@@ -51,6 +51,21 @@ entry's `sources` already are. Any published dataset therefore seeds them:
 
 Seeding from the final upstream release produces 29,549 merge locks covering 177,593 sources.
 
+## AniDB
+
+The `anidb` module can read entries either from anidb.net or from the AniDB HTTP API. The API is the
+access path AniDB sanctions for third parties, it is not behind the protection that the website is,
+and it returns as structured data what the website only exposes as page layout, including the entry's
+IDs on other metadata providers.
+
+Using it requires a client registered with AniDB, since requests identify the caller and a ban
+applies to the client rather than to an address:
+
+| Property | Description |
+|---|---|
+| `modb.anidb.client` | Registered client name. |
+| `modb.anidb.clientver` | Registered client version. |
+
 ## Outgoing connections
 
 The anidb and anisearch crawlers change their outgoing IP address when a provider starts refusing
