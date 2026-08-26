@@ -16,20 +16,12 @@ val kotlinVersion = org.jetbrains.kotlin.gradle.dsl.KotlinVersion.KOTLIN_2_4 // 
 
 repositories {
     mavenCentral()
-    maven {
-        name = "kommand"
-        url = uri("https://maven.pkg.github.com/$githubUsername/kommand")
-        credentials {
-            username = parameter("GH_USERNAME", githubUsername)
-            password = parameter("GH_PACKAGES_READ_TOKEN")
-        }
-    }
 }
 
 dependencies {
     implementation(libs.kotlin.stdlib)
     implementation(project(":lib"))
-    implementation(libs.kommand)
+    implementation(project(":kommand"))
     implementation(libs.logback.classic)
 
     testImplementation(project(":test"))
