@@ -1,89 +1,70 @@
-[![Tests](https://github.com/manami-project/modb-app/actions/workflows/tests.yml/badge.svg)](https://github.com/manami-project/modb-app/actions/workflows/tests.yml) [![codecov](https://codecov.io/gh/manami-project/modb-app/graph/badge.svg?token=66LR8JA8KE)](https://codecov.io/gh/manami-project/modb-app) ![jdk25](https://img.shields.io/badge/jdk-25-informational)
 # modb-app
 
-_[modb](https://github.com/manami-project?tab=repositories&q=modb&type=source)_ stands for _**M**anami **O**ffline **D**ata**B**ase_. The applications and libraries of this repository are used to create the [manami-project/anime-offline-database](https://github.com/manami-project/anime-offline-database). Don't use these libraries and applications to crawl the websites entirely. Instead, check whether the dataset already offers the data that you need.
+The application and libraries which build
+[anime-offline-database](https://github.com/anime-offline-database/anime-offline-database). _modb_
+stands for **M**anami **O**ffline **D**ata**B**ase.
 
-* **analyzer:** Allows to review the entries of the dataset and create merge locks.
-* **anidb:** Config, downloader and converter for [anidb.net](https://anidb.net)
-* **anilist:** Config, downloader and converter for [anilist.co](https://anilist.co)
-* **anime-planet:** Config, downloader and converter for [anime-planet.com](https://anime-planet.com)
-* **animenewsnetwork:** Config, downloader and converter for [animenewsnetwork.com](https://animenewsnetwork.com)
-* **anisearch:** Config, downloader and converter for [anisearch.com](https://anisearch.com)
-* **app:** The application that runs the crawlers, merges anime and updates the repository.
-* **core:** Core functionality used by all other modules.
-* **kitsu:** Config, downloader and converter for [kitsu.app](https://kitsu.app)
-* **lib:** A library that drives the applications "app" and "analyzer".
-* **livechart:** Config, downloader and converter for [livechart.me](https://livechart.me)
-* **myanimelist:** Config, downloader and converter for [myanimelist.net](https://myanimelist.net)
-* **serde:** Serialization and deserialization of the finalized dataset files.
-* **simkl:** Config, downloader and converter for [simkl.com](https://simkl.com/anime/) as well as config for [animecountdown.com](https://animecountdown.com).
-* **test:** All essential dependencies as well as some convenience functions and classes for creating tests.
+This repository continues [manami-project/modb-app](https://github.com/manami-project/modb-app),
+archived on 2026-07-02. The original author stopped maintaining it, and the projects that depend on
+the dataset had no way forward. This fork exists to keep the dataset updated.
 
-## Documentation
+Do not use these crawlers to download a metadata provider in full. Check whether the dataset already
+contains what you need first, and use it if so.
 
-* General
-  * [Data quality](docs/data-quality.md)
-* Downloading
-  * [Download Control State (DCS)](docs/dcs.md)
-  * [Data lifecycle](docs/data-lifecycle.md)
-* Merging
-  * [Merging](docs/merging.md)
-  * [Merge locks](docs/merge-locks.md) 
-  * [Reviewed isolated entries](docs/reviewed-isolated-entries.md)
-* Terminology
-  * [Terminology](docs/terminology.md)
+## Modules
+
+| Module | Purpose |
+|---|---|
+| `app` | Runs the crawlers, merges anime, updates the dataset repository. |
+| `analyzer` | Reviews entries and creates merge locks. |
+| `core` | Shared functionality. |
+| `lib` | Drives `app` and `analyzer`. |
+| `serde` | Reads and writes the dataset files. |
+| `kommand` | Vendored from [manami-project/kommand](https://github.com/manami-project/kommand). See below. |
+| `anidb`, `anilist`, `anime-planet`, `animenewsnetwork`, `anisearch`, `kitsu`, `livechart`, `myanimelist`, `simkl` | Config, downloader and converter per metadata provider. |
 
 ## Requirements
 
-* JDK/JVM 25 (LTS) or higher
-* Linux/Unix system supporting
-  * `make`
-  * `bash`
-  * `set`
-  * `echo`
-  * `rm`
-  * `jsonschema` (https://github.com/sourcemeta/jsonschema)
-  * `gh`
-  * `git`
-  * `ifconfig`
-* ipv6 based internet connection with SLAAC enabled
+* JDK 25 or higher
+* A Linux or Unix system with `make`, `bash`, `jsonschema`, `gh` and `git`
 
-## Getting started
+## Building
 
-Setup is identical for app and analyzer.
-* Clone `https://github.com/manami-project/anime-offline-database`
-  * Run `make check-requirements` in that directory to see if you've got all requirements installed
-  * Run `make init-or-reset` in that directory
-* Create a separate directory for the `*.jar` files and place the [latest releases](https://github.com/manami-project/modb-app/releases) in that directory
-* Create a third directory for DCS files
-* Create a fourth directory for raw download files
-* Create a [configuration file](core/README.md#configuration-management).
-  * Set all the properties from the "Configuration" section down below which don't offer a default value.
+```
+./gradlew assemble
+```
 
-### Optional: Logback configuration
+No credentials are needed. `kommand` used to resolve from GitHub Packages, which rejects anonymous
+callers and is published from a repository that is now archived, so a clone could not be built
+without a token. It is vendored here as a subproject under its own AGPL-3.0 licence instead.
 
-Optionally you can create a [logback configuration](https://logback.qos.ch/manual/configuration.html) to override the default setup.
+## Starting from an existing dataset
 
-### Start using IDE
+The pipeline keeps two kinds of state: download control state, which schedules what to re-download
+and rebuilds itself after a full pass, and merge locks, which record which entries belong together.
+Merge locks are not published, but a merge lock is a set of source URIs, which is exactly what an
+entry's `sources` already are. Any published dataset therefore seeds them:
 
-Run `main()` in `io/github/manamiproject/modb/app/App.kt` of the `app` module or `io/github/manamiproject/modb/analyzer/Analyzer.kt` of the `analyzer` module with the following VM parameter:
-* `-Djava.net.preferIPv6Addresses=true`
-* `-Djava.net.preferIPv4Stack=false`
+```
+./gradlew :lib:seedMergeLocks --args="anime-offline-database.jsonl.zst /path/to/dcs-directory"
+```
 
-### Start using *.jar file
+Seeding from the final upstream release produces 29,549 merge locks covering 177,593 sources.
 
-Run
-* either `java -Djava.net.preferIPv6Addresses=true -Djava.net.preferIPv4Stack=false -jar modb-app.jar`
-* or `java -Djava.net.preferIPv6Addresses=true -Djava.net.preferIPv4Stack=false -jar modb-analyzer.jar`
+## Outgoing connections
 
-## Configuration
+The anidb and anisearch crawlers change their outgoing IP address when a provider starts refusing
+requests. Two implementations of `NetworkController` are available:
 
-For more configuration options see the `README.md` files of the respective modules.
+* `LinuxNetworkController` restarts the network device so a SLAAC enabled IPv6 connection hands out
+  a new address. This is the original behaviour and needs a routed prefix, `sudo` and `ifconfig`.
+* `RotatingProxyNetworkController` advances through a pool of proxies configured under
+  `modb.app.network.proxies`. Use this where restarting the interface returns the same address,
+  which is the case on most hosted machines.
 
-| parameter                                | type     | default                                                                     | description                                                                                                                                                                                               |
-|------------------------------------------|----------|-----------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `modb.app.downloadsDirectory`            | `String` | -                                                                           | Root directory in which the raw files and converted files are stored.                                                                                                                                     |
-| `modb.app.outputDirectory`               | `String` | -                                                                           | Target output directory. Normally this should be the directory in which you cloned the [anime-offline-database](https://github.com/manami-project/anime-offline-database)                                 |
-| `modb.app.downloadControlStateDirectory` | `String` | -                                                                           | Root directory of download control state files.                                                                                                                                                           |
-| `modb.app.logFileDirectory`              | `String` | A directory called `logs` within the working directory of the current week. | Defines the directory in which the logs saved.                                                                                                                                                            |
-| `modb.app.keepDownloadDirectories`       | `Long`   | `1`                                                                         | Number of download directories to keep. Download directories contain both raw data and conv files (intermediate format). Default is `1` which means that only the most recent download directory is kept. |
+## Licence
+
+AGPL-3.0, the same as the original. If you run a modified version of this software as a network
+service, you must offer its source to the users of that service.
+
+The dataset this software produces is published separately under the Open Database License.
