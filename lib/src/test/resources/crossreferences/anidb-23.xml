@@ -1,0 +1,2258 @@
+<?xml version="1.0" encoding="UTF-8"?><anime id="23" restricted="false">
+    <type>TV Series</type>
+    <episodecount>26</episodecount>
+    <startdate>1998-04-03</startdate>
+    <enddate>1999-04-24</enddate>
+    <titles>
+        <title xml:lang="x-jat" type="main">Cowboy Bebop</title>
+        <title xml:lang="ru" type="synonym">Ковбой Бибоп ТВ</title>
+        <title xml:lang="ar" type="synonym">راعي البقر بيبوب</title>
+        <title xml:lang="nl" type="synonym">Cowboy Bebop</title>
+        <title xml:lang="lt" type="synonym">Kaubojus Bibopas</title>
+        <title xml:lang="lt" type="synonym">Kaubojus Bebopas</title>
+        <title xml:lang="tr" type="synonym">Kovboy Bebop</title>
+        <title xml:lang="x-jat" type="synonym">CBB</title>
+        <title xml:lang="uk" type="synonym">Ковбой Бібоп ТБ</title>
+        <title xml:lang="fa" type="synonym">کابوی بیباپ</title>
+        <title xml:lang="x-jat" type="short">CB</title>
+        <title xml:lang="x-jat" type="short">Bebop TV</title>
+        <title xml:lang="x-jat" type="short">Bebop</title>
+        <title xml:lang="x-jat" type="short">CowBe</title>
+        <title xml:lang="ja" type="official">カウボーイビバップ</title>
+        <title xml:lang="zh" type="official">星际牛仔</title>
+        <title xml:lang="en" type="official">Cowboy Bebop</title>
+        <title xml:lang="de" type="official">Cowboy Bebop</title>
+        <title xml:lang="fr" type="official">Cowboy Bebop</title>
+        <title xml:lang="it" type="official">Cowboy Bebop</title>
+        <title xml:lang="es" type="official">Cowboy Bebop</title>
+        <title xml:lang="ko" type="official">카우보이 비밥</title>
+        <title xml:lang="pl" type="official">Cowboy Bebop</title>
+        <title xml:lang="ar" type="official">صائدو جوائز بيبوب</title>
+        <title xml:lang="pt" type="official">Cowboy Bebop</title>
+        <title xml:lang="pt-BR" type="official">Cowboy Bebop</title>
+        <title xml:lang="es-CA" type="official">Cowboy Bebop</title>
+        <title xml:lang="cs" type="official">Kovboj Bebop</title>
+        <title xml:lang="fi" type="official">Cowboy Bebop</title>
+        <title xml:lang="el" type="official">Καουμπόηδες του Διαστήματος</title>
+        <title xml:lang="he" type="official">קאובוי ביבופ</title>
+        <title xml:lang="hu" type="official">Csillagközi fejvadászok</title>
+        <title xml:lang="ro" type="official">Cowboy Bebop</title>
+        <title xml:lang="bg" type="official">Марсиански каубой</title>
+        <title xml:lang="hr" type="official">Kauboj Bebop</title>
+        <title xml:lang="zh-Hant" type="official">星際牛仔</title>
+        <title xml:lang="zh-Hans" type="official">星际牛仔</title>
+        <title xml:lang="es-419" type="official">Cowboy Bebop</title>
+    </titles>
+    <relatedanime>
+        <anime id="219" type="Side Story">Cowboy Bebop: Tengoku no Tobira</anime>
+    </relatedanime>
+    <similaranime>
+        <anime id="1543" approval="321" total="389">Samurai Champloo</anime>
+        <anime id="53" approval="206" total="249">Trigun</anime>
+        <anime id="3395" approval="134" total="225">Black Lagoon</anime>
+        <anime id="171" approval="130" total="163">Seihou Bukyou Outlaw Star</anime>
+        <anime id="4906" approval="21" total="76">Darker Than Black: Kuro no Keiyakusha</anime>
+        <anime id="5779" approval="18" total="44">Michiko to Hacchin</anime>
+        <anime id="9031" approval="14" total="28">Lupin the Third: Mine Fujiko to Iu Onna</anime>
+        <anime id="449" approval="13" total="35">Wolf`s Rain</anime>
+        <anime id="421" approval="12" total="23">Lupin Sansei</anime>
+        <anime id="1003" approval="11" total="43">Gungrave</anime>
+        <anime id="13893" approval="11" total="32">Carole &amp; Tuesday</anime>
+        <anime id="1209" approval="7" total="12">Gun Frontier</anime>
+        <anime id="45" approval="6" total="13">Gun Smith Cats</anime>
+        <anime id="4327" approval="4" total="14">Coyote Ragtime Show</anime>
+        <anime id="10553" approval="4" total="12">Space Dandy 2</anime>
+        <anime id="13348" approval="4" total="11">Cannon Busters</anime>
+        <anime id="2839" approval="4" total="11">Gun x Sword</anime>
+        <anime id="403" approval="3" total="21">Lost Universe</anime>
+        <anime id="78" approval="3" total="15">Metropolis</anime>
+        <anime id="412" approval="3" total="11">Z.O.E Dolores,i</anime>
+        <anime id="21" approval="1" total="18">Full Moon o Sagashite</anime>
+    </similaranime>
+    <recommendations total="111">
+        <recommendation type="For Fans" uid="572441">Best anime ever!</recommendation>
+        <recommendation type="Recommended" uid="345091">rly nice</recommendation>
+        <recommendation type="Recommended" uid="179096">1st Anime i bought the Full Dvds of thats as high as it gets for me. Aged very well so far and the plot is still deep. The music is still TOP</recommendation>
+        <recommendation type="Recommended" uid="134273">Anime  is  easily  the  best  of the  1990s  and  its  an  all time  favorite</recommendation>
+        <recommendation type="Recommended" uid="758856">Best space western anime. Sad it was rather short. Very unique.</recommendation>
+        <recommendation type="Recommended" uid="188437">One of the best stories, it brings me to tears of sadness and joy, many many times. the ending song is very special too</recommendation>
+        <recommendation type="Recommended" uid="466624">This is a really good show for adults and I love it. There are many genre(s) included in the show that might just be your fave. There`s comedy, lots of action and thriller, and some horror themes. Trust me. If you like violence, then you will like Cowboy Bebop.</recommendation>
+        <recommendation type="Recommended" uid="798196">Whats not to like about a good ol pulpesqe cartoon taking place 60 years into the future plus it has a corgi</recommendation>
+        <recommendation type="Recommended" uid="309932">awesome anime, great watch and with some heavy episodes they follow up with some lighthearted antics. But don`t be fooled, there is a deep back story. Does leave you wanting more. You have been warned</recommendation>
+        <recommendation type="Recommended" uid="433878">I can see why this show appeals to so many people, but I can`t pull myself to classify it as a masterpiece.
+The production values are high, so as the overall quality. But the episodic nature of it leads to some highs and lows in the enjoyment factor. Not that the latter are unpleasant, its just that the flow becomes somewhat uneven. You will love with a passion some of the episodes, and quickly forget about the others.
+Despite those shortcomings it is now one of the few shows that I will recommend to anyone who wants to see what the Anime universe is all about.
+The plot is easy to follow, the characters are lovable - and the number of them is easily manageable - and the western influences make it more approachable to everyone.
+For newcomers this is a must watch; for veterans it is recommended.</recommendation>
+        <recommendation type="Recommended" uid="1065944">This is so terrific, with great episodes and interesting characters. The music is great too.</recommendation>
+        <recommendation type="Recommended" uid="556870">A definite classic anime, maybe THE classic anime for its time period.
+Many say that its a masterpiece of a show, and I can agree to an extent.
+The episodes preceding the last two is all just following the lives of the characters, all to pay off at the end.
+Those two episodes are the masterpiece, the rest is just entertainent of no real value on a single episode basis.
+But it all comes down to the end.
+As Arkada would say "The ending is paramount"</recommendation>
+        <recommendation type="Recommended" uid="259764">Might seem retro by today`s standards but I this series has a wonderful story line with fantastic supporting music.</recommendation>
+        <recommendation type="Must See" uid="176136">The best anime series of all time</recommendation>
+        <recommendation type="Must See" uid="40254">Greatest Anime of all times. `Nuff said.</recommendation>
+        <recommendation type="Must See" uid="230513">Totaly a 10. A must see, the story is great and I fell in love with the music everytime I watch it.....Wat are ya waiting for go SEE it already!
+
+Dp</recommendation>
+        <recommendation type="Must See" uid="660321">This anime has endured the test of time I`d argue better than any other anime, and remains one of the best anime ever to come out of Japan. The English dub is frequently hailed for its excellence, and I share that belief. Steven Blum did an masterful job as Spike and Yoko Kanno created one of the best soundtracks to grace any TV show I`ve seen</recommendation>
+        <recommendation type="Must See" uid="497940">What to say... It was amazing. The story telling was well done; The action was exemplary; The character felt real; And over all it was enjoyable to watch.</recommendation>
+        <recommendation type="Must See" uid="422137">Best developed characters than any other series out there.If you love classic music and noir touch,you should definitely watch this.You will never forget about it after you`ve finished it.</recommendation>
+        <recommendation type="Must See" uid="273473">Simply put, one of the best anime shows ever. It manages to avoid many anime stereotypes that push away first-timers and crafts an extremely engaging world with unique characters and clever plot lines. If someone was to watch one, and only one anime series, this should be it.</recommendation>
+        <recommendation type="Must See" uid="517106">I would definitely recommend the music and story of this great show. Didn`t like the ending but that is just because i don`t like ending with...</recommendation>
+        <recommendation type="Must See" uid="550129">Adventures, beautiful women and jazz. When the last episode ended I wanted more. See You Space Cowboy…</recommendation>
+        <recommendation type="Must See" uid="286977">A must see for anyone starting out in the realm of action or sci-fi anime. Definately in my top five list with Trigun, Berserk, Outlaw star and Hellsing for action I would say.</recommendation>
+        <recommendation type="Must See" uid="406803">Legendary ! Charismatic characters, great animation (aired in 1998 !!!), awesome music, great story with action, fun, humor, love... True Masterpiece !</recommendation>
+        <recommendation type="Must See" uid="199638">Anime masterpiece. Liked both by anime fans and not-anime-lovers. A living legend.</recommendation>
+        <recommendation type="Must See" uid="373896">Everyone should watch this legend.</recommendation>
+        <recommendation type="Must See" uid="52094">Pure classic.</recommendation>
+        <recommendation type="Must See" uid="794376">I`ve been watching anime for decades. This work is one of the few that I consider irreproachable. Be it the characters, the visuals and especially the soundtrack of Yoko. Everything is in the right place, in the right way and at the right time.</recommendation>
+        <recommendation type="Must See" uid="274570">Well made. One of the great classic sci-fi anime that can be showed to your non-otaku friends and they will like it.</recommendation>
+        <recommendation type="Must See" uid="510517">A sci-fi adventure with a touch of Western, set to a soundtrack that`s a mix of blade runner with country/blues/jazz/heavy metal. The story is about a group of bounty hunters with personality. They get involved in ALL kinds of trouble, but rarely get the reward. The famous "screwed good guys." It has excellent action, especially with shootouts and chases in spaceships. Unfortunately, it doesn`t have an "overall story" that ties all the episodes together and closes at the end. Each episode is relatively independent of the others. But each episode is unique, as they always add something, however small, to the final story. So, it can be said that Cowboy Bebop is a very good series because, despite not having a story, it has personality. It set out to be a sci-fi action series, and it was that way from the first to the last episode. Good duration, neither dragging nor rushing, progressing at an ideal pace. Recommended for fans of all genres, because it has a little bit of everything.</recommendation>
+        <recommendation type="Must See" uid="1160446">A genuine masterpiece, it`s just a great story with a cyberpunk touch and over all with a sublime soundtrack, loves all the music scores from this TV series, excellent work by Kanno Yoko and Seatbelts.</recommendation>
+        <recommendation type="Must See" uid="23301">Classic must have series.</recommendation>
+        <recommendation type="Must See" uid="113079">A great anime ! A intriguing story , each character with a interesting story .</recommendation>
+        <recommendation type="Must See" uid="28415">This is one anime I keep watching over and over because it`s so good! And each time I watch it, I find more subtle details to the story...</recommendation>
+        <recommendation type="Must See" uid="8855">The very pinnacle of all anime....that is all that needs to be said. If perfection existed, this would be it.</recommendation>
+        <recommendation type="Must See" uid="291869">Best I`ve ever seen.</recommendation>
+        <recommendation type="Must See" uid="273014">A must see classic</recommendation>
+        <recommendation type="Must See" uid="355791">awesome anime great to watch</recommendation>
+        <recommendation type="Must See" uid="424780">THE.VERY.BEST.</recommendation>
+        <recommendation type="Must See" uid="323986">A top10 anime of all time!!</recommendation>
+        <recommendation type="Must See" uid="142721">This is one of the anime which you MUST see. It`s a classic.</recommendation>
+        <recommendation type="Must See" uid="99944">Simply number one in music , characters , camera work , story. Absolutely must see</recommendation>
+        <recommendation type="Must See" uid="391443">personally, it`s my favorite anime of them all - indisputably revolutionary, lingeringly subtle, thoroughly entertaining, beautifully animated, orchestrated, and directed.</recommendation>
+        <recommendation type="Must See" uid="197514">Simply unrepeatable</recommendation>
+        <recommendation type="Must See" uid="322928">For me the series has never been topped. Awesome characters, designs, soundtrack and directing as well as a great tie in movie too. For those yet to experience it....you`re missing out</recommendation>
+        <recommendation type="Must See" uid="54199">Great! :D</recommendation>
+        <recommendation type="Must See" uid="586055">True Masterpiece. Best Anime in History. No need to say more.</recommendation>
+    </recommendations>
+    <url>http://www.cowboy-bebop.net/</url>
+    <creators>
+        <name id="662" type="Character Design">Kawamoto Toshihiro</name>
+        <name id="241" type="Music">Kanno Youko</name>
+        <name id="1352" type="Original Work">Yatate Hajime</name>
+        <name id="129" type="Direction">Watanabe Shin`ichirou</name>
+        <name id="662" type="Chief Animation Direction">Kawamoto Toshihiro</name>
+        <name id="5560" type="Series Composition">Nobumoto Keiko</name>
+        <name id="726" type="Animation Work">Sunrise</name>
+    </creators>
+    <description>The year is 2071 AD. With the systematic collapse of the old nation-states, a mixed jumble of races and peoples were driven out of their terrestrial Eden and spread to the stars, taking with them the now confused concepts of justice, freedom, violence, and love. New rules were established, and a new generation of bounty hunters came into being. People referred to these bounty hunters as "cowboys".
+Meet http://anidb.net/ch270 [Spike Spiegel] and http://anidb.net/ch401 [Jet Black], a drifter and a retired cyborg cop who have started a bounty hunting partnership. In the converted ship The Bebop, Spike and Jet search the galaxy for criminals with bounties on their heads. They meet a lot of interesting characters, including the unusually intelligent dog http://anidb.net/ch403 [Ein], the bizarre hacker child prodigy http://anidb.net/ch402 [Ed], and the voluptuous and vexing femme fatale, http://anidb.net/ch400 [Faye Valentine].
+Source: AnimeNfo
+Note: Originally aired on http://anidb.net/cr804 [TV Tokyo], but after 12 episodes the show was cancelled due to the violence portrayed in the Cowboy Bebop world and violence in Japanese schools. The final and also the 13th episode on TV Tokyo was a compilation episode where the characters provide a philosophical commentary and end with the words: "[i]This Is Not The End. You Will See The Real "Cowboy Bebop" Someday!" Four months later, http://anidb.net/cr764 [WOWOW] started to broadcast all 26 episodes of Cowboy Bebop. The ordering was different with completely new episodes mixed in between episodes previously broadcast on TV Tokyo, including a new episode 1.[/i]</description>
+    <ratings>
+        <permanent count="19024">8.75</permanent>
+        <temporary count="19433">8.64</temporary>
+        <review count="25">9.08</review>
+    </ratings>
+    <picture>221595.jpg</picture>
+    <resources>
+        <resource type="1">
+            <externalentity>
+                <identifier>13</identifier>
+            </externalentity>
+        </resource>
+        <resource type="2">
+            <externalentity>
+                <identifier>17205</identifier>
+            </externalentity>
+            <externalentity>
+                <identifier>1</identifier>
+            </externalentity>
+            <externalentity>
+                <identifier>4037</identifier>
+            </externalentity>
+        </resource>
+        <resource type="3">
+            <externalentity>
+                <identifier>114</identifier>
+                <identifier>tzoabg</identifier>
+            </externalentity>
+        </resource>
+        <resource type="4">
+            <externalentity>
+                <url>http://www.sunrise-inc.co.jp/works/list/detail.php?cid=240</url>
+            </externalentity>
+            <externalentity>
+                <url>http://www.cowboy-bebop.net/</url>
+            </externalentity>
+            <externalentity>
+                <url>http://www.sunrise-inc.co.jp/works/list/detail.php?cid=41</url>
+            </externalentity>
+        </resource>
+        <resource type="5">
+            <externalentity>
+                <url>http://www.sunrise-inc.co.jp/international/works/detail.php?cid=41</url>
+            </externalentity>
+        </resource>
+        <resource type="6">
+            <externalentity>
+                <identifier>Cowboy_Bebop</identifier>
+            </externalentity>
+        </resource>
+        <resource type="7">
+            <externalentity>
+                <identifier>カウボーイビバップ</identifier>
+            </externalentity>
+        </resource>
+        <resource type="8">
+            <externalentity>
+                <identifier>538</identifier>
+            </externalentity>
+        </resource>
+        <resource type="9">
+            <externalentity>
+                <identifier>88862</identifier>
+            </externalentity>
+        </resource>
+        <resource type="10">
+            <externalentity>
+                <identifier>1628</identifier>
+            </externalentity>
+        </resource>
+        <resource type="17">
+            <externalentity>
+                <identifier>bebop</identifier>
+            </externalentity>
+        </resource>
+        <resource type="19">
+            <externalentity>
+                <identifier>카우보이_비밥</identifier>
+            </externalentity>
+        </resource>
+        <resource type="20">
+            <externalentity>
+                <identifier>星際牛仔</identifier>
+            </externalentity>
+        </resource>
+        <resource type="28">
+            <externalentity>
+                <identifier>GYVNXMVP6</identifier>
+            </externalentity>
+        </resource>
+        <resource type="31">
+            <externalentity>
+                <identifier>12561</identifier>
+            </externalentity>
+            <externalentity>
+                <identifier>6378</identifier>
+            </externalentity>
+        </resource>
+        <resource type="32">
+            <externalentity>
+                <identifier>B06XMQW3FS</identifier>
+            </externalentity>
+        </resource>
+        <resource type="43">
+            <externalentity>
+                <identifier>tt0889816</identifier>
+            </externalentity>
+            <externalentity>
+                <identifier>tt0213338</identifier>
+            </externalentity>
+        </resource>
+        <resource type="44">
+            <externalentity>
+                <identifier>30991</identifier>
+                <identifier>tv</identifier>
+            </externalentity>
+        </resource>
+        <resource type="45">
+            <externalentity>
+                <identifier>cowboy-bebop</identifier>
+            </externalentity>
+        </resource>
+    </resources>
+    <tags>
+        <tag id="30" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2014-09-10">
+            <name>maintenance tags</name>
+            <description>These tags are used for maintenance.</description>
+        </tag>
+        <tag id="201" parentid="2872" infobox="true" weight="600" localspoiler="false" globalspoiler="false" verified="true" update="2019-01-01">
+            <name>bounty hunter</name>
+            <description>A bounty hunter is one who hunts and captures targets (be it people, animals, etc.) for monetary gain, preferably without killing/destroying their target. Despite being illegal in most of the world today, it is a legal profession in the United States and Philippines (a former commonwealth of the US), who are known as "bail enforcement agents".
+If they are only and constantly hired to kill, they are likely an http://anidb.net/t2399 [assassin].
+Source: Wikipedia</description>
+        </tag>
+        <tag id="308" parentid="2611" infobox="true" weight="400" localspoiler="false" globalspoiler="false" verified="true" update="2017-12-17">
+            <name>detective</name>
+            <description>A detective is an investigator, generally either a member of a law enforcement agency or as an individual working in the capacity of private investigators, tasked with solving crimes and other mysteries, such as disappearances, by examining and evaluating clues and records in order to solve the mystery; for a crime, this would mean uncovering the criminal`s identity and/or whereabouts. In some police systems, a detective position is achieved by passing a written test after a person completes the requirements for being a police officer; in others, detectives are college graduates who join directly from civilian life without first serving as uniformed officers.
+Source: Wikipedia</description>
+            <picurl>210906.jpg</picurl>
+        </tag>
+        <tag id="1637" parentid="2565" weight="200" localspoiler="false" globalspoiler="false" verified="true" update="2021-03-23">
+            <name>reverse trap</name>
+            <description>A reverse trap is a plot device where a female character is mistaken for a male, with the intention of sexually deceiving other characters and/or the viewer. This behavior does not need to be intentional by the female (it is often not intentional) or continually maintained by the female, but the occurrence is common enough to deserve this fetish-specific tag.
+This is often achieved by portraying the female character as a male; primarily via their clothing and physical appearance, but also through her behaviour, and/or language. A female character misinterpreted by others as male, without action from the female (explicitly masculine dress or behaviour), is generally not considered a reverse trap; instead they are likely just http://anidb.net/t2561 [androgynous].
+The reverse case is known as a http://anidb.net/t618 [trap].</description>
+            <picurl>258712.jpg</picurl>
+        </tag>
+        <tag id="1759" parentid="6149" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2010-01-27">
+            <name>carefree</name>
+            <description>A [b]carefree[b] person is free of worries, cares or concerns. This does not necessarily imply that they have no responsibilities or are negligent towards them; they are simply able to live out their lives in tranquility regardless of what happens.</description>
+        </tag>
+        <tag id="1802" parentid="2606" infobox="true" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2016-01-24">
+            <name>seinen</name>
+            <description>Seinen, literally "young man", is one of the main demographic classifications applied to manga, and, by extension, to anime, especially manga-based ones. As the name implies, seinen works are marketed primarily to an audience of young men; the age range commonly understood to be the target of such works goes roughly from 17 to somewhere in the 40s.</description>
+            <picurl>181651.jpg</picurl>
+        </tag>
+        <tag id="2180" parentid="2636" weight="100" localspoiler="false" globalspoiler="false" verified="true" update="2009-02-24">
+            <name>cyborg</name>
+            <description>A cyborg is a cybernetic organism (i.e. an organism that has both artificial and natural systems). The term was coined in 1960 when Manfred Clynes and Nathan Kline used it in an article about the advantages of self-regulating human-machine systems in outer space. D. S. Halacy`s Cyborg: Evolution of the Superman in 1965 featured an introduction which spoke of a "new frontier" that was "not merely space, but more profoundly the relationship between `inner space` to `outer space` -a bridge...between mind and matter." The cyborg is often seen today merely as an organism that has enhanced abilities due to technology, but this perhaps oversimplifies the category of feedback.
+Fictional cyborgs are portrayed as a synthesis of organic and synthetic parts, and frequently pose the question of difference between human and machine as one concerned with morality, free will, and empathy. Fictional cyborgs may be represented as visibly mechanical (e.g. the Cybermen in the Doctor Who franchise or The Borg from Star Trek); or as almost indistinguishable from humans (e.g. the "Human" Cylons from the re-imagining of Battlestar Galactica). The 1970s television series The Six Million Dollar Man featured one of the most famous fictional cyborgs. Cyborgs in fiction often play up a human contempt for over-dependence on technology, particularly when used for war, and when used in ways that seem to threaten free will. Cyborgs are also often portrayed with physical or mental abilities far exceeding a human counterpart (military forms may have inbuilt weapons, among other things).
+Real (as opposed to fictional) cyborgs are more frequently people who use cybernetic technology to repair or overcome the physical and mental constraints of their bodies. While cyborgs are commonly thought of as mammals, they can be any kind of organism.
+[Source: wiki]</description>
+            <picurl>42022.jpg</picurl>
+        </tag>
+        <tag id="2282" parentid="2841" weight="200" localspoiler="false" globalspoiler="false" verified="true" update="2017-12-18">
+            <name>martial arts</name>
+            <description>Various sports or skills, mainly of Japanese origin, that originated as forms of self-defense or attack, such as judo, karate, and kendo.</description>
+            <picurl>210947.jpg</picurl>
+        </tag>
+        <tag id="2565" parentid="2608" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2011-04-14">
+            <name>cross-dressing</name>
+            <description>This character sometimes wears clothes traditionally worn by and associated with the opposite sex.
+Cross-dressers often hide their cross-dressing identity for a long period of time and thus tend to become adept in accurately portraying the opposite sex in terms of voice, movement, behaviour, temperament, etc.</description>
+        </tag>
+        <tag id="2604" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2018-11-08">
+            <name>content indicators</name>
+            <description>The content indicators branch is intended to be a less geographically specific tool than the `age rating` used by convention, for warning about things that might cause offence. Obviously there is still a degree of subjectivity involved, but hopefully it will prove useful for parents with delicate children, or children with delicate parents.
+Note: Refer to further guidance on http://wiki.anidb.net/w/Categories:Content_Indicators [the Wiki page] for how to apply tag weights for content indicators.</description>
+        </tag>
+        <tag id="2605" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2014-09-28">
+            <name>dynamic</name>
+            <description>Some of the central structural elements in anime are: 
+Plot Continuity 
+How does the plot or several plots unfold. Are they a strictly linear retelling of one big continuing story, a serial, possibly with several side stories, or is the content chopped into a set of unconnected episodes, only sharing the same setting and characters?
+Stereotype Characters
+Then there is the question of the character set presentation. Is it completely original, or is it your usual stereotypical character cast. Both choices have their merit, for example it would not really make much sense to reinvent the wheel for a harem anime. Fans of that genre come to expect their favourite stereotype protagonists.
+Plot Twists
+Finally there is the question of how complex the plot / the story unfolds. Are there side-plots that merge into the main plot leading to unexpected plot twists, or is the anime quite predictable? The latter would not be appropriate for detective stories. In harem anime on the other hand a foreseeable outcome is actually something the fans will come to expect.</description>
+        </tag>
+        <tag id="2606" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2018-11-05">
+            <name>target audience</name>
+            <description>Anime, like everything else in the modern world, is targeted towards specific audiences, both implicitly by the creators and overtly by the marketing. While categories are associated with specific sex and age groups, this is not a bar on the anime being enjoyed by people who don`t fit into that band; not only do crossover titles exist, but the categories also have a considerable following outside their main demographic, and a person might as well enjoy anime from all categories. Still, does not invalidate the usefulness of marking a title as one of the categories; the same themes will likely be treated differently in anime geared for different audiences. Only one should not jump the gun and assume that a title will be more or less serious or present content in this or that way due to its target audience, or conversely assume the target audience on the content and its presentation alone. As such, the audience categories help form a broad impression of how a title might work with the announced themes, but offer little to no in-depth information about specific content or its treatment.
+The audience categories originate from manga magazines, which group titles of a same intended audience into a magazine that is advertised as belonging to that category, and so manga-based anime will have the category from their parent work. As for anime based on other works, the audience is often debatable, but comparing information such as time slot to the manga-based anime generally helps figure out the most likely possibility.
+If the parent material was classified under multiple audiences over time (for example, it was originally shounen, but then as the plot changed and became more mature, it was reclassified as seinen), and the anime adapts parent material time periods covering multiple audiences, we tag all audiences covered by the anime adaptation.</description>
+        </tag>
+        <tag id="2607" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2009-04-29">
+            <name>themes</name>
+            <description>Themes describe the very central elements important to the anime stories. They set the backdrop against which the protagonists must face their challenges. Be it School Life, present Daily Life, Military action, Cyberpunk, Law and Order detective work, Sports, or the Underworld. These are only but a few of the more typical backgrounds for anime plots. Add to that a Conspiracy setting with a possible tragic outcome, the Themes span most of the imaginable subject matter relevant to anime.</description>
+        </tag>
+        <tag id="2608" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2021-07-27">
+            <name>fetishes</name>
+            <description>For non-porn anime, the fetish must be a major element of the show; incidental appearances of the fetish is not sufficient for a fetish tag. Please do not add fetish tags to anime that do not pander to the fetish in question in any meaningful way. For example, there`s some ecchi in http://anidb.net/a22 [Shinseiki Evangelion], but the fact you get to see http://anidb.net/ch39 [Asuka]`s pantsu is not sufficient to warrant applying the http://anidb.net/t2894 [school girl] fetish tag. See also the http://wiki.anidb.net/Tags#Minimum_Relevance_Rule [minimum relevancy rule].
+For porn anime, the application of fetish tags are fairly straightforward, as porn will fully play out most fetishes.</description>
+        </tag>
+        <tag id="2609" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2018-09-01">
+            <name>original work</name>
+            <description>What the anime is based on! This is given as the original work credit in the OP. Mostly of academic interest, but a useful bit of info, hinting at the possible depth of story.</description>
+        </tag>
+        <tag id="2610" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2009-04-22">
+            <name>setting</name>
+            <description>The setting describes in what time and place an anime takes place. To a certain extent it describes what you can expect from the world in the anime.</description>
+        </tag>
+        <tag id="2611" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2014-09-08">
+            <name>elements</name>
+            <description>Next to Themes setting the backdrop for the protagonists in anime, there are the more detailed plot Elements that centre on character interactions: "What do characters do to each other or what is done to them?". Is it violent Action, an awe-inspiring Adventure in a foreign place, the gripping life of a Detective, a slapstick Comedy, an Ecchi Harem anime, a SciFi epic, or some Fantasy travelling adventure?</description>
+        </tag>
+        <tag id="2612" parentid="2610" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2016-09-04">
+            <name>time</name>
+            <description>This placeholder lists different epochs in human history and more vague but important timelines such as the future, the present and the past.</description>
+        </tag>
+        <tag id="2613" parentid="2610" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2016-09-04">
+            <name>place</name>
+            <description>The places the anime can take place in. Includes more specific places such as a country on Earth, as well as more general places such as a dystopia or a mirror world.</description>
+        </tag>
+        <tag id="2618" parentid="2841" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2012-10-07">
+            <name>collateral damage</name>
+            <description>The usually action orientated anime does not only show large amounts of combat and weapon use, but also the incidental massive destruction of property, often due to the inability of the protagonists to aim properly.
+Example: Mecha duking it out in a densely populated urban area.</description>
+        </tag>
+        <tag id="2619" parentid="2841" infobox="true" weight="400" localspoiler="false" globalspoiler="false" verified="true" update="2017-12-26">
+            <name>gunfights</name>
+            <description>Fights where two or more parties are firing guns at one another.</description>
+            <picurl>211280.jpg</picurl>
+        </tag>
+        <tag id="2622" parentid="2841" weight="100" localspoiler="false" globalspoiler="false" verified="true" update="2017-12-26">
+            <name>swordplay</name>
+            <description>The act or art of using a sword or similar weapon skillfully.</description>
+            <picurl>211286.jpg</picurl>
+        </tag>
+        <tag id="2626" parentid="2612" weight="600" localspoiler="false" globalspoiler="false" verified="true" update="2009-05-15">
+            <name>future</name>
+            <description>Anime that fall under the future category are the ones that have a society that could have originated from ours. In most cases it should go hand to hand with sci-fi since we expect the future to consist of advanced technology, however, in the case where it`s explicitly stated in the story that the anime takes place "x years into the future", the state of technology doesn`t matter as long as it`s long into the future. The anime can be set in an alternative universe not tied with our own, as long as it has a futuristic feel to it.
+This category sports quite a lot of anime, mostly stemming from SciFi, but not necessarily only from there.</description>
+        </tag>
+        <tag id="2627" parentid="2613" weight="600" localspoiler="false" globalspoiler="false" verified="true" update="2019-12-27">
+            <name>space</name>
+            <description>The final frontier.</description>
+            <picurl>242357.jpg</picurl>
+        </tag>
+        <tag id="2636" parentid="2846" weight="100" localspoiler="false" globalspoiler="false" verified="true" update="2018-09-16">
+            <name>human enhancement</name>
+            <description>Human enhancement can take various forms: It can be something comparatively non-intrusive as a power-up drug, a form of machine implantation or cyberization (http://anidb.net/a4414 [SAC Solid State Society]), or outright - possibly atrocious - genetic manipulation (http://anidb.net/a361 [Ao no 6 Gou]). Plot-wise enhanced protagonists in anime usually have to pay a price for their enhancements, be it physical or mental.</description>
+            <picurl>223945.jpg</picurl>
+        </tag>
+        <tag id="2639" parentid="2846" infobox="true" weight="600" localspoiler="false" globalspoiler="false" verified="true" update="2019-12-27">
+            <name>space travel</name>
+            <description>Space Travel usually refers going to space or travelling there with or without a spacecraft. There are different forms of space travel like Interplanetary travel, Interstellar travel or Intergalactic travel. Since it isn`t possible to travel faster than light, most anime series involve some sort "sub-space travel mechanism" as a way to travel faster than light.</description>
+            <picurl>242375.jpg</picurl>
+        </tag>
+        <tag id="2653" parentid="2853" weight="100" localspoiler="false" globalspoiler="false" verified="true" update="2009-05-04">
+            <name>slapstick</name>
+            <description>Slapstick humour is generally recognized by lots of physical abuse, horseplay and practical jokes. Also often seen are impossible situations, using sounds to illustrate impossible stunts that aren`t shown on-screen and to create tension for audience anticipation.</description>
+        </tag>
+        <tag id="2654" parentid="2853" weight="200" localspoiler="false" globalspoiler="false" verified="true" update="2017-06-13">
+            <name>medium awareness</name>
+            <description>Medium awareness is the situational and generally temporary awareness characters in works of fiction have and display of the very fact that they are characters in works of fiction. For example, they may comment about the background music, quip about the script or narration, complain about the roles given to them by the writer or their lack of screen time, see the subtitles that appear on screen, inform the audience about the arrival of the commercial break, and even use medium effects as tools. The most common form of medium awareness is known as breaking the fourth wall, in which characters speak directly to the audience, either to it as a whole or to specific members of it. The "fourth wall" is the imaginary "wall" at the front of the stage of a proscenium theatre through which the audience sees the play; it is a metaphor for the boundary between what happens inside the work, to the characters, and outside it, to the audience.</description>
+        </tag>
+        <tag id="2660" parentid="2627" weight="400" localspoiler="false" globalspoiler="false" verified="true" update="2009-05-15">
+            <name>other planet</name>
+            <description>The anime will fit this category if some or all of the action takes place on another planet which is supposedly in the same universe as Earth, not a complete fantasy world; usually there has to be some concept of space travel. The Latin name for Earth - Terra, would also pass the condition of being in the same universe as Earth. Basically, even mentioning of Earth existing or having existed would be enough. Although Moon is a moon, it also qualifies as Other Planet.</description>
+        </tag>
+        <tag id="2661" parentid="2627" weight="400" localspoiler="false" globalspoiler="false" verified="true" update="2009-05-18">
+            <name>shipboard</name>
+            <description>Beam me up, Scotty! Space stations (think Death Star) also count. Basically, this category is to tell if the setting takes place onboard a spaceship in space. This category is not applicable if the spaceship lies on a planet and never actually gets into space.</description>
+        </tag>
+        <tag id="2748" parentid="2604" weight="100" localspoiler="false" globalspoiler="false" verified="true" update="2018-11-08">
+            <name>sex</name>
+            <description>Sexual intercourse, the ultimate bond of love and the "Origin of the World" (just think of Gustave Courbet`s painting: http://en.wikipedia.org/wiki/L%27Origine_du_monde).
+Note: Refer to further guidance on http://wiki.anidb.net/w/Categories:Content_Indicators [the Wiki page] for how to apply tag weights for content indicators.</description>
+            <picurl>161190.jpg</picurl>
+        </tag>
+        <tag id="2750" parentid="2604" weight="200" localspoiler="false" globalspoiler="false" verified="true" update="2018-11-08">
+            <name>violence</name>
+            <description>Violence is the use of physical force against oneself or another entity, compelling action against one`s will on pain of being hurt.
+Note: Refer to further guidance on http://wiki.anidb.net/w/Categories:Content_Indicators [the Wiki page] for how to apply tag weights for content indicators.</description>
+        </tag>
+        <tag id="2765" parentid="2660" weight="200" localspoiler="false" globalspoiler="false" verified="true" update="2018-03-06">
+            <name>Mars</name>
+            <description>Mars is the fourth planet from the Sun and the second-smallest planet in the Solar System after Mercury. In English, Mars carries a name of the Roman god of war, and is often referred to as the "Red Planet" because the reddish iron oxide prevalent on its surface gives it a reddish appearance that is distinctive among the astronomical bodies visible to the naked eye. Mars is a terrestrial planet with a thin atmosphere, having surface features reminiscent both of the impact craters of the Moon and the valleys, deserts, and polar ice caps of Earth.
+Source: Wikipedia</description>
+            <picurl>214389.jpg</picurl>
+        </tag>
+        <tag id="2790" parentid="2605" weight="300" localspoiler="false" globalspoiler="false" verified="true" update="2010-01-17">
+            <name>plot continuity</name>
+            <description>Consistency of the characteristics of persons, plot, objects, places and events seen by the viewer.
+A single linear focused plot is highly continuous.
+A truly random plot is highly discontinuous.</description>
+        </tag>
+        <tag id="2794" parentid="2883" weight="100" localspoiler="false" globalspoiler="false" verified="true" update="2015-02-23">
+            <name>music</name>
+            <description>Music anime generally revolves around people concerned with music in their everyday lives. In addition they often adhere to certain genre conventions, the emphasis on training and practice in preparation for competitions, characters desire for self improvement, and pursuit of a specific goal. This is not unlike the Sports category.</description>
+            <picurl>169131.jpg</picurl>
+        </tag>
+        <tag id="2797" parentid="2609" infobox="true" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2009-05-18">
+            <name>new</name>
+            <description>Not based on anything, the story is a new work, usually made up by the people involved in creating the anime. Generally if an original work (原作) credit is given, it will be to the studio, or director, or other members of the production team.</description>
+        </tag>
+        <tag id="2841" parentid="2611" infobox="true" weight="400" localspoiler="false" globalspoiler="false" verified="true" update="2017-12-26">
+            <name>action</name>
+            <description>Action anime usually involve a fairly straightforward story of good guys versus bad guys, where most disputes are resolved by using physical force. It often contains a lot of shooting, explosions and fighting.</description>
+            <picurl>211261.jpg</picurl>
+        </tag>
+        <tag id="2844" parentid="2611" weight="100" localspoiler="false" globalspoiler="false" verified="true" update="2018-01-21">
+            <name>angst</name>
+            <description>A feeling of general discomfort and uneasiness is present due to either trivial or more serious reasons, often accompanied by depression.
+Warning: may contain copious amounts of brooding and sighing.
+Etymology: "Angst" is a German word meaning fear or anxiety.</description>
+            <picurl>212183.jpg</picurl>
+        </tag>
+        <tag id="2846" parentid="7050" infobox="true" weight="600" localspoiler="false" globalspoiler="false" verified="true" update="2018-10-04">
+            <name>science fiction</name>
+            <description>Science fiction stories usually focus on how situations could be different in the future when we are more technologically advanced; due to either our own achievements or having met with other civilizations whom we have learned from.</description>
+            <picurl>212180.jpg</picurl>
+        </tag>
+        <tag id="2849" parentid="7050" weight="100" localspoiler="false" globalspoiler="false" verified="true" update="2005-05-07">
+            <name>fantasy</name>
+            <description>Fantasy is a genre of fiction that uses magic and other supernatural phenomena as a primary element of plot, theme, or setting. Many works within the genre take place in fictional worlds where magic is common. Fantasy is generally distinguished from science fiction and horror by the expectation that it steers clear of (pseudo-)scientific and macabre themes, respectively, though there is a great deal of overlap between the three (which are subgenres of speculative fiction).
+In popular culture, the genre of fantasy is dominated by its medievalist form, especially since the worldwide success of The Lord of the Rings books by J. R. R. Tolkien. In its broadest sense however, fantasy comprises works by many writers, artists, filmmakers, and musicians, from ancient myths and legends to many recent works embraced by a wide audience today.
+Fantasy is a vibrant area of academic study in a number of disciplines (English, cultural studies, comparative literature, history, medieval studies). Work in this area ranges widely, from the structuralist theory of Tzvetan Todorov, which emphasizes the fantastic as a liminal space, to work on the connections (political, historical, literary) between medievalism and popular culture
+Source: Wiki</description>
+            <picurl>68768.jpg</picurl>
+        </tag>
+        <tag id="2850" parentid="2611" weight="300" localspoiler="false" globalspoiler="false" verified="true" update="2015-10-25">
+            <name>adventure</name>
+            <description>Adventures are exciting stories, with new experiences or exotic locales. Adventures are designed to provide an action-filled, energetic experience for the viewer. Rather than the predominant emphasis on violence and fighting that is found in pure action anime, however, the viewer of adventures can live vicariously through the travels, conquests, explorations, creation of empires, struggles and situations that confront the main characters, actual historical figures or protagonists. Under the category of adventures, we can include traditional swashbucklers, serialized films, and historical spectacles, searches or expeditions for lost continents, "jungle" and "desert" epics, treasure hunts and quests, disaster films, and heroic journeys or searches for the unknown. Adventure films are often, but not always, set in an historical period, and may include adapted stories of historical or literary adventure heroes, kings, battles, rebellion, or piracy.</description>
+            <picurl>178879.jpg</picurl>
+        </tag>
+        <tag id="2852" parentid="2611" weight="200" localspoiler="false" globalspoiler="false" verified="true" update="2018-03-11">
+            <name>thriller</name>
+            <description>The thriller is a genre of fiction in which tough, resourceful, but essentially ordinary heroes are pitted against villains determined to destroy them, their country, or the stability of the free world. The hero of a typical thriller faces danger alone or in the company of a small band of companions. The protagonist may be a law enforcement agent, a journalist, or a soldier, but typically he or she is cut off from the resources of "their" organization. More often the hero is an ordinary citizen drawn into danger and intrigue by circumstances beyond their control.
+Source: Wikipedia</description>
+            <picurl>214683.jpg</picurl>
+        </tag>
+        <tag id="2853" parentid="2611" weight="200" localspoiler="false" globalspoiler="false" verified="true" update="2017-02-13">
+            <name>comedy</name>
+            <description>Anime whose central struggle causes hilarious results. These stories are built upon funny characters, situations and events. A comedy anime is laced with humour and sets out to provoke laughter from the audience.
+Japanese humour can be a bit strange to westerners, so if you`re new to this type of humour, just bear with it; it`ll most likely grow on you if you`re a fan of other kinds of comedy.</description>
+            <picurl>198104.jpg</picurl>
+        </tag>
+        <tag id="2858" parentid="2611" weight="200" localspoiler="false" globalspoiler="false" verified="true" update="2017-12-01">
+            <name>romance</name>
+            <description>Romance describes a story that deals with love between two or more characters typically also having an optimistic ending. Romance is also a difficulty encountered when creating a harem.</description>
+            <picurl>210061.jpg</picurl>
+        </tag>
+        <tag id="2861" parentid="2846" weight="300" localspoiler="false" globalspoiler="false" verified="true" update="2017-12-26">
+            <name>cyberpunk</name>
+            <description>Cyberpunk focuses on computers or information technology, usually coupled with some degree of breakdown in social order. The plot often centres on a conflict among hackers, artificial intelligences, and mega corporations, tending to be set within a near-future dystopian Earth.</description>
+            <picurl>211264.jpg</picurl>
+        </tag>
+        <tag id="2872" parentid="2607" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2009-04-16">
+            <name>crime</name>
+            <description>The underworld we talk about here is not to be confused with the place where people are believed to go after they die, but the general term for organized crime. It is a shady world, unknown to most people, where illegal things like murder, smuggling, drug dealing and similar are happening daily. Groups known to be acting in this world are for example the mafia or the yakuza.</description>
+        </tag>
+        <tag id="2874" parentid="2607" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2018-05-07">
+            <name>disaster</name>
+            <description>A disaster is a large-scale situation that causes great loss of or damage or threat to life, health, property, society, or the environment, irrespective of its source or cause. Disasters have substantial, long-lasting negative repercussions, and great effort must be spent in order to undo or mitigate their effects.</description>
+        </tag>
+        <tag id="2877" parentid="2607" weight="200" localspoiler="false" globalspoiler="false" verified="true" update="2014-02-27">
+            <name>revenge</name>
+            <description>A primary factor that drives the plot forward, is the almost obsessive desire of one of the characters to get back at someone else.</description>
+        </tag>
+        <tag id="2883" parentid="2607" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2014-10-07">
+            <name>the arts</name>
+            <description>The arts represent an outlet of human expression, usually influenced by culture, and driven by human creative impulse. Major constituents of the arts include literature – including poetry, novels and short stories, and epics; performing arts – among them music, dance, and theatre; culinary arts such as baking, chocolatiering, and winemaking; media arts like photography and film, and visual arts – including drawing, painting, and sculpting. Some art forms combine a visual element with performance (e.g. film) and the written word (e.g. comics).
+From prehistoric cave paintings to modern day films, art serves as a vessel for storytelling and conveying mankind`s relationship with its environment.
+Source: Wiki</description>
+        </tag>
+        <tag id="2884" parentid="2607" weight="300" localspoiler="false" globalspoiler="false" verified="true" update="2019-07-24">
+            <name>psychoactive drugs</name>
+            <description>Psychoactive drugs are chemical substances that affect the function of the central nervous system, altering perception, mood or consciousness.
+Source: Wikipedia</description>
+        </tag>
+        <tag id="2887" parentid="2611" infobox="true" weight="400" localspoiler="false" globalspoiler="false" verified="true" update="2009-05-16">
+            <name>tragedy</name>
+            <description>Tragedy is a form of drama characterized by seriousness and dignity, usually involving a conflict between a character and some higher power, such as the law, the gods, fate, or society.</description>
+        </tag>
+        <tag id="2906" parentid="2846" weight="200" localspoiler="false" globalspoiler="false" verified="true" update="2016-09-04">
+            <name>nanomachines</name>
+            <description>The anime features sub-microscopic (nano = 10E-9 = one billionth) machines, machines that float in the bloodstream and affect the human body. They can be used both for good (repairing human cells in situ) or for evil (nano-machine warfare, attacking human cells in situ).</description>
+            <picurl>183210.jpg</picurl>
+        </tag>
+        <tag id="2923" parentid="2874" infobox="true" weight="400" localspoiler="false" globalspoiler="false" verified="true" update="2014-06-25">
+            <name>post-apocalyptic</name>
+            <description>An anime that takes place on future Earth (or it could be an alternative universe) after a major cataclysm has occurred. World War III, an alien invasion, plague, global warming or some other general disaster are common themes to build a post-apocalyptic world upon, where the effects were severe enough that mankind barely survived.
+The time frame may be immediately after the catastrophe, focusing on the travails or psychology of survivors, or considerably later, often including the theme that the existence of pre-catastrophe civilization has been forgotten (or mythologised). Post-apocalyptic stories often take place in an agrarian, non-technological future world, or a world where only scattered elements of technology remain. There is a considerable degree of blurring between post-apocalyptic fiction and that which deals with false utopias or dystopian societies.</description>
+            <picurl>42081.jpg</picurl>
+        </tag>
+        <tag id="2931" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2016-12-04">
+            <name>unsorted</name>
+            <description>a bunch of tags that still need to be either deleted or moved into proper places.</description>
+        </tag>
+        <tag id="2962" parentid="2611" weight="300" localspoiler="false" globalspoiler="false" verified="true" update="2015-03-14">
+            <name>neo-noir</name>
+            <description>Neo-noir is a style that prominently utilizes elements of the now declined film noir, but with updated themes, content, style, visual elements, or media that were absent in films noirs of the 1940s and 1950s.
+Films noirs were typically crime dramas or psychological thrillers featuring a pessimistic worldview and starring conflicted antiheroes trapped in difficult situations and making choices out of desperation or nihilistic moral systems, with crime, especially murder, being featured on the majority of them. Some of the most obvious visual elements included low-key lighting, striking use of light and shadow, black-and-white filming, and unusual camera placement such as low-angle, wide-angle, and Dutch angle shots.
+Film noir is often associated with urban settings, private detectives, femmes fatales, and bleak endings, but they are not necessary to the genre; a large number of these films, including some of the genre classics, take place in small towns, suburbia, rural areas, or on the open road, feature neither character type, and have clearly happy endings.
+Film noir and the early neo-noir would come to influence the formation of tech noir, a crossover of neo-noir and science fiction, in the late 1970s; some the most influencial tech noir works are the American movies Alien (1979), Blade Runner (1982), and The Terminator (1984). Tech noir itself would also help form http://anidb.net/t2861 [cyberpunk] in the early 1980s.</description>
+        </tag>
+        <tag id="3040" parentid="6230" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2018-11-01">
+            <name>male protagonist</name>
+            <description>This anime has a male protagonist.</description>
+        </tag>
+        <tag id="3316" parentid="2931" weight="0" localspoiler="false" globalspoiler="false" verified="false" update="2009-08-10">
+            <name>despair</name>
+            <description>Involves characters that may be lost in negatively emotional atmospheres created through feelings of hopelessness and suffering.</description>
+        </tag>
+        <tag id="3328" parentid="6149" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2021-03-15">
+            <name>melancholic</name>
+            <description>A melancholic person is someone that is filled with or affected by great sadness or depression, especially of a thoughtful or introspective nature.</description>
+        </tag>
+        <tag id="3464" parentid="2846" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2008-08-07">
+            <name>space western</name>
+            <description>Space Western is a subgenre of science fiction that transposes themes of American Western books and film to a backdrop of futuristic space frontiers; it is the complement of the science fiction Western, which transposes science fiction themes onto an American Western setting.</description>
+        </tag>
+        <tag id="3489" parentid="2841" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2017-12-26">
+            <name>car chases</name>
+            <description>Car chases occur as part of the action setting in this anime.</description>
+            <picurl>211263.jpg</picurl>
+        </tag>
+        <tag id="3568" parentid="2607" weight="100" localspoiler="false" globalspoiler="false" verified="true" update="2016-02-07">
+            <name>gambling</name>
+            <description>Gambling is the wagering of money or something of value (referred to as "the stakes") on an event with an uncertain outcome with the primary intent of winning additional money and/or material goods. Gambling thus requires three elements be present: consideration, chance and prize. The outcome of the wager is often immediate, such as a single roll of dice or a spin of a roulette wheel, but longer time frames are also common, allowing wagers on the outcome of a future sports contest or even an entire sports season.
+Source: Wikipedia</description>
+        </tag>
+        <tag id="3795" parentid="6151" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2019-02-14">
+            <name>remastered version available</name>
+            <description>This anime has been remastered in a higher quality format than the original release. The remaster may be a simple upscale, or it could be a full enhancement project from the original frames. This is irrespective of whether specific groups have released rips of such formats to the internet.</description>
+        </tag>
+        <tag id="3809" parentid="2605" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2012-05-24">
+            <name>character driven</name>
+            <description>The main appeal of the show is the way the characters are portrayed and interact, focusing on dialogue, spending time together or getting to know each other. These anime are not "story-less" but story is secondary to character development and the characters themselves and what they experience.</description>
+        </tag>
+        <tag id="3822" parentid="6230" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2010-03-15">
+            <name>strong male lead</name>
+            <description>The lead male protagonist in this anime shows backbone, is competent, and does not shy away from seemingly insurmountable objectives.</description>
+        </tag>
+        <tag id="4084" parentid="2931" weight="0" localspoiler="false" globalspoiler="false" verified="false" update="2014-03-20">
+            <name>dark atmosphere</name>
+            <description>Usually metaphorical. Sometimes literal. At times both!
+Typically this refers to the fact that the story is set in a grim, dog eat dog milieu — for example a decaying city.
+Often the characters are just doing what they need to do to survive, with little or no expectation that their lives can be better. And often characters may feel they do not have any real choice in what they do.
+And yes, occasionally the setting is actually dark — be it night or perpetually heavy cloudy sky and rain. It all adds to the oppressive, hopeless feeling of the show.
+You probably will not feel uplifted or happy after watching this anime.</description>
+        </tag>
+        <tag id="4167" parentid="2841" weight="200" localspoiler="false" globalspoiler="false" verified="true" update="2008-08-24">
+            <name>air combat</name>
+            <description>Dogfight refers to combat engagement between aircraft (or space craft), often one on one. So in short: jets, planes, missiles, machine guns and maybe a kamikaze or two.
+Not to be confused with the `bark-bark` or `woof-woof` sort of dogfight.</description>
+        </tag>
+        <tag id="4251" parentid="6230" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2018-11-20">
+            <name>ensemble cast</name>
+            <description>A show with an ensemble cast focuses on a larger group of main characters in a single plot narrative; anime containing several segmented plot narratives (such as episodic or arc-based plots) are excluded. As such, it doesn`t really have a "main" or "lead" character; instead, every member of the central main character group plays an important part in the show`s grander scheme; no single character is more important or prominent than the others (equality of importance). Further, subplots (if any) lead by each character in the ensemble have equal weighting in importance (or lack of weight).
+
+* In a show where no single main character is more important or prominent than the others, 4+ main characters is almost always an ensemble cast.
+* A show with 3 main characters of equal importance is likely also an ensemble cast; equality of importance must be considered carefully.
+* A show with 2 main characters of equal importance is generally not an ensemble cast situation; however, on an exception basis where neither main character is considered an antagonist, a 2-main-character anime may be considered an ensemble (e.g. http://anidb.net/a11829 [Kimi no Na wa.]).
+
+Pictured: http://anidb.net/a9043 [K (anime)]</description>
+            <picurl>94914.jpg</picurl>
+        </tag>
+        <tag id="4314" parentid="2931" weight="0" localspoiler="false" globalspoiler="false" verified="false" update="2010-04-11">
+            <name>psychological</name>
+            <description>Directed toward dealing with or affecting the mind, especially as a function of awareness, feeling, or motivation.</description>
+        </tag>
+        <tag id="4316" parentid="6242" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2018-11-11">
+            <name>murder</name>
+            <description>To murder means to bring about someone else`s death, by a voluntary act. Whether it comes from the killer`s own hand or by exposing the victim to life-threatening circumstances, the result is foreseeable and sought by the perpetrator. Someone who murders as their profession/job is an http://anidb.net/t2399 [assassin or hitman].</description>
+        </tag>
+        <tag id="4343" parentid="2931" weight="0" localspoiler="false" globalspoiler="true" verified="false" update="2009-09-21">
+            <name>main character dies</name>
+            <description>At least one of the main characters in the anime dies.</description>
+        </tag>
+        <tag id="4398" parentid="6230" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2019-02-23">
+            <name>antihero</name>
+            <description>An antihero is a main character in a story who lacks conventional heroic qualities and attributes such as idealism, courage and morality. Although antiheroes may sometimes perform actions that are morally correct, it is not always for the right reasons, often acting primarily out of self-interest or in ways that defy conventional ethical codes.
+A villain protagonist is where the leading character of the story (the protagonist) is also a villain; this is a fairly rare occurrence.</description>
+            <picurl>70856.jpg</picurl>
+        </tag>
+        <tag id="4446" parentid="2639" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2017-12-12">
+            <name>faster-than-light travel</name>
+            <description>Faster-than-light travel is taken for grated in this anime. This is achieved by travelling via hyperspace, nullspace, or wormholes.</description>
+        </tag>
+        <tag id="4479" parentid="2931" weight="0" localspoiler="false" globalspoiler="false" verified="false" update="2009-02-03">
+            <name>sense of foreboding</name>
+            <description>The anime starts off quietly, everything seems to be fine, but from episode to episode the signs that something ominous is about to happen increase. E.g. a typical mystery setting.</description>
+        </tag>
+        <tag id="4521" parentid="6233" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2009-05-28">
+            <name>lost technology</name>
+            <description>Any advanced technology or science-related knowledge that was lost for some reason fits the description. This could be technology from a time before a post-apocalyptic cataclysm, knowledge gained a long time ago but forgotten, or the relics of an old alien civilization only recently discovered.</description>
+        </tag>
+        <tag id="5649" parentid="2794" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2015-02-23">
+            <name>jazz</name>
+            <description>A style of music originating in the Southern USA in the early 20th century, emerging from Blues and Ragtime. Jazz is often associated with the city of New Orleans.
+Jazz music is typified by improvisation and syncopation.
+Instruments often associated with Jazz are the trumpet, trombone, piano and clarinet.
+The anime features a vast amount of jazz, or the theme revolves around it.</description>
+            <picurl>10253.jpeg</picurl>
+        </tag>
+        <tag id="5767" parentid="2841" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2015-08-16">
+            <name>Itano circus</name>
+            <description>The Itano circus is named after Itano Ichirou, a Japanese animator, and refers to a highly stylized and acrobatic method of depicting aerial combat and dogfights in many anime, particularly the Macross series, where it was utilised by Itano for the first time and was ground-breaking.
+The Itano circus is characterized by detailed, fluid shading of the mecha, the close-range acrobatic moves the duelling fighters make in combat, as well as twisting contrails left by fighters and missiles. It is also commonly used in specific reference to an attack where a mecha or spaceship launches a large swarm of missiles with meticulously animated spiralling smoke trails and erratic trajectories.</description>
+        </tag>
+        <tag id="5816" parentid="4316" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2009-10-03">
+            <name>massacre</name>
+            <description>Mass murder.</description>
+        </tag>
+        <tag id="5996" parentid="6247" weight="0" localspoiler="true" globalspoiler="false" verified="false" update="2014-02-19">
+            <name>tragic ending</name>
+            <description>Up to the very end of the anime the viewer will hope that the story will end well and that the characters will in some way be able to solve the problems.
+Not so. The sense of foreboding doom could not be averted. The social or personal calamity strikes mercilessly.
+Examples: The catastrophic meteor strike does hit Earth after all. The long sick loved one cannot be saved. After overcoming all obstacles a random cruel event ends the life of the protagonist. A almost forgotten tragedy in the past has repercussions in the present.</description>
+        </tag>
+        <tag id="6018" parentid="6230" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2011-11-27">
+            <name>predominantly adult cast</name>
+            <description>This show features mostly adults. That means children and teenagers are relatively rare and unlikely to hold significance to the plot.
+That is a rare trait in anime, as most shows spin around children or teenagers.</description>
+        </tag>
+        <tag id="6149" parentid="30" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2014-09-10">
+            <name>TO BE MOVED TO CHARACTER</name>
+            <description>Tags under this parent tag are going to be moved to character tags and removed from the anime they`re currently assigned to. They will be blocked from the anime system once that move is complete. Please help with that job if you know what characters they should be assigned to.</description>
+        </tag>
+        <tag id="6151" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2014-09-10">
+            <name>technical aspects</name>
+            <description>It may sometimes be useful to know about technical aspects of a show, such as information about its broadcasting or censorship. Such information can be found here.</description>
+        </tag>
+        <tag id="6153" parentid="6151" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2014-09-10">
+            <name>multi-anime projects</name>
+            <description>Many anime are created as part of larger projects encompassing many shows without direct relation to one another. Normally, there is a specific idea in mind: for example, the http://anidb.net/t4859 [Young Animator Training Project] aims to stimulate the on-the-job training of next-generation professionals of the anime industry, whereas the http://anidb.net/t3763 [World Masterpiece Theatre] aims to animate classical stories from all over the world.</description>
+        </tag>
+        <tag id="6173" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2014-09-24">
+            <name>origin</name>
+        </tag>
+        <tag id="6230" parentid="2605" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2014-10-20">
+            <name>cast</name>
+        </tag>
+        <tag id="6233" parentid="2611" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2015-08-11">
+            <name>tropes</name>
+            <description>A trope is a commonly recurring literary and rhetorical devices, motifs or clichés in creative works. This use is a broader redefining of a literary trope, the use of figurative language, via word, phrase, or even an image, for artistic effect, such as using a figure of speech.
+Source: Wikipedia</description>
+        </tag>
+        <tag id="6242" parentid="2607" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2019-07-24">
+            <name>death</name>
+            <description>Death is the state of no longer being alive or the process of ceasing to be alive.</description>
+        </tag>
+        <tag id="6247" parentid="2931" weight="0" localspoiler="false" globalspoiler="false" verified="false" update="2019-06-02">
+            <name>ending tags that need merging</name>
+            <description>See also: http://anidb.net/post426253 [http://anidb.net/post426253] and http://anidb.net/c6774745 [http://anidb.net/c6774745]</description>
+        </tag>
+        <tag id="6399" parentid="2605" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2015-08-25">
+            <name>episodic</name>
+            <description>An episodic anime consists of many successive short arcs that are generally 1-2 episodes in length, with strong plot continuity within each arc but generally little continuity from one arc to the next. For long shows (well upwards of 50 episodes), the episode count constraint is less tight; for example, a show with close to 250 episodes would also be considered episodic if it consisted of a majority of arcs of up to 3 or maybe 4 episodes and possibly also very few slightly longer arcs.</description>
+        </tag>
+        <tag id="7050" parentid="2611" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2019-04-18">
+            <name>speculative fiction</name>
+            <description>Speculative fiction is an umbrella genre encompassing fiction with certain elements that do not exist in the real world, often in the context of supernatural, futuristic or other imaginative themes. This includes, but is not limited to, science fiction, fantasy, superhero fiction, horror, utopian and dystopian fiction, fairytale fantasy, supernatural fiction, as well as combinations thereof.
+Source: Wikipedia</description>
+        </tag>
+        <tag id="7119" parentid="6153" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2018-08-06">
+            <name>Super Robot Wars</name>
+            <description>Super Robot Wars is a series of tactical role-playing video games produced by Banpresto. The main feature of the franchise is having a story that crosses over several popular mecha anime, manga and video games, allowing characters and mecha from different titles to team up or battle one another. Due to the nature of crossover games and licensing involved, only a few games have been released outside Japan, and in English; early English-language games only feature Banpresto`s original characters and mecha, and a flagship installment were to never be released until 2016, with the English release of Super Robot Wars V in Southeast Asian countries. The franchise celebrated its 25th anniversary in 2016.
+Source: Wikipedia</description>
+            <picurl>221614.jpg</picurl>
+        </tag>
+        <tag id="7885" parentid="6173" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2021-11-07">
+            <name>Japanese production</name>
+        </tag>
+    </tags>
+    <characters>
+        <character id="270" type="main character in" update="2015-04-14">
+            <rating votes="803">9.32</rating>
+            <name>Spike Spiegel</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <description>A former member of the Red Dragons mafia group, Spike left his past behind 3 years ago and now lives the life of a wanderer, sailing the cosmos alongside his trusted partner, Jet Black, in their ship, the Bebop. Always after a new prize to restock their dwindling money supply and put food on the table, Spike and Jet will get into all sorts of scrapes to hunt criminals down. Spike`s skills at martial arts and with his gun help make him someone you definitely do not want to mess with.</description>
+            <picture>14555.jpg</picture>
+            <seiyuu id="380" picture="158572.jpg">Yamadera Kouichi</seiyuu>
+        </character>
+        <character id="400" type="main character in" update="2015-12-19">
+            <rating votes="419">8.11</rating>
+            <name>Faye Valentine</name>
+            <gender>female</gender>
+            <charactertype id="1">Character</charactertype>
+            <description>Faye Valentine is one of the members of the bounty hunting crew in the anime series Cowboy Bebop. She is often seen with a cigarette and in a revealing outfit complete with bright yellow hot pants and a matching, revealing top (and, on occasion, a bikini). She sports violet hair, green eyes, and a voluptuous body. Although appearing to be no more than 23 years old, Faye is actually around 77 years old, having been put into cryogenic freeze after a space shuttle accident, wherein she spent fifty-four years in suspended animation. During the course of the series (set in 2071), Faye manages to cross paths with Spike and Jet twice before she finally makes herself at home aboard their ship the second time around, much to the consternation and disapproval of the two men, both of whom have their own reservations about women in general.
+Faye herself is brash, egotistical, and quite lazy, despite taking plenty of time to pamper and care for her own appearance. Faye has been arrested several times in the series, and has spent time in handcuffs on the ship. She, at times, expects the boys to take care of bounties for her, while she sits by idly to reap the benefits and eat all their food, which is another source of conflict.
+Seemingly little more than a thorn in her partner`s sides, Faye is actually a well-rounded member of the team. She can handle herself exceptionally well for a woman of her slight appearance, displaying at least once in the series (in "http://anidb.net/e880 [Cowboy Funk]") that she has a powerful punch. Adept at flying, Faye has stood her ground just as well as Spike has in an aerial dogfight in her ship Red Tail, and at times even against Spike in an aerial dogfight (though Spike eventually proved the better pilot). She also excels with guns, and is first seen in the series completely disabling a shop with a Heckler &amp; Koch MP5K, though she is immediately apprehended afterward. In the movie, she is seen with the same gun, in addition to her normal companion: a Glock 30. Faye has an almost unstoppable attitude, and even her sometimes innocent smile can be seen as dangerous. She has many bad habits, such as drinking, habitual gambling, smoking cigarettes and occasionally cigars, becoming unnecessarily violent, and turning on partners when the profits seem too skimpy. Sarcastic and presumptuous, she rarely appears weak or in need of support. She brags and takes care of herself, never trusting others, cheating and lying her way from one day to the next.
+She is a woman who is skilled at getting what she wants; her indomitable exterior hides a more delicate interior. Upon awakening from her 54-year cryogenic sleep, not only was she saddled with a massive amount of debt that she had no means to pay, but she was also diagnosed with total amnesia, a stranger in a mysterious world that she was not a part of and did not understand, surrounded by people who claimed to be helping her but were only there to take advantage of her naiveté. The surname "Valentine" was merely a name given to her by the doctor who woke her; the circumstances of her accident, her previous life, and even her real name all remain a mystery, and are only gradually revealed as the series progresses. It has been hinted that she came from Singapore on Earth, and was the daughter of a very wealthy family, as the city`s famous Merlion Statue features prominently in scenes of her childhood, and that memories and a film from her childhood showed her living in a large mansion. Faye is supposedly her real name, as a high school classmate (by now an old disabled woman) recognizes her and calls her by that name. In her debut episode, she claims to be descended from Roma people, but it later becomes apparent that was likely a lie. Utterly betrayed by someone she thought she could trust after waking, Faye found herself burdened with even more money to pay, and the situation resulted in the hardening of her personality to an extreme degree. She even says in Session 11: "we deceive or we are deceived", and that "nothing good ever happened to me when I trusted others."
+Source: Wiki</description>
+            <picture>14672.jpg</picture>
+            <seiyuu id="13" picture="16583.jpg">Hayashibara Megumi</seiyuu>
+        </character>
+        <character id="401" type="main character in" update="2015-04-14">
+            <rating votes="245">7.76</rating>
+            <name>Jet Black</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <description>Known on his home satellite as the "Black Dog" for his tenacity, Jet Black is a 36-year-old former cop from Ganymede (a Jovian satellite) and acts as Spike`s foil during the series. Physically, Jet is very tall with a muscular build. He wears a beard with no mustache, and is completely bald save for the back of his head. Spike acts lazy and uninterested, whereas Jet is hard working and a jack-of-all-trades. Jet was once an investigator in the Intra Solar System Police (ISSP) for many years until he lost his arm in an investigation that went awry when his corrupt partner (and friend at the time) betrayed him. His arm was replaced with a cybernetic limb—an operation later revealed to be by choice. As biological replacements were possible, he wanted the fake arm as a reminder of the consequences of his actions. His loss of limb coupled with the general corruption of the police force prompted Jet to quit the ISSP in disgust and become a freelance bounty hunter. Jet also considers himself something of a renaissance man: he cultivates bonsai trees, cooks, enjoys jazz/blues music (he named his ship the Bebop, referring to a type of jazz), especially Charlie Parker, and even has interest in Goethe. As a character, Jet is the quintessential oyaji or "dad" even though he often wishes people would view him as a more brotherly figure (so as not to seem old). Of the crew he shows the most obvious affection when dealing with Edward, most obviously shown when he tells her a story in Session 18; he is also shown attempting to (perhaps falsely) reassure himself after she and Faye leave the crew of the Bebop, hinting that his sometimes-stoic nature may be born of necessity rather than any real lack of emotion.
+Source: Wiki</description>
+            <picture>14673.jpg</picture>
+            <seiyuu id="339" picture="79312.jpg">Ishizuka Unshou</seiyuu>
+        </character>
+        <character id="402" type="main character in" update="2015-04-14">
+            <rating votes="304">7.53</rating>
+            <name>Edward Wong Hau Pepelu Tivrusky IV</name>
+            <gender>female</gender>
+            <charactertype id="1">Character</charactertype>
+            <description>Edward Wong Hau Pepelu Tivruski IV is the self-invented personal name of an elite hacker prodigy from Earth. Her birth name is Françoise Appledehli. "Radical Edward" is a very strange, somewhat androgynous, teenage girl claiming to be around 13 years of age. Her mannerisms include walking around in her bare feet, performing strange postures, and her gangling walk. Ed could be considered a "free spirit;" she is fond of silly exclamations and childish rhymes, is easily distracted, has the habit of "drifting off" from reality... sometimes in mid-sentence, and is the show`s primary source of physical humor. Ed`s generally carefree attitude and energy act as a counterpoint to the more solemn and dark aspects of the show. Ed remains a part of the Bebop crew until the 24th episode, when she, along with Ein, leaves the crew to reunite with her father.
+Over the course of the show, she rarely walks anywhere, preferring to run, crawl, flip, roll, walk on her hands, ride piggy-back, or, at the very least, saunter. Ed wears a very loose sleeveless shirt and tight, black bicycle shorts, and a pair of large green goggles around her neck or on her head that act as a virtual reality accessory for computers when connected. She is always barefoot and uses her feet for tasks which one would usually use hands, such as scratching her nose, clapping, and typing, and it seems she has followed this habit throughout her life. This also works the other way around, where she walks on her hands instead of her feet. In the episode Mushroom Samba she considers putting on socks and shoes but quickly removes them, as even wearing socks hampers her, and she falls over seconds after putting them on.
+She almost always refers to herself in the third person. Not much is known about her origins, only that she spent some of her earlier childhood in an orphanage after being left there by her father, a cartographer (a questionable occupation on a planet which undergoes changes to its landscape daily due to asteroid impacts) named Appledelhi Siniz Hesap Lütfen (which means "excuse me, check please" in Turkish). Ed`s primary use to the Bebop crew is as a hacker; she is widely known to be a whiz kid behind the computer. Ed`s computer of choice is a carry-along Tomato desktop, and when traveling by foot she will balance it on her head. Her goggles can interact with it to give her a virtual reality environment in which she can browse an entire network at once.
+Source: Wiki</description>
+            <picture>14676.jpg</picture>
+            <seiyuu id="405" picture="186916.jpg">Tada Aoi</seiyuu>
+        </character>
+        <character id="403" type="main character in" update="2015-04-14">
+            <rating votes="167">8.48</rating>
+            <name>Ein</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>14678.jpg</picture>
+            <seiyuu id="380" picture="158572.jpg">Yamadera Kouichi</seiyuu>
+        </character>
+        <character id="404" type="secondary cast in" update="2015-04-14">
+            <rating votes="76">6.12</rating>
+            <name>Vicious</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>14684.jpg</picture>
+            <seiyuu id="2" picture="265617.jpg">Wakamoto Norio</seiyuu>
+        </character>
+        <character id="405" type="secondary cast in" update="2015-04-14">
+            <rating votes="64">3.90</rating>
+            <name>Julia</name>
+            <gender>female</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>14687.jpg</picture>
+            <seiyuu id="404" picture="151682.jpg">Takashima Gara</seiyuu>
+        </character>
+        <character id="10212" type="appears in" update="2009-07-06">
+            <rating votes="44">8.83</rating>
+            <name>Bebop Gou Crew</name>
+            <gender>unknown</gender>
+            <charactertype id="3">Organization</charactertype>
+            <description>The crew of the spaceship Bebop are a partnership of bounty hunters, called "cowboys". Originally consisted of Jet Black and Spike Spiegel, later Faye Valentine, Ed (Edward Wong Hau Pepelu Tivrusky IV) and Ein have joined.</description>
+            <picture>30643.jpg</picture>
+        </character>
+        <character id="10219" type="appears in" update="2010-06-12">
+            <rating votes="20">7.95</rating>
+            <name>Bebop</name>
+            <gender>unknown</gender>
+            <charactertype id="4">Vessel</charactertype>
+            <description>A former fishing trawler spaceship owned by Jet Black and refitted to serve as a mobile base for bounty hunting. Contains enough living space to house at least 4 people and one dog. Bebop isn`t equipped with any kind of defensive or offensive weaponry but internal hangars may uphold at least 3 fighter class ships. It is also capable of interplanetary jumpgate travel and planet water landing.</description>
+            <picture>30652.jpg</picture>
+            <seiyuu id="2089" picture="151696.jpg">Morota Kaoru</seiyuu>
+        </character>
+        <character id="18655" type="appears in" update="2010-06-09">
+            <rating votes="4">5.76</rating>
+            <name>Bartender</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49382.jpg</picture>
+            <seiyuu id="3102" picture="251991.jpg">Chou Katsumi</seiyuu>
+        </character>
+        <character id="18656" type="appears in" update="2013-01-12">
+            <rating votes="9">4.64</rating>
+            <name>Asimov Solensan</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49383.jpg</picture>
+            <seiyuu id="18719" picture="68967.jpg">Nishi Tarou</seiyuu>
+        </character>
+        <character id="18657" type="appears in" update="2010-06-09">
+            <rating votes="8">6.35</rating>
+            <name>Laughing Bull</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49384.jpg</picture>
+            <seiyuu id="4683" picture="27279.jpg">Koyama Takehiro</seiyuu>
+        </character>
+        <character id="18659" type="appears in" update="2010-06-09">
+            <rating votes="14">6.48</rating>
+            <name>Katerina</name>
+            <gender>female</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49386.jpg</picture>
+            <seiyuu id="2879" picture="316326.jpg">Hino Yurika</seiyuu>
+        </character>
+        <character id="18660" type="appears in" update="2010-06-09">
+            <rating votes="5">3.13</rating>
+            <name>Abdul Hakim</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49388.jpg</picture>
+            <seiyuu id="2053" picture="23204.jpg">Ootomo Ryuuzaburou</seiyuu>
+        </character>
+        <character id="18662" type="appears in" update="2010-06-09">
+            <rating votes="21">6.26</rating>
+            <name>Judy</name>
+            <gender>female</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49390.jpg</picture>
+            <seiyuu id="290" picture="24139.jpg">Nagasawa Miki</seiyuu>
+        </character>
+        <character id="18663" type="appears in" update="2010-06-09">
+            <rating votes="12">6.70</rating>
+            <name>Punch</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49391.jpg</picture>
+            <seiyuu id="2199" picture="21752.jpg">Tareki Tsutomu</seiyuu>
+        </character>
+        <character id="18664" type="appears in" update="2010-06-09">
+            <rating votes="5">3.37</rating>
+            <name>Owner</name>
+            <gender>female</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49392.jpg</picture>
+            <seiyuu id="3968" picture="22867.jpg">Mizuhara Rin</seiyuu>
+        </character>
+        <character id="18665" type="appears in" update="2010-06-09">
+            <rating votes="5">3.70</rating>
+            <name>Oyaji</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49394.jpg</picture>
+            <seiyuu id="18720" picture="267027.jpg">Hirao Jinshou</seiyuu>
+        </character>
+        <character id="18670" type="appears in" update="2010-06-09">
+            <rating votes="4">2.32</rating>
+            <name>Gordon</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49402.jpg</picture>
+            <seiyuu id="544" picture="238510.jpg">Ogawa Shinji</seiyuu>
+        </character>
+        <character id="18675" type="appears in" update="2010-06-09">
+            <rating votes="4">2.68</rating>
+            <name>Morgan</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49408.jpg</picture>
+            <seiyuu id="42809" picture="223789.jpg">Nakata Kazuhiro</seiyuu>
+        </character>
+        <character id="18676" type="appears in" update="2010-06-09">
+            <rating votes="9">2.60</rating>
+            <name>Twinkle Maria Murdock</name>
+            <gender>female</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49409.jpg</picture>
+            <seiyuu id="18731" picture="49407.jpg">Arita Mari</seiyuu>
+        </character>
+        <character id="18677" type="appears in" update="2010-06-09">
+            <rating votes="4">2.40</rating>
+            <name>Harrison</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49410.jpg</picture>
+            <seiyuu id="173" picture="150067.jpg">Chafuurin</seiyuu>
+        </character>
+        <character id="18681" type="appears in" update="2010-06-09">
+            <rating votes="11">4.87</rating>
+            <name>Bob</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49415.jpg</picture>
+            <seiyuu id="415" picture="241624.jpg">Nakano Yutaka</seiyuu>
+        </character>
+        <character id="18682" type="appears in" update="2010-06-09">
+            <rating votes="3">3.49</rating>
+            <name>Choukan</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49417.jpg</picture>
+            <seiyuu id="275" picture="17102.jpg">Tahara Aruno</seiyuu>
+        </character>
+        <character id="18683" type="appears in" update="2013-01-13">
+            <rating votes="5">3.18</rating>
+            <name>Mao Yenrai</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49428.jpg</picture>
+            <seiyuu id="4690" picture="246059.jpg">Itou Kazuaki</seiyuu>
+        </character>
+        <character id="18684" type="appears in" update="2010-06-11">
+            <rating votes="6">4.94</rating>
+            <name>Annie</name>
+            <gender>female</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49429.jpg</picture>
+            <seiyuu id="494" picture="295879.jpg">Ichijou Miyuki</seiyuu>
+        </character>
+        <character id="18692" type="appears in" update="2010-06-11">
+            <rating votes="5">4.30</rating>
+            <name>Fatty</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49475.jpg</picture>
+            <seiyuu id="2946" picture="23373.jpg">Gouri Daisuke</seiyuu>
+        </character>
+        <character id="18693" type="appears in" update="2010-06-11">
+            <rating votes="5">4.71</rating>
+            <name>Giraffe</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49476.jpg</picture>
+            <seiyuu id="3276" picture="248100.jpg">Nakagi Ryuuji</seiyuu>
+        </character>
+        <character id="18694" type="appears in" update="2010-06-11">
+            <rating votes="4">4.65</rating>
+            <name>Zebra</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49477.jpg</picture>
+        </character>
+        <character id="18695" type="appears in" update="2010-06-11">
+            <rating votes="9">3.21</rating>
+            <name>Wen</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49478.jpg</picture>
+            <seiyuu id="1446" picture="19314.jpg">Touma Yumi</seiyuu>
+        </character>
+        <character id="18696" type="appears in" update="2010-06-11">
+            <rating votes="8">4.76</rating>
+            <name>VT</name>
+            <gender>female</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49480.jpg</picture>
+            <seiyuu id="2276" picture="187770.jpg">Kataoka Tomie</seiyuu>
+        </character>
+        <character id="18697" type="appears in" update="2010-06-11">
+            <rating votes="4">4.52</rating>
+            <name>Macho</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49481.jpg</picture>
+            <seiyuu id="42809" picture="223789.jpg">Nakata Kazuhiro</seiyuu>
+        </character>
+        <character id="18698" type="appears in" update="2010-06-11">
+            <rating votes="7">3.24</rating>
+            <name>Muriel</name>
+            <gender>female</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49482.jpg</picture>
+            <seiyuu id="4957" picture="91922.jpg">Uchikawa Ai</seiyuu>
+        </character>
+        <character id="18699" type="appears in" update="2010-06-11">
+            <rating votes="4">4.65</rating>
+            <name>Otto</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49483.jpg</picture>
+            <seiyuu id="601" picture="248145.jpg">Nakamura Hidetoshi</seiyuu>
+        </character>
+        <character id="18726" type="appears in" update="2010-06-12">
+            <rating votes="8">6.10</rating>
+            <name>Roco</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49524.jpg</picture>
+            <seiyuu id="3149" picture="248099.jpg">Nakao Ryuusei</seiyuu>
+        </character>
+        <character id="18727" type="appears in" update="2010-06-12">
+            <rating votes="3">2.16</rating>
+            <name>Louie</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49525.jpg</picture>
+            <seiyuu id="1756" picture="53985.jpg">Nakajima Toshihiko</seiyuu>
+        </character>
+        <character id="18728" type="appears in" update="2010-06-12">
+            <rating votes="3">3.80</rating>
+            <name>Huey</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49526.jpg</picture>
+            <seiyuu id="2021" picture="316313.jpg">Tsuji Shinpachi</seiyuu>
+        </character>
+        <character id="18729" type="appears in" update="2010-06-12">
+            <rating votes="4">3.62</rating>
+            <name>Dewey</name>
+            <gender>female</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49527.jpg</picture>
+            <seiyuu id="25084" picture="28798.jpg">Hayami Kei</seiyuu>
+        </character>
+        <character id="18730" type="appears in" update="2010-06-12">
+            <rating votes="8">4.88</rating>
+            <name>Stella</name>
+            <gender>female</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49528.jpg</picture>
+            <seiyuu id="227" picture="205854.jpg">Sakamoto Maaya</seiyuu>
+        </character>
+        <character id="18732" type="appears in" update="2010-06-12">
+            <rating votes="3">2.16</rating>
+            <name>Piccaro</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49529.jpg</picture>
+            <seiyuu id="2823" picture="83143.jpg">Shimaka Yuu</seiyuu>
+        </character>
+        <character id="18733" type="appears in" update="2010-06-12">
+            <rating votes="5">5.52</rating>
+            <name>Announcer 2</name>
+            <gender>female</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49533.jpg</picture>
+            <seiyuu id="628" picture="188442.jpg">Dodo Asako</seiyuu>
+        </character>
+        <character id="18734" type="appears in" update="2010-06-12">
+            <rating votes="4">2.25</rating>
+            <name>Amjad</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49534.jpg</picture>
+            <seiyuu id="2021" picture="316313.jpg">Tsuji Shinpachi</seiyuu>
+        </character>
+        <character id="18735" type="appears in" update="2010-06-12">
+            <rating votes="4">5.13</rating>
+            <name>MPU</name>
+            <gender>none/does not apply</gender>
+            <charactertype id="1">Character</charactertype>
+            <description>The satellite control program on the D-135 artificial sattelite which Ed names MPU.</description>
+            <picture>49537.jpg</picture>
+            <seiyuu id="226" picture="10969.jpeg">Nakata Jouji</seiyuu>
+        </character>
+        <character id="18738" type="appears in" update="2010-06-12">
+            <rating votes="4">4.74</rating>
+            <name>Donelly</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49540.jpg</picture>
+            <seiyuu id="4478" picture="26750.jpg">Matsuoka Fumio</seiyuu>
+        </character>
+        <character id="18740" type="appears in" update="2010-06-12">
+            <rating votes="11">6.04</rating>
+            <name>Arisa</name>
+            <gender>female</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49544.jpg</picture>
+            <seiyuu id="542" picture="60897.jpg">Doi Mika</seiyuu>
+        </character>
+        <character id="18753" type="appears in" update="2010-06-12">
+            <rating votes="5">2.62</rating>
+            <name>Rhint</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49560.jpg</picture>
+            <seiyuu id="254" picture="10967.jpeg">Yamaguchi Kappei</seiyuu>
+        </character>
+        <character id="18764" type="appears in" update="2010-06-13">
+            <rating votes="7">4.60</rating>
+            <name>Lin</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49627.jpg</picture>
+            <seiyuu id="353" picture="10966.jpeg">Midorikawa Hikaru</seiyuu>
+        </character>
+        <character id="18765" type="appears in" update="2010-06-13">
+            <rating votes="6">3.55</rating>
+            <name>Man Long</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49629.jpg</picture>
+            <seiyuu id="27206" picture="73948.jpg">Taguchi Takashi</seiyuu>
+        </character>
+        <character id="18766" type="appears in" update="2010-06-13">
+            <rating votes="7">2.54</rating>
+            <name>Julius</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49631.jpg</picture>
+            <seiyuu id="4841" picture="279966.jpg">Iwasaki Hiroshi</seiyuu>
+        </character>
+        <character id="18767" type="appears in" update="2010-06-13">
+            <rating votes="14">5.33</rating>
+            <name>Gren</name>
+            <gender>intersexual</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49632.jpg</picture>
+            <seiyuu id="2037" picture="244859.jpg">Horiuchi Ken`yuu</seiyuu>
+        </character>
+        <character id="18768" type="appears in" update="2010-06-13">
+            <rating votes="4">5.26</rating>
+            <name>Bartender</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49633.jpg</picture>
+            <seiyuu id="1913" picture="186187.jpg">Chiba Isshin</seiyuu>
+        </character>
+        <character id="18769" type="appears in" update="2011-02-28">
+            <rating votes="4">4.73</rating>
+            <name>Bartender</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>66706.jpg</picture>
+            <seiyuu id="282" picture="266829.jpg">Houki Katsuhisa</seiyuu>
+        </character>
+        <character id="18770" type="appears in" update="2010-06-13">
+            <rating votes="4">3.89</rating>
+            <name>Otoko</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49640.jpg</picture>
+            <seiyuu id="2340" picture="151335.jpg">Naka Hiroshi</seiyuu>
+        </character>
+        <character id="18771" type="appears in" update="2010-06-13">
+            <rating votes="5">3.53</rating>
+            <name>Kodomo</name>
+            <gender>female</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49642.jpg</picture>
+            <seiyuu id="290" picture="24139.jpg">Nagasawa Miki</seiyuu>
+        </character>
+        <character id="18786" type="appears in" update="2010-06-13">
+            <rating votes="3">3.61</rating>
+            <name>Jonathan</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49645.jpg</picture>
+            <seiyuu id="3317" picture="258399.jpg">Kishino Yukimasa</seiyuu>
+        </character>
+        <character id="18787" type="appears in" update="2010-06-13">
+            <rating votes="6">6.06</rating>
+            <name>Chessmaster Hex</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49646.jpg</picture>
+            <seiyuu id="3225" picture="248147.jpg">Watabe Takeshi</seiyuu>
+        </character>
+        <character id="18788" type="appears in" update="2010-06-13">
+            <rating votes="4">3.38</rating>
+            <name>Doctor Baccus</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49647.jpg</picture>
+        </character>
+        <character id="18789" type="appears in" update="2010-06-13">
+            <rating votes="5">3.31</rating>
+            <name>Whitney Hagas Matsumoto</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49648.jpg</picture>
+            <seiyuu id="286" picture="266317.jpg">Ootsuka Akio</seiyuu>
+        </character>
+        <character id="18790" type="appears in" update="2010-06-13">
+            <rating votes="4">3.70</rating>
+            <name>Manley</name>
+            <gender>female</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49649.jpg</picture>
+            <seiyuu id="4770" picture="76766.jpg">Suzuka Chiharu</seiyuu>
+        </character>
+        <character id="18811" type="appears in" update="2010-06-14">
+            <rating votes="5">2.85</rating>
+            <name>Yuuri Kellerman</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49681.jpg</picture>
+            <seiyuu id="368" picture="25838.jpg">Tatsuta Naoki</seiyuu>
+        </character>
+        <character id="18824" type="appears in" update="2010-06-14">
+            <rating votes="4">2.35</rating>
+            <name>Pilot</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49694.jpg</picture>
+            <seiyuu id="2246" picture="186215.jpg">Mikimoto Yuuji</seiyuu>
+        </character>
+        <character id="18825" type="appears in" update="2010-06-14">
+            <rating votes="5">1.95</rating>
+            <name>Dig</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49695.jpg</picture>
+            <seiyuu id="2823" picture="83143.jpg">Shimaka Yuu</seiyuu>
+        </character>
+        <character id="18826" type="appears in" update="2010-06-14">
+            <rating votes="4">4.44</rating>
+            <name>Fad</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49697.jpg</picture>
+            <seiyuu id="418" picture="17270.jpg">Hirose Masashi</seiyuu>
+        </character>
+        <character id="18827" type="appears in" update="2010-06-14">
+            <rating votes="7">5.09</rating>
+            <name>Udai</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49696.jpg</picture>
+            <seiyuu id="4688" picture="29259.jpg">Hirota Kousei</seiyuu>
+        </character>
+        <character id="18828" type="appears in" update="2010-06-14">
+            <rating votes="10">5.80</rating>
+            <name>Kofi</name>
+            <gender>female</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49698.jpg</picture>
+            <seiyuu id="222" picture="11000.jpeg">Tanaka Atsuko</seiyuu>
+        </character>
+        <character id="18829" type="appears in" update="2010-06-14">
+            <rating votes="4">5.20</rating>
+            <name>Domino Walker</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49699.jpg</picture>
+            <seiyuu id="343" picture="11234.jpeg">Genda Tesshou</seiyuu>
+        </character>
+        <character id="18830" type="appears in" update="2010-06-14">
+            <rating votes="3">5.79</rating>
+            <name>Shaft</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49700.jpg</picture>
+            <seiyuu id="297" picture="233915.jpg">Ootsuka Houchuu</seiyuu>
+        </character>
+        <character id="18834" type="appears in" update="2010-06-14">
+            <rating votes="4">5.00</rating>
+            <name>Video Mania</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49704.jpg</picture>
+            <seiyuu id="541" picture="11510.jpeg">Chiba Shigeru</seiyuu>
+        </character>
+        <character id="18845" type="appears in" update="2010-06-15">
+            <rating votes="6">4.38</rating>
+            <name>Miles</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49727.jpg</picture>
+            <seiyuu id="107" picture="172060.jpg">Shioya Yoku</seiyuu>
+        </character>
+        <character id="18846" type="appears in" update="2010-06-15">
+            <rating votes="5">5.75</rating>
+            <name>Duhan</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49725.jpg</picture>
+            <seiyuu id="28" picture="23184.jpg">Aono Takeshi</seiyuu>
+        </character>
+        <character id="18847" type="appears in" update="2010-06-15">
+            <rating votes="3">2.53</rating>
+            <name>Ruth</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49726.jpg</picture>
+            <seiyuu id="67" picture="270054.jpg">Ishii Kouji</seiyuu>
+        </character>
+        <character id="18848" type="appears in" update="2010-06-15">
+            <rating votes="3">2.53</rating>
+            <name>Reggie</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49728.jpg</picture>
+            <seiyuu id="2340" picture="151335.jpg">Naka Hiroshi</seiyuu>
+        </character>
+        <character id="18849" type="appears in" update="2010-06-15">
+            <rating votes="4">2.40</rating>
+            <name>George</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49729.jpg</picture>
+            <seiyuu id="1998" picture="324062.jpg">Nagasako Takashi</seiyuu>
+        </character>
+        <character id="18850" type="appears in" update="2010-06-15">
+            <rating votes="5">3.54</rating>
+            <name>Harman</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49730.jpg</picture>
+            <seiyuu id="233" picture="228661.jpg">Miki Shin`ichirou</seiyuu>
+        </character>
+        <character id="18851" type="appears in" update="2010-06-15">
+            <rating votes="8">7.63</rating>
+            <name>Tongpu</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49731.jpg</picture>
+            <seiyuu id="2782" picture="263455.jpg">Ginga Banjou</seiyuu>
+        </character>
+        <character id="18852" type="appears in" update="2010-06-15">
+            <rating votes="4">3.53</rating>
+            <name>Tenshi</name>
+            <gender>female</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49732.jpg</picture>
+            <seiyuu id="643" picture="316718.jpg">Kojima Sachiko</seiyuu>
+        </character>
+        <character id="18853" type="appears in" update="2010-06-15">
+            <rating votes="10">4.69</rating>
+            <name>Meifa</name>
+            <gender>female</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49733.jpg</picture>
+            <seiyuu id="457" picture="255088.jpg">Ogasawara Arisa</seiyuu>
+        </character>
+        <character id="18854" type="appears in" update="2010-06-15">
+            <rating votes="4">3.53</rating>
+            <name>Pao</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49736.jpg</picture>
+            <seiyuu id="2366" picture="203225.jpg">Ooki Tamio</seiyuu>
+        </character>
+        <character id="18856" type="appears in" update="2010-06-15">
+            <rating votes="23">7.23</rating>
+            <name>Andy von de Oniyate</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <description>Part of the YMCA, the Young Men`s Cowboy Association!</description>
+            <picture>49737.jpg</picture>
+            <seiyuu id="467" picture="284132.jpg">Ebara Masashi</seiyuu>
+        </character>
+        <character id="18857" type="appears in" update="2010-06-15">
+            <rating votes="5">5.35</rating>
+            <name>Teddy Bomber</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49739.jpg</picture>
+            <seiyuu id="614" picture="18136.jpg">Hashi Takaya</seiyuu>
+        </character>
+        <character id="18873" type="appears in" update="2010-06-15">
+            <rating votes="4">5.38</rating>
+            <name>Reporter</name>
+            <gender>female</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49760.jpg</picture>
+            <seiyuu id="21499" picture="223705.jpg">Tomokawa Mari</seiyuu>
+        </character>
+        <character id="18874" type="appears in" update="2010-06-15">
+            <rating votes="3">3.51</rating>
+            <name>Caster</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49759.jpg</picture>
+            <seiyuu id="29936" picture="228637.jpg">Kogami Hiromichi</seiyuu>
+        </character>
+        <character id="18875" type="appears in" update="2010-06-15">
+            <rating votes="5">3.00</rating>
+            <name>Londes</name>
+            <gender>none/does not apply</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49761.jpg</picture>
+            <seiyuu id="456" picture="17358.jpg">Ootsuka Chikao</seiyuu>
+        </character>
+        <character id="18876" type="appears in" update="2010-06-15">
+            <rating votes="4">3.54</rating>
+            <name>Keibiin</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <description>A guard.</description>
+            <picture>49762.jpg</picture>
+            <seiyuu id="3315" picture="196861.jpg">Mizuuchi Kiyomitsu</seiyuu>
+        </character>
+        <character id="18877" type="appears in" update="2010-06-15">
+            <rating votes="4">5.63</rating>
+            <name>Ronny Spanngen</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49763.jpg</picture>
+            <seiyuu id="20240" picture="315719.jpg">Hachinohe Masaru</seiyuu>
+        </character>
+        <character id="18878" type="appears in" update="2010-06-15">
+            <rating votes="6">2.78</rating>
+            <name>Mago</name>
+            <gender>female</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49766.jpg</picture>
+            <seiyuu id="6685" picture="31329.jpg">Asano Ruri</seiyuu>
+        </character>
+        <character id="18879" type="appears in" update="2010-06-15">
+            <rating votes="6">4.62</rating>
+            <name>Sally Yung</name>
+            <gender>female</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49767.jpg</picture>
+            <seiyuu id="5352" picture="265705.jpg">Tani Ikuko</seiyuu>
+        </character>
+        <character id="18880" type="appears in" update="2010-06-15">
+            <rating votes="5">4.00</rating>
+            <name>McEntire</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49765.jpg</picture>
+            <seiyuu id="2218" picture="226178.jpg">Nakahara Shigeru</seiyuu>
+        </character>
+        <character id="18881" type="appears in" update="2010-06-15">
+            <rating votes="8">6.18</rating>
+            <name>Appledelhi Siniz Hesap Lutfen</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <description>Correctly transcribed name: Appledelhi Siniz Hesap Lütfen.</description>
+            <picture>49764.jpg</picture>
+            <seiyuu id="23" picture="188505.jpg">Utsumi Kenji</seiyuu>
+        </character>
+        <character id="18882" type="appears in" update="2010-06-15">
+            <rating votes="6">4.58</rating>
+            <name>Doctor</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49768.jpg</picture>
+            <seiyuu id="3135" picture="24120.jpg">Fujimoto Yuzuru</seiyuu>
+        </character>
+        <character id="18883" type="appears in" update="2010-06-15">
+            <rating votes="5">2.38</rating>
+            <name>Hahaoya</name>
+            <gender>female</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49770.jpg</picture>
+            <seiyuu id="2255" picture="38626.jpg">Okamoto Yoshiko</seiyuu>
+        </character>
+        <character id="18887" type="appears in" update="2010-06-15">
+            <rating votes="5">5.82</rating>
+            <name>Shin</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>49778.jpg</picture>
+            <seiyuu id="73" picture="270111.jpg">Hiyama Nobuyuki</seiyuu>
+        </character>
+        <character id="19068" type="appears in" update="2010-06-20">
+            <rating votes="4">2.24</rating>
+            <name>Irezumi Otoko</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>50087.jpg</picture>
+            <seiyuu id="168" picture="246304.jpg">Fujiwara Keiji</seiyuu>
+        </character>
+        <character id="19146" type="appears in" update="2010-06-23">
+            <rating votes="4">3.93</rating>
+            <name>Baker Panchorero</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <description>A criminal from Mars who broke into a bank.</description>
+            <picture>50242.jpg</picture>
+            <seiyuu id="282" picture="266829.jpg">Houki Katsuhisa</seiyuu>
+        </character>
+        <character id="156121" type="appears in" update="2026-07-31">
+            <name>Zeros</name>
+            <gender>unknown</gender>
+            <charactertype id="1">Character</charactertype>
+            <description>Note: Character has real cat vocalizations instead of human seiyuu.</description>
+            <picture>78567.png</picture>
+        </character>
+    </characters>
+    <episodes>
+        <episode id="858" update="2016-11-21">
+            <epno type="1">19</epno>
+            <length>25</length>
+            <airdate>1999-03-06</airdate>
+            <rating votes="52">6.48</rating>
+            <title xml:lang="ja">ワイルド・ホーセス</title>
+            <title xml:lang="en">Wild Horses</title>
+            <title xml:lang="de">Auf Abfangkurs</title>
+            <title xml:lang="es">Caballos Salvajes</title>
+            <title xml:lang="pl">Dzikie konie</title>
+            <title xml:lang="es-CA">Cavalls Salvatges</title>
+            <title xml:lang="hu">Amit ma elkaphatsz, ne halaszd holnapra</title>
+            <title xml:lang="x-jat">Wild Horses</title>
+            <summary>While Spike pays a visit to the man who built his ship, Faye and Jet go fishing for space pirates.
+Source: crunchyroll</summary>
+            <resources>
+                <resource type="28">
+                    <externalentity>
+                        <identifier>GG1U2DD1M</identifier>
+                    </externalentity>
+                </resource>
+            </resources>
+        </episode>
+        <episode id="859" update="2016-11-21">
+            <epno type="1">18</epno>
+            <length>25</length>
+            <airdate>1998-06-19</airdate>
+            <rating votes="58">8.93</rating>
+            <title xml:lang="ja">スピーク・ライク・ア・チャイルド</title>
+            <title xml:lang="en">Speak Like a Child</title>
+            <title xml:lang="de">Post aus der Vergangenheit</title>
+            <title xml:lang="es">Habla como un Niño</title>
+            <title xml:lang="pl">Mówić jak dziecko</title>
+            <title xml:lang="es-CA">Parla com una Nena</title>
+            <title xml:lang="hu">A videóüzenet</title>
+            <title xml:lang="x-jat">Speak Like a Child</title>
+            <summary>When a mysterious package arrives, Faye disappears on a gambling binge, and Spike and Jet embark on a frustrating search for ancient technology!
+Source: crunchyroll</summary>
+            <resources>
+                <resource type="28">
+                    <externalentity>
+                        <identifier>G50UZEEG8</identifier>
+                    </externalentity>
+                </resource>
+            </resources>
+        </episode>
+        <episode id="860" update="2016-11-21">
+            <epno type="1">17</epno>
+            <length>25</length>
+            <airdate>1999-02-20</airdate>
+            <rating votes="63">8.87</rating>
+            <title xml:lang="ja">マッシュルーム・サンバ</title>
+            <title xml:lang="en">Mushroom Samba</title>
+            <title xml:lang="de">Breiter als das Universum</title>
+            <title xml:lang="es">La Samba de las Setas</title>
+            <title xml:lang="pl">Grzybowa samba</title>
+            <title xml:lang="es-CA">La Samba del Bolets</title>
+            <title xml:lang="hu">Gomba szamba</title>
+            <title xml:lang="x-jat">Mushroom Samba</title>
+            <summary>After the Bebop crash lands, Ed and Ein’s search for food turns up some very expensive mushrooms with psychedelic side effects!
+Source: crunchyroll</summary>
+            <resources>
+                <resource type="28">
+                    <externalentity>
+                        <identifier>GD9UV2277</identifier>
+                    </externalentity>
+                </resource>
+            </resources>
+        </episode>
+        <episode id="861" update="2016-11-21">
+            <epno type="1">16</epno>
+            <length>25</length>
+            <airdate>1999-02-13</airdate>
+            <rating votes="53">8.06</rating>
+            <title xml:lang="ja">ブラック・ドッグ・セレナーデ</title>
+            <title xml:lang="en">Black Dog Serenade</title>
+            <title xml:lang="de">Der falsche Freund</title>
+            <title xml:lang="es">La Serenata del Perro Negro</title>
+            <title xml:lang="pl">Serenada czarnego psa</title>
+            <title xml:lang="es-CA">La Serenata del Gos Negre</title>
+            <title xml:lang="hu">Fegyencjárat</title>
+            <title xml:lang="x-jat">Black Dog Serenade</title>
+            <summary>Jet teams up with a former partner to settle the score with the man who took his arm, but he soon discovers that memories can be deceiving.
+Source: crunchyroll</summary>
+            <resources>
+                <resource type="28">
+                    <externalentity>
+                        <identifier>G2XU0559V</identifier>
+                    </externalentity>
+                </resource>
+            </resources>
+        </episode>
+        <episode id="862" update="2016-11-21">
+            <epno type="1">15</epno>
+            <length>25</length>
+            <airdate>1998-06-12</airdate>
+            <rating votes="51">7.73</rating>
+            <title xml:lang="ja">マイ・ファニー・ヴァレンタイン</title>
+            <title xml:lang="en">My Funny Valentine</title>
+            <title xml:lang="de">Dornröschen, eisgekühlt</title>
+            <title xml:lang="es">Mi Querida Valentine</title>
+            <title xml:lang="pl">Moja Fanny Valentine</title>
+            <title xml:lang="es-CA">La Divertida Valentine</title>
+            <title xml:lang="hu">Űr Don Juan</title>
+            <title xml:lang="x-jat">My Funny Valentine</title>
+            <summary>When Jet brings in a fugitive from Faye’s past, the rebellious beauty must decide whether to turn him in – or give an old flame one last chance.
+Source: crunchyroll</summary>
+            <resources>
+                <resource type="28">
+                    <externalentity>
+                        <identifier>GPWUK00MJ</identifier>
+                    </externalentity>
+                </resource>
+            </resources>
+        </episode>
+        <episode id="863" update="2016-11-21">
+            <epno type="1">14</epno>
+            <length>25</length>
+            <airdate>1998-06-05</airdate>
+            <rating votes="48">7.74</rating>
+            <title xml:lang="ja">ボヘミアン・ラプソディー</title>
+            <title xml:lang="en">Bohemian Rhapsody</title>
+            <title xml:lang="de">Schachmatt</title>
+            <title xml:lang="es">Rapsodia Bohemia</title>
+            <title xml:lang="pl">Bohemian Rapsody</title>
+            <title xml:lang="es-CA">Rapsòdia Bohèmia</title>
+            <title xml:lang="hu">A sakkmester</title>
+            <title xml:lang="x-jat">Bohemian Rhapsody</title>
+            <summary>The Bebop Crew embarks on a wild goose chase of a bounty hunt that leads them deep into space in search of an ancient chess master.
+Source: crunchyroll</summary>
+            <resources>
+                <resource type="28">
+                    <externalentity>
+                        <identifier>GMKUX55EP</identifier>
+                    </externalentity>
+                </resource>
+            </resources>
+        </episode>
+        <episode id="864" update="2016-11-21">
+            <epno type="1">9</epno>
+            <length>25</length>
+            <airdate>1998-05-01</airdate>
+            <rating votes="58">7.71</rating>
+            <title xml:lang="ja">ジャミング・ウィズ・エドワード</title>
+            <title xml:lang="en">Jamming with Edward</title>
+            <title xml:lang="de">Genie und Wahnsinn</title>
+            <title xml:lang="es">Interferencias de EDO</title>
+            <title xml:lang="pl">Spotkanie z Edem</title>
+            <title xml:lang="es-CA">Els Embolics de l`Eduard</title>
+            <title xml:lang="hu">A magányos számítógép</title>
+            <title xml:lang="x-jat">Jamming with Edward</title>
+            <summary>The Bebop crew tries to crack the case of mysterious satellite drawings appearing on the Earth’s surface, but they’ll need help from a hacker know as Radical Edward to earn their bounty!
+Source: crunchyroll</summary>
+            <resources>
+                <resource type="28">
+                    <externalentity>
+                        <identifier>GG1U2DDXM</identifier>
+                    </externalentity>
+                </resource>
+            </resources>
+        </episode>
+        <episode id="865" update="2016-11-21">
+            <epno type="1">13</epno>
+            <length>25</length>
+            <airdate>1998-05-29</airdate>
+            <rating votes="57">9.36</rating>
+            <title xml:lang="ja">ジュピター・ジャズ (後編)</title>
+            <title xml:lang="en">Jupiter Jazz (Part II)</title>
+            <title xml:lang="de">Die Tränen des Kriegers (Teil 2)</title>
+            <title xml:lang="es">Júpiter Jazz (2da Parte)</title>
+            <title xml:lang="pl">Jowiszowy jazz, część 2</title>
+            <title xml:lang="es-CA">El Jazz de Júpiter (2a. part)</title>
+            <title xml:lang="hu">Halál Jazz</title>
+            <title xml:lang="x-jat">Jupiter Jazz (Kouhen)</title>
+            <summary>Jet continues his mission to reunite his Bebop comrades, and Spike finds himself locked in a brutal dogfight with his old nemesis Vicious.
+Source: crunchyroll</summary>
+            <resources>
+                <resource type="28">
+                    <externalentity>
+                        <identifier>GJWU2JJQV</identifier>
+                    </externalentity>
+                </resource>
+            </resources>
+        </episode>
+        <episode id="866" update="2016-11-21">
+            <epno type="1">8</epno>
+            <length>25</length>
+            <airdate>1998-04-24</airdate>
+            <rating votes="61">7.86</rating>
+            <title xml:lang="ja">ワルツ・フォー・ヴィーナス</title>
+            <title xml:lang="en">Waltz for Venus</title>
+            <title xml:lang="de">Geschwisterliebe</title>
+            <title xml:lang="es">El Vals de Venus</title>
+            <title xml:lang="pl">Walc na Wenus</title>
+            <title xml:lang="es-CA">El Vals de Venus</title>
+            <title xml:lang="hu">Kaland a Vénusz bolygón</title>
+            <title xml:lang="x-jat">Waltz for Venus</title>
+            <summary>Spike gets involved with a fugitive who is willing to risk his own life to restore his sister’s sight. Can the Bebop crew save the day before tragedy strikes?
+Source: crunchyroll</summary>
+            <resources>
+                <resource type="28">
+                    <externalentity>
+                        <identifier>G50UZEEM8</identifier>
+                    </externalentity>
+                </resource>
+            </resources>
+        </episode>
+        <episode id="867" update="2016-11-21">
+            <epno type="1">12</epno>
+            <length>25</length>
+            <airdate>1998-05-22</airdate>
+            <rating votes="58">9.15</rating>
+            <title xml:lang="ja">ジュピター・ジャズ (前編)</title>
+            <title xml:lang="en">Jupiter Jazz (Part I)</title>
+            <title xml:lang="de">Die Tränen des Kriegers (Teil 1)</title>
+            <title xml:lang="es">Júpiter Jazz (1ª Parte)</title>
+            <title xml:lang="pl">Jowiszowy jazz, część 1</title>
+            <title xml:lang="es-CA">El Jazz de Júpiter (1a. part)</title>
+            <title xml:lang="hu">Jupiter Jazz</title>
+            <title xml:lang="x-jat">Jupiter Jazz (Zenpen)</title>
+            <summary>Faye robs and abandons the Bebop crew, Spike goes in search of a woman he once knew, and Vicious makes another deadly appearance.
+Source: crunchyroll</summary>
+            <resources>
+                <resource type="28">
+                    <externalentity>
+                        <identifier>G14U4XXVN</identifier>
+                    </externalentity>
+                </resource>
+            </resources>
+        </episode>
+        <episode id="868" update="2016-11-21">
+            <epno type="1">7</epno>
+            <length>25</length>
+            <airdate>1998-04-17</airdate>
+            <rating votes="64">5.71</rating>
+            <title xml:lang="ja">ヘヴィ・メタル・クイーン</title>
+            <title xml:lang="en">Heavy Metal Queen</title>
+            <title xml:lang="de">Der Abschaum der Galaxis</title>
+            <title xml:lang="es">La Reina del Heavy Metal</title>
+            <title xml:lang="pl">Królowa heavy metalu</title>
+            <title xml:lang="es-CA">La Reina del Heavy Metal</title>
+            <title xml:lang="hu">Űrkamionosok</title>
+            <title xml:lang="x-jat">Heavy Metal Queen</title>
+            <summary>The Bebop crew pursues a renegade explosives expert, and Spike crosses paths with a nameless space trucker that hates bounty hunters.
+Source: crunchyroll</summary>
+            <resources>
+                <resource type="28">
+                    <externalentity>
+                        <identifier>GD9UV22E7</identifier>
+                    </externalentity>
+                </resource>
+            </resources>
+        </episode>
+        <episode id="869" update="2016-11-21">
+            <epno type="1">11</epno>
+            <length>25</length>
+            <airdate>1998-05-15</airdate>
+            <rating votes="71">9.34</rating>
+            <title xml:lang="ja">闇夜のヘヴィ・ロック</title>
+            <title xml:lang="en">Toys in the Attic</title>
+            <title xml:lang="de">Die galaktische Killer-Bestie</title>
+            <title xml:lang="es">Los Juguetes del Desván</title>
+            <title xml:lang="pl">Zabawki na strychu</title>
+            <title xml:lang="es-CA">Les Joguines de les Golfes</title>
+            <title xml:lang="hu">Harapós kísértet</title>
+            <title xml:lang="x-jat">Yamiyo no Heavy Rock</title>
+            <summary>When an unusual, blob-like space creature infects Ein, Faye, and Jet, Spike and Radical Edward must figure out a way to save their friends.
+Source: crunchyroll</summary>
+            <resources>
+                <resource type="28">
+                    <externalentity>
+                        <identifier>G9DUEDD91</identifier>
+                    </externalentity>
+                </resource>
+            </resources>
+        </episode>
+        <episode id="870" update="2016-11-21">
+            <epno type="1">6</epno>
+            <length>25</length>
+            <airdate>1998-11-28</airdate>
+            <rating votes="62">6.49</rating>
+            <title xml:lang="ja">悪魔を憐れむ歌</title>
+            <title xml:lang="en">Sympathy for the Devil</title>
+            <title xml:lang="de">Der Junge mit der Mundharmonika</title>
+            <title xml:lang="es">Simpatía por el Diablo</title>
+            <title xml:lang="pl">Współczucie dla diabła</title>
+            <title xml:lang="es-CA">Compassió pel Diable</title>
+            <title xml:lang="hu">Kisördög ez a gyerek</title>
+            <title xml:lang="x-jat">Akuma o Awaremu Uta</title>
+            <summary>The latest case for the crew of the Bebop finds Spike pitted against a young boy with a talent for the harmonica – and murder.
+Source: crunchyroll</summary>
+            <resources>
+                <resource type="28">
+                    <externalentity>
+                        <identifier>G2XU055NV</identifier>
+                    </externalentity>
+                </resource>
+            </resources>
+        </episode>
+        <episode id="871" update="2016-11-21">
+            <epno type="1">10</epno>
+            <length>25</length>
+            <airdate>1998-05-08</airdate>
+            <rating votes="61">7.77</rating>
+            <title xml:lang="ja">ガニメデ慕情</title>
+            <title xml:lang="en">Ganymede Elegy</title>
+            <title xml:lang="de">Verloren und verlassen</title>
+            <title xml:lang="es">Elegía de Ganímedes</title>
+            <title xml:lang="pl">Elegia na Ganimedesa</title>
+            <title xml:lang="es-CA">L`elegia de Ganimedes</title>
+            <title xml:lang="hu">Végállomás</title>
+            <title xml:lang="x-jat">Ganymede Bojou</title>
+            <summary>When a case takes the Bebop crew to Jet’s old stomping ground, the big man crosses paths with an old lover – and her wanted boyfriend.
+Source: crunchyroll</summary>
+            <resources>
+                <resource type="28">
+                    <externalentity>
+                        <identifier>G7PU4WW30</identifier>
+                    </externalentity>
+                </resource>
+            </resources>
+        </episode>
+        <episode id="872" update="2016-11-21">
+            <epno type="1">26</epno>
+            <length>25</length>
+            <airdate>1999-04-24</airdate>
+            <rating votes="82">9.72</rating>
+            <title xml:lang="ja">ザ・リアル・フォークブルース (後編)</title>
+            <title xml:lang="en">The Real Folk Blues (Part II)</title>
+            <title xml:lang="de">Die letzte Mission</title>
+            <title xml:lang="es">El Auténtico Folk Blues (2da Parte)</title>
+            <title xml:lang="pl">Prawdziwy blues, część 2</title>
+            <title xml:lang="es-CA">L`Autèntic Folk Blues (II)</title>
+            <title xml:lang="hu">Az álom véget ér</title>
+            <title xml:lang="x-jat">The Real Folk Blues (Kouhen)</title>
+            <summary>Spike finally finds the woman he’s been searching for, and Faye makes a surprising return to the Bebop. With the syndicate in hot pursuit, Spike seeks to end the reign of Vicious.
+Source: crunchyroll</summary>
+            <resources>
+                <resource type="28">
+                    <externalentity>
+                        <identifier>G31UX77JK</identifier>
+                    </externalentity>
+                </resource>
+            </resources>
+        </episode>
+        <episode id="873" update="2016-11-21">
+            <epno type="1">5</epno>
+            <length>25</length>
+            <airdate>1998-11-21</airdate>
+            <rating votes="86">9.29</rating>
+            <title xml:lang="ja">堕天使たちのバラッド</title>
+            <title xml:lang="en">Ballad of Fallen Angels</title>
+            <title xml:lang="de">Böses Blut</title>
+            <title xml:lang="es">Balada de los Ángeles Caídos</title>
+            <title xml:lang="pl">Ballada o upadłych aniołach</title>
+            <title xml:lang="es-CA">La Balada dels Àngels Caiguts</title>
+            <title xml:lang="hu">Spike rejtett titka</title>
+            <title xml:lang="x-jat">Datenshi-tachi no Ballad</title>
+            <summary>Spike aims to collect the bounty on a member of the Red Dragon Syndicate, but his mission leads him into a deadly showdown with a face from his past!
+Source: crunchyroll</summary>
+            <resources>
+                <resource type="28">
+                    <externalentity>
+                        <identifier>G31UX77VK</identifier>
+                    </externalentity>
+                </resource>
+            </resources>
+        </episode>
+        <episode id="874" update="2016-11-21">
+            <epno type="1">25</epno>
+            <length>25</length>
+            <airdate>1999-04-17</airdate>
+            <rating votes="60">9.56</rating>
+            <title xml:lang="ja">ザ・リアル・フォークブルース (前編)</title>
+            <title xml:lang="en">The Real Folk Blues (Part I)</title>
+            <title xml:lang="de">Der Machtkampf</title>
+            <title xml:lang="es">El Auténtico Folk Blues (1era Parte)</title>
+            <title xml:lang="pl">Prawdziwy blues, część 1</title>
+            <title xml:lang="es-CA">L`Autèntic Folk Blues (I)</title>
+            <title xml:lang="hu">A Vörös Sárkányok</title>
+            <title xml:lang="x-jat">The Real Folk Blues (Zenpen)</title>
+            <summary>Spike and Jet are ambushed by members of the syndicate, and Faye has an unexpected encounter with a woman from Spike’s past.
+Source: crunchyroll</summary>
+            <resources>
+                <resource type="28">
+                    <externalentity>
+                        <identifier>GMKUX550P</identifier>
+                    </externalentity>
+                </resource>
+            </resources>
+        </episode>
+        <episode id="875" update="2016-11-21">
+            <epno type="1">4</epno>
+            <length>25</length>
+            <airdate>1998-11-14</airdate>
+            <rating votes="66">6.07</rating>
+            <title xml:lang="ja">ゲイトウェイ・シャッフル</title>
+            <title xml:lang="en">Gateway Shuffle</title>
+            <title xml:lang="de">Rettet die Wasserratten!</title>
+            <title xml:lang="es">Puerta de Escape</title>
+            <title xml:lang="pl">Problem z wrotami</title>
+            <title xml:lang="es-CA">Porta de Fugida</title>
+            <title xml:lang="hu">Majomkodók</title>
+            <title xml:lang="x-jat">Gateway Shuffle</title>
+            <summary>Faye teams up with Spike and Jet to track down a gang of space activists that plans on turning the human population into monkeys!
+Source: crunchyroll</summary>
+            <resources>
+                <resource type="28">
+                    <externalentity>
+                        <identifier>GMKUX55XP</identifier>
+                    </externalentity>
+                </resource>
+            </resources>
+        </episode>
+        <episode id="876" update="2016-11-21">
+            <epno type="1">24</epno>
+            <length>25</length>
+            <airdate>1999-04-10</airdate>
+            <rating votes="59">9.84</rating>
+            <title xml:lang="ja">ハード・ラック・ウーマン</title>
+            <title xml:lang="en">Hard Luck Woman</title>
+            <title xml:lang="de">Die totale Erinnerung</title>
+            <title xml:lang="es">El Destino de la Mujer es Duro</title>
+            <title xml:lang="pl">Smutna kobieta</title>
+            <title xml:lang="es-CA">El Destí de la Dona és Dur</title>
+            <title xml:lang="hu">Tudnod kell, ki vagy</title>
+            <title xml:lang="x-jat">Hard Luck Woman</title>
+            <summary>Faye and Ed discover clues to their respective pasts that could send the crew of the Bebop heading in very different directions.
+Source: crunchyroll</summary>
+            <resources>
+                <resource type="28">
+                    <externalentity>
+                        <identifier>GN7UDWW0V</identifier>
+                    </externalentity>
+                </resource>
+            </resources>
+        </episode>
+        <episode id="877" update="2016-11-21">
+            <epno type="1">3</epno>
+            <length>25</length>
+            <airdate>1998-04-10</airdate>
+            <rating votes="68">6.75</rating>
+            <title xml:lang="ja">ホンキィ・トンク・ウィメン</title>
+            <title xml:lang="en">Honky Tonk Women</title>
+            <title xml:lang="de">Zickenalarm</title>
+            <title xml:lang="es">La Jugadora</title>
+            <title xml:lang="pl">Honky-tonk women</title>
+            <title xml:lang="es-CA">La Jugadora</title>
+            <title xml:lang="hu">Nő a baj</title>
+            <title xml:lang="x-jat">Honky Tonk Women</title>
+            <summary>A night at the casino lands Spike and Jet in hot water when they cross paths with Faye Valentine, a stunning con artist wanted by the law – and the bad guys.
+Source: crunchyroll</summary>
+            <resources>
+                <resource type="28">
+                    <externalentity>
+                        <identifier>GK9U3883M</identifier>
+                    </externalentity>
+                </resource>
+            </resources>
+        </episode>
+        <episode id="878" update="2016-11-21">
+            <epno type="1">23</epno>
+            <length>25</length>
+            <airdate>1999-04-03</airdate>
+            <rating votes="50">8.96</rating>
+            <title xml:lang="ja">ブレイン・スクラッチ</title>
+            <title xml:lang="en">Brain Scratch</title>
+            <title xml:lang="de">In den Fängen der Sekte</title>
+            <title xml:lang="es">Arañazo Cerebral</title>
+            <title xml:lang="pl">Umysłowe marzenie</title>
+            <title xml:lang="es-CA">Rascada Cerebral</title>
+            <title xml:lang="hu">Szellem a gépben</title>
+            <title xml:lang="x-jat">Brain Scratch</title>
+            <summary>Faye goes undercover to collect the bounty on a deranged cult leader, but when the mysterious organization brainwashes her into a very deep sleep – she’ll need a little help from her friends.
+Source: crunchyroll</summary>
+            <resources>
+                <resource type="28">
+                    <externalentity>
+                        <identifier>G14U4XX5N</identifier>
+                    </externalentity>
+                </resource>
+            </resources>
+        </episode>
+        <episode id="879" update="2016-11-21">
+            <epno type="1">2</epno>
+            <length>25</length>
+            <airdate>1998-04-03</airdate>
+            <rating votes="73">5.68</rating>
+            <title xml:lang="ja">野良犬のストラット</title>
+            <title xml:lang="en">Stray Dog Strut</title>
+            <title xml:lang="de">Ein tierisches Geschäft</title>
+            <title xml:lang="es">Strut Perro Callejero</title>
+            <title xml:lang="pl">Zbłąkany pies</title>
+            <title xml:lang="es-CA">El Gos de Carrer</title>
+            <title xml:lang="hu">Kincs ez a kutya</title>
+            <title xml:lang="x-jat">Norainu no Strut</title>
+            <summary>Spike and Jet’s next case takes them to Mars, where they’ll to try apprehend a professional pet thief and a priceless data dog.
+Source: crunchyroll</summary>
+            <resources>
+                <resource type="28">
+                    <externalentity>
+                        <identifier>GJWU2JJ2V</identifier>
+                    </externalentity>
+                </resource>
+            </resources>
+        </episode>
+        <episode id="880" update="2016-11-21">
+            <epno type="1">22</epno>
+            <length>25</length>
+            <airdate>1999-03-27</airdate>
+            <rating votes="50">8.64</rating>
+            <title xml:lang="ja">カウボーイ・ファンク</title>
+            <title xml:lang="en">Cowboy Funk</title>
+            <title xml:lang="de">Das Duell</title>
+            <title xml:lang="es">Mejor Cowboy</title>
+            <title xml:lang="pl">Kowbojski funk</title>
+            <title xml:lang="es-CA">Cowboy Funk</title>
+            <title xml:lang="hu">Fejvadász a cowboy ellen</title>
+            <title xml:lang="x-jat">Cowboy Funk</title>
+            <summary>Spike’s attempts to apprehend the infamous Teddy Bear Bomber are maddeningly derailed by a mysterious – and clueless – cowboy!
+Source: crunchyroll</summary>
+            <resources>
+                <resource type="28">
+                    <externalentity>
+                        <identifier>GX9UQKK2G</identifier>
+                    </externalentity>
+                </resource>
+            </resources>
+        </episode>
+        <episode id="881" update="2016-11-21">
+            <epno type="1">1</epno>
+            <length>25</length>
+            <airdate>1998-10-24</airdate>
+            <rating votes="102">7.02</rating>
+            <title xml:lang="ja">アステロイド・ブルース</title>
+            <title xml:lang="en">Asteroid Blues</title>
+            <title xml:lang="de">Der tödliche Deal</title>
+            <title xml:lang="es">Canción Triste para un Asteroide</title>
+            <title xml:lang="pl">Asteroidalny blues</title>
+            <title xml:lang="es-CA">El Blues de l`Asteroide</title>
+            <title xml:lang="hu">Bolygóközi blues</title>
+            <title xml:lang="x-jat">Asteroid Blues</title>
+            <summary>Spike and Jet head to Tijuana to track down an outlaw smuggling a dangerous drug known as blood-eye. Jet wants the bounty, but Spike has eyes for a far prettier prize.
+Source: crunchyroll</summary>
+            <resources>
+                <resource type="28">
+                    <externalentity>
+                        <identifier>G14U4XX4N</identifier>
+                    </externalentity>
+                </resource>
+            </resources>
+        </episode>
+        <episode id="882" update="2016-11-21">
+            <epno type="1">21</epno>
+            <length>25</length>
+            <airdate>1999-03-20</airdate>
+            <rating votes="45">6.15</rating>
+            <title xml:lang="ja">ブギ・ウギ・フンシェイ</title>
+            <title xml:lang="en">Boogie Woogie Feng Shui</title>
+            <title xml:lang="de">Das Geheimnis der Sonnensteine</title>
+            <title xml:lang="es">Boggie Woogie Feng Shui</title>
+            <title xml:lang="pl">Boogie Woogie Feng Shui</title>
+            <title xml:lang="es-CA">Boogie Woogie Feng-Shui</title>
+            <title xml:lang="hu">Boogie Woogie Feng Shui</title>
+            <title xml:lang="x-jat">Boogie-Woogie Feng-Shui</title>
+            <summary>Spurred by a cryptic email, Jet goes looking for an old friend, but finds his daughter – and a mysterious sun stone – instead.
+Source: crunchyroll</summary>
+            <resources>
+                <resource type="28">
+                    <externalentity>
+                        <identifier>G9DUEDD41</identifier>
+                    </externalentity>
+                </resource>
+            </resources>
+        </episode>
+        <episode id="883" update="2016-11-21">
+            <epno type="1">20</epno>
+            <length>25</length>
+            <airdate>1999-03-13</airdate>
+            <rating votes="62">9.24</rating>
+            <title xml:lang="ja">道化師の鎮魂歌</title>
+            <title xml:lang="en">Pierrot Le Fou</title>
+            <title xml:lang="de">Der lachende Tod</title>
+            <title xml:lang="es">Pierrot Le Fou</title>
+            <title xml:lang="pl">Szalony Piotruś</title>
+            <title xml:lang="es-CA">Pierrot el Boig</title>
+            <title xml:lang="hu">A bohóc</title>
+            <title xml:lang="x-jat">Doukeshi no Requiem</title>
+            <summary>Spike takes a beating during a chance encounter with an indestructible assassin. While Jet searches for the secret to the madman’s power, Spike goes looking for payback!
+Source: crunchyroll</summary>
+            <resources>
+                <resource type="28">
+                    <externalentity>
+                        <identifier>GEVUZ880G</identifier>
+                    </externalentity>
+                </resource>
+            </resources>
+        </episode>
+        <episode id="7274" recap="true" update="2013-03-26">
+            <epno type="2">S1</epno>
+            <length>30</length>
+            <airdate>1998-06-26</airdate>
+            <rating votes="22">5.56</rating>
+            <title xml:lang="ja">よせあつめブルース</title>
+            <title xml:lang="en">Session XX: Mish-Mash Blues</title>
+            <title xml:lang="x-jat">Yoseatsume Blues</title>
+        </episode>
+        <episode id="22748" update="2011-02-03">
+            <epno type="4">T1</epno>
+            <length>1</length>
+            <rating votes="2">3.31</rating>
+            <title xml:lang="en">Session 00 (Characters)</title>
+        </episode>
+        <episode id="23130" update="2015-08-07">
+            <epno type="2">S4</epno>
+            <length>1</length>
+            <rating votes="1">6.92</rating>
+            <title xml:lang="en">Kanno Youko Interview</title>
+        </episode>
+        <episode id="36590" update="2006-02-09">
+            <epno type="4">T9</epno>
+            <length>1</length>
+            <rating votes="1">6.92</rating>
+            <title xml:lang="en">Session 09 Preview</title>
+        </episode>
+        <episode id="36634" update="2006-02-09">
+            <epno type="4">T6</epno>
+            <length>1</length>
+            <rating votes="1">6.92</rating>
+            <title xml:lang="en">Session 06 Preview</title>
+        </episode>
+        <episode id="46674" update="2006-02-07">
+            <epno type="4">T7</epno>
+            <length>1</length>
+            <rating votes="1">6.92</rating>
+            <title xml:lang="en">Session 07 Preview</title>
+        </episode>
+        <episode id="46675" update="2006-02-07">
+            <epno type="4">T8</epno>
+            <length>1</length>
+            <rating votes="1">6.92</rating>
+            <title xml:lang="en">Session 08 Preview</title>
+        </episode>
+        <episode id="118920" update="2010-06-11">
+            <epno type="3">C2</epno>
+            <length>2</length>
+            <airdate>1998-10-24</airdate>
+            <rating votes="8">9.25</rating>
+            <title xml:lang="en">Ending 1</title>
+        </episode>
+        <episode id="118921" update="2010-06-11">
+            <epno type="3">C1</epno>
+            <length>2</length>
+            <airdate>1998-10-24</airdate>
+            <rating votes="9">10.00</rating>
+            <title xml:lang="en">Opening</title>
+        </episode>
+        <episode id="120855" update="2010-08-06">
+            <epno type="3">C4</epno>
+            <length>0</length>
+            <rating votes="5">10.00</rating>
+            <title xml:lang="en">Ending 3</title>
+        </episode>
+        <episode id="120856" update="2010-08-06">
+            <epno type="3">C3</epno>
+            <length>0</length>
+            <rating votes="5">8.97</rating>
+            <title xml:lang="en">Ending 2</title>
+        </episode>
+        <episode id="127868" update="2015-08-07">
+            <epno type="2">S2</epno>
+            <length>30</length>
+            <rating votes="2">5.52</rating>
+            <title xml:lang="en">Session 0</title>
+        </episode>
+        <episode id="147212" update="2015-08-10">
+            <epno type="2">S3</epno>
+            <length>1</length>
+            <airdate>2012-12-21</airdate>
+            <rating votes="8">2.61</rating>
+            <title xml:lang="ja">アインのなつやすみ</title>
+            <title xml:lang="en">Ein`s Summer Vacation</title>
+            <title xml:lang="x-jat">Ein no Natsu Yasumi</title>
+        </episode>
+        <episode id="155750" update="2013-11-02">
+            <epno type="4">T10</epno>
+            <length>2</length>
+            <rating votes="1">6.92</rating>
+            <title xml:lang="en">Blu-Ray Commercial</title>
+        </episode>
+        <episode id="155751" update="2013-11-02">
+            <epno type="2">S6</epno>
+            <length>5</length>
+            <rating votes="2">7.81</rating>
+            <title xml:lang="en">Tank! Bebop AV Edit</title>
+        </episode>
+        <episode id="155752" update="2013-11-02">
+            <epno type="2">S5</epno>
+            <length>4</length>
+            <rating votes="1">6.92</rating>
+            <title xml:lang="en">Tank! Full Size Music Clip</title>
+        </episode>
+        <episode id="189464" update="2017-07-24">
+            <epno type="2">S7</epno>
+            <length>2</length>
+            <rating votes="1">6.92</rating>
+            <title xml:lang="en">Character Intros</title>
+        </episode>
+        <episode id="189465" update="2017-07-24">
+            <epno type="2">S14</epno>
+            <length>2</length>
+            <rating votes="1">6.92</rating>
+            <title xml:lang="en">Interview - Yoko Kanno</title>
+        </episode>
+        <episode id="189466" update="2017-07-24">
+            <epno type="2">S13</epno>
+            <length>2</length>
+            <rating votes="1">6.92</rating>
+            <title xml:lang="en">Interview: Sunrise Staff</title>
+        </episode>
+        <episode id="189467" update="2017-07-24">
+            <epno type="2">S12</epno>
+            <length>1</length>
+            <rating votes="1">6.92</rating>
+            <title xml:lang="en">Interview - Shoji Kawamori</title>
+        </episode>
+        <episode id="189468" update="2017-07-24">
+            <epno type="2">S11</epno>
+            <length>2</length>
+            <rating votes="1">6.92</rating>
+            <title xml:lang="en">Interview - Shinichiro Watanabe</title>
+        </episode>
+        <episode id="189469" update="2017-07-24">
+            <epno type="2">S10</epno>
+            <length>1</length>
+            <rating votes="1">6.92</rating>
+            <title xml:lang="en">Interview - Masahiko Minami</title>
+        </episode>
+        <episode id="189470" update="2017-07-24">
+            <epno type="2">S9</epno>
+            <length>1</length>
+            <rating votes="1">6.92</rating>
+            <title xml:lang="en">Interview - Keiko Nobumoto</title>
+        </episode>
+        <episode id="189471" update="2017-07-24">
+            <epno type="2">S8</epno>
+            <length>3</length>
+            <rating votes="1">6.92</rating>
+            <title xml:lang="en">Interview: Japanese Voice Cast</title>
+        </episode>
+        <episode id="291752" update="2025-01-18">
+            <epno type="5">P1</epno>
+            <length>1</length>
+            <title xml:lang="en">Jolly Rancher</title>
+        </episode>
+    </episodes>
+</anime>

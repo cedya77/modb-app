@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8"?><anime id="19983" restricted="false">
+    <type>TV Series</type>
+    <episodecount>13</episodecount>
+    <startdate>2026-07-05</startdate>
+    <titles>
+        <title xml:lang="x-jat" type="main">Seihantai na Kimi to Boku (2026)</title>
+        <title xml:lang="en" type="synonym">You and I Are Polar Opposites Season 2</title>
+        <title xml:lang="ja" type="official">正反対な君と僕 (2026)</title>
+        <title xml:lang="en" type="official">You and I Are Polar Opposites (2026)</title>
+    </titles>
+    <relatedanime>
+        <anime id="19010" type="Prequel">Seihantai na Kimi to Boku</anime>
+    </relatedanime>
+    <recommendations total="1">
+        <recommendation type="Recommended" uid="614578">The importance of the main characters have decreased and now the show is mostly about the side characters. And it`s as beautiful as the first season.
+
+8/10</recommendation>
+    </recommendations>
+    <url>https://sh-anime.shochiku.co.jp/seihantai_anime/</url>
+    <creators>
+        <name id="59930" type="Chief Animation Direction">Sakoe Sara</name>
+        <name id="49083" type="Chief Animation Direction">Izawa Tamami</name>
+        <name id="45418" type="Animation Work">Lapin Track</name>
+        <name id="82180" type="Character Design">Miyako Mako</name>
+        <name id="30794" type="Series Composition">Utsumi Teruko</name>
+        <name id="79346" type="Original Work">Agasawa Koucha</name>
+        <name id="59885" type="Direction">Nagatomo Takakazu</name>
+        <name id="36181" type="Chief Animation Direction">Sakimoto Sayuri</name>
+        <name id="16879" type="Chief Animation Direction">Kozono Naho</name>
+        <name id="11506" type="Chief Animation Direction">Hayakawa Kazuko</name>
+        <name id="47312" type="Music">Tofubeats</name>
+    </creators>
+    <description>* Based on a rom-com school manga by http://anidb.net/cr79346 [Agasawa Koucha].</description>
+    <ratings>
+        <permanent count="27">8.44</permanent>
+        <temporary count="28">8.35</temporary>
+    </ratings>
+    <picture>327020.jpg</picture>
+    <resources>
+        <resource type="1">
+            <externalentity>
+                <identifier>38846</identifier>
+            </externalentity>
+        </resource>
+        <resource type="2">
+            <externalentity>
+                <identifier>63832</identifier>
+            </externalentity>
+        </resource>
+        <resource type="4">
+            <externalentity>
+                <url>https://sh-anime.shochiku.co.jp/seihantai_anime/</url>
+            </externalentity>
+        </resource>
+        <resource type="6">
+            <externalentity>
+                <identifier>You_and_I_Are_Polar_Opposites</identifier>
+            </externalentity>
+        </resource>
+        <resource type="7">
+            <externalentity>
+                <identifier>正反対な君と僕</identifier>
+            </externalentity>
+        </resource>
+        <resource type="8">
+            <externalentity>
+                <identifier>7825</identifier>
+            </externalentity>
+        </resource>
+        <resource type="9">
+            <externalentity>
+                <identifier>405307</identifier>
+            </externalentity>
+        </resource>
+        <resource type="10">
+            <externalentity>
+                <identifier>26261</identifier>
+            </externalentity>
+        </resource>
+        <resource type="23">
+            <externalentity>
+                <identifier>seihantai_x</identifier>
+            </externalentity>
+        </resource>
+        <resource type="28">
+            <externalentity>
+                <identifier>GT00365624</identifier>
+            </externalentity>
+        </resource>
+    </resources>
+    <tags>
+        <tag id="6173" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2014-09-24">
+            <name>origin</name>
+        </tag>
+        <tag id="7885" parentid="6173" weight="0" localspoiler="false" globalspoiler="false" verified="true" update="2021-11-07">
+            <name>Japanese production</name>
+        </tag>
+    </tags>
+    <characters>
+        <character id="149503" type="main character in" update="2026-01-11">
+            <rating votes="5">5.54</rating>
+            <name>Tani Yuusuke</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <description>A quiet boy who isn`t afraid to speak his mind. He`s been aloof towards Suzuki, who speaks casually to him. However...
+Source: Official page</description>
+            <picture>323593.jpg</picture>
+            <seiyuu id="58964" picture="11404.jpeg">Sakata Shougo</seiyuu>
+        </character>
+        <character id="149504" type="main character in" update="2026-01-11">
+            <rating votes="12">7.67</rating>
+            <name>Suzuki Miyu</name>
+            <gender>female</gender>
+            <charactertype id="1">Character</charactertype>
+            <description>An energetic girl who worries about how others see her. She admires how Tani, unlike her, isn`t afraid to be himself towards anyone, but she can`t behave normal around him and ends up acting annoying.
+Source: Official page</description>
+            <picture>323594.jpg</picture>
+            <seiyuu id="55692" picture="224737.jpg">Suzushiro Sayumi</seiyuu>
+        </character>
+        <character id="153059" type="secondary cast in" update="2026-01-11">
+            <rating votes="5">5.21</rating>
+            <name>Satou Aoi</name>
+            <gender>female</gender>
+            <charactertype id="1">Character</charactertype>
+            <description>A quiet and cool-headed girl, also a classmate of Suzuki and Tani. Calm and reliable, she tends to observe her friends` love lives with a rational, objective perspective.
+Source: Official page</description>
+            <picture>323591.jpg</picture>
+            <seiyuu id="83015" picture="320379.jpg">Hirabayashi Konatsu</seiyuu>
+        </character>
+        <character id="153060" type="secondary cast in" update="2026-01-11">
+            <rating votes="6">5.96</rating>
+            <name>Yamada Kentarou</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <description>A cheerful, easygoing boy and classmate of Suzuki and Tani. He`s the life of the party, open, honest, and quick to befriend anyone. He expresses his thoughts without holding back.
+Source: Official page</description>
+            <picture>323590.jpg</picture>
+            <seiyuu id="73639" picture="295070.jpg">Iwata Anji</seiyuu>
+        </character>
+        <character id="153061" type="secondary cast in" update="2026-01-11">
+            <rating votes="9">6.37</rating>
+            <name>Taira Shuuji</name>
+            <gender>male</gender>
+            <charactertype id="1">Character</charactertype>
+            <description>A boy in Suzuki and Tani`s class with a cynical attitude. Lacking confidence, he often compares himself to others and ends up feeling insecure or down.
+Source: Official page</description>
+            <picture>323588.jpg</picture>
+            <seiyuu id="47913" picture="242796.jpg">Katou Wataru</seiyuu>
+        </character>
+        <character id="153062" type="secondary cast in" update="2026-01-11">
+            <rating votes="6">5.00</rating>
+            <name>Honda Rikako</name>
+            <gender>female</gender>
+            <charactertype id="1">Character</charactertype>
+            <description>A girl from the same class as Nishi, with a dry, no-nonsense personality. She`s logical and values efficiency in everything. She`s close friends with Nishi and the only person Nishi communicates with normally.
+Source: Official page</description>
+            <picture>323586.jpg</picture>
+            <seiyuu id="51124" picture="293103.jpg">Kusunoki Tomori</seiyuu>
+        </character>
+        <character id="153063" type="secondary cast in" update="2026-01-11">
+            <rating votes="11">6.80</rating>
+            <name>Azuma Shino</name>
+            <gender>female</gender>
+            <charactertype id="1">Character</charactertype>
+            <description>A mature-minded girl in Suzuki and Tani`s class. Though she comes off as jaded, she`s never experienced a proper romantic relationship.
+Source: Official page</description>
+            <picture>323589.jpg</picture>
+            <seiyuu id="53024" picture="232385.jpg">Shimabukuro Miyuri</seiyuu>
+        </character>
+        <character id="153064" type="secondary cast in" update="2026-01-11">
+            <rating votes="6">5.43</rating>
+            <name>Watanabe Manami</name>
+            <gender>female</gender>
+            <charactertype id="1">Character</charactertype>
+            <description>A cheerful, upbeat classmate of Suzuki and Tani. She`s free-spirited and says exactly what`s on her mind without hesitation.
+Source: Official page</description>
+            <picture>323592.jpg</picture>
+            <seiyuu id="39135" picture="258077.jpg">Taniguchi Yuna</seiyuu>
+        </character>
+        <character id="153065" type="secondary cast in" update="2026-01-11">
+            <rating votes="9">7.35</rating>
+            <name>Nishi Natsumi</name>
+            <gender>female</gender>
+            <charactertype id="1">Character</charactertype>
+            <description>A quiet and reserved girl from the class next to Suzuki and Tani who actually laughs at just about everything. She`s extremely shy and bad at talking to classmates other than Honda. One of her main worries is always being a beat behind in conversations.
+Source: Official page</description>
+            <picture>323587.jpg</picture>
+            <seiyuu id="78070" picture="307373.jpg">Oomori Kokoro</seiyuu>
+        </character>
+        <character id="153184" type="appears in" update="2026-01-18">
+            <rating votes="1">7.81</rating>
+            <name>Tenpura</name>
+            <gender>unknown</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>323831.jpg</picture>
+            <seiyuu id="47913" picture="242796.jpg">Katou Wataru</seiyuu>
+        </character>
+        <character id="153185" type="appears in" update="2026-01-18">
+            <rating votes="1">4.91</rating>
+            <name>Yeti</name>
+            <gender>unknown</gender>
+            <charactertype id="1">Character</charactertype>
+            <picture>323830.jpg</picture>
+            <seiyuu id="51124" picture="293103.jpg">Kusunoki Tomori</seiyuu>
+        </character>
+        <character id="153195" type="appears in" update="2026-01-20">
+            <name>Mini</name>
+            <gender>unknown</gender>
+            <charactertype id="1">Character</charactertype>
+            <seiyuu id="61615" picture="250744.jpg">Urushiyama Yuuki</seiyuu>
+        </character>
+        <character id="153196" type="appears in" update="2026-01-20">
+            <name>Morimo</name>
+            <gender>unknown</gender>
+            <charactertype id="1">Character</charactertype>
+            <seiyuu id="41968" picture="223846.jpg">Fujiwara Daichi</seiyuu>
+        </character>
+        <character id="153197" type="appears in" update="2026-01-20">
+            <name>Homeroom Teacher</name>
+            <gender>unknown</gender>
+            <charactertype id="1">Character</charactertype>
+        </character>
+        <character id="153389" type="appears in" update="2026-02-02">
+            <name>Gomapon</name>
+            <gender>unknown</gender>
+            <charactertype id="1">Character</charactertype>
+            <seiyuu id="43270" picture="283831.jpg">Maki Shun`ichi</seiyuu>
+        </character>
+        <character id="154415" type="appears in" update="2026-04-13">
+            <name>Saotome</name>
+            <gender>unknown</gender>
+            <charactertype id="1">Character</charactertype>
+            <seiyuu id="66391" picture="293133.jpg">Niwa Satoshi</seiyuu>
+        </character>
+        <character id="154416" type="appears in" update="2026-04-13">
+            <name>Hasegawa</name>
+            <gender>unknown</gender>
+            <charactertype id="1">Character</charactertype>
+            <seiyuu id="61010" picture="249434.jpg">Mino Yuudai</seiyuu>
+        </character>
+        <character id="156012" type="appears in" update="2026-07-24">
+            <name>Watanabe Akemi</name>
+            <gender>unknown</gender>
+            <charactertype id="1">Character</charactertype>
+            <seiyuu id="68368" picture="278658.jpg">Tsukada Yui</seiyuu>
+        </character>
+        <character id="156013" type="appears in" update="2026-07-24">
+            <name>Watanabe Akemi</name>
+            <gender>unknown</gender>
+            <charactertype id="1">Character</charactertype>
+            <seiyuu id="56210" picture="223902.jpg">Sahaku Miyuki</seiyuu>
+        </character>
+    </characters>
+    <episodes>
+        <episode id="313428" update="2026-07-05">
+            <epno type="1">1</epno>
+            <length>25</length>
+            <airdate>2026-07-05</airdate>
+            <rating votes="5">8.56</rating>
+            <title xml:lang="ja">クリスマスイヴ</title>
+            <title xml:lang="en">Christmas Eve</title>
+            <title xml:lang="de">Heiligabend</title>
+            <title xml:lang="x-jat">Christmas Eve</title>
+            <resources>
+                <resource type="28">
+                    <externalentity>
+                        <identifier>GE00366879JAJP</identifier>
+                    </externalentity>
+                </resource>
+            </resources>
+        </episode>
+        <episode id="313429" update="2026-07-05">
+            <epno type="1">2</epno>
+            <length>25</length>
+            <airdate>2026-07-12</airdate>
+            <rating votes="5">9.31</rating>
+            <title xml:lang="ja">冬の夜のジレンマ</title>
+            <title xml:lang="en">Dilemma of a Winter`s Night</title>
+            <title xml:lang="de">Winternachtsdilemma</title>
+            <title xml:lang="x-jat">Fuyu no Yoru no Dilemma</title>
+            <resources>
+                <resource type="28">
+                    <externalentity>
+                        <identifier>GE00366880JAJP</identifier>
+                    </externalentity>
+                </resource>
+            </resources>
+        </episode>
+        <episode id="313430" update="2026-07-05">
+            <epno type="1">3</epno>
+            <length>25</length>
+            <airdate>2026-07-19</airdate>
+            <rating votes="4">9.02</rating>
+            <title xml:lang="ja">行く年来る年</title>
+            <title xml:lang="en">The Year That`s Passed, and the Year to Come</title>
+            <title xml:lang="x-jat">Yukutoshi Kurutoshi</title>
+            <resources>
+                <resource type="28">
+                    <externalentity>
+                        <identifier>GE00366881JAJP</identifier>
+                    </externalentity>
+                </resource>
+            </resources>
+        </episode>
+        <episode id="313431" update="2026-07-05">
+            <epno type="1">4</epno>
+            <length>25</length>
+            <airdate>2026-07-26</airdate>
+            <rating votes="5">8.17</rating>
+            <title xml:lang="ja">新学期</title>
+            <title xml:lang="en">New School Term</title>
+            <title xml:lang="x-jat">Shingakki</title>
+            <resources>
+                <resource type="28">
+                    <externalentity>
+                        <identifier>GE00366882JAJP</identifier>
+                    </externalentity>
+                </resource>
+            </resources>
+        </episode>
+        <episode id="313432" update="2026-07-05">
+            <epno type="1">5</epno>
+            <length>25</length>
+            <airdate>2026-08-02</airdate>
+            <rating votes="5">9.39</rating>
+            <title xml:lang="ja">バレンタイン</title>
+            <title xml:lang="en">Valentine`s Day</title>
+            <title xml:lang="x-jat">Valentine</title>
+            <resources>
+                <resource type="28">
+                    <externalentity>
+                        <identifier>GE00366883JAJP</identifier>
+                    </externalentity>
+                </resource>
+            </resources>
+        </episode>
+        <episode id="313433" update="2026-07-05">
+            <epno type="1">6</epno>
+            <length>25</length>
+            <airdate>2026-08-09</airdate>
+            <rating votes="5">9.31</rating>
+            <title xml:lang="ja">春の手前</title>
+            <title xml:lang="en">Threshold of Spring</title>
+            <title xml:lang="x-jat">Haru no Temae</title>
+            <resources>
+                <resource type="28">
+                    <externalentity>
+                        <identifier>GE00366884JAJP</identifier>
+                    </externalentity>
+                </resource>
+            </resources>
+        </episode>
+        <episode id="313603" update="2026-07-06">
+            <epno type="3">C1</epno>
+            <length>2</length>
+            <airdate>2026-07-05</airdate>
+            <title xml:lang="en">Opening</title>
+        </episode>
+        <episode id="313604" update="2026-07-06">
+            <epno type="3">C2</epno>
+            <length>2</length>
+            <airdate>2026-07-05</airdate>
+            <title xml:lang="en">Ending</title>
+        </episode>
+        <episode id="314362" update="2026-07-25">
+            <epno type="1">7</epno>
+            <length>25</length>
+            <airdate>2026-08-16</airdate>
+            <rating votes="4">8.57</rating>
+            <title xml:lang="ja">グラデーション</title>
+            <title xml:lang="en">Gradation</title>
+            <title xml:lang="x-jat">Gradation</title>
+            <resources>
+                <resource type="28">
+                    <externalentity>
+                        <identifier>GE00366885JAJP</identifier>
+                    </externalentity>
+                </resource>
+            </resources>
+        </episode>
+        <episode id="314363" update="2026-07-25">
+            <epno type="1">8</epno>
+            <length>25</length>
+            <airdate>2026-08-23</airdate>
+            <rating votes="4">8.57</rating>
+            <title xml:lang="ja">この先</title>
+            <title xml:lang="en">The Future</title>
+            <title xml:lang="x-jat">Kono Saki</title>
+            <resources>
+                <resource type="28">
+                    <externalentity>
+                        <identifier>GE00366886JAJP</identifier>
+                    </externalentity>
+                </resource>
+            </resources>
+        </episode>
+        <episode id="315372" update="2026-08-15">
+            <epno type="1">9</epno>
+            <length>25</length>
+            <airdate>2026-08-30</airdate>
+            <title xml:lang="en">Episode 9</title>
+        </episode>
+        <episode id="315373" update="2026-08-15">
+            <epno type="1">10</epno>
+            <length>25</length>
+            <airdate>2026-09-06</airdate>
+            <title xml:lang="en">Episode 10</title>
+        </episode>
+        <episode id="315374" update="2026-08-15">
+            <epno type="1">11</epno>
+            <length>25</length>
+            <airdate>2026-09-13</airdate>
+            <title xml:lang="en">Episode 11</title>
+        </episode>
+        <episode id="315375" update="2026-08-15">
+            <epno type="1">12</epno>
+            <length>25</length>
+            <airdate>2026-09-20</airdate>
+            <title xml:lang="en">Episode 12</title>
+        </episode>
+        <episode id="315389" update="2026-08-15">
+            <epno type="1">13</epno>
+            <length>25</length>
+            <airdate>2026-09-27</airdate>
+            <title xml:lang="en">Episode 13</title>
+        </episode>
+    </episodes>
+</anime>
