@@ -4,6 +4,10 @@ import io.github.manamiproject.modb.anisearch.AnisearchConfig
 import io.github.manamiproject.modb.anisearch.AnisearchRelationsConfig
 import io.github.manamiproject.modb.app.convfiles.DefaultRawFileConversionService
 import io.github.manamiproject.modb.app.crawlers.anidb.AnidbCrawler
+import io.github.manamiproject.modb.core.config.DefaultConfigRegistry
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.joinAll
 import io.github.manamiproject.modb.app.crawlers.anilist.AnilistCrawler
 import io.github.manamiproject.modb.app.crawlers.animenewsnetwork.AnimenewsnetworkCrawler
 import io.github.manamiproject.modb.app.crawlers.animeplanet.AnimePlanetCrawler
@@ -30,24 +34,32 @@ import javax.swing.SwingUtilities
 import kotlin.system.exitProcess
 
 @KoverIgnore
+private val log = org.slf4j.LoggerFactory.getLogger("App")
+
 fun main() = runCoroutine {
     LinuxNetworkController.instance.sudoPasswordValue = passwordPrompt()
 
     val rawFileConversionService = DefaultRawFileConversionService.instance
     rawFileConversionService.start()
 
+    val disabled = DefaultConfigRegistry.instance.list<String>("modb.app.disabledCrawlers")?.toSet() ?: emptySet()
+
+    val crawlers = mutableListOf<Job>()
+
     withContext(LIMITED_NETWORK) {
-        launch { AnidbCrawler.instance.start() }
-        launch { AnilistCrawler.instance.start() }
-        launch { AnimePlanetCrawler.instance.start() }
-        launch { AnimenewsnetworkCrawler.instance.start() }
-        launch { AnisearchCrawler(metaDataProviderConfig = AnisearchConfig).start() }
-        launch { AnisearchCrawler(metaDataProviderConfig = AnisearchRelationsConfig).start() }
-        launch { KitsuCrawler.instance.start() }
-        launch { LivechartCrawler.instance.start() }
-        launch { MyanimelistCrawler.instance.start() }
-        launch { SimklCrawler.instance.start() }
-    }.join()
+        crawl("anidb.net", disabled, crawlers) { AnidbCrawler.instance.start() }
+        crawl("anilist.co", disabled, crawlers) { AnilistCrawler.instance.start() }
+        crawl("anime-planet.com", disabled, crawlers) { AnimePlanetCrawler.instance.start() }
+        crawl("animenewsnetwork.com", disabled, crawlers) { AnimenewsnetworkCrawler.instance.start() }
+        crawl("anisearch.com", disabled, crawlers) { AnisearchCrawler(metaDataProviderConfig = AnisearchConfig).start() }
+        crawl("anisearch.com-relations", disabled, crawlers) { AnisearchCrawler(metaDataProviderConfig = AnisearchRelationsConfig).start() }
+        crawl("kitsu.app", disabled, crawlers) { KitsuCrawler.instance.start() }
+        crawl("livechart.me", disabled, crawlers) { LivechartCrawler.instance.start() }
+        crawl("myanimelist.net", disabled, crawlers) { MyanimelistCrawler.instance.start() }
+        crawl("simkl.com", disabled, crawlers) { SimklCrawler.instance.start() }
+    }
+
+    crawlers.joinAll()
 
     rawFileConversionService.waitForAllRawFilesToBeConverted()
     rawFileConversionService.shutdown()
@@ -111,4 +123,26 @@ private fun passwordPrompt(): String {
         println("sudo password:")
         readlnOrNull() ?: EMPTY
     }
+}
+
+/**
+ * Starts a crawler unless it has been switched off, and keeps its failure to itself.
+ *
+ * A provider can refuse to serve us for reasons which have nothing to do with the other eight, and
+ * losing an entire run to one of them wastes every request the others already made. Whatever the
+ * crawler managed to download stays on disk and is picked up by the conversion step either way.
+ */
+private fun CoroutineScope.crawl(hostname: String, disabled: Set<String>, jobs: MutableList<Job>, block: suspend () -> Unit) {
+    if (hostname in disabled) {
+        log.warn("Skipping crawler for [$hostname], because it is listed in [modb.app.disabledCrawlers].")
+        return
+    }
+
+    jobs.add(launch {
+        try {
+            block.invoke()
+        } catch (e: Throwable) {
+            log.error("Crawler for [$hostname] stopped: ${e.message}", e)
+        }
+    })
 }
