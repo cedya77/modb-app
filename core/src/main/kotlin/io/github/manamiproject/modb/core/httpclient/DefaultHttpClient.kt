@@ -41,6 +41,11 @@ import java.util.concurrent.TimeUnit.*
  * # Retry
  * + Waits for the amount of time defined in [RetryCase.waitDuration].
  * + Executes request again.
+ *
+ * The default cases treat a server error as something which may pass. A caller talking to a service
+ * which answers with a verdict rather than a hiccup, such as one reporting that a route is refused,
+ * has to turn them off: repeating that request cannot change the answer, and the backoff between
+ * attempts hides the verdict from the caller for minutes.
  * @since 9.0.0
  * @param proxy **Default** is [NO_PROXY]
  * @property protocols List of supported HTTP protocol versions in the order of preference. Default is `HTTP/2, HTTP/1.1`.
@@ -64,12 +69,13 @@ public class DefaultHttpClient(
         .build(),
     private val isTestContext: Boolean = false,
     private val headerCreator: HeaderCreator = DefaultHeaderCreator.instance,
+    useDefaultRetryCases: Boolean = true,
 ) : HttpClient {
 
     private val retryBehavior: RetryBehavior = RetryBehavior()
 
     init {
-        retryBehavior.addCases(
+        if (useDefaultRetryCases) retryBehavior.addCases(
             // Server errors based on https://http.dev/status#5xx-server-error
             HttpResponseRetryCase { it.code == 500 },
             HttpResponseRetryCase { it.code == 501 },

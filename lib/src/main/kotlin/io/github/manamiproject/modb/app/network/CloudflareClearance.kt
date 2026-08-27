@@ -153,6 +153,10 @@ class CloudflareClearance(
          */
         private fun solverClient(): HttpClient = DefaultHttpClient(
             readTimeoutInSeconds = SOLVER_TIMEOUT / 1000 + SOLVER_GRACE_IN_SECONDS,
+            // A solver reporting that it could not get through is describing the route it was given,
+            // not a fault which might clear. Retrying holds the answer back behind a backoff while
+            // the caller could have been trying another route.
+            useDefaultRetryCases = false,
         )
 
         private const val SOLVER_GRACE_IN_SECONDS = 30L
