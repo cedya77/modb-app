@@ -34,7 +34,7 @@ import java.time.LocalDate
  * @property clock Used to determine the current date.
  */
 public class AnidbApiAnimeConverter(
-    private val metaDataProviderConfig: MetaDataProviderConfig = AnidbApiConfig,
+    private val metaDataProviderConfig: MetaDataProviderConfig = AnidbConfig,
     private val extractor: DataExtractor = XmlDataExtractor,
     private val clock: Clock = Clock.systemUTC(),
 ) : AnimeConverter {

@@ -33,7 +33,7 @@ import java.time.LocalDate
  * @param clock Used to determine the current date. **Default:** `Clock.systemDefaultZone()`
  */
 public class AnidbAnimeConverter(
-    private val metaDataProviderConfig: MetaDataProviderConfig = AnidbConfig,
+    private val metaDataProviderConfig: MetaDataProviderConfig = AnidbWebsiteConfig,
     private val extractor: DataExtractor = XmlDataExtractor,
     clock: Clock = Clock.systemDefaultZone(),
 ) : AnimeConverter {

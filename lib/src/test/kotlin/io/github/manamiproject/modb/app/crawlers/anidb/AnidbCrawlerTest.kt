@@ -152,7 +152,7 @@ internal class AnidbCrawlerTest {
 
                 // then
                 testIdRangeSelector.idDownloadList().forEach { id ->
-                    val result = tempDir.resolve("$id.html").readFile()
+                    val result = tempDir.resolve("$id.xml").readFile()
                     assertThat(result).isEqualTo("$successfulEntry $id")
                 }
             }
@@ -199,10 +199,10 @@ internal class AnidbCrawlerTest {
                 crawler.start()
 
                 // then
-                assertThat(tempDir).isDirectoryContaining { it.fileName() == "1535.html" }
-                assertThat(tempDir).isDirectoryContaining { it.fileName() == "23.html" }
-                assertThat(tempDir).isDirectoryContaining { it.fileName() == "424.html" }
-                assertThat(tempDir).isDirectoryNotContaining { it.fileName() == "1254.html" }
+                assertThat(tempDir).isDirectoryContaining { it.fileName() == "1535.xml" }
+                assertThat(tempDir).isDirectoryContaining { it.fileName() == "23.xml" }
+                assertThat(tempDir).isDirectoryContaining { it.fileName() == "424.xml" }
+                assertThat(tempDir).isDirectoryNotContaining { it.fileName() == "1254.xml" }
             }
         }
 
@@ -423,7 +423,7 @@ internal class AnidbCrawlerTest {
                 // then
                 assertThat(hasBeenInvoked).isTrue()
                 testIdRangeSelector.idDownloadList().forEach { id ->
-                    val result = tempDir.resolve("$id.html").readFile()
+                    val result = tempDir.resolve("$id.xml").readFile()
                     assertThat(result).isEqualTo("$successfulEntry $id")
                 }
             }

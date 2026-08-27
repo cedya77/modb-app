@@ -45,15 +45,15 @@ internal class AnidbConfigTest {
         val result = AnidbConfig.buildDataDownloadLink(id)
 
         // then
-        assertThat(result).isEqualTo(URI("https://anidb.net/anime/$id"))
+        assertThat(result).isEqualTo(URI("http://api.anidb.net:9001/httpapi?request=anime&aid=$id"))
     }
 
     @Test
-    fun `file suffix must be html`() {
+    fun `file suffix must be xml`() {
         // when
         val result = AnidbConfig.fileSuffix()
 
         // then
-        assertThat(result).isEqualTo("html")
+        assertThat(result).isEqualTo("xml")
     }
 }

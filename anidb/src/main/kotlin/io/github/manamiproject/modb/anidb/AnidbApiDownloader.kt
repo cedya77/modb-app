@@ -27,7 +27,7 @@ import java.util.zip.GZIPInputStream
  * @property httpClient To actually download the anime data.
  */
 public class AnidbApiDownloader(
-    private val metaDataProviderConfig: MetaDataProviderConfig = AnidbApiConfig,
+    private val metaDataProviderConfig: MetaDataProviderConfig = AnidbConfig,
     configRegistry: ConfigRegistry = DefaultConfigRegistry.instance,
     private val httpClient: HttpClient = DefaultHttpClient(isTestContext = metaDataProviderConfig.isTestContext()),
 ) : Downloader {

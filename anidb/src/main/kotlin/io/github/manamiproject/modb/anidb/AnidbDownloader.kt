@@ -20,7 +20,7 @@ import kotlinx.coroutines.withContext
  * @property httpClient To actually download the anime data.
  */
 public class AnidbDownloader(
-    private val metaDataProviderConfig: MetaDataProviderConfig = AnidbConfig,
+    private val metaDataProviderConfig: MetaDataProviderConfig = AnidbWebsiteConfig,
     private val httpClient: HttpClient = DefaultHttpClient(isTestContext = metaDataProviderConfig.isTestContext()),
 ) : Downloader {
 

@@ -1,6 +1,7 @@
 package io.github.manamiproject.modb.app.crawlers.anidb
 
 import io.github.manamiproject.modb.anidb.AnidbConfig
+import io.github.manamiproject.modb.anidb.AnidbApiDownloader
 import io.github.manamiproject.modb.anidb.AnidbDownloader
 import io.github.manamiproject.modb.anidb.AnidbDownloader.Companion.ANIDB_PENDING_FILE_INDICATOR
 import io.github.manamiproject.modb.anidb.AnidbResponseChecker
@@ -52,7 +53,7 @@ class AnidbCrawler(
         highestIdDetector = AnidbTitlesDumpHighestIdDetector.instance,
     ),
     private val httpClient: HttpClient = SuspendableHttpClient(),
-    private val downloader: Downloader = AnidbDownloader(
+    private val downloader: Downloader = AnidbApiDownloader(
         metaDataProviderConfig = metaDataProviderConfig,
         httpClient = httpClient,
     ),

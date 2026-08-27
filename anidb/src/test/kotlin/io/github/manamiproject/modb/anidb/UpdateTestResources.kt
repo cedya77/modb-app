@@ -135,7 +135,7 @@ internal class UpdateTestResourcesTest {
 
         val filesInTestResources = Files.walk(testResource(testResourcesDirectory))
             .filter { it.isRegularFile() }
-            .filter { it.fileSuffix() == AnidbConfig.fileSuffix() }
+            .filter { it.fileSuffix() == AnidbWebsiteConfig.fileSuffix() }
             .map { it.toString() }
             .toList()
 
