@@ -100,3 +100,10 @@ tasks.register<JavaExec>("seedMergeLocks") {
     mainClass.set("io.github.manamiproject.modb.app.merging.lock.MergeLockSeederKt")
     classpath = sourceSets["main"].runtimeClasspath
 }
+
+tasks.register<JavaExec>("seedDownloadControlState") {
+    group = "application"
+    description = "Creates download control state entries from a published dataset. Usage: --args=\"<dataset-file> <dcs-dir>\""
+    mainClass.set("io.github.manamiproject.modb.app.downloadcontrolstate.DownloadControlStateSeederKt")
+    classpath = sourceSets["main"].runtimeClasspath
+}

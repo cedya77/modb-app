@@ -69,6 +69,13 @@ class RotatingProxyNetworkController(
     private var isNetworkActive = true
 
     /**
+     * Whether a proxy pool has been configured at all.
+     * @since 1.0.0
+     * @return `true` if at least one proxy is configured.
+     */
+    fun hasProxies(): Boolean = proxies.isNotEmpty()
+
+    /**
      * The proxy that requests are currently supposed to go through.
      * @since 1.0.0
      * @return Proxy of the pool which is currently active.
