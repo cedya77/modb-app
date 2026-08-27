@@ -30,11 +30,24 @@ object NetworkControllers {
 
         return when {
             rotating.hasProxies() -> rotating
+            canRestartNetworkDevice() -> {
+                log.info { "Using the network device to change the outgoing address." }
+                LinuxNetworkController.instance
+            }
             else -> {
-                log.info { "No proxy pool configured, so the outgoing address cannot be changed on demand." }
+                log.info { "No proxy pool configured and no network device to restart, so the outgoing address cannot be changed on demand." }
                 FixedNetworkController
             }
         }
+    }
+
+    // The original design changes address by restarting the device, which only works where ifconfig
+    // exists and the connection hands out a new address afterwards. That is a property of the
+    // machine, so ask it rather than assume either way.
+    private fun canRestartNetworkDevice(): Boolean = try {
+        ProcessBuilder("ifconfig").redirectErrorStream(true).start().waitFor() == 0
+    } catch (e: Exception) {
+        false
     }
 }
 
