@@ -9,6 +9,7 @@ import io.github.manamiproject.modb.anidb.AnidbWebsiteConfig
 import io.github.manamiproject.modb.app.network.ClearanceHttpClient
 import io.github.manamiproject.modb.app.network.CloudflareClearance
 import io.github.manamiproject.modb.app.network.ProxiedHttpClients
+import io.github.manamiproject.modb.app.network.NetworkControllers
 import io.github.manamiproject.modb.app.network.SuspendableHttpClient
 import io.github.manamiproject.modb.core.config.ConfigRegistry
 import io.github.manamiproject.modb.core.config.DefaultConfigRegistry
@@ -17,6 +18,7 @@ import io.github.manamiproject.modb.core.config.StringPropertyDelegate
 import io.github.manamiproject.modb.core.converter.AnimeConverter
 import io.github.manamiproject.modb.core.downloader.Downloader
 import io.github.manamiproject.modb.core.httpclient.HttpClient
+import java.net.InetSocketAddress
 
 /**
  * Decides where anidb entries are read from.
@@ -67,10 +69,23 @@ object AnidbSource {
      * @return Client able to reach the chosen source.
      */
     fun httpClient(configRegistry: ConfigRegistry = DefaultConfigRegistry.instance): HttpClient = when {
-        isWebsite() -> ClearanceHttpClient(
-            clearance = CloudflareClearance(configRegistry = configRegistry),
-            httpClient = ProxiedHttpClients.suspendable(configRegistry),
-        )
+        isWebsite() -> {
+            val networkController = NetworkControllers.rotating(configRegistry)
+
+            ClearanceHttpClient(
+                clearance = CloudflareClearance(configRegistry = configRegistry),
+                httpClient = ProxiedHttpClients.suspendable(configRegistry),
+                currentProxy = {
+                    when {
+                        // Built by hand from host and port: an InetSocketAddress renders as
+                        // "/host:port", which would produce an unusable "http:///host:port".
+                        networkController.hasProxies() -> (networkController.currentProxy().address() as? InetSocketAddress)
+                            ?.let { "http://${it.hostString}:${it.port}" }
+                        else -> null
+                    }
+                },
+            )
+        }
         else -> SuspendableHttpClient()
     }
 

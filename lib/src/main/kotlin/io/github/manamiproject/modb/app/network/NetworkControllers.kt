@@ -19,6 +19,25 @@ object NetworkControllers {
 
     private val log by LoggerDelegate()
 
+    private val rotatingControllers = mutableMapOf<ConfigRegistry, RotatingProxyNetworkController>()
+
+    /**
+     * Returns the one rotating controller belonging to a configuration.
+     *
+     * Which proxy of the pool is currently in use is state. Handing out a fresh controller per
+     * caller gives each of them a private idea of that, so the part which rotates on refusal and the
+     * part which actually sends the request disagree about where traffic leaves from: the rotation
+     * is logged, nothing about the connection changes, and the address stays burned.
+     * @since 1.0.0
+     * @param configRegistry Source of the proxy pool definition.
+     * @return The controller for this configuration, created once.
+     */
+    fun rotating(configRegistry: ConfigRegistry = DefaultConfigRegistry.instance): RotatingProxyNetworkController = synchronized(rotatingControllers) {
+        rotatingControllers.getOrPut(configRegistry) {
+            RotatingProxyNetworkController(configRegistry = configRegistry)
+        }
+    }
+
     /**
      * @since 1.0.0
      * @param configRegistry Source of the proxy pool definition.
@@ -26,7 +45,7 @@ object NetworkControllers {
      * it cannot.
      */
     fun forDeployment(configRegistry: ConfigRegistry = DefaultConfigRegistry.instance): NetworkController {
-        val rotating = RotatingProxyNetworkController(configRegistry = configRegistry)
+        val rotating = rotating(configRegistry)
 
         return when {
             rotating.hasProxies() -> rotating

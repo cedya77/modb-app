@@ -24,7 +24,7 @@ object ProxiedHttpClients {
      * is configured.
      */
     fun suspendable(configRegistry: ConfigRegistry = DefaultConfigRegistry.instance): HttpClient {
-        val networkController = RotatingProxyNetworkController(configRegistry = configRegistry)
+        val networkController = NetworkControllers.rotating(configRegistry)
 
         return when {
             networkController.hasProxies() -> {
