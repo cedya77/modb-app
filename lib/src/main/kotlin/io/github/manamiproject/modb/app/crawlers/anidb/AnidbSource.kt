@@ -84,6 +84,7 @@ object AnidbSource {
                         else -> null
                     }
                 },
+                changeConnection = { networkController.restartAsync().await() },
             )
         }
         else -> SuspendableHttpClient()
