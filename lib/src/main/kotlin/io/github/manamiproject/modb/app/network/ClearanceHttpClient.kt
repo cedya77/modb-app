@@ -21,12 +21,11 @@ import java.net.URL
 class ClearanceHttpClient(
     private val clearance: CloudflareClearance,
     private val httpClient: HttpClient,
+    private val currentProxy: () -> String? = { null },
 ): HttpClient {
 
     override suspend fun get(url: URL, headers: Map<String, Collection<String>>): HttpResponse {
-        if (clearance.cookie.isBlank()) {
-            clearance.refresh(url)
-        }
+        clearance.ensureIssuedTo(url, currentProxy())
 
         val response = httpClient.get(url, headers + clearanceHeaders())
 
@@ -37,7 +36,7 @@ class ClearanceHttpClient(
         log.info { "Clearance for [${url.host}] was refused, renewing it." }
 
         return when {
-            clearance.refresh(url) -> httpClient.get(url, headers + clearanceHeaders())
+            clearance.refresh(url, currentProxy()) -> httpClient.get(url, headers + clearanceHeaders())
             else -> response
         }
     }

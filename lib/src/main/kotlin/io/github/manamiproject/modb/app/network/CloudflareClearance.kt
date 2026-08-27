@@ -51,10 +51,40 @@ class CloudflareClearance(
         private set
 
     /**
+     * Route the current clearance was issued to, `null` when there is none.
+     * @since 1.0.0
+     */
+    var issuedTo: String? = null
+        private set
+
+    /**
      * @since 1.0.0
      * @return `true` if a solver has been configured.
      */
     fun isConfigured(): Boolean = solverUrl != EMPTY_SOLVER && solverUrl.isNotBlank()
+
+    /**
+     * Makes sure a clearance is held for the given route, obtaining one only if the current
+     * clearance was issued to a different one.
+     *
+     * A clearance is bound to the address which earned it, so changing route invalidates it just as
+     * surely as time does. The site does not always answer the mismatch with a challenge, so waiting
+     * for one before renewing can leave the crawler presenting a clearance no address it uses will
+     * be accepted with.
+     * @since 1.0.0
+     * @param url Page to render if a clearance is needed.
+     * @param proxyUrl Route the clearance has to be valid for.
+     * @return `true` if a clearance for this route is held.
+     */
+    suspend fun ensureIssuedTo(url: URL, proxyUrl: String? = null): Boolean {
+        lock.withLock {
+            if (cookie.isNotBlank() && issuedTo == proxyUrl) {
+                return true
+            }
+        }
+
+        return refresh(url, proxyUrl)
+    }
 
     /**
      * Obtains a clearance by having the solver render the given page.
@@ -62,14 +92,21 @@ class CloudflareClearance(
      * @param url Page to render. Any page of the site will do.
      * @return `true` if a clearance was obtained.
      */
-    suspend fun refresh(url: URL): Boolean = lock.withLock {
+    suspend fun refresh(url: URL, proxyUrl: String? = null): Boolean = lock.withLock {
         check(isConfigured()) { "No challenge solver configured. Set [$CONFIG_NAMESPACE.solverUrl]." }
 
-        log.info { "Requesting a clearance for [${url.host}] from the challenge solver." }
+        log.info { "Requesting a clearance for [${url.host}] from the challenge solver, leaving through [${proxyUrl ?: "this machine"}]." }
+
+        // The clearance is issued to whichever address renders the page, so the solver has to
+        // leave by the same route the crawler will use, or the cookie it returns is worthless.
+        val proxy = when {
+            proxyUrl.isNullOrBlank() -> ""
+            else -> ""","proxy":{"url":"$proxyUrl"}"""
+        }
 
         val body = RequestBody(
             mediaType = "application/json",
-            body = """{"cmd":"request.get","url":"$url","maxTimeout":$SOLVER_TIMEOUT}""",
+            body = """{"cmd":"request.get","url":"$url","maxTimeout":$SOLVER_TIMEOUT$proxy}""",
         )
 
         val response = httpClient.post(URI(solverUrl).toURL(), body).bodyAsString()
@@ -77,11 +114,22 @@ class CloudflareClearance(
 
         if (parsed?.status != "ok" || parsed.solution == null) {
             log.warn { "Solver could not obtain a clearance: [${parsed?.message}]" }
+            issuedTo = null
+            return@withLock false
+        }
+
+        // A solve which returns no cookie means the solver never reached the site, usually because
+        // it could not use the route it was given. Reporting that as success leaves the crawler
+        // presenting nothing and wondering why every request is refused.
+        if (parsed.solution.cookies.isEmpty()) {
+            log.warn { "Solver returned no cookies, so [${url.host}] was not reached through [${proxyUrl ?: "this machine"}]." }
+            issuedTo = null
             return@withLock false
         }
 
         cookie = parsed.solution.cookies.joinToString("; ") { "${it.name}=${it.value}" }
         userAgent = parsed.solution.userAgent
+        issuedTo = proxyUrl
 
         log.info { "Clearance obtained for [${url.host}], carrying [${parsed.solution.cookies.size}] cookies." }
 
