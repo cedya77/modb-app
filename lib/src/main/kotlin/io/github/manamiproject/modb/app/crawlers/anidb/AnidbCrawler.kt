@@ -49,7 +49,7 @@ class AnidbCrawler(
     private val deadEntriesAccess: DeadEntriesAccessor = DefaultDeadEntriesAccessor.instance,
     private val idRangeSelector: IdRangeSelector<Int> = IntegerBasedIdRangeSelector(
         metaDataProviderConfig = metaDataProviderConfig,
-        highestIdDetector = AnidbHighestIdDetector.instance,
+        highestIdDetector = AnidbTitlesDumpHighestIdDetector.instance,
     ),
     private val httpClient: HttpClient = SuspendableHttpClient(),
     private val downloader: Downloader = AnidbDownloader(
