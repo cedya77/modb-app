@@ -25,7 +25,7 @@ import java.net.URL
  */
 class CloudflareClearance(
     configRegistry: ConfigRegistry = DefaultConfigRegistry.instance,
-    private val httpClient: HttpClient = DefaultHttpClient(),
+    private val httpClient: HttpClient = solverClient(),
 ) {
 
     private val solverUrl: String by StringPropertyDelegate(
@@ -141,6 +141,21 @@ class CloudflareClearance(
 
         private const val EMPTY_SOLVER = ""
         private const val SOLVER_TIMEOUT = 120000
+
+        /**
+         * Client for talking to the solver, which is nothing like talking to a site.
+         *
+         * A render legitimately takes longer than an ordinary response, so the default read timeout
+         * expires mid-solve. Retrying that does not recover anything: the solver is still working on
+         * the first render, and each attempt starts another one, so a single slow solve becomes a
+         * queue of browsers and the caller waits for all of them holding the clearance lock.
+         * Waiting past the solver's own deadline and failing once is the honest outcome.
+         */
+        private fun solverClient(): HttpClient = DefaultHttpClient(
+            readTimeoutInSeconds = SOLVER_TIMEOUT / 1000 + SOLVER_GRACE_IN_SECONDS,
+        )
+
+        private const val SOLVER_GRACE_IN_SECONDS = 30L
 
         /**
          * Prefix of the properties read by this class.

@@ -51,6 +51,7 @@ import java.util.concurrent.TimeUnit.*
 public class DefaultHttpClient(
     proxy: Proxy = NO_PROXY,
     useCustomRedirectInterceptor: Boolean = false,
+    readTimeoutInSeconds: Long = DEFAULT_READ_TIMEOUT_IN_SECONDS,
     private val protocols: MutableList<HttpProtocol> = mutableListOf(HTTP_2, HTTP_1_1),
     private var okhttpClient: Call.Factory = OkHttpClient.Builder()
         .followRedirects(!useCustomRedirectInterceptor)
@@ -58,7 +59,7 @@ public class DefaultHttpClient(
         .addInterceptor(RedirectInterceptor(useCustomRedirectInterceptor))
         .connectTimeout(5L, SECONDS)
         .protocols(mapHttpProtocols(protocols))
-        .readTimeout(60L, SECONDS)
+        .readTimeout(readTimeoutInSeconds, SECONDS)
         .proxy(proxy)
         .build(),
     private val isTestContext: Boolean = false,
@@ -273,6 +274,15 @@ public class DefaultHttpClient(
                 }
             }
         }
+
+        /**
+         * Time a response may take before the request is considered failed. Suits a site answering
+         * a request. A caller waiting on something which does real work per call, such as rendering
+         * a page in a browser, has to raise it, or the wait ends while the work is still running and
+         * a retry starts the work a second time.
+         * @since 15.0.0
+         */
+        public const val DEFAULT_READ_TIMEOUT_IN_SECONDS: Long = 60L
 
         /**
          * Singleton of [DefaultHttpClient]
