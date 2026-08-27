@@ -11,7 +11,7 @@ import io.github.manamiproject.modb.app.downloadcontrolstate.DefaultDownloadCont
 import io.github.manamiproject.modb.app.downloadcontrolstate.DefaultDownloadControlStateScheduler
 import io.github.manamiproject.modb.app.downloadcontrolstate.DownloadControlStateAccessor
 import io.github.manamiproject.modb.app.downloadcontrolstate.DownloadControlStateScheduler
-import io.github.manamiproject.modb.app.network.ProxiedHttpClients
+import io.github.manamiproject.modb.app.network.ClearanceHttpClients
 import io.github.manamiproject.modb.app.network.SuspendableHttpClient
 import io.github.manamiproject.modb.core.config.MetaDataProviderConfig
 import io.github.manamiproject.modb.core.coverage.KoverIgnore
@@ -53,7 +53,7 @@ class AnimePlanetCrawler(
     private val paginationIdRangeSelector: PaginationIdRangeSelector<Int> = AnimePlanetPaginationIdRangeSelector.instance,
     private val alreadyDownloadedIdsFinder: AlreadyDownloadedIdsFinder = DefaultAlreadyDownloadedIdsFinder.instance,
     private val downloader: Downloader = FaultTolerantDownloader(
-        downloader = AnimePlanetDownloader(httpClient = ProxiedHttpClients.suspendable()),
+        downloader = AnimePlanetDownloader(httpClient = ClearanceHttpClients.forHost(metaDataProviderConfig.hostname())),
         hostname = metaDataProviderConfig.hostname(),
     ),
 ): Crawler {

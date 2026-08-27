@@ -2,7 +2,7 @@ package io.github.manamiproject.modb.app.crawlers.animeplanet
 
 import io.github.manamiproject.modb.app.crawlers.HighestIdDetector
 import io.github.manamiproject.modb.app.extensions.checkedBody
-import io.github.manamiproject.modb.app.network.SuspendableHttpClient
+import io.github.manamiproject.modb.app.network.ClearanceHttpClients
 import io.github.manamiproject.modb.core.config.MetaDataProviderConfig
 import io.github.manamiproject.modb.core.coverage.KoverIgnore
 import io.github.manamiproject.modb.core.excludeFromTestContext
@@ -24,7 +24,7 @@ import kotlin.time.toDuration
  */
 class AnimePlanetLastPageDetector(
     private val metaDataProviderConfig: MetaDataProviderConfig = AnimePlanetHighestIdDetectorConfig,
-    private val httpClient: HttpClient = SuspendableHttpClient(),
+    private val httpClient: HttpClient = ClearanceHttpClients.forHost(metaDataProviderConfig.hostname()),
     private val extractor: DataExtractor = XmlDataExtractor,
 ): HighestIdDetector {
 

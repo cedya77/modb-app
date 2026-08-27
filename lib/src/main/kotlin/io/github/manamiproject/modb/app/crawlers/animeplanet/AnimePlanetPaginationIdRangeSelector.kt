@@ -6,7 +6,7 @@ import io.github.manamiproject.modb.app.crawlers.PaginationIdRangeSelector
 import io.github.manamiproject.modb.app.downloadcontrolstate.DefaultDownloadControlStateScheduler
 import io.github.manamiproject.modb.app.downloadcontrolstate.DownloadControlStateScheduler
 import io.github.manamiproject.modb.app.extensions.checkedBody
-import io.github.manamiproject.modb.app.network.SuspendableHttpClient
+import io.github.manamiproject.modb.app.network.ClearanceHttpClients
 import io.github.manamiproject.modb.core.config.AnimeId
 import io.github.manamiproject.modb.core.config.MetaDataProviderConfig
 import io.github.manamiproject.modb.core.coverage.KoverIgnore
@@ -36,7 +36,7 @@ import kotlin.time.toDuration
  */
 class AnimePlanetPaginationIdRangeSelector(
     private val metaDataProviderConfig: MetaDataProviderConfig = AnimePlanetPaginationIdRangeSelectorConfig,
-    private val httpClient: HttpClient = SuspendableHttpClient(),
+    private val httpClient: HttpClient = ClearanceHttpClients.forHost(metaDataProviderConfig.hostname()),
     private val extractor: DataExtractor = XmlDataExtractor,
     private val downloadControlStateScheduler: DownloadControlStateScheduler = DefaultDownloadControlStateScheduler.instance,
     private val alreadyDownloadedIdsFinder: AlreadyDownloadedIdsFinder = DefaultAlreadyDownloadedIdsFinder.instance,
@@ -59,7 +59,10 @@ class AnimePlanetPaginationIdRangeSelector(
         ).checkedBody(this::class)
 
         val data = extractor.extract(response, mapOf(
-            "entriesOnThePage" to "//li[@data-type='anime']/a/@href",
+            // The list view renders a table. It previously rendered list items carrying the entry
+            // type, and the page still answers to the same parameters, so the change is only visible
+            // in the markup.
+            "entriesOnThePage" to "//td[@class='tableTitle']/a/@href",
         ))
 
         if (data.notFound("entriesOnThePage")) {
