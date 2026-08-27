@@ -13,7 +13,7 @@ import io.github.manamiproject.modb.app.downloadcontrolstate.DownloadControlStat
 import io.github.manamiproject.modb.app.downloadcontrolstate.DownloadControlStateScheduler
 import io.github.manamiproject.modb.app.network.NetworkControllers
 import io.github.manamiproject.modb.app.network.NetworkController
-import io.github.manamiproject.modb.app.network.SuspendableHttpClient
+import io.github.manamiproject.modb.app.network.ProxiedHttpClients
 import io.github.manamiproject.modb.core.config.AnimeId
 import io.github.manamiproject.modb.core.config.MetaDataProviderConfig
 import io.github.manamiproject.modb.core.coverage.KoverIgnore
@@ -61,7 +61,10 @@ class AnisearchCrawler(
     private val lastPageDetector: HighestIdDetector = AnisearchLastPageDetector.instance,
     private val paginationIdRangeSelector: PaginationIdRangeSelector<Int> = AnisearchPaginationIdRangeSelector(metaDataProviderConfig = metaDataProviderConfig),
     private val alreadyDownloadedIdsFinder: AlreadyDownloadedIdsFinder = DefaultAlreadyDownloadedIdsFinder.instance,
-    private val httpClient: HttpClient = SuspendableHttpClient(),
+    // anisearch refuses connections from hosted networks, so requests have to leave through the
+    // proxy pool where one is configured. Without it the crawler reaches the address and is turned
+    // away at the socket, which reads as an entry that cannot be downloaded.
+    private val httpClient: HttpClient = ProxiedHttpClients.suspendable(),
     private val downloader: Downloader = FaultTolerantDownloader(
         downloader = AnisearchDownloader(
         metaDataProviderConfig = metaDataProviderConfig,
