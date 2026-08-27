@@ -19,15 +19,22 @@ import io.github.manamiproject.modb.core.logging.LoggerDelegate
  * Failures in a row are a different matter. They suggest the provider has stopped serving us
  * altogether, in which case continuing wastes requests and produces a suspiciously thin week, so
  * the downloader gives up and lets the failure travel.
+ *
+ * Not every failure is about the entry that triggered it. Some say the connection it went out on
+ * has been refused, which the crawler can recover from by leaving through another one. Skipping
+ * those would spend the run's entries against a route already known to be dead, so a caller which
+ * can recover names them and they travel untouched.
  * @since 1.0.0
  * @property downloader Performs the actual download.
  * @property hostname Named in the log so a skipped entry can be traced to a provider.
  * @property maxConsecutiveFailures Number of failures in a row tolerated before giving up.
+ * @property isHandledByCaller Decides whether a failure is one the caller recovers from itself.
  */
 class FaultTolerantDownloader(
     private val downloader: Downloader,
     private val hostname: String,
     configRegistry: ConfigRegistry = DefaultConfigRegistry.instance,
+    private val isHandledByCaller: (Throwable) -> Boolean = { false },
 ): Downloader {
 
     private val maxConsecutiveFailures: Int by IntPropertyDelegate(
@@ -44,6 +51,10 @@ class FaultTolerantDownloader(
             consecutiveFailures = 0
             response
         } catch (e: Throwable) {
+            if (isHandledByCaller(e)) {
+                throw e
+            }
+
             consecutiveFailures++
 
             if (consecutiveFailures >= maxConsecutiveFailures) {

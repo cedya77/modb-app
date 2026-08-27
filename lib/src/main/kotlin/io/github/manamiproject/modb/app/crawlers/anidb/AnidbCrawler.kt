@@ -4,7 +4,6 @@ import io.github.manamiproject.modb.anidb.AnidbConfig
 import io.github.manamiproject.modb.anidb.AnidbApiDownloader
 import io.github.manamiproject.modb.anidb.AnidbDownloader
 import io.github.manamiproject.modb.anidb.AnidbDownloader.Companion.ANIDB_PENDING_FILE_INDICATOR
-import io.github.manamiproject.modb.anidb.AnidbResponseChecker
 import io.github.manamiproject.modb.anidb.CrawlerDetectedException
 import io.github.manamiproject.modb.app.config.AppConfig
 import io.github.manamiproject.modb.app.config.Config
@@ -16,6 +15,9 @@ import io.github.manamiproject.modb.app.dataset.DefaultDeadEntriesAccessor
 import io.github.manamiproject.modb.app.network.NetworkControllers
 import io.github.manamiproject.modb.app.network.NetworkController
 import io.github.manamiproject.modb.app.network.SuspendableHttpClient
+import io.github.manamiproject.modb.core.config.ConfigRegistry
+import io.github.manamiproject.modb.core.config.DefaultConfigRegistry
+import io.github.manamiproject.modb.core.config.IntPropertyDelegate
 import io.github.manamiproject.modb.core.config.MetaDataProviderConfig
 import io.github.manamiproject.modb.core.coverage.KoverIgnore
 import io.github.manamiproject.modb.app.crawlers.FaultTolerantDownloader
@@ -44,6 +46,8 @@ import kotlin.time.toDuration
  * @property idRangeSelector Delivers the IDs to download.
  * @property httpClient To actually download the anime data.
  * @property downloader Downloader for a specific metadata provider.
+ * @property networkController Changes the connection requests leave through.
+ * @property maxConnectionChanges Connections tried in a row before a refusal is treated as final.
  */
 class AnidbCrawler(
     private val appConfig: Config = AppConfig.instance,
@@ -57,9 +61,19 @@ class AnidbCrawler(
     private val downloader: Downloader = FaultTolerantDownloader(
         downloader = AnidbSource.downloader(httpClient),
         hostname = metaDataProviderConfig.hostname(),
+        // Detection is answered below by leaving through another connection. Skipping it here
+        // would burn the run's remaining entries against an address anidb has already refused.
+        isHandledByCaller = { it is CrawlerDetectedException },
     ),
     private val networkController: NetworkController = NetworkControllers.forDeployment(),
+    configRegistry: ConfigRegistry = DefaultConfigRegistry.instance,
 ): Crawler {
+
+    private val maxConnectionChanges: Int by IntPropertyDelegate(
+        configRegistry = configRegistry,
+        namespace = CONFIG_NAMESPACE,
+        default = DEFAULT_MAX_CONNECTION_CHANGES,
+    )
 
     init {
         val restart = suspend { networkController.restartAsync().join() }
@@ -93,23 +107,7 @@ class AnidbCrawler(
 
         log.debug { "Downloading ${index+1}/${idDownloadList.size}: [anidbId=$animeId]" }
 
-        val response = try {
-            downloader.download(animeId.toString()) {
-                deadEntriesAccess.addDeadEntry(it, metaDataProviderConfig)
-            }
-        } catch (e: Throwable) {
-            when(e) {
-                is CrawlerDetectedException -> {
-                    networkController.restartAsync().await()
-                    val response = downloader.download(animeId.toString()) {
-                        deadEntriesAccess.addDeadEntry(it, metaDataProviderConfig)
-                    }
-                    AnidbResponseChecker(response).checkIfCrawlerIsDetected()
-                    response
-                }
-                else -> throw e
-            }
-        }
+        val response = downloadChangingConnectionWhenRefused(animeId)
 
         when {
             response.neitherNullNorBlank() && response != ANIDB_PENDING_FILE_INDICATOR -> {
@@ -123,6 +121,34 @@ class AnidbCrawler(
         }
     }
 
+    /**
+     * Downloads an entry, leaving through another connection each time anidb refuses the current one.
+     *
+     * A replacement address is not certain to be accepted either, so one refusal says nothing
+     * conclusive and rotating once is not enough. Several addresses refused in a row is a different
+     * signal: the run is being recognised by something other than where it comes from, and further
+     * rotation only spends addresses, so the failure is allowed to travel.
+     */
+    private suspend fun downloadChangingConnectionWhenRefused(animeId: Int): String {
+        var connectionChanges = 0
+
+        while (true) {
+            try {
+                return downloader.download(animeId.toString()) {
+                    deadEntriesAccess.addDeadEntry(it, metaDataProviderConfig)
+                }
+            } catch (e: Throwable) {
+                if (e !is CrawlerDetectedException || connectionChanges >= maxConnectionChanges) {
+                    throw e
+                }
+
+                connectionChanges++
+                log.info { "[${metaDataProviderConfig.hostname()}] refused the current connection, changing it [$connectionChanges/$maxConnectionChanges]." }
+                networkController.restartAsync().await()
+            }
+        }
+    }
+
     @KoverIgnore
     private suspend fun wait() {
         excludeFromTestContext(metaDataProviderConfig) {
@@ -132,6 +158,14 @@ class AnidbCrawler(
 
     companion object {
         private val log by LoggerDelegate()
+
+        private const val DEFAULT_MAX_CONNECTION_CHANGES = 5
+
+        /**
+         * Prefix of the properties read by this class.
+         * @since 1.0.0
+         */
+        const val CONFIG_NAMESPACE: String = "modb.anidb.crawler"
 
         /**
          * Singleton of [AnidbCrawler]
