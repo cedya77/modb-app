@@ -6,7 +6,7 @@ import io.github.manamiproject.modb.app.crawlers.PaginationIdRangeSelector
 import io.github.manamiproject.modb.app.downloadcontrolstate.DefaultDownloadControlStateScheduler
 import io.github.manamiproject.modb.app.downloadcontrolstate.DownloadControlStateScheduler
 import io.github.manamiproject.modb.app.extensions.checkedBody
-import io.github.manamiproject.modb.app.network.LinuxNetworkController
+import io.github.manamiproject.modb.app.network.NetworkControllers
 import io.github.manamiproject.modb.app.network.NetworkController
 import io.github.manamiproject.modb.app.network.SuspendableHttpClient
 import io.github.manamiproject.modb.core.config.AnimeId
@@ -42,7 +42,7 @@ class AnisearchPaginationIdRangeSelector(
     private val metaDataProviderConfig: MetaDataProviderConfig,
     private val paginationIdRangeSelectorConfig: MetaDataProviderConfig = AnisearchPaginationIdRangeSelectorConfig,
     private val httpClient: HttpClient = SuspendableHttpClient(),
-    private val networkController: NetworkController = LinuxNetworkController.instance,
+    private val networkController: NetworkController = NetworkControllers.forDeployment(),
     private val extractor: DataExtractor = XmlDataExtractor,
     private val downloadControlStateScheduler: DownloadControlStateScheduler = DefaultDownloadControlStateScheduler.instance,
     private val alreadyDownloadedIdsFinder: AlreadyDownloadedIdsFinder = DefaultAlreadyDownloadedIdsFinder.instance,

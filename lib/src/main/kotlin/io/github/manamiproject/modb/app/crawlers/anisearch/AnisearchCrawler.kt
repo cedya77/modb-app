@@ -11,7 +11,7 @@ import io.github.manamiproject.modb.app.downloadcontrolstate.DefaultDownloadCont
 import io.github.manamiproject.modb.app.downloadcontrolstate.DefaultDownloadControlStateScheduler
 import io.github.manamiproject.modb.app.downloadcontrolstate.DownloadControlStateAccessor
 import io.github.manamiproject.modb.app.downloadcontrolstate.DownloadControlStateScheduler
-import io.github.manamiproject.modb.app.network.LinuxNetworkController
+import io.github.manamiproject.modb.app.network.NetworkControllers
 import io.github.manamiproject.modb.app.network.NetworkController
 import io.github.manamiproject.modb.app.network.SuspendableHttpClient
 import io.github.manamiproject.modb.core.config.AnimeId
@@ -69,7 +69,7 @@ class AnisearchCrawler(
     ),
         hostname = metaDataProviderConfig.hostname(),
     ),
-    private val networkController: NetworkController = LinuxNetworkController.instance,
+    private val networkController: NetworkController = NetworkControllers.forDeployment(),
 ): Crawler {
 
     init {

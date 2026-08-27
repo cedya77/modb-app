@@ -2,7 +2,7 @@ package io.github.manamiproject.modb.app.crawlers.anisearch
 
 import io.github.manamiproject.modb.app.crawlers.HighestIdDetector
 import io.github.manamiproject.modb.app.extensions.checkedBody
-import io.github.manamiproject.modb.app.network.LinuxNetworkController
+import io.github.manamiproject.modb.app.network.NetworkControllers
 import io.github.manamiproject.modb.app.network.NetworkController
 import io.github.manamiproject.modb.app.network.SuspendableHttpClient
 import io.github.manamiproject.modb.core.config.MetaDataProviderConfig
@@ -26,7 +26,7 @@ import java.net.UnknownHostException
 class AnisearchLastPageDetector(
     private val metaDataProviderConfig: MetaDataProviderConfig = AnisearchLastPageDetectorConfig,
     private val httpClient: HttpClient = SuspendableHttpClient(),
-    private val networkController: NetworkController = LinuxNetworkController.instance,
+    private val networkController: NetworkController = NetworkControllers.forDeployment(),
     private val extractor: DataExtractor = XmlDataExtractor,
 ): HighestIdDetector {
 

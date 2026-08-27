@@ -14,7 +14,7 @@ public object XmlDataExtractor : DataExtractor {
         return try {
             JsoupCssSelectorDataExtractor.extract(rawContent, selection)
         } catch (e: Exception) {
-            log.warn { "Tried to execute query using JsoupCssDataExtractor. This resulted in error: [${e.message}]. Retrying extraction using JsoupXPathDataExtractor." }
+            log.debug { "Tried to execute query using JsoupCssDataExtractor. This resulted in error: [${e.message}]. Retrying extraction using JsoupXPathDataExtractor." }
             JsoupXPathDataExtractor.extract(rawContent, selection)
         }
     }

@@ -13,7 +13,7 @@ import io.github.manamiproject.modb.app.crawlers.IdRangeSelector
 import io.github.manamiproject.modb.app.crawlers.IntegerBasedIdRangeSelector
 import io.github.manamiproject.modb.app.dataset.DeadEntriesAccessor
 import io.github.manamiproject.modb.app.dataset.DefaultDeadEntriesAccessor
-import io.github.manamiproject.modb.app.network.LinuxNetworkController
+import io.github.manamiproject.modb.app.network.NetworkControllers
 import io.github.manamiproject.modb.app.network.NetworkController
 import io.github.manamiproject.modb.app.network.SuspendableHttpClient
 import io.github.manamiproject.modb.core.config.MetaDataProviderConfig
@@ -58,7 +58,7 @@ class AnidbCrawler(
         downloader = AnidbSource.downloader(httpClient),
         hostname = metaDataProviderConfig.hostname(),
     ),
-    private val networkController: NetworkController = LinuxNetworkController.instance,
+    private val networkController: NetworkController = NetworkControllers.forDeployment(),
 ): Crawler {
 
     init {
