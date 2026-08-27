@@ -16,6 +16,7 @@ import io.github.manamiproject.modb.core.config.AnimeId
 import io.github.manamiproject.modb.core.config.MetaDataProviderConfig
 import io.github.manamiproject.modb.core.coroutines.ModbDispatchers.LIMITED_NETWORK
 import io.github.manamiproject.modb.core.coverage.KoverIgnore
+import io.github.manamiproject.modb.app.crawlers.FaultTolerantDownloader
 import io.github.manamiproject.modb.core.downloader.Downloader
 import io.github.manamiproject.modb.core.excludeFromTestContext
 import io.github.manamiproject.modb.core.extensions.*
@@ -42,7 +43,10 @@ class SimklCrawler(
     private val deadEntriesAccessor: DeadEntriesAccessor = DefaultDeadEntriesAccessor.instance,
     private val lastPageMemorizer: LastPageMemorizer<Int> = IntegerBasedLastPageMemorizer(metaDataProviderConfig = metaDataProviderConfig),
     private val alreadyDownloadedIdsFinder: AlreadyDownloadedIdsFinder = DefaultAlreadyDownloadedIdsFinder.instance,
-    private val downloader: Downloader = SimklDownloader(httpClient = SuspendableHttpClient()),
+    private val downloader: Downloader = FaultTolerantDownloader(
+        downloader = SimklDownloader(httpClient = SuspendableHttpClient()),
+        hostname = metaDataProviderConfig.hostname(),
+    ),
     private val httpClient: HttpClient = SuspendableHttpClient(),
     private val xmlDataExtractor: DataExtractor = XmlDataExtractor,
 ): Crawler {

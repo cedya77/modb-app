@@ -15,6 +15,7 @@ import io.github.manamiproject.modb.app.network.ProxiedHttpClients
 import io.github.manamiproject.modb.app.network.SuspendableHttpClient
 import io.github.manamiproject.modb.core.config.MetaDataProviderConfig
 import io.github.manamiproject.modb.core.coverage.KoverIgnore
+import io.github.manamiproject.modb.app.crawlers.FaultTolerantDownloader
 import io.github.manamiproject.modb.core.downloader.Downloader
 import io.github.manamiproject.modb.core.excludeFromTestContext
 import io.github.manamiproject.modb.core.extensions.createShuffledList
@@ -51,7 +52,10 @@ class AnimePlanetCrawler(
     private val lastPageDetector: HighestIdDetector = AnimePlanetLastPageDetector.instance,
     private val paginationIdRangeSelector: PaginationIdRangeSelector<Int> = AnimePlanetPaginationIdRangeSelector.instance,
     private val alreadyDownloadedIdsFinder: AlreadyDownloadedIdsFinder = DefaultAlreadyDownloadedIdsFinder.instance,
-    private val downloader: Downloader = AnimePlanetDownloader(httpClient = ProxiedHttpClients.suspendable()),
+    private val downloader: Downloader = FaultTolerantDownloader(
+        downloader = AnimePlanetDownloader(httpClient = ProxiedHttpClients.suspendable()),
+        hostname = metaDataProviderConfig.hostname(),
+    ),
 ): Crawler {
 
     override suspend fun start() {

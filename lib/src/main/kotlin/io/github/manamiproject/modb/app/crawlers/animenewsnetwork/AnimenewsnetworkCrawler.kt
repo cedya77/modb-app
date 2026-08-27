@@ -17,6 +17,7 @@ import io.github.manamiproject.modb.app.downloadcontrolstate.DownloadControlStat
 import io.github.manamiproject.modb.app.network.SuspendableHttpClient
 import io.github.manamiproject.modb.core.config.MetaDataProviderConfig
 import io.github.manamiproject.modb.core.coverage.KoverIgnore
+import io.github.manamiproject.modb.app.crawlers.FaultTolerantDownloader
 import io.github.manamiproject.modb.core.downloader.Downloader
 import io.github.manamiproject.modb.core.excludeFromTestContext
 import io.github.manamiproject.modb.core.extensions.createShuffledList
@@ -52,8 +53,11 @@ class AnimenewsnetworkCrawler(
     private val lastPageMemorizer: LastPageMemorizer<String> = StringBasedLastPageMemorizer(metaDataProviderConfig = metaDataProviderConfig),
     private val paginationIdRangeSelector: PaginationIdRangeSelector<String> = AnimenewsnetworkPaginationIdRangeSelector.instance,
     private val alreadyDownloadedIdsFinder: AlreadyDownloadedIdsFinder = DefaultAlreadyDownloadedIdsFinder.instance,
-    private val downloader: Downloader = AnimenewsnetworkDownloader(
+    private val downloader: Downloader = FaultTolerantDownloader(
+        downloader = AnimenewsnetworkDownloader(
         httpClient = SuspendableHttpClient(),
+    ),
+        hostname = metaDataProviderConfig.hostname(),
     ),
 ): Crawler {
 

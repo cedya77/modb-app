@@ -12,6 +12,7 @@ import io.github.manamiproject.modb.app.downloadcontrolstate.DownloadControlStat
 import io.github.manamiproject.modb.app.network.SuspendableHttpClient
 import io.github.manamiproject.modb.core.config.MetaDataProviderConfig
 import io.github.manamiproject.modb.core.coverage.KoverIgnore
+import io.github.manamiproject.modb.app.crawlers.FaultTolerantDownloader
 import io.github.manamiproject.modb.core.downloader.Downloader
 import io.github.manamiproject.modb.core.excludeFromTestContext
 import io.github.manamiproject.modb.core.extensions.createShuffledList
@@ -54,7 +55,10 @@ class LivechartCrawler(
     private val newestYearDetector: HighestIdDetector = LivechartNewestYearDetector.instance,
     private val paginationIdRangeSelector: PaginationIdRangeSelector<String> = LivechartPaginationIdRangeSelector.instance,
     private val alreadyDownloadedIdsFinder: AlreadyDownloadedIdsFinder = DefaultAlreadyDownloadedIdsFinder.instance,
-    private val downloader: Downloader = LivechartDownloader(httpClient = SuspendableHttpClient()),
+    private val downloader: Downloader = FaultTolerantDownloader(
+        downloader = LivechartDownloader(httpClient = SuspendableHttpClient()),
+        hostname = metaDataProviderConfig.hostname(),
+    ),
 ): Crawler {
 
     override suspend fun start() {

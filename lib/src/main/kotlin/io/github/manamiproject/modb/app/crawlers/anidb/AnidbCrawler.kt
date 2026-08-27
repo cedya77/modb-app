@@ -18,6 +18,7 @@ import io.github.manamiproject.modb.app.network.NetworkController
 import io.github.manamiproject.modb.app.network.SuspendableHttpClient
 import io.github.manamiproject.modb.core.config.MetaDataProviderConfig
 import io.github.manamiproject.modb.core.coverage.KoverIgnore
+import io.github.manamiproject.modb.app.crawlers.FaultTolerantDownloader
 import io.github.manamiproject.modb.core.downloader.Downloader
 import io.github.manamiproject.modb.core.excludeFromTestContext
 import io.github.manamiproject.modb.core.extensions.*
@@ -53,7 +54,10 @@ class AnidbCrawler(
         highestIdDetector = AnidbTitlesDumpHighestIdDetector.instance,
     ),
     private val httpClient: HttpClient = AnidbSource.httpClient(),
-    private val downloader: Downloader = AnidbSource.downloader(httpClient),
+    private val downloader: Downloader = FaultTolerantDownloader(
+        downloader = AnidbSource.downloader(httpClient),
+        hostname = metaDataProviderConfig.hostname(),
+    ),
     private val networkController: NetworkController = LinuxNetworkController.instance,
 ): Crawler {
 

@@ -10,6 +10,7 @@ import io.github.manamiproject.modb.app.dataset.DefaultDeadEntriesAccessor
 import io.github.manamiproject.modb.app.network.SuspendableHttpClient
 import io.github.manamiproject.modb.core.config.MetaDataProviderConfig
 import io.github.manamiproject.modb.core.coverage.KoverIgnore
+import io.github.manamiproject.modb.app.crawlers.FaultTolerantDownloader
 import io.github.manamiproject.modb.core.downloader.Downloader
 import io.github.manamiproject.modb.core.excludeFromTestContext
 import io.github.manamiproject.modb.core.extensions.neitherNullNorBlank
@@ -41,9 +42,12 @@ class KitsuCrawler @KoverIgnore constructor(
         metaDataProviderConfig = metaDataProviderConfig,
         highestIdDetector = KitsuHighestIdDetector.instance,
     ),
-    private val downloader: Downloader = KitsuDownloader(
+    private val downloader: Downloader = FaultTolerantDownloader(
+        downloader = KitsuDownloader(
         metaDataProviderConfig = metaDataProviderConfig,
         httpClient = SuspendableHttpClient(),
+    ),
+        hostname = metaDataProviderConfig.hostname(),
     ),
 ): Crawler {
 

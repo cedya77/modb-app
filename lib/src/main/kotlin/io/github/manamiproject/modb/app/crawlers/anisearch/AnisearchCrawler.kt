@@ -17,6 +17,7 @@ import io.github.manamiproject.modb.app.network.SuspendableHttpClient
 import io.github.manamiproject.modb.core.config.AnimeId
 import io.github.manamiproject.modb.core.config.MetaDataProviderConfig
 import io.github.manamiproject.modb.core.coverage.KoverIgnore
+import io.github.manamiproject.modb.app.crawlers.FaultTolerantDownloader
 import io.github.manamiproject.modb.core.downloader.Downloader
 import io.github.manamiproject.modb.core.excludeFromTestContext
 import io.github.manamiproject.modb.core.extensions.createShuffledList
@@ -61,9 +62,12 @@ class AnisearchCrawler(
     private val paginationIdRangeSelector: PaginationIdRangeSelector<Int> = AnisearchPaginationIdRangeSelector(metaDataProviderConfig = metaDataProviderConfig),
     private val alreadyDownloadedIdsFinder: AlreadyDownloadedIdsFinder = DefaultAlreadyDownloadedIdsFinder.instance,
     private val httpClient: HttpClient = SuspendableHttpClient(),
-    private val downloader: Downloader = AnisearchDownloader(
+    private val downloader: Downloader = FaultTolerantDownloader(
+        downloader = AnisearchDownloader(
         metaDataProviderConfig = metaDataProviderConfig,
         httpClient = httpClient,
+    ),
+        hostname = metaDataProviderConfig.hostname(),
     ),
     private val networkController: NetworkController = LinuxNetworkController.instance,
 ): Crawler {

@@ -13,6 +13,7 @@ import io.github.manamiproject.modb.app.dataset.DefaultDeadEntriesAccessor
 import io.github.manamiproject.modb.app.network.SuspendableHttpClient
 import io.github.manamiproject.modb.core.config.MetaDataProviderConfig
 import io.github.manamiproject.modb.core.coverage.KoverIgnore
+import io.github.manamiproject.modb.app.crawlers.FaultTolerantDownloader
 import io.github.manamiproject.modb.core.downloader.Downloader
 import io.github.manamiproject.modb.core.excludeFromTestContext
 import io.github.manamiproject.modb.core.extensions.neitherNullNorBlank
@@ -42,10 +43,13 @@ class AnilistCrawler(
         metaDataProviderConfig = metaDataProviderConfig,
         highestIdDetector = AnilistHighestIdDetector.instance,
     ),
-    private val downloader: Downloader = AnilistDownloader(
+    private val downloader: Downloader = FaultTolerantDownloader(
+        downloader = AnilistDownloader(
         httpClient = SuspendableHttpClient(
             httpClient = AnilistHttpClient.instance,
         ),
+    ),
+        hostname = metaDataProviderConfig.hostname(),
     ),
 ): Crawler {
 
