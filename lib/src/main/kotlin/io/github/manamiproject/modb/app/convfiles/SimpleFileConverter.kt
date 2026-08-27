@@ -37,7 +37,14 @@ class SimpleFileConverter(
         unconvertedFiles.chunked(250).forEach { chunk ->
             val jobs = chunk.map {
                 async {
-                    convertFileToConvFile(it)
+                    try {
+                        convertFileToConvFile(it)
+                    } catch (e: Throwable) {
+                        // Leaving the raw file in place means the entry is retried on the next run
+                        // and stays visible, rather than a whole run ending over one page whose
+                        // format drifted.
+                        log.error(e) { "Unable to convert [${it.fileName}] of [${metaDataProviderConfig.hostname()}]: ${e.message}" }
+                    }
                 }
             }
 

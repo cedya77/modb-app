@@ -2,6 +2,7 @@ package io.github.manamiproject.modb.app.config
 
 import io.github.manamiproject.AnimenewsnetworkConfig
 import io.github.manamiproject.modb.anidb.AnidbConfig
+import io.github.manamiproject.modb.anidb.AnidbWebsiteConfig
 import io.github.manamiproject.modb.anilist.AnilistConfig
 import io.github.manamiproject.modb.animeplanet.AnimePlanetConfig
 import io.github.manamiproject.modb.anisearch.AnisearchConfig
@@ -66,6 +67,7 @@ class AppConfig(
         val hostname = metaDataProviderConfig.hostname()
         val workingDir = when(metaDataProviderConfig) {
             AnidbConfig,
+            AnidbWebsiteConfig,
             AnilistConfig,
             AnimePlanetConfig,
             AnimePlanetPaginationIdRangeSelectorConfig,
