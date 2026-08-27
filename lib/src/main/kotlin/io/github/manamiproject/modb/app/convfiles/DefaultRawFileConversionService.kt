@@ -2,7 +2,7 @@ package io.github.manamiproject.modb.app.convfiles
 
 import io.github.manamiproject.AnimenewsnetworkAnimeConverter
 import io.github.manamiproject.AnimenewsnetworkConfig
-import io.github.manamiproject.modb.anidb.AnidbApiAnimeConverter
+import io.github.manamiproject.modb.app.crawlers.anidb.AnidbSource
 import io.github.manamiproject.modb.anidb.AnidbConfig
 import io.github.manamiproject.modb.anilist.AnilistAnimeConverter
 import io.github.manamiproject.modb.anilist.AnilistConfig
@@ -114,7 +114,7 @@ class DefaultRawFileConversionService(
 
     private fun buildWatchServices() {
         mapOf(
-            AnidbConfig to AnidbApiAnimeConverter.instance,
+            AnidbSource.config() to AnidbSource.converter(),
             AnilistConfig to AnilistAnimeConverter.instance,
             AnimePlanetConfig to AnimePlanetAnimeConverter.instance,
             KitsuConfig to KitsuAnimeConverter.instance,

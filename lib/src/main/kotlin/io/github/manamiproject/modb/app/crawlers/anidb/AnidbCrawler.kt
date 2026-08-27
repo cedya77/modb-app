@@ -46,17 +46,14 @@ import kotlin.time.toDuration
  */
 class AnidbCrawler(
     private val appConfig: Config = AppConfig.instance,
-    private val metaDataProviderConfig: MetaDataProviderConfig = AnidbConfig,
+    private val metaDataProviderConfig: MetaDataProviderConfig = AnidbSource.config(),
     private val deadEntriesAccess: DeadEntriesAccessor = DefaultDeadEntriesAccessor.instance,
     private val idRangeSelector: IdRangeSelector<Int> = IntegerBasedIdRangeSelector(
         metaDataProviderConfig = metaDataProviderConfig,
         highestIdDetector = AnidbTitlesDumpHighestIdDetector.instance,
     ),
-    private val httpClient: HttpClient = SuspendableHttpClient(),
-    private val downloader: Downloader = AnidbApiDownloader(
-        metaDataProviderConfig = metaDataProviderConfig,
-        httpClient = httpClient,
-    ),
+    private val httpClient: HttpClient = AnidbSource.httpClient(),
+    private val downloader: Downloader = AnidbSource.downloader(httpClient),
     private val networkController: NetworkController = LinuxNetworkController.instance,
 ): Crawler {
 

@@ -1,7 +1,7 @@
 package io.github.manamiproject.modb.app.config
 
 import io.github.manamiproject.AnimenewsnetworkConfig
-import io.github.manamiproject.modb.anidb.AnidbConfig
+import io.github.manamiproject.modb.app.crawlers.anidb.AnidbSource
 import io.github.manamiproject.modb.anilist.AnilistConfig
 import io.github.manamiproject.modb.animeplanet.AnimePlanetConfig
 import io.github.manamiproject.modb.anisearch.AnisearchConfig
@@ -56,7 +56,7 @@ interface Config: ContextAware {
      * @return Duplicate free list of all metadata provider configs.
      */
     fun metaDataProviderConfigurations(): Set<MetaDataProviderConfig> = setOf(
-        AnidbConfig,
+        AnidbSource.config(),
         AnilistConfig,
         AnimePlanetConfig,
         AnimenewsnetworkConfig,
@@ -109,7 +109,7 @@ interface Config: ContextAware {
      * @return `true` if the metadata provider has its own dead entries file.
      */
     fun deadEntriesSupported(metaDataProviderConfig: MetaDataProviderConfig): Boolean = setOf(
-        AnidbConfig,
+        AnidbSource.config(),
         AnilistConfig,
         AnimenewsnetworkConfig,
         KitsuConfig,
