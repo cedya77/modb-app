@@ -8,7 +8,7 @@ import io.github.manamiproject.modb.core.json.Json.SerializationOptions.DEACTIVA
 import io.github.manamiproject.modb.core.json.Json.SerializationOptions.DEACTIVATE_SERIALIZE_NULL
 import io.github.manamiproject.modb.core.logging.LoggerDelegate
 import io.github.manamiproject.modb.serde.json.models.Dataset
-import io.github.manamiproject.modb.serde.json.models.DatasetRepository
+import io.github.manamiproject.modb.core.config.DatasetRepository
 import io.github.manamiproject.modb.serde.json.models.License
 import kotlinx.coroutines.withContext
 import java.net.URI

@@ -1,5 +1,6 @@
 package io.github.manamiproject.modb.serde.json.models
 
+import io.github.manamiproject.modb.core.config.DatasetRepository
 import java.net.URI
 
 /**

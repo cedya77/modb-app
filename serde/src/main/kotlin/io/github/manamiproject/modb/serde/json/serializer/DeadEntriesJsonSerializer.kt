@@ -6,7 +6,7 @@ import io.github.manamiproject.modb.core.date.WeekOfYear
 import io.github.manamiproject.modb.core.json.Json
 import io.github.manamiproject.modb.core.logging.LoggerDelegate
 import io.github.manamiproject.modb.serde.json.models.DeadEntries
-import io.github.manamiproject.modb.serde.json.models.DatasetRepository
+import io.github.manamiproject.modb.core.config.DatasetRepository
 import io.github.manamiproject.modb.serde.json.models.License
 import kotlinx.coroutines.withContext
 import java.net.URI
