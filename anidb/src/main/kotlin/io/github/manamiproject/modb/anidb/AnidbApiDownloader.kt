@@ -52,13 +52,16 @@ public class AnidbApiDownloader(
         check(response.isOk()) { "Unexpected response code [anidbId=$id], [responseCode=${response.code}]" }
         check(body.isNotBlank()) { "Response body was blank for [anidbId=$id]." }
 
-        val error = ERROR_CODE.find(body)
+        val error = ERROR.find(body)
 
         if (error != null) {
             val code = error.groupValues[1]
-            val message = error.groupValues[2]
+            val message = error.groupValues[2].trim()
 
-            if (code in DEAD_ENTRY_CODES) {
+            // Not every error carries a code. An id which never existed is answered with a bare
+            // <error>Anime not found</error>, so a check on the code alone lets that through and the
+            // apology page ends up stored and converted as if it were an anime.
+            if (code in DEAD_ENTRY_CODES || message.lowercase() in DEAD_ENTRY_MESSAGES) {
                 log.info { "Adding [anidbId=$id] to dead entries list, because the API responded with [$message]." }
                 onDeadEntry.invoke(id)
                 return@withContext EMPTY_RESPONSE
@@ -88,13 +91,19 @@ public class AnidbApiDownloader(
         private const val EMPTY_RESPONSE = ""
         private const val GZIP_MAGIC_FIRST: Byte = 0x1f
         private const val GZIP_MAGIC_SECOND: Byte = 0x8b.toByte()
-        private val ERROR_CODE = Regex("""<error code="(\d+)">([^<]*)</error>""")
+        private val ERROR = Regex("""<error(?:\s+code="(\d+)")?\s*>([^<]*)</error>""")
 
         /**
          * Error codes which mean that the anime does not exist rather than that something went wrong.
          * @since 1.0.0
          */
         public val DEAD_ENTRY_CODES: Set<String> = setOf("330")
+
+        /**
+         * Lowercased messages of code-less errors which mean that the anime does not exist.
+         * @since 1.0.0
+         */
+        public val DEAD_ENTRY_MESSAGES: Set<String> = setOf("anime not found")
 
         /**
          * Prefix of the properties read by this class.
