@@ -79,6 +79,7 @@ fun main() = runCoroutine {
         DownloadControlStateWeeksValidationPostProcessor.instance,
         StudiosAndProducersExtractionChecker.instance,
         DuplicatesValidationPostProcessor.instance,
+        DeadEntriesFileCreatorPostProcessor.instance,
         ZstandardFilesForDeadEntriesCreatorPostProcessor.instance,
         DeadEntriesValidationPostProcessor.instance,
         SourcesConsistencyValidationPostProcessor.instance,
