@@ -39,7 +39,11 @@ class DeadEntriesValidationPostProcessor(
         )
 
         log.info { "Checking if a merge lock contains dead entries." }
-        checkForDeadEntries(mergeLockAccess.allSourcesInAllMergeLockEntries())
+        // Same exclusion as the other two checks. A merge lock holds the sources of the entry it
+        // locks, which includes providers this check has no dead entries list for.
+        checkForDeadEntries(mergeLockAccess.allSourcesInAllMergeLockEntries()
+            .filterNot { source -> ignoreMetaDataConfiguration.any { it.hostname() == source.host } }
+        )
 
         log.info { "Checking if dataset contains dead entries." }
         checkForDeadEntries(datasetFileAccessor.fetchEntries()
