@@ -1,6 +1,7 @@
 package io.github.manamiproject.modb.app.downloadcontrolstate
 
 import io.github.manamiproject.modb.core.date.WeekOfYear
+import io.github.manamiproject.modb.core.date.compareTo
 import io.github.manamiproject.modb.core.extensions.copyTo
 import io.github.manamiproject.modb.test.tempDirectory
 import io.github.manamiproject.modb.test.testResource
@@ -66,7 +67,7 @@ internal class DownloadControlStateSeederTest {
                 // then
                 assertThat(entry.weeksWihoutChange).isZero()
                 assertThat(entry.lastDownloaded).isEqualTo(currentWeek)
-                assertThat(entry.nextDownload.year).isGreaterThanOrEqualTo(currentWeek.year)
+                assertThat(entry.nextDownload > currentWeek).isTrue()
                 assertThat(entry.anime.sources).hasSize(1)
                 assertThat(entry.anime.title).isNotBlank()
             }

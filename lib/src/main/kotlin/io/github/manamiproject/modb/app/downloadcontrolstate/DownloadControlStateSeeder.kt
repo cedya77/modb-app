@@ -105,8 +105,11 @@ class DownloadControlStateSeeder(
     }
 
     // Deriving the offset from the URI keeps the schedule stable across reruns, so seeding twice
-    // does not reshuffle when everything is due.
-    private fun scheduleOffset(source: URI): Int = source.toString().hashCode().absoluteValue % WEEKS_PER_QUARTER
+    // does not reshuffle when everything is due. The offset is at least one week: an entry due in
+    // the same week it was last downloaded is refused an update, because the updater takes the
+    // matching week to mean the entry has already been handled, and then fails validation for
+    // carrying a next download which is not in the future.
+    private fun scheduleOffset(source: URI): Int = source.toString().hashCode().absoluteValue % WEEKS_PER_QUARTER + 1
 
     companion object {
         private val log by LoggerDelegate()
