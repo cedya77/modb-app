@@ -6,6 +6,7 @@ import io.github.manamiproject.modb.core.date.WeekOfYear
 import io.github.manamiproject.modb.core.json.Json
 import io.github.manamiproject.modb.core.logging.LoggerDelegate
 import io.github.manamiproject.modb.serde.json.models.DeadEntries
+import io.github.manamiproject.modb.serde.json.models.DatasetRepository
 import io.github.manamiproject.modb.serde.json.models.License
 import kotlinx.coroutines.withContext
 import java.net.URI
@@ -29,9 +30,9 @@ public class DeadEntriesJsonSerializer(
             val currentWeek = WeekOfYear(LocalDate.now(clock))
 
             val deadEntriesDocument = DeadEntries(
-                `$schema` = URI("https://raw.githubusercontent.com/manami-project/anime-offline-database/refs/tags/${currentWeek}/schemas/dead-entries.schema.json"),
+                `$schema` = DatasetRepository.schema("$currentWeek", "dead-entries.schema.json"),
                 license = License().copy(
-                    url = URI("https://github.com/manami-project/anime-offline-database/blob/$currentWeek/LICENSE"),
+                    url = DatasetRepository.license("$currentWeek"),
                 ),
                 lastUpdate = LocalDate.now(clock).format(DateTimeFormatter.ISO_DATE),
                 deadEntries = obj.toSet().sorted(),

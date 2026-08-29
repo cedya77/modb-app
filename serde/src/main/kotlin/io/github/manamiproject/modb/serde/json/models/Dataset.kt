@@ -16,7 +16,7 @@ import java.net.URI
 public data class Dataset(
     val `$schema`: URI,
     val license: License = License(),
-    val repository: String = "https://github.com/manami-project/anime-offline-database",
+    val repository: String = DatasetRepository.url(),
     val scoreRange: ScoreRange = ScoreRange(),
     val lastUpdate: String,
     val data: List<Anime>,

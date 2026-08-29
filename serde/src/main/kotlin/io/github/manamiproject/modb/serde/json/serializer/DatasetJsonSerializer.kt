@@ -8,6 +8,7 @@ import io.github.manamiproject.modb.core.json.Json.SerializationOptions.DEACTIVA
 import io.github.manamiproject.modb.core.json.Json.SerializationOptions.DEACTIVATE_SERIALIZE_NULL
 import io.github.manamiproject.modb.core.logging.LoggerDelegate
 import io.github.manamiproject.modb.serde.json.models.Dataset
+import io.github.manamiproject.modb.serde.json.models.DatasetRepository
 import io.github.manamiproject.modb.serde.json.models.License
 import kotlinx.coroutines.withContext
 import java.net.URI
@@ -34,14 +35,14 @@ public class DatasetJsonSerializer(
             val currentWeek = WeekOfYear(LocalDate.now(clock))
 
             val schemaLink = when (minify) {
-                true -> URI("https://raw.githubusercontent.com/manami-project/anime-offline-database/refs/tags/$currentWeek/schemas/anime-offline-database-minified.schema.json")
-                else -> URI("https://raw.githubusercontent.com/manami-project/anime-offline-database/refs/tags/$currentWeek/schemas/anime-offline-database.schema.json")
+                true -> DatasetRepository.schema("$currentWeek", "anime-offline-database-minified.schema.json")
+                else -> DatasetRepository.schema("$currentWeek", "anime-offline-database.schema.json")
             }
 
             val data = Dataset(
                 `$schema` = schemaLink,
                 license = License().copy(
-                    url = URI("https://github.com/manami-project/anime-offline-database/blob/$currentWeek/LICENSE"),
+                    url = DatasetRepository.license("$currentWeek"),
                 ),
                 data = sortedList,
                 lastUpdate = LocalDate.now(clock).format(DateTimeFormatter.ISO_DATE),

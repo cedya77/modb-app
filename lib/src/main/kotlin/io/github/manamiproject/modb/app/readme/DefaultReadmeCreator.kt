@@ -15,6 +15,7 @@ import io.github.manamiproject.modb.core.config.MetaDataProviderConfig
 import io.github.manamiproject.modb.core.extensions.writeToFile
 import io.github.manamiproject.modb.core.anime.Anime
 import io.github.manamiproject.modb.core.anime.Year
+import io.github.manamiproject.modb.serde.json.models.DatasetRepository
 import io.github.manamiproject.modb.simkl.SimklConfig
 import java.time.LocalDate
 
@@ -44,7 +45,7 @@ class DefaultReadmeCreator(
 
     private fun createHeaderBlock(): String {
         return """
-            [![License: ODbL-1.0](https://img.shields.io/badge/license-ODbL--1.0-orange)](https://github.com/manami-project/anime-offline-database/blob/${getWeekAndYear().second}-${getWeekAndYear().first}/LICENSE)
+            [![License: ODbL-1.0](https://img.shields.io/badge/license-ODbL--1.0-orange)](${DatasetRepository.license("${getWeekAndYear().second}-${getWeekAndYear().first}")})
             
             # anime-offline-database
             The purpose of this repository is to create a dataset containing anime metadata aggregated by different anime metadata providers (such as myanimelist.net, anidb.net, kitsu.app and more) and allow cross-references between those metadata providers. This dataset is supposed to be used by and created for [manami](https://github.com/manami-project/manami).
@@ -202,12 +203,12 @@ class DefaultReadmeCreator(
             
             ```json
             {
-              "$schema": "https://raw.githubusercontent.com/manami-project/anime-offline-database/refs/tags/2025-18/anime-offline-database.schema.json",
+              "$schema": "$${DatasetRepository.schema("2025-18", "anime-offline-database.schema.json")}",
               "license": {
                 "name": "Open Data Commons Open Database License (ODbL) v1.0 + Database Contents License (DbCL) v1.0",
-                "url": "https://github.com/manami-project/anime-offline-database/blob/2025-18/LICENSE"
+                "url": "$${DatasetRepository.license("2025-18")}"
               },
-              "repository": "https://github.com/manami-project/anime-offline-database",
+              "repository": "$${DatasetRepository.url()}",
               "scoreRange": {
                 "minInclusive": 1.0,
                 "maxInclusive": 10.0
@@ -419,12 +420,12 @@ class DefaultReadmeCreator(
             
             ```json
             {
-              "$schema": "https://raw.githubusercontent.com/manami-project/anime-offline-database/refs/tags/2025-18/dead-entries/dead-entries.schema.json",
+              "$schema": "$${DatasetRepository.schema("2025-18", "dead-entries.schema.json")}",
               "license": {
                 "name": "Open Data Commons Open Database License (ODbL) v1.0 + Database Contents License (DbCL) v1.0",
-                "url": "https://github.com/manami-project/anime-offline-database/blob/2025-18/LICENSE"
+                "url": "$${DatasetRepository.license("2025-18")}"
               },
-              "repository": "https://github.com/manami-project/anime-offline-database",
+              "repository": "$${DatasetRepository.url()}",
               "lastUpdate": "2025-05-02",
               "deadEntries": [
                 "38492",

@@ -129,7 +129,7 @@ Here are some examples showing what the files look like.
 
 ```json
 {
-  "$schema": "https://raw.githubusercontent.com/manami-project/anime-offline-database/refs/tags/2025-18/anime-offline-database.schema.json",
+  "$schema": "https://raw.githubusercontent.com/manami-project/anime-offline-database/refs/tags/2025-18/schemas/anime-offline-database.schema.json",
   "license": {
     "name": "Open Data Commons Open Database License (ODbL) v1.0 + Database Contents License (DbCL) v1.0",
     "url": "https://github.com/manami-project/anime-offline-database/blob/2025-18/LICENSE"
@@ -346,7 +346,7 @@ Here are some examples showing what the files look like.
 
 ```json
 {
-  "$schema": "https://raw.githubusercontent.com/manami-project/anime-offline-database/refs/tags/2025-18/dead-entries/dead-entries.schema.json",
+  "$schema": "https://raw.githubusercontent.com/manami-project/anime-offline-database/refs/tags/2025-18/schemas/dead-entries.schema.json",
   "license": {
     "name": "Open Data Commons Open Database License (ODbL) v1.0 + Database Contents License (DbCL) v1.0",
     "url": "https://github.com/manami-project/anime-offline-database/blob/2025-18/LICENSE"

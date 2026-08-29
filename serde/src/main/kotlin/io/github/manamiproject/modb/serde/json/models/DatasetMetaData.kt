@@ -14,7 +14,7 @@ import java.net.URI
 public data class DatasetMetaData(
     val `$schema`: URI,
     val license: License = License(),
-    val repository: String = "https://github.com/manami-project/anime-offline-database",
+    val repository: String = DatasetRepository.url(),
     val scoreRange: ScoreRange = ScoreRange(),
     val lastUpdate: String,
 )

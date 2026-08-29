@@ -7,6 +7,7 @@ import io.github.manamiproject.modb.core.json.Json
 import io.github.manamiproject.modb.core.json.Json.SerializationOptions.*
 import io.github.manamiproject.modb.core.logging.LoggerDelegate
 import io.github.manamiproject.modb.serde.json.models.DatasetMetaData
+import io.github.manamiproject.modb.serde.json.models.DatasetRepository
 import io.github.manamiproject.modb.serde.json.models.License
 import kotlinx.coroutines.withContext
 import java.net.URI
@@ -31,9 +32,9 @@ public class DatasetJsonLinesSerializer(
         val currentWeek = WeekOfYear(LocalDate.now(clock))
 
         val metaData = DatasetMetaData(
-            `$schema` = URI("https://raw.githubusercontent.com/manami-project/anime-offline-database/refs/tags/$currentWeek/schemas/anime-offline-database.jsonl.schema.json"),
+            `$schema` = DatasetRepository.schema("$currentWeek", "anime-offline-database.jsonl.schema.json"),
             license = License().copy(
-                url = URI("https://github.com/manami-project/anime-offline-database/blob/$currentWeek/LICENSE"),
+                url = DatasetRepository.license("$currentWeek"),
             ),
             lastUpdate = LocalDate.now(clock).format(ISO_DATE),
         )

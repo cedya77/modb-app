@@ -10,5 +10,5 @@ import java.net.URI
  */
 public data class License(
     val name: String = "Open Data Commons Open Database License (ODbL) v1.0 + Database Contents License (DbCL) v1.0",
-    val url: URI = URI("https://github.com/manami-project/anime-offline-database/blob/master/LICENSE"),
+    val url: URI = DatasetRepository.license("master"),
 )
