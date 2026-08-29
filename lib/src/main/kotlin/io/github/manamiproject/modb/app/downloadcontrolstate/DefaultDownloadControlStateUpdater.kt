@@ -3,6 +3,9 @@ package io.github.manamiproject.modb.app.downloadcontrolstate
 import io.github.manamiproject.modb.app.config.AppConfig
 import io.github.manamiproject.modb.app.config.Config
 import io.github.manamiproject.modb.app.convfiles.CONVERTED_FILE_SUFFIX
+import io.github.manamiproject.modb.core.config.ConfigRegistry
+import io.github.manamiproject.modb.core.config.DefaultConfigRegistry
+import io.github.manamiproject.modb.core.config.IntPropertyDelegate
 import io.github.manamiproject.modb.core.config.MetaDataProviderConfig
 import io.github.manamiproject.modb.core.coroutines.ModbDispatchers.LIMITED_FS
 import io.github.manamiproject.modb.core.extensions.fileName
@@ -39,7 +42,14 @@ import kotlinx.coroutines.withContext
 class DefaultDownloadControlStateUpdater(
     private val appConfig: Config = AppConfig.instance,
     private val downloadControlStateAccessor: DownloadControlStateAccessor = DefaultDownloadControlStateAccessor.instance,
+    configRegistry: ConfigRegistry = DefaultConfigRegistry.instance,
 ): DownloadControlStateUpdater {
+
+    private val qualityScoreThreshold: Int by IntPropertyDelegate(
+        configRegistry = configRegistry,
+        namespace = CONFIG_NAMESPACE,
+        default = DEFAULT_QUALITY_SCORE_THRESHOLD,
+    )
 
     override suspend fun updateAll() = withContext(LIMITED_FS) {
         val convFileAnimeToFilename = fetchAnimeFromConvFiles()
@@ -102,7 +112,7 @@ class DefaultDownloadControlStateUpdater(
                 else -> (score.toDouble() / numberOfFiles.toDouble() * 100.0).toUInt()
             }
 
-            if (percentage >= 25u) {
+            if (percentage >= qualityScoreThreshold.toUInt()) {
                 faulty.add("${metaDataProviderConfig.hostname()} with a percentage of $percentage")
             }
         }
@@ -150,6 +160,25 @@ class DefaultDownloadControlStateUpdater(
 
     companion object {
         private val log by LoggerDelegate()
+
+        /**
+         * How much poorer than what is already known an extraction may be before the run is stopped.
+         *
+         * The comparison is against what the download control state holds, so it only means what it
+         * says once that state was written by this pipeline. State seeded from a published dataset
+         * holds entries merged from every provider, which carry more synonyms and relations than any
+         * single provider ever returns, so a seeded corpus reports a shortfall for honest data and
+         * needs the threshold lifted until one full cycle has replaced it.
+         * @since 1.0.0
+         */
+        private const val DEFAULT_QUALITY_SCORE_THRESHOLD = 25
+
+        /**
+         * Prefix of the properties read by this class.
+         * @since 1.0.0
+         */
+        const val CONFIG_NAMESPACE: String = "modb.app.dcs"
+
 
         /**
          * Singleton of [DefaultDownloadControlStateUpdater]
