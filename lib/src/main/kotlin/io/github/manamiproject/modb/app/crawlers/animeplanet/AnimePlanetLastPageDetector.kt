@@ -46,9 +46,13 @@ class AnimePlanetLastPageDetector(
             throw IllegalStateException("Couldn't find lastPage.")
         }
 
-        return data.listNotNull<String>("lastPage")
+        val lastPage = data.listNotNull<String>("lastPage")
             .mapNotNull { it.toIntOrNull() }
             .maxOrNull() ?: throw IllegalStateException("Couldn't extract the last page.")
+
+        log.info { "Last page for [${metaDataProviderConfig.hostname()}] is [$lastPage]." }
+
+        return lastPage
     }
 
     @KoverIgnore

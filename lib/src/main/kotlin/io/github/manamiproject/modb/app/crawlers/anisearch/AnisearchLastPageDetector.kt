@@ -52,7 +52,11 @@ class AnisearchLastPageDetector(
 
         val lastPageNavEntry = data.listNotNull<String>("lastPageNavEntry").first()
 
-        return """\d+""".toRegex().find(lastPageNavEntry)!!.value.toInt()
+        val lastPage = """\d+""".toRegex().find(lastPageNavEntry)!!.value.toInt()
+
+        log.info { "Last page for [${metaDataProviderConfig.hostname()}] is [$lastPage]." }
+
+        return lastPage
     }
 
     private suspend fun download(): String {
