@@ -10,5 +10,7 @@ import java.net.URI
  */
 object AnimePlanetPaginationIdRangeSelectorConfig: MetaDataProviderConfig by AnimePlanetConfig {
 
-    override fun buildDataDownloadLink(id: String): URI = URI("https://${hostname()}/anime/all?sort=title&order=asc&page=$id&bvm=list")
+    // No view mode is asked for. It is stored in a cookie rather than applied to the response, so
+    // asking only costs a redirect and still returns whichever layout the cookie already held.
+    override fun buildDataDownloadLink(id: String): URI = URI("https://${hostname()}/anime/all?sort=title&order=asc&page=$id")
 }

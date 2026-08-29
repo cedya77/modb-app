@@ -46,7 +46,7 @@ internal class AnimePlanetPaginationIdRangeSelectorConfigTest {
         val result = AnimePlanetPaginationIdRangeSelectorConfig.buildDataDownloadLink(id)
 
         // then
-        assertThat(result).isEqualTo(URI("https://${AnimePlanetPaginationIdRangeSelectorConfig.hostname()}/anime/all?sort=title&order=asc&page=black-clover&bvm=list"))
+        assertThat(result).isEqualTo(URI("https://${AnimePlanetPaginationIdRangeSelectorConfig.hostname()}/anime/all?sort=title&order=asc&page=black-clover"))
     }
 
     @Test

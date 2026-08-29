@@ -58,18 +58,29 @@ class AnimePlanetPaginationIdRangeSelector(
             headers = mapOf("host" to listOf("www.${metaDataProviderConfig.hostname()}")),
         ).checkedBody(this::class)
 
+        // Which of the two layouts comes back is a preference held in a cookie, and a request carries
+        // whichever value the clearance was issued with rather than one this crawler chose. Reading
+        // both means the page is understood either way instead of only when the cookie happens to
+        // agree. Both layouts list the same 35 entries.
         val data = extractor.extract(response, mapOf(
-            // The list view renders a table. It previously rendered list items carrying the entry
-            // type, and the page still answers to the same parameters, so the change is only visible
-            // in the markup.
-            "entriesOnThePage" to "//td[@class='tableTitle']/a/@href",
+            "entriesInCards" to "//li[@data-type='anime']/a/@href",
+            "entriesInTable" to "//td[@class='tableTitle']/a/@href",
         ))
 
-        if (data.notFound("entriesOnThePage")) {
+        if (data.notFound("entriesInCards") && data.notFound("entriesInTable")) {
             throw IllegalStateException("Unable to locate entries on page.")
         }
 
-        val entriesOnThePage = data.listNotNull<String>("entriesOnThePage")
+        val links = buildList {
+            if (!data.notFound("entriesInCards")) {
+                addAll(data.listNotNull<String>("entriesInCards"))
+            }
+            if (!data.notFound("entriesInTable")) {
+                addAll(data.listNotNull<String>("entriesInTable"))
+            }
+        }
+
+        val entriesOnThePage = links
             .filterNot { it.startsWith("/anime/years/") }
             .map { it.remove("/anime/") }
             .toHashSet()
