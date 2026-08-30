@@ -8,6 +8,9 @@ import io.github.manamiproject.modb.app.downloadcontrolstate.DefaultDownloadCont
 import io.github.manamiproject.modb.app.downloadcontrolstate.DefaultDownloadControlStateScheduler
 import io.github.manamiproject.modb.app.downloadcontrolstate.DownloadControlStateAccessor
 import io.github.manamiproject.modb.app.downloadcontrolstate.DownloadControlStateScheduler
+import io.github.manamiproject.modb.core.config.ConfigRegistry
+import io.github.manamiproject.modb.core.config.DefaultConfigRegistry
+import io.github.manamiproject.modb.core.config.IntPropertyDelegate
 import io.github.manamiproject.modb.core.config.MetaDataProviderConfig
 import io.github.manamiproject.modb.core.extensions.createShuffledList
 import io.github.manamiproject.modb.core.logging.LoggerDelegate
@@ -33,7 +36,14 @@ class IntegerBasedIdRangeSelector(
     private val downloadControlStateAccessor: DownloadControlStateAccessor = DefaultDownloadControlStateAccessor.instance,
     private val downloadControlStateScheduler: DownloadControlStateScheduler = DefaultDownloadControlStateScheduler.instance,
     private val alreadyDownloadedIdsFinder: AlreadyDownloadedIdsFinder = DefaultAlreadyDownloadedIdsFinder.instance,
+    configRegistry: ConfigRegistry = DefaultConfigRegistry.instance,
 ): IdRangeSelector<Int> {
+
+    private val deadEntriesToRecheck: Int by IntPropertyDelegate(
+        configRegistry = configRegistry,
+        namespace = CONFIG_NAMESPACE,
+        default = DEFAULT_DEAD_ENTRIES_TO_RECHECK,
+    )
 
     override suspend fun idDownloadList(): List<Int> {
         log.info { "Creating a list of IDs to download for [${metaDataProviderConfig.hostname()}]." }
@@ -51,7 +61,19 @@ class IntegerBasedIdRangeSelector(
         }
 
         log.debug { "Having [${possibleIds.size}] for [${metaDataProviderConfig.hostname()}] before excluding dead entries." }
-        possibleIds.removeAll(deadEntriesAccessor.fetchDeadEntries(metaDataProviderConfig).map { it.toInt() }.toSet())
+
+        // An id which answered that it does not exist is excluded from every later run, so a
+        // provider which publishes an entry under an id it had previously refused keeps that entry
+        // out of the dataset for good. The highest ids are the ones this happens to, because they
+        // are the ones a provider is still filling in, so a slice of them is looked at again.
+        val deadEntries = deadEntriesAccessor.fetchDeadEntries(metaDataProviderConfig).map { it.toInt() }.toSet()
+        val recheck = deadEntries.sortedDescending().take(deadEntriesToRecheck).toSet()
+
+        if (recheck.isNotEmpty()) {
+            log.info { "Rechecking [${recheck.size}] of [${deadEntries.size}] dead entries for [${metaDataProviderConfig.hostname()}]." }
+        }
+
+        possibleIds.removeAll(deadEntries - recheck)
         log.debug { "Having [${possibleIds.size}] for [${metaDataProviderConfig.hostname()}] after excluding dead entries." }
 
         log.debug { "Having [${possibleIds.size}] for [${metaDataProviderConfig.hostname()}] before excluding entries which are not scheduled for the current week." }
@@ -65,7 +87,19 @@ class IntegerBasedIdRangeSelector(
         return possibleIds.toList().createShuffledList()
     }
 
-    private companion object {
+    companion object {
         private val log by LoggerDelegate()
+
+        /**
+         * Dead entries are not rechecked unless a deployment asks for it.
+         * @since 1.0.0
+         */
+        private const val DEFAULT_DEAD_ENTRIES_TO_RECHECK = 0
+
+        /**
+         * Prefix of the properties read by this class.
+         * @since 1.0.0
+         */
+        const val CONFIG_NAMESPACE: String = "modb.app.crawler"
     }
 }
