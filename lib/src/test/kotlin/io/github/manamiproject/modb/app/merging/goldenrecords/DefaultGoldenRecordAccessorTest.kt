@@ -167,6 +167,70 @@ internal class DefaultGoldenRecordAccessorTest {
             assertThat(result).isEmpty()
         }
 
+        @ParameterizedTest
+        @ValueSource(strings = ["Kaiketsu Zorori Da-Da-Da-Daibōken!", "Kaiketsu Zorori Da-Da-Da-Daibouken!"])
+        fun `finds the same entry whether a long vowel is written with a macron or spelled out`(title: String) {
+            // given
+            val goldenRecord = AnimeRaw(
+                _sources = hashSetOf(
+                    URI("https://myanimelist.net/anime/14093"),
+                ),
+                _title = "Kaiketsu Zorori Da-Da-Da-Daibouken!",
+                type = MOVIE,
+                episodes = 1,
+            )
+
+            val entryToMatch = AnimeRaw(
+                _sources = hashSetOf(
+                    URI("https://animenewsnetwork.com/encyclopedia/anime.php?id=13787"),
+                ),
+                _title = title,
+                type = MOVIE,
+                episodes = 1,
+            )
+
+            val goldenRecordList = DefaultGoldenRecordAccessor()
+            goldenRecordList.createGoldenRecord(goldenRecord)
+
+            // when
+            val result = goldenRecordList.findPossibleGoldenRecords(entryToMatch)
+
+            // then
+            assertThat(result).hasSize(1)
+            assertThat(result.first().anime.title).isEqualTo("Kaiketsu Zorori Da-Da-Da-Daibouken!")
+        }
+
+        @Test
+        fun `does not match a title which merely shares a prefix`() {
+            // given
+            val goldenRecord = AnimeRaw(
+                _sources = hashSetOf(
+                    URI("https://myanimelist.net/anime/14093"),
+                ),
+                _title = "Slime Boukenki: Umi da, Yeah",
+                type = MOVIE,
+                episodes = 1,
+            )
+
+            val entryToMatch = AnimeRaw(
+                _sources = hashSetOf(
+                    URI("https://animenewsnetwork.com/encyclopedia/anime.php?id=1"),
+                ),
+                _title = "Slime Boukenki: Yama da, Yeah",
+                type = MOVIE,
+                episodes = 1,
+            )
+
+            val goldenRecordList = DefaultGoldenRecordAccessor()
+            goldenRecordList.createGoldenRecord(goldenRecord)
+
+            // when
+            val result = goldenRecordList.findPossibleGoldenRecords(entryToMatch)
+
+            // then
+            assertThat(result).isEmpty()
+        }
+
         @Test
         fun `find correct entry for matching main title`() {
             // given

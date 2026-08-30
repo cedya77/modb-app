@@ -212,6 +212,16 @@ class DefaultGoldenRecordAccessor: GoldenRecordAccessor {
             .remove("•")
             .remove("†")
 
+            // Macrons are the long-vowel spelling used by some providers where others write the
+            // vowel out. Folding them the same way keeps both spellings on one cluster key.
+            .replace("ō", "ou")
+            .replace("ū", "uu")
+            .replace("ā", "aa")
+            .replace("ī", "ii")
+            .replace("ē", "ee")
+            .replace("ô", "ou")
+            .replace("û", "uu")
+
             // remove quotation marks and diacritics
             .remove("\"")
             .remove("'")
