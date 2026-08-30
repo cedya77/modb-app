@@ -42,14 +42,20 @@ public class KitsuDownloader(
             200 -> {
                 val data = extractor.extract(responseBody, mapOf(
                     "entries" to "$.meta.count",
+                    "title" to "$.data[0].attributes.canonicalTitle",
                 ))
                 val entries = data.intOrDefault("entries")
-                when (entries) {
-                    0 -> {
+                when {
+                    entries == 0 -> {
                         onDeadEntry.invoke(id)
                         EMPTY
                     }
-                    1 -> {
+                    entries == 1 && data.stringOrDefault("title").lowercase() in DEAD_ENTRY_TITLES -> {
+                        log.info { "Adding [kitsuId=$id] to dead-entries list, because it has been renamed to a deletion marker." }
+                        onDeadEntry.invoke(id)
+                        EMPTY
+                    }
+                    entries == 1 -> {
                         responseBody
                     }
                     else -> throw IllegalStateException("Anime with id [${id}] returned [$entries] entries.")
@@ -65,6 +71,13 @@ public class KitsuDownloader(
 
     public companion object {
         private val log by LoggerDelegate()
+
+        /**
+         * Lowercased titles which kitsu assigns to an entry it has emptied instead of removing it.
+         * The response is a valid entry apart from the title, so it has to be recognized here.
+         * @since 1.0.0
+         */
+        public val DEAD_ENTRY_TITLES: Set<String> = setOf("delete", "deleted")
 
         /**
          * Singleton of [KitsuDownloader]

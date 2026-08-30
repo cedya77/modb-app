@@ -96,6 +96,79 @@ internal class KitsuDownloaderTest : MockServerTestCase<WireMockServer> by WireM
         }
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = ["Delete", "Deleted", "delete", "DELETED"])
+    fun `title renamed to a deletion marker invokes a dead entry`(title: String) {
+        runTest {
+            // given
+            val id = 1535
+
+            val testKitsuConfig = object : MetaDataProviderConfig by TestMetaDataProviderConfig {
+                override fun hostname(): Hostname = "localhost"
+                override fun buildAnimeLink(id: AnimeId): URI = KitsuConfig.buildAnimeLink(id)
+                override fun buildDataDownloadLink(id: String): URI = URI("http://localhost:$port/graphql")
+                override fun fileSuffix(): FileSuffix = KitsuConfig.fileSuffix()
+            }
+
+            serverInstance.stubFor(
+                get(urlPathEqualTo("/graphql")).willReturn(
+                    aResponse()
+                        .withHeader("Content-Type", APPLICATION_JSON)
+                        .withStatus(200)
+                        .withBody("""{ "data": [ { "attributes": { "canonicalTitle": "$title" } } ], "meta": { "count": 1 } }""")
+                )
+            )
+
+            var deadEntry = EMPTY
+            val downloader = KitsuDownloader(testKitsuConfig)
+
+            // when
+            val result = downloader.download(id.toString()) {
+                deadEntry = it
+            }
+
+            // then
+            assertThat(deadEntry).isEqualTo(id.toString())
+            assertThat(result).isEmpty()
+        }
+    }
+
+    @Test
+    fun `a title which merely contains a deletion marker is not treated as a dead entry`() {
+        runTest {
+            // given
+            val id = 1535
+
+            val testKitsuConfig = object : MetaDataProviderConfig by TestMetaDataProviderConfig {
+                override fun hostname(): Hostname = "localhost"
+                override fun buildAnimeLink(id: AnimeId): URI = KitsuConfig.buildAnimeLink(id)
+                override fun buildDataDownloadLink(id: String): URI = URI("http://localhost:$port/graphql")
+                override fun fileSuffix(): FileSuffix = KitsuConfig.fileSuffix()
+            }
+
+            val responseBody = """{ "data": [ { "attributes": { "canonicalTitle": "Delete Me, Baby" } } ], "meta": { "count": 1 } }"""
+
+            serverInstance.stubFor(
+                get(urlPathEqualTo("/graphql")).willReturn(
+                    aResponse()
+                        .withHeader("Content-Type", APPLICATION_JSON)
+                        .withStatus(200)
+                        .withBody(responseBody)
+                )
+            )
+
+            val downloader = KitsuDownloader(testKitsuConfig)
+
+            // when
+            val result = downloader.download(id.toString()) {
+                shouldNotBeInvoked()
+            }
+
+            // then
+            assertThat(result).isEqualTo(responseBody)
+        }
+    }
+
     @Test
     fun `throws an exception in case of an unhandled response code`() {
         // given
