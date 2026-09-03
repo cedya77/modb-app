@@ -2,6 +2,7 @@ package io.github.manamiproject.modb.app.downloadcontrolstate
 
 import io.github.manamiproject.modb.anilist.AnilistConfig
 import io.github.manamiproject.modb.app.TestAppConfig
+import io.github.manamiproject.modb.app.TestConfigRegistry
 import io.github.manamiproject.modb.app.TestDownloadControlStateAccessor
 import io.github.manamiproject.modb.app.TestMetaDataProviderConfig
 import io.github.manamiproject.modb.app.config.Config
@@ -13,6 +14,7 @@ import io.github.manamiproject.modb.core.config.MetaDataProviderConfig
 import io.github.manamiproject.modb.core.extensions.Directory
 import io.github.manamiproject.modb.core.extensions.RegularFile
 import io.github.manamiproject.modb.core.extensions.writeToFile
+import io.github.manamiproject.modb.core.config.ConfigRegistry
 import io.github.manamiproject.modb.core.json.Json
 import io.github.manamiproject.modb.core.anime.*
 import io.github.manamiproject.modb.core.anime.AnimeStatus.FINISHED
@@ -60,6 +62,7 @@ internal class DefaultDownloadControlStateUpdaterTest {
                     }
 
                     val testDownloadControlStateAccessor = object: DownloadControlStateAccessor by TestDownloadControlStateAccessor {
+                    override suspend fun allDcsEntries(metaDataProviderConfig: MetaDataProviderConfig): List<DownloadControlStateEntry> = emptyList()
                         override fun downloadControlStateDirectory(metaDataProviderConfig: MetaDataProviderConfig): Directory = tempDir
                     }
 
@@ -114,6 +117,7 @@ internal class DefaultDownloadControlStateUpdaterTest {
                     }
 
                     val testDownloadControlStateAccessor = object: DownloadControlStateAccessor by TestDownloadControlStateAccessor {
+                    override suspend fun allDcsEntries(metaDataProviderConfig: MetaDataProviderConfig): List<DownloadControlStateEntry> = emptyList()
                         override fun downloadControlStateDirectory(metaDataProviderConfig: MetaDataProviderConfig): Directory = tempDir
                         override suspend fun dcsEntryExists(metaDataProviderConfig: MetaDataProviderConfig, animeId: AnimeId): Boolean = true
                         override suspend fun dcsEntry(metaDataProviderConfig: MetaDataProviderConfig, animeId: AnimeId): DownloadControlStateEntry = downloadControlStateEntry
@@ -196,6 +200,7 @@ internal class DefaultDownloadControlStateUpdaterTest {
                     Json.toJson(dcsChangedAnime).writeToFile(dcsFileChangedAnime)
 
                     val testDownloadControlStateAccessor = object: DownloadControlStateAccessor by TestDownloadControlStateAccessor {
+                    override suspend fun allDcsEntries(metaDataProviderConfig: MetaDataProviderConfig): List<DownloadControlStateEntry> = emptyList()
                         override fun downloadControlStateDirectory(metaDataProviderConfig: MetaDataProviderConfig): Directory = tempDir
                         override suspend fun dcsEntryExists(metaDataProviderConfig: MetaDataProviderConfig, animeId: AnimeId): Boolean = true
                         override suspend fun dcsEntry(metaDataProviderConfig: MetaDataProviderConfig, animeId: AnimeId): DownloadControlStateEntry = when (animeId) {
@@ -272,6 +277,7 @@ internal class DefaultDownloadControlStateUpdaterTest {
                     }
 
                     val testDownloadControlStateAccessor = object: DownloadControlStateAccessor by TestDownloadControlStateAccessor {
+                    override suspend fun allDcsEntries(metaDataProviderConfig: MetaDataProviderConfig): List<DownloadControlStateEntry> = emptyList()
                         override fun downloadControlStateDirectory(metaDataProviderConfig: MetaDataProviderConfig): Directory = tempDir
                         override suspend fun dcsEntryExists(metaDataProviderConfig: MetaDataProviderConfig, animeId: AnimeId): Boolean = true
                         override suspend fun dcsEntry(metaDataProviderConfig: MetaDataProviderConfig, animeId: AnimeId): DownloadControlStateEntry = downloadControlStateEntry
@@ -341,6 +347,7 @@ internal class DefaultDownloadControlStateUpdaterTest {
 
                     var updaterHasBeenExecuted = false
                     val testDownloadControlStateAccessor = object: DownloadControlStateAccessor by TestDownloadControlStateAccessor {
+                    override suspend fun allDcsEntries(metaDataProviderConfig: MetaDataProviderConfig): List<DownloadControlStateEntry> = emptyList()
                         override fun downloadControlStateDirectory(metaDataProviderConfig: MetaDataProviderConfig): Directory = tempDir
                         override suspend fun dcsEntryExists(metaDataProviderConfig: MetaDataProviderConfig, animeId: AnimeId): Boolean = true
                         override suspend fun dcsEntry(metaDataProviderConfig: MetaDataProviderConfig, animeId: AnimeId): DownloadControlStateEntry = downloadControlStateEntry
@@ -420,6 +427,7 @@ internal class DefaultDownloadControlStateUpdaterTest {
 
                 var receivedDcsEntry: DownloadControlStateEntry? = null
                 val testDownloadControlStateAccessor = object: DownloadControlStateAccessor by TestDownloadControlStateAccessor {
+                    override suspend fun allDcsEntries(metaDataProviderConfig: MetaDataProviderConfig): List<DownloadControlStateEntry> = emptyList()
                     override fun downloadControlStateDirectory(metaDataProviderConfig: MetaDataProviderConfig): Directory = tempDir
                     override suspend fun dcsEntryExists(metaDataProviderConfig: MetaDataProviderConfig, animeId: AnimeId): Boolean = false
                     override suspend fun createOrUpdate(metaDataProviderConfig: MetaDataProviderConfig, animeId: AnimeId, downloadControlStateEntry: DownloadControlStateEntry): Boolean {
@@ -513,6 +521,7 @@ internal class DefaultDownloadControlStateUpdaterTest {
 
                 var receivedDcsEntry: DownloadControlStateEntry? = null
                 val testDownloadControlStateAccessor = object: DownloadControlStateAccessor by TestDownloadControlStateAccessor {
+                    override suspend fun allDcsEntries(metaDataProviderConfig: MetaDataProviderConfig): List<DownloadControlStateEntry> = emptyList()
                     override fun downloadControlStateDirectory(metaDataProviderConfig: MetaDataProviderConfig): Directory = tempDir
                     override suspend fun dcsEntryExists(metaDataProviderConfig: MetaDataProviderConfig, animeId: AnimeId): Boolean = true
                     override suspend fun dcsEntry(metaDataProviderConfig: MetaDataProviderConfig, animeId: AnimeId): DownloadControlStateEntry = initialDcsEntry
@@ -588,6 +597,7 @@ internal class DefaultDownloadControlStateUpdaterTest {
                 var invocations = 0
                 var hasBeenInvoked = false
                 val testDownloadControlStateAccessor = object: DownloadControlStateAccessor by TestDownloadControlStateAccessor {
+                    override suspend fun allDcsEntries(metaDataProviderConfig: MetaDataProviderConfig): List<DownloadControlStateEntry> = emptyList()
                     override fun downloadControlStateDirectory(metaDataProviderConfig: MetaDataProviderConfig): Directory = tempDir
                     override suspend fun changeId(oldId: AnimeId, newId: AnimeId, metaDataProviderConfig: MetaDataProviderConfig): RegularFile {
                         hasBeenInvoked = true
@@ -611,6 +621,153 @@ internal class DefaultDownloadControlStateUpdaterTest {
                 // then
                 assertThat(invocations).isEqualTo(2)
                 assertThat(hasBeenInvoked).isTrue()
+            }
+        }
+
+        @Nested
+        inner class RescheduleEntriesWhichHaveNotBeenFetchedTests {
+
+            @Test
+            fun `moves an entry which was due this week, but never fetched, to the following week`() {
+                tempDirectory {
+                    // given
+                    val rawdata = tempDir.resolve("rawdata").createDirectory()
+                    val clock = Clock.fixed(Instant.parse("2021-11-02T17:55:43.035Z"), ZoneId.systemDefault())
+
+                    val testAppConfig = object: Config by TestAppConfig {
+                        override fun downloadControlStateDirectory(): Directory = tempDir
+                        override fun metaDataProviderConfigurations(): Set<MetaDataProviderConfig> = setOf(AnilistConfig)
+                        override fun workingDir(metaDataProviderConfig: MetaDataProviderConfig): Directory = rawdata
+                        override fun findMetaDataProviderConfig(host: Hostname): MetaDataProviderConfig = AnilistConfig
+                        override fun clock(): Clock = clock
+                    }
+
+                    val stranded = DownloadControlStateEntry(
+                        _weeksWihoutChange = 3,
+                        _lastDownloaded = WeekOfYear.currentWeek().minusWeeks(1),
+                        _nextDownload = WeekOfYear.currentWeek(),
+                        _anime = AnimeRaw(
+                            _title = "Death Note",
+                            _sources = hashSetOf(URI("https://anilist.co/anime/1535")),
+                        ),
+                    )
+
+                    var received: DownloadControlStateEntry? = null
+                    val testDownloadControlStateAccessor = object: DownloadControlStateAccessor by TestDownloadControlStateAccessor {
+                        override suspend fun allDcsEntries(metaDataProviderConfig: MetaDataProviderConfig): List<DownloadControlStateEntry> = listOf(stranded)
+                        override suspend fun createOrUpdate(metaDataProviderConfig: MetaDataProviderConfig, animeId: AnimeId, downloadControlStateEntry: DownloadControlStateEntry): Boolean {
+                            received = downloadControlStateEntry
+                            return true
+                        }
+                    }
+
+                    val downloadControlStateUpdater = DefaultDownloadControlStateUpdater(
+                        appConfig = testAppConfig,
+                        downloadControlStateAccessor = testDownloadControlStateAccessor,
+                    )
+
+                    // when
+                    downloadControlStateUpdater.updateAll()
+
+                    // then
+                    assertThat(received?.nextDownload).isEqualTo(WeekOfYear.currentWeek().plusWeeks(1))
+                    assertThat(received?.lastDownloaded).isEqualTo(stranded.lastDownloaded)
+                    assertThat(received?.weeksWihoutChange).isEqualTo(stranded.weeksWihoutChange)
+                }
+            }
+
+            @Test
+            fun `leaves an entry alone if it has been fetched`() {
+                tempDirectory {
+                    // given
+                    val rawdata = tempDir.resolve("rawdata").createDirectory()
+                    val clock = Clock.fixed(Instant.parse("2021-11-02T17:55:43.035Z"), ZoneId.systemDefault())
+
+                    val anime = AnimeRaw(
+                        _title = "Death Note",
+                        _sources = hashSetOf(URI("https://anilist.co/anime/1535")),
+                    )
+                    Json.toJson(anime).writeToFile(rawdata.resolve("1535.$CONVERTED_FILE_SUFFIX").createFile())
+
+                    val testAppConfig = object: Config by TestAppConfig {
+                        override fun downloadControlStateDirectory(): Directory = tempDir
+                        override fun metaDataProviderConfigurations(): Set<MetaDataProviderConfig> = setOf(AnilistConfig)
+                        override fun workingDir(metaDataProviderConfig: MetaDataProviderConfig): Directory = rawdata
+                        override fun findMetaDataProviderConfig(host: Hostname): MetaDataProviderConfig = AnilistConfig
+                        override fun clock(): Clock = clock
+                    }
+
+                    val fetched = DownloadControlStateEntry(
+                        _weeksWihoutChange = 0,
+                        _lastDownloaded = WeekOfYear.currentWeek(),
+                        _nextDownload = WeekOfYear.currentWeek(),
+                        _anime = anime,
+                    )
+
+                    val receivedWeeks = mutableListOf<WeekOfYear>()
+                    val testDownloadControlStateAccessor = object: DownloadControlStateAccessor by TestDownloadControlStateAccessor {
+                        override suspend fun allDcsEntries(metaDataProviderConfig: MetaDataProviderConfig): List<DownloadControlStateEntry> = listOf(fetched)
+                        override suspend fun dcsEntryExists(metaDataProviderConfig: MetaDataProviderConfig, animeId: AnimeId): Boolean = false
+                        override suspend fun createOrUpdate(metaDataProviderConfig: MetaDataProviderConfig, animeId: AnimeId, downloadControlStateEntry: DownloadControlStateEntry): Boolean {
+                            receivedWeeks.add(downloadControlStateEntry.nextDownload)
+                            return true
+                        }
+                    }
+
+                    val downloadControlStateUpdater = DefaultDownloadControlStateUpdater(
+                        appConfig = testAppConfig,
+                        downloadControlStateAccessor = testDownloadControlStateAccessor,
+                    )
+
+                    // when
+                    downloadControlStateUpdater.updateAll()
+
+                    // then
+                    assertThat(receivedWeeks).hasSize(1)
+                }
+            }
+
+            @Test
+            fun `does not reschedule anything for a crawler which has been switched off`() {
+                tempDirectory {
+                    // given
+                    val rawdata = tempDir.resolve("rawdata").createDirectory()
+                    val clock = Clock.fixed(Instant.parse("2021-11-02T17:55:43.035Z"), ZoneId.systemDefault())
+
+                    val testAppConfig = object: Config by TestAppConfig {
+                        override fun downloadControlStateDirectory(): Directory = tempDir
+                        override fun metaDataProviderConfigurations(): Set<MetaDataProviderConfig> = setOf(AnilistConfig)
+                        override fun workingDir(metaDataProviderConfig: MetaDataProviderConfig): Directory = rawdata
+                        override fun findMetaDataProviderConfig(host: Hostname): MetaDataProviderConfig = AnilistConfig
+                        override fun clock(): Clock = clock
+                    }
+
+                    val testConfigRegistry = object: ConfigRegistry by TestConfigRegistry {
+                        @Suppress("UNCHECKED_CAST")
+                        override fun <T : Any> list(key: String): List<T>? = when (key) {
+                            "modb.app.disabledCrawlers" -> listOf(AnilistConfig.hostname()) as List<T>
+                            else -> null
+                        }
+                        override fun int(key: String): Int? = null
+                    }
+
+                    val testDownloadControlStateAccessor = object: DownloadControlStateAccessor by TestDownloadControlStateAccessor {
+                        override suspend fun allDcsEntries(metaDataProviderConfig: MetaDataProviderConfig): List<DownloadControlStateEntry> = shouldNotBeInvoked()
+                        override suspend fun createOrUpdate(metaDataProviderConfig: MetaDataProviderConfig, animeId: AnimeId, downloadControlStateEntry: DownloadControlStateEntry): Boolean = shouldNotBeInvoked()
+                    }
+
+                    val downloadControlStateUpdater = DefaultDownloadControlStateUpdater(
+                        appConfig = testAppConfig,
+                        downloadControlStateAccessor = testDownloadControlStateAccessor,
+                        configRegistry = testConfigRegistry,
+                    )
+
+                    // when
+                    downloadControlStateUpdater.updateAll()
+
+                    // then
+                    // shouldNotBeInvoked in the accessor is the assertion
+                }
             }
         }
     }

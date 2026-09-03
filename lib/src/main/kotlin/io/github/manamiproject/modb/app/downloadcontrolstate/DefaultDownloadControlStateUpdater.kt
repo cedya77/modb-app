@@ -6,6 +6,7 @@ import io.github.manamiproject.modb.app.convfiles.CONVERTED_FILE_SUFFIX
 import io.github.manamiproject.modb.core.config.ConfigRegistry
 import io.github.manamiproject.modb.core.config.DefaultConfigRegistry
 import io.github.manamiproject.modb.core.config.IntPropertyDelegate
+import io.github.manamiproject.modb.core.config.ListPropertyDelegate
 import io.github.manamiproject.modb.core.config.MetaDataProviderConfig
 import io.github.manamiproject.modb.core.coroutines.ModbDispatchers.LIMITED_FS
 import io.github.manamiproject.modb.core.extensions.fileName
@@ -51,6 +52,12 @@ class DefaultDownloadControlStateUpdater(
         default = DEFAULT_QUALITY_SCORE_THRESHOLD,
     )
 
+    private val disabledCrawlers: List<String> by ListPropertyDelegate(
+        configRegistry = configRegistry,
+        namespace = APP_NAMESPACE,
+        default = emptyList(),
+    )
+
     override suspend fun updateAll() = withContext(LIMITED_FS) {
         val convFileAnimeToFilename = fetchAnimeFromConvFiles()
         val animeToProvider = convFileAnimeToFilename.map { it.first to appConfig.findMetaDataProviderConfig(it.first.sources.first().host) }
@@ -61,6 +68,49 @@ class DefaultDownloadControlStateUpdater(
         animeToProvider.map { (anime, metaDataProviderConfig) ->
             launch { handleUpdate(anime, metaDataProviderConfig) }
         }.joinAll()
+
+        rescheduleEntriesWhichHaveNotBeenFetched()
+    }
+
+    /**
+     * A provider can stop serving us part way through its list. The entries it never answered for
+     * keep next-download set to the current week, which the week validation refuses, so a single
+     * provider cutting out ends the run with nothing published. They are moved to the following week
+     * instead, which is where they would have landed had the entry been fetched and found unchanged.
+     * Last-downloaded and the weeks-without-change counter are left alone, because no download
+     * happened. Providers whose crawler was switched off are skipped, otherwise a run which
+     * deliberately crawls nothing would reschedule the whole dataset.
+     */
+    private suspend fun rescheduleEntriesWhichHaveNotBeenFetched() {
+        val currentWeek = WeekOfYear.currentWeek()
+
+        appConfig.metaDataProviderConfigurations()
+            .filterNot { it.hostname() in disabledCrawlers }
+            .forEach { metaDataProviderConfig ->
+                val fetched = appConfig.workingDir(metaDataProviderConfig)
+                    .listRegularFiles("*.$CONVERTED_FILE_SUFFIX")
+                    .map { it.fileName().substringBeforeLast('.') }
+                    .toSet()
+
+                val stranded = downloadControlStateAccessor.allDcsEntries(metaDataProviderConfig)
+                    .filter { it.nextDownload == currentWeek }
+                    .map { metaDataProviderConfig.extractAnimeId(it.anime.sources.first()) to it }
+                    .filterNot { (animeId, _) -> animeId in fetched }
+
+                if (stranded.isEmpty()) {
+                    return@forEach
+                }
+
+                log.warn { "Rescheduling [${stranded.size}] entries for [${metaDataProviderConfig.hostname()}] which were due this week, but never fetched." }
+
+                stranded.forEach { (animeId, entry) ->
+                    downloadControlStateAccessor.createOrUpdate(
+                        metaDataProviderConfig,
+                        animeId,
+                        entry.copy(_nextDownload = currentWeek.plusWeeks(1)),
+                    )
+                }
+            }
     }
 
     private suspend fun fetchAnimeFromConvFiles(): List<Pair<AnimeRaw, String>> = withContext(LIMITED_FS) {
@@ -172,6 +222,12 @@ class DefaultDownloadControlStateUpdater(
          * @since 1.0.0
          */
         private const val DEFAULT_QUALITY_SCORE_THRESHOLD = 25
+
+        /**
+         * Namespace holding the list of crawlers which have been switched off.
+         * @since 1.0.0
+         */
+        const val APP_NAMESPACE: String = "modb.app"
 
         /**
          * Prefix of the properties read by this class.
