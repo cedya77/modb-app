@@ -15,6 +15,7 @@ import io.github.manamiproject.modb.app.merging.lock.MergeLockAccessor
 import io.github.manamiproject.modb.core.config.Hostname
 import io.github.manamiproject.modb.core.config.MetaDataProviderConfig
 import io.github.manamiproject.modb.core.extensions.readFile
+import io.github.manamiproject.modb.core.extensions.writeToFile
 import io.github.manamiproject.modb.core.anime.Anime
 import io.github.manamiproject.modb.core.anime.AnimeRaw
 import io.github.manamiproject.modb.kitsu.KitsuConfig
@@ -715,6 +716,104 @@ internal class DefaultReadmeCreatorTest {
 
                 // then
                 assertThat(testAppConfig.outputDirectory().resolve("README.md").readFile()).isEqualTo(expectedFile)
+            }
+        }
+
+        @Test
+        fun `only replaces the statistics block and keeps the rest of an existing README`() {
+            tempDirectory {
+                // given
+                val testMyanimelistConfig = object: MetaDataProviderConfig by MyanimelistConfig {
+                    override fun isTestContext(): Boolean = true
+                }
+
+                val testAppConfig = object: Config by TestAppConfig {
+                    override fun findMetaDataProviderConfig(host: Hostname): MetaDataProviderConfig = super.findMetaDataProviderConfig(host)
+                    override fun outputDirectory() = tempDir
+                    override fun metaDataProviderConfigurations() = setOf(testMyanimelistConfig)
+                    override fun clock() = Clock.fixed(Instant.parse("2020-05-01T16:02:42.00Z"), UTC)
+                }
+
+                val testDownloadControlStateAccessor = object: DownloadControlStateAccessor by TestDownloadControlStateAccessor {
+                    override suspend fun allAnime(metaDataProviderConfig: MetaDataProviderConfig): List<AnimeRaw> = listOf(AnimeRaw("myanimelist 1"))
+                }
+
+                val defaultReadmeCreator = DefaultReadmeCreator(
+                    appConfig = testAppConfig,
+                    mergeLockAccessor = object: MergeLockAccessor by TestMergeLockAccessor {
+                        override suspend fun hasMergeLock(uris: Set<URI>): Boolean = false
+                    },
+                    downloadControlStateAccessor = testDownloadControlStateAccessor,
+                    reviewedIsolatedEntriesAccessor = object: ReviewedIsolatedEntriesAccessor by TestReviewedIsolatedEntriesAccessor {
+                        override fun contains(uri: URI): Boolean = false
+                    },
+                )
+
+                val readme = tempDir.resolve("README.md")
+                """
+                    # my own headline
+
+                    text above which must survive.
+
+                    ${DefaultReadmeCreator.STATISTICS_START}
+                    outdated numbers
+                    ${DefaultReadmeCreator.STATISTICS_END}
+
+                    text below which must survive.
+                """.trimIndent().writeToFile(readme)
+
+                // when
+                defaultReadmeCreator.updateWith(listOf(Anime("Death Note")))
+
+                // then
+                val result = readme.readFile()
+                assertThat(result).contains("# my own headline")
+                assertThat(result).contains("text above which must survive.")
+                assertThat(result).contains("text below which must survive.")
+                assertThat(result).contains("Update **week 18 [2020]**")
+                assertThat(result).doesNotContain("outdated numbers")
+            }
+        }
+
+        @Test
+        fun `leaves an existing README without a statistics block untouched`() {
+            tempDirectory {
+                // given
+                val testMyanimelistConfig = object: MetaDataProviderConfig by MyanimelistConfig {
+                    override fun isTestContext(): Boolean = true
+                }
+
+                val testAppConfig = object: Config by TestAppConfig {
+                    override fun findMetaDataProviderConfig(host: Hostname): MetaDataProviderConfig = super.findMetaDataProviderConfig(host)
+                    override fun outputDirectory() = tempDir
+                    override fun metaDataProviderConfigurations() = setOf(testMyanimelistConfig)
+                    override fun clock() = Clock.fixed(Instant.parse("2020-05-01T16:02:42.00Z"), UTC)
+                }
+
+                val testDownloadControlStateAccessor = object: DownloadControlStateAccessor by TestDownloadControlStateAccessor {
+                    override suspend fun allAnime(metaDataProviderConfig: MetaDataProviderConfig): List<AnimeRaw> = listOf(AnimeRaw("myanimelist 1"))
+                }
+
+                val defaultReadmeCreator = DefaultReadmeCreator(
+                    appConfig = testAppConfig,
+                    mergeLockAccessor = object: MergeLockAccessor by TestMergeLockAccessor {
+                        override suspend fun hasMergeLock(uris: Set<URI>): Boolean = false
+                    },
+                    downloadControlStateAccessor = testDownloadControlStateAccessor,
+                    reviewedIsolatedEntriesAccessor = object: ReviewedIsolatedEntriesAccessor by TestReviewedIsolatedEntriesAccessor {
+                        override fun contains(uri: URI): Boolean = false
+                    },
+                )
+
+                val readme = tempDir.resolve("README.md")
+                val handWritten = "# hand written README\n\nnothing generated in here."
+                handWritten.writeToFile(readme)
+
+                // when
+                defaultReadmeCreator.updateWith(listOf(Anime("Death Note")))
+
+                // then
+                assertThat(readme.readFile()).isEqualTo(handWritten)
             }
         }
     }

@@ -12,7 +12,10 @@ import io.github.manamiproject.modb.app.merging.lock.DefaultMergeLockAccessor
 import io.github.manamiproject.modb.app.merging.lock.MergeLockAccessor
 import io.github.manamiproject.modb.core.config.Hostname
 import io.github.manamiproject.modb.core.config.MetaDataProviderConfig
+import io.github.manamiproject.modb.core.extensions.readFile
+import io.github.manamiproject.modb.core.extensions.regularFileExists
 import io.github.manamiproject.modb.core.extensions.writeToFile
+import io.github.manamiproject.modb.core.logging.LoggerDelegate
 import io.github.manamiproject.modb.core.anime.Anime
 import io.github.manamiproject.modb.core.anime.Year
 import io.github.manamiproject.modb.core.config.DatasetRepository
@@ -35,12 +38,32 @@ class DefaultReadmeCreator(
 ): ReadmeCreator {
 
     override suspend fun updateWith(mergedAnime: List<Anime>) {
-        val fileContent = StringBuilder(createHeaderBlock())
-            .append(createStatisticsBlock(mergedAnime))
-            .append(createStructureBlock())
-            .toString()
+        val readme = appConfig.outputDirectory().resolve("README.md")
+        val statistics = createStatisticsBlock(mergedAnime)
 
-        fileContent.writeToFile(appConfig.outputDirectory().resolve("README.md"))
+        if (!readme.regularFileExists()) {
+            StringBuilder(createHeaderBlock())
+                .append(statistics)
+                .append(createStructureBlock())
+                .toString()
+                .writeToFile(readme)
+            return
+        }
+
+        val currentContent = readme.readFile()
+        val start = currentContent.indexOf(STATISTICS_START)
+        val end = currentContent.indexOf(STATISTICS_END)
+
+        if (start == -1 || end == -1 || end < start) {
+            log.info { "README.md has no statistics block. Leaving it untouched." }
+            return
+        }
+
+        val updatedContent = currentContent.substring(0, start + STATISTICS_START.length) +
+                "\n" + statistics.trim() + "\n" +
+                currentContent.substring(end)
+
+        updatedContent.writeToFile(readme)
     }
 
     private fun createHeaderBlock(): String {
@@ -59,13 +82,6 @@ class DefaultReadmeCreator(
         val block = StringBuilder("""
             
             
-            > [!IMPORTANT]  
-            > After the _2025-25_ update the dataset files will be removed from the repo and moved to releases instead.
-            > The reason is that this project is close to hitting the limits of github free plan and my assumption is
-            > that even git LFS won't last long under the free plan. There is a **latest** release available, always
-            > containing the most recent version of the files. Additionally named releases like **2025-25** are created
-            > which contain the files for that specific week.
-
             ## Statistics
             Update **week ${weekAndYear.first} [${weekAndYear.second}]**
 
@@ -472,6 +488,20 @@ class DefaultReadmeCreator(
     }
 
     companion object {
+        private val log by LoggerDelegate()
+
+        /**
+         * Opening marker of the generated statistics section within an existing `README.md`.
+         * @since 1.0.0
+         */
+        const val STATISTICS_START: String = "<!-- statistics -->"
+
+        /**
+         * Closing marker of the generated statistics section within an existing `README.md`.
+         * @since 1.0.0
+         */
+        const val STATISTICS_END: String = "<!-- /statistics -->"
+
         /**
          * Singleton of [DefaultReadmeCreator]
          * @since 1.0.0
