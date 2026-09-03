@@ -59,9 +59,11 @@ class DefaultReadmeCreator(
             return
         }
 
+        // readFile strips a trailing newline, so it is restored here to keep the file unchanged
+        // apart from the statistics.
         val updatedContent = currentContent.substring(0, start + STATISTICS_START.length) +
                 "\n" + statistics.trim() + "\n" +
-                currentContent.substring(end)
+                currentContent.substring(end) + "\n"
 
         updatedContent.writeToFile(readme)
     }

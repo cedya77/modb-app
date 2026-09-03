@@ -772,6 +772,7 @@ internal class DefaultReadmeCreatorTest {
                 assertThat(result).contains("text below which must survive.")
                 assertThat(result).contains("Update **week 18 [2020]**")
                 assertThat(result).doesNotContain("outdated numbers")
+                assertThat(readme.toFile().readText()).endsWith("text below which must survive.\n")
             }
         }
 
