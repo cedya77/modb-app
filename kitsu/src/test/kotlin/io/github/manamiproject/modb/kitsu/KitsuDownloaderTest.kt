@@ -97,7 +97,7 @@ internal class KitsuDownloaderTest : MockServerTestCase<WireMockServer> by WireM
     }
 
     @ParameterizedTest
-    @ValueSource(strings = ["Delete", "Deleted", "delete", "DELETED"])
+    @ValueSource(strings = ["Delete", "Deleted", "delete", "DELETED", "deleteasv", "DeleteG"])
     fun `title renamed to a deletion marker invokes a dead entry`(title: String) {
         runTest {
             // given
@@ -133,8 +133,9 @@ internal class KitsuDownloaderTest : MockServerTestCase<WireMockServer> by WireM
         }
     }
 
-    @Test
-    fun `a title which merely contains a deletion marker is not treated as a dead entry`() {
+    @ParameterizedTest
+    @ValueSource(strings = ["Delete Me, Baby", "Delete Beach", "Deletion Squad", "undelete"])
+    fun `a title which merely contains a deletion marker is not treated as a dead entry`(title: String) {
         runTest {
             // given
             val id = 1535
@@ -146,7 +147,7 @@ internal class KitsuDownloaderTest : MockServerTestCase<WireMockServer> by WireM
                 override fun fileSuffix(): FileSuffix = KitsuConfig.fileSuffix()
             }
 
-            val responseBody = """{ "data": [ { "attributes": { "canonicalTitle": "Delete Me, Baby" } } ], "meta": { "count": 1 } }"""
+            val responseBody = """{ "data": [ { "attributes": { "canonicalTitle": "$title" } } ], "meta": { "count": 1 } }"""
 
             serverInstance.stubFor(
                 get(urlPathEqualTo("/graphql")).willReturn(

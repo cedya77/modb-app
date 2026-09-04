@@ -119,6 +119,7 @@ class AnimenewsnetworkCrawler(
 
         if (response.neitherNullNorBlank()) {
             response.writeToFile(file, true)
+            deadEntriesAccessor.removeDeadEntry(animeId, metaDataProviderConfig)
         }
     }
 

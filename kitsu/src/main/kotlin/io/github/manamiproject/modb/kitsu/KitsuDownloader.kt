@@ -50,7 +50,7 @@ public class KitsuDownloader(
                         onDeadEntry.invoke(id)
                         EMPTY
                     }
-                    entries == 1 && data.stringOrDefault("title").lowercase() in DEAD_ENTRY_TITLES -> {
+                    entries == 1 && DEAD_ENTRY_TITLE.matches(data.stringOrDefault("title").trim()) -> {
                         log.info { "Adding [kitsuId=$id] to dead-entries list, because it has been renamed to a deletion marker." }
                         onDeadEntry.invoke(id)
                         EMPTY
@@ -73,11 +73,13 @@ public class KitsuDownloader(
         private val log by LoggerDelegate()
 
         /**
-         * Lowercased titles which kitsu assigns to an entry it has emptied instead of removing it.
-         * The response is a valid entry apart from the title, so it has to be recognized here.
+         * Title kitsu assigns to an entry it has emptied instead of removing it. The response is a
+         * valid entry apart from the title, so it has to be recognized here. Seen as `delete`,
+         * `deleted` and with a suffix as in `deleteasv` or `DeleteG`, always as a single word.
+         * A title of several words is left alone, because `Delete Beach` is a real anime.
          * @since 1.0.0
          */
-        public val DEAD_ENTRY_TITLES: Set<String> = setOf("delete", "deleted")
+        public val DEAD_ENTRY_TITLE: Regex = Regex("^delete[a-z]*$", RegexOption.IGNORE_CASE)
 
         /**
          * Singleton of [KitsuDownloader]

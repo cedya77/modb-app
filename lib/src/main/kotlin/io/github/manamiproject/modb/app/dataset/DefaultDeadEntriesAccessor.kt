@@ -92,6 +92,35 @@ class DefaultDeadEntriesAccessor(
         downloadControlStateAccessor.removeDeadEntry(metaDataProviderConfig, animeId)
     }
 
+    override suspend fun removeDeadEntry(animeId: AnimeId, metaDataProviderConfig: MetaDataProviderConfig) {
+        if (!appConfig.deadEntriesSupported(metaDataProviderConfig)) {
+            return
+        }
+
+        if (!isInitialized) {
+            init()
+        }
+
+        writeAccess.withLock {
+            val deadEntriesOfProvider = when (metaDataProviderConfig.hostname()) {
+                AnidbConfig.hostname() -> deadEntries.anidb
+                AnilistConfig.hostname() -> deadEntries.anilist
+                AnimenewsnetworkConfig.hostname() -> deadEntries.animenewsnetwork
+                KitsuConfig.hostname() -> deadEntries.kitsu
+                MyanimelistConfig.hostname() -> deadEntries.myanimelist
+                else -> throw IllegalStateException("Metadata provider [${metaDataProviderConfig.hostname()}] is not supported.")
+            }
+
+            if (!deadEntriesOfProvider.remove(animeId)) {
+                return@withLock
+            }
+
+            log.info { "Removing [$animeId] from the [${metaDataProviderConfig.hostname()}] dead entries list, because it is being served again." }
+
+            jsonSerializer.serialize(deadEntriesOfProvider, minify = true).writeToFile(deadEntriesFile(metaDataProviderConfig, JSON_MINIFIED))
+        }
+    }
+
     override suspend fun determineDeadEntries(sources: Collection<URI>): Set<URI> {
         if (!isInitialized) {
             init()

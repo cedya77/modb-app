@@ -78,6 +78,7 @@ class KitsuCrawler @KoverIgnore constructor(
 
         if (response.neitherNullNorBlank()) {
             response.writeToFile(file, true)
+            deadEntriesAccess.removeDeadEntry(animeId.toString(), metaDataProviderConfig)
         }
     }
 

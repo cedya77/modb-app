@@ -113,6 +113,7 @@ class AnidbCrawler(
             response.neitherNullNorBlank() && response != ANIDB_PENDING_FILE_INDICATOR -> {
                 val file = appConfig.workingDir(metaDataProviderConfig).resolve("$animeId.${metaDataProviderConfig.fileSuffix()}")
                 response.writeToFile(file, true)
+                deadEntriesAccess.removeDeadEntry(animeId.toString(), metaDataProviderConfig)
             }
             response == ANIDB_PENDING_FILE_INDICATOR -> {
                 val pendingFile = appConfig.workingDir(metaDataProviderConfig).resolve("$animeId.${ANIDB_PENDING_FILE_SUFFIX}")

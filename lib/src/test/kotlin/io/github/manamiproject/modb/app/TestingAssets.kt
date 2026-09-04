@@ -158,6 +158,7 @@ internal class TestJsonSerializer<T>: JsonSerializer<T> {
 internal object TestDeadEntriesAccessor: DeadEntriesAccessor {
     override fun deadEntriesFile(metaDataProviderConfig: MetaDataProviderConfig, type: DatasetFileType): RegularFile = shouldNotBeInvoked()
     override suspend fun addDeadEntry(animeId: AnimeId, metaDataProviderConfig: MetaDataProviderConfig) = shouldNotBeInvoked()
+    override suspend fun removeDeadEntry(animeId: AnimeId, metaDataProviderConfig: MetaDataProviderConfig) { }
     override suspend fun determineDeadEntries(sources: Collection<URI>): Set<URI> = shouldNotBeInvoked()
     override suspend fun fetchDeadEntries(metaDataProviderConfig: MetaDataProviderConfig): Set<AnimeId> = shouldNotBeInvoked()
 }

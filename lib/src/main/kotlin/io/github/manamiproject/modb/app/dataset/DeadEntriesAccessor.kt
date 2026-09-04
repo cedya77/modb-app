@@ -29,6 +29,16 @@ interface DeadEntriesAccessor {
     suspend fun addDeadEntry(animeId: AnimeId, metaDataProviderConfig: MetaDataProviderConfig)
 
     /**
+     * Removes an anime from the dead entries list of a metadata provider.
+     * Called when a provider serves an entry again under an id it previously refused. Does nothing
+     * for metadata providers without a dead entries file, and nothing if the id is not listed.
+     * @since 1.0.0
+     * @param animeId ID of the anime as defined by the metadata provider.
+     * @param metaDataProviderConfig Configuration for a specific metadata provider.
+     */
+    suspend fun removeDeadEntry(animeId: AnimeId, metaDataProviderConfig: MetaDataProviderConfig)
+
+    /**
      * Find dead entries in a list of [URI].
      * @since 1.0.0
      * @param sources List of URIs to check for dead entries.
