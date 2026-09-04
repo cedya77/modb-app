@@ -17,6 +17,7 @@ import io.github.manamiproject.modb.test.exceptionExpected
 import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Nested
+import org.junit.jupiter.api.parallel.Isolated
 import java.net.Proxy
 import java.net.URI
 import java.time.Clock
@@ -24,6 +25,7 @@ import java.time.Instant
 import java.time.ZoneOffset.UTC
 import kotlin.test.Test
 
+@Isolated
 internal class RotatingProxyNetworkControllerTest {
 
     @Nested
