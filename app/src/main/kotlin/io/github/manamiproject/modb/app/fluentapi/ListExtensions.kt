@@ -6,6 +6,7 @@ import io.github.manamiproject.modb.app.merging.DefaultMergingService
 import io.github.manamiproject.modb.app.readme.DefaultReadmeCreator
 import io.github.manamiproject.modb.app.relatedanime.DefaultUnknownRelatedAnimeRemover
 import io.github.manamiproject.modb.app.synonyms.DefaultAmbiguousSynonymRemover
+import io.github.manamiproject.modb.app.synonyms.DefaultFragmentedSynonymRemover
 import io.github.manamiproject.modb.core.coverage.KoverIgnore
 import io.github.manamiproject.modb.core.anime.Anime
 import io.github.manamiproject.modb.core.anime.AnimeRaw
@@ -28,6 +29,9 @@ internal fun List<AnimeRaw>.addAnimeCountdown(): List<AnimeRaw> = AnimeCountdown
 
 @KoverIgnore
 internal fun List<AnimeRaw>.removeAmbiguousSynonyms(): List<AnimeRaw> = DefaultAmbiguousSynonymRemover.instance.removeSynonymsWhichNameARelatedAnime(this)
+
+@KoverIgnore
+internal fun List<AnimeRaw>.removeFragmentedSynonyms(): List<AnimeRaw> = DefaultFragmentedSynonymRemover.instance.removeSynonymsWhichAreAFragmentOfAnotherName(this)
 
 @KoverIgnore
 internal fun List<AnimeRaw>.removeUnknownEntriesFromRelatedAnime(): List<AnimeRaw> = DefaultUnknownRelatedAnimeRemover.instance.removeRelatedAnimeWhichHaveNoCorrespondingEntryInSources(this)

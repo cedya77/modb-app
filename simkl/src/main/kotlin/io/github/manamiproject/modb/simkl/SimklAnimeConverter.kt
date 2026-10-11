@@ -275,7 +275,7 @@ public class SimklAnimeConverter(
     }
 
     private fun extractSynonyms(data: ExtractionResult): HashSet<String> {
-        return data.stringOrDefault("synonyms").split(',').map { it.trim() }.toHashSet()
+        return data.stringOrDefault("synonyms").split(SYNONYM_SEPARATOR).map { it.trim() }.toHashSet()
     }
 
     private fun postProcessSynonyms(title: String, synonyms: HashSet<String>): HashSet<Title> {
@@ -331,6 +331,12 @@ public class SimklAnimeConverter(
     public companion object {
         private const val NO_START_DATE = "1970-01-01T00:00:00Z"
         private val YEAR_REGEX = "\\d{4}".toRegex()
+
+        /**
+         * The page joins the synonyms with a comma followed by a space. A comma without a space belongs to the
+         * synonym itself, as in "1,000,000", and must not split it.
+         */
+        private const val SYNONYM_SEPARATOR = ", "
 
         /**
          * Singleton of [SimklAnimeConverter]

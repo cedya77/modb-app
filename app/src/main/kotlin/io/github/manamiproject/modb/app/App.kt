@@ -70,6 +70,7 @@ fun main() = runCoroutine {
         .mergeAnime()
         .removeUnknownEntriesFromRelatedAnime()
         .removeAmbiguousSynonyms()
+        .removeFragmentedSynonyms()
         .addAnimeCountdown()
         .transformToDatasetEntries()
         .saveToDataset()

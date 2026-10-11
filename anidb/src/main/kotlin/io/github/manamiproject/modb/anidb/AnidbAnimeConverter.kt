@@ -150,14 +150,14 @@ public class AnidbAnimeConverter(
             data.listNotNull<Title>("alternateNames").forEach { synonyms.add(it) }
         }
 
-        data.stringOrDefault("synonymsList").split(",").forEach { synonyms.add(it) }
+        data.stringOrDefault("synonymsList").split(SYNONYM_SEPARATOR).forEach { synonyms.add(it) }
 
         if (data.isOfType("shortNames", ArrayList::class) && !data.notFound("shortNames")) {
             data.listNotNull<Title>("shortNames").forEach { synonyms.add(it) }
         }
 
         if (data.isOfType("shortNames", String::class)) {
-            data.stringOrDefault("shortNames").split(",").forEach { synonyms.add(it) }
+            data.stringOrDefault("shortNames").split(SYNONYM_SEPARATOR).forEach { synonyms.add(it) }
         }
 
         return synonyms
@@ -367,6 +367,12 @@ public class AnidbAnimeConverter(
         private const val US_CDN = "https://cdn-us.anidb.net"
         private const val CDN = "https://cdn.anidb.net"
         private val DATEFORMAT = """(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})""".toRegex()
+
+        /**
+         * The page joins the synonyms with a comma followed by a space. A comma without a space belongs to the
+         * synonym itself, as in "1,000,000", and must not split it.
+         */
+        private const val SYNONYM_SEPARATOR = ", "
 
         /**
          * Singleton of [AnidbAnimeConverter]
