@@ -1,5 +1,6 @@
 package io.github.manamiproject.modb.myanimelist
 
+import io.github.manamiproject.modb.core.anime.RelatedAnime
 import io.github.manamiproject.modb.core.anime.AnimeSeason.Season.*
 import io.github.manamiproject.modb.core.anime.AnimeStatus.*
 import io.github.manamiproject.modb.core.anime.AnimeType.*
@@ -839,11 +840,11 @@ internal class MyanimelistAnimeConverterTest {
 
                 // then
                 assertThat(result.relatedAnime).containsExactlyInAnyOrder(
-                    URI("https://myanimelist.net/anime/17819"),
-                    URI("https://myanimelist.net/anime/19671"),
-                    URI("https://myanimelist.net/anime/22265"),
-                    URI("https://myanimelist.net/anime/30415"),
-                    URI("https://myanimelist.net/anime/33845"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/17819"), "Other"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/19671"), "Side Story"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/22265"), "Sequel"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/30415"), "Prequel"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/33845"), "Alternative Version"),
                 )
             }
         }
@@ -867,7 +868,7 @@ internal class MyanimelistAnimeConverterTest {
 
                 // then
                 assertThat(result.relatedAnime).containsExactly(
-                    URI("https://myanimelist.net/anime/10165"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/10165"), "Sequel"),
                 )
             }
         }
@@ -891,23 +892,23 @@ internal class MyanimelistAnimeConverterTest {
 
                 // then
                 assertThat(result.relatedAnime).containsExactlyInAnyOrder(
-                    URI("https://myanimelist.net/anime/12685"),
-                    URI("https://myanimelist.net/anime/15197"),
-                    URI("https://myanimelist.net/anime/15199"),
-                    URI("https://myanimelist.net/anime/15201"),
-                    URI("https://myanimelist.net/anime/17277"),
-                    URI("https://myanimelist.net/anime/1953"),
-                    URI("https://myanimelist.net/anime/2124"),
-                    URI("https://myanimelist.net/anime/2904"),
-                    URI("https://myanimelist.net/anime/30711"),
-                    URI("https://myanimelist.net/anime/33155"),
-                    URI("https://myanimelist.net/anime/34438"),
-                    URI("https://myanimelist.net/anime/34439"),
-                    URI("https://myanimelist.net/anime/40334"),
-                    URI("https://myanimelist.net/anime/40836"),
-                    URI("https://myanimelist.net/anime/41075"),
-                    URI("https://myanimelist.net/anime/4596"),
-                    URI("https://myanimelist.net/anime/8888"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/12685"), "Spin-Off"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/15197"), "Alternative Setting"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/15199"), "Alternative Setting"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/15201"), "Alternative Setting"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/17277"), "Alternative Setting"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/1953"), "Side Story"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/2124"), "Summary"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/2904"), "Sequel"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/30711"), "Alternative Setting"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/33155"), "Side Story"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/34438"), "Alternative Version"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/34439"), "Alternative Version"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/40334"), "Side Story"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/40836"), "Side Story"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/41075"), "Side Story"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/4596"), "Summary"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/8888"), "Alternative Setting"),
                 )
             }
         }

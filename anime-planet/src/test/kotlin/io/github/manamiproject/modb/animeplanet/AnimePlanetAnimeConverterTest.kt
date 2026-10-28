@@ -1,5 +1,6 @@
 package io.github.manamiproject.modb.animeplanet
 
+import io.github.manamiproject.modb.core.anime.RelatedAnime
 import io.github.manamiproject.modb.core.anime.AnimeSeason
 import io.github.manamiproject.modb.core.anime.AnimeSeason.Season.*
 import io.github.manamiproject.modb.core.anime.AnimeStatus.*
@@ -1020,13 +1021,13 @@ internal class AnimePlanetAnimeConverterTest {
 
                 // then
                 assertThat(result.relatedAnime).containsExactlyInAnyOrder(
-                    URI("https://anime-planet.com/anime/fullmetal-alchemist"),
-                    URI("https://anime-planet.com/anime/fullmetal-alchemist-brotherhood-4-koma-theater"),
-                    URI("https://anime-planet.com/anime/fullmetal-alchemist-brotherhood-specials"),
-                    URI("https://anime-planet.com/anime/fullmetal-alchemist-premium-collection"),
-                    URI("https://anime-planet.com/anime/fullmetal-alchemist-reflections"),
-                    URI("https://anime-planet.com/anime/fullmetal-alchemist-the-movie-conqueror-of-shamballa"),
-                    URI("https://anime-planet.com/anime/fullmetal-alchemist-the-sacred-star-of-milos"),
+                    RelatedAnime(URI("https://anime-planet.com/anime/fullmetal-alchemist"), "Other Franchise"),
+                    RelatedAnime(URI("https://anime-planet.com/anime/fullmetal-alchemist-brotherhood-4-koma-theater"), "Omake"),
+                    RelatedAnime(URI("https://anime-planet.com/anime/fullmetal-alchemist-brotherhood-specials"), "Side Story"),
+                    RelatedAnime(URI("https://anime-planet.com/anime/fullmetal-alchemist-premium-collection"), "Other Franchise"),
+                    RelatedAnime(URI("https://anime-planet.com/anime/fullmetal-alchemist-reflections"), "Other Franchise"),
+                    RelatedAnime(URI("https://anime-planet.com/anime/fullmetal-alchemist-the-movie-conqueror-of-shamballa"), "Other Franchise"),
+                    RelatedAnime(URI("https://anime-planet.com/anime/fullmetal-alchemist-the-sacred-star-of-milos")),
                 )
             }
         }
@@ -1049,12 +1050,12 @@ internal class AnimePlanetAnimeConverterTest {
 
                 // then
                 assertThat(result.relatedAnime).containsExactlyInAnyOrder(
-                    URI("https://anime-planet.com/anime/demon-slayer-kimetsu-no-yaiba-entertainment-district-arc"),
-                    URI("https://anime-planet.com/anime/demon-slayer-kimetsu-no-yaiba-movie-mugen-train"),
-                    URI("https://anime-planet.com/anime/demon-slayer-kimetsu-no-yaiba-mugen-train"),
-                    URI("https://anime-planet.com/anime/demon-slayer-kimetsu-no-yaiba-swordsmith-village-arc"),
-                    URI("https://anime-planet.com/anime/kimetsu-gakuen-monogatari-kimetsu-no-utage-tokubetsu-hen"),
-                    URI("https://anime-planet.com/anime/kimetsu-gakuen-valentine-hen"),
+                    RelatedAnime(URI("https://anime-planet.com/anime/demon-slayer-kimetsu-no-yaiba-entertainment-district-arc")),
+                    RelatedAnime(URI("https://anime-planet.com/anime/demon-slayer-kimetsu-no-yaiba-movie-mugen-train"), "Sequel"),
+                    RelatedAnime(URI("https://anime-planet.com/anime/demon-slayer-kimetsu-no-yaiba-mugen-train"), "Sequel"),
+                    RelatedAnime(URI("https://anime-planet.com/anime/demon-slayer-kimetsu-no-yaiba-swordsmith-village-arc")),
+                    RelatedAnime(URI("https://anime-planet.com/anime/kimetsu-gakuen-monogatari-kimetsu-no-utage-tokubetsu-hen")),
+                    RelatedAnime(URI("https://anime-planet.com/anime/kimetsu-gakuen-valentine-hen")),
                 )
             }
         }

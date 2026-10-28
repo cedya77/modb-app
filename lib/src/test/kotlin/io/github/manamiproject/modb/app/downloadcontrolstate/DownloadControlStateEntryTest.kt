@@ -470,14 +470,14 @@ internal class DownloadControlStateEntryTest {
                 _nextDownload = WeekOfYear.currentWeek(),
                 _anime = AnimeRaw(
                     _title = "title",
-                    _relatedAnime = hashSetOf(URI("https://example.org/anime/some-title")),
+                    _relatedAnime = hashSetOf(RelatedAnime(URI("https://example.org/anime/some-title"))),
                 ),
             )
 
             val newAnime = downloadControlStateEntry.anime.copy(
                 _relatedAnime = hashSetOf(
-                    URI("https://example.org/anime/some-title"),
-                    URI("https://example.org/anime/additional-title"),
+                    RelatedAnime(URI("https://example.org/anime/some-title")),
+                    RelatedAnime(URI("https://example.org/anime/additional-title")),
                 ),
             )
 
@@ -902,7 +902,7 @@ internal class DownloadControlStateEntryTest {
                 _nextDownload = WeekOfYear.currentWeek(),
                 _anime = AnimeRaw(
                     _title = "Test",
-                    _relatedAnime = hashSetOf(URI("https://example.org/real1"))
+                    _relatedAnime = hashSetOf(RelatedAnime(URI("https://example.org/real1")))
                 ),
             )
 
@@ -980,7 +980,7 @@ internal class DownloadControlStateEntryTest {
                         "Clannad: After Story OVA",
                         "クラナド　アフターストーリー　もうひとつの世界　杏編",
                     ),
-                    _relatedAnime = hashSetOf(URI("https://myanimelist.net/anime/2167")),
+                    _relatedAnime = hashSetOf(RelatedAnime(URI("https://myanimelist.net/anime/2167"))),
                     _tags = hashSetOf(
                         "comedy",
                         "drama",
@@ -1027,7 +1027,7 @@ internal class DownloadControlStateEntryTest {
                         "Clannad: After Story OVA",
                         "クラナド　アフターストーリー　もうひとつの世界　杏編",
                     ),
-                    _relatedAnime = hashSetOf(URI("https://myanimelist.net/anime/2167")),
+                    _relatedAnime = hashSetOf(RelatedAnime(URI("https://myanimelist.net/anime/2167"))),
                     _tags = hashSetOf(
                         "comedy",
                         "drama",

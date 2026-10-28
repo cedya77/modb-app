@@ -117,7 +117,7 @@ internal object TestAnimeRawObjects {
                     "vap",
                 ),
                 _relatedAnime = hashSetOf(
-                    URI("https://myanimelist.net/anime/2994"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/2994")),
                 ),
                 _tags = hashSetOf(
                     "psychological",
@@ -175,7 +175,9 @@ internal object TestAnimeRawObjects {
                 "vap"
               ],
               "relatedAnime": [
-                "https://myanimelist.net/anime/2994"
+                {
+                  "uri": "https://myanimelist.net/anime/2994"
+                }
               ],
               "tags": [
                 "psychological",
@@ -187,7 +189,7 @@ internal object TestAnimeRawObjects {
         """.trimIndent()
 
         val serializedMinified = """
-            {"sources":["https://myanimelist.net/anime/1535"],"title":"Death Note","type":"TV","episodes":37,"status":"FINISHED","animeSeason":{"season":"FALL"},"picture":"https://cdn.myanimelist.net/images/anime/1079/138100.jpg","thumbnail":"https://cdn.myanimelist.net/images/anime/1079/138100t.jpg","scores":[{"hostname":"myanimelist.net","value":8.62,"range":{"minInclusive":1.0,"maxInclusive":10.0}}],"synonyms":["DN","デスノート"],"studios":["madhouse"],"producers":["d.n. dream partners","nippon television network","shueisha","vap"],"relatedAnime":["https://myanimelist.net/anime/2994"],"tags":["psychological","shounen","supernatural","suspense"]}
+            {"sources":["https://myanimelist.net/anime/1535"],"title":"Death Note","type":"TV","episodes":37,"status":"FINISHED","animeSeason":{"season":"FALL"},"picture":"https://cdn.myanimelist.net/images/anime/1079/138100.jpg","thumbnail":"https://cdn.myanimelist.net/images/anime/1079/138100t.jpg","scores":[{"hostname":"myanimelist.net","value":8.62,"range":{"minInclusive":1.0,"maxInclusive":10.0}}],"synonyms":["DN","デスノート"],"studios":["madhouse"],"producers":["d.n. dream partners","nippon television network","shueisha","vap"],"relatedAnime":[{"uri":"https://myanimelist.net/anime/2994"}],"tags":["psychological","shounen","supernatural","suspense"]}
         """.trimIndent()
     }
 
@@ -228,7 +230,7 @@ internal object TestAnimeRawObjects {
                     "pony canyon",
                 ),
                 _relatedAnime = hashSetOf(
-                    URI("https://anilist.co/anime/131520"),
+                    RelatedAnime(URI("https://anilist.co/anime/131520")),
                 ),
                 _tags = hashSetOf(
                     "comedy",
@@ -297,7 +299,9 @@ internal object TestAnimeRawObjects {
                 "pony canyon"
               ],
               "relatedAnime": [
-                "https://anilist.co/anime/131520"
+                {
+                  "uri": "https://anilist.co/anime/131520"
+                }
               ],
               "tags": [
                 "comedy",
@@ -318,7 +322,7 @@ internal object TestAnimeRawObjects {
         """.trimIndent()
 
         val serializedMinified = """
-            {"sources":["https://anilist.co/anime/177191"],"title":"Go-toubun no Hanayome *","type":"SPECIAL","episodes":2,"status":"FINISHED","animeSeason":{"season":"FALL","year":2024},"picture":"https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx177191-ovNZsq8EbIPY.jpg","thumbnail":"https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx177191-ovNZsq8EbIPY.jpg","duration":{"value":1440,"unit":"SECONDS"},"scores":[{"hostname":"anilist.co","value":75.0,"range":{"minInclusive":1.0,"maxInclusive":100.0}}],"synonyms":["The Quintessential Quintuplets*","五等分の花嫁*"],"studios":["bibury animation studios"],"producers":["dax production","nichion","pony canyon"],"relatedAnime":["https://anilist.co/anime/131520"],"tags":["comedy","drama","ensemble cast","female harem","heterosexual","language barrier","male protagonist","marriage","primarily female cast","romance","school","shounen","twins"]}
+            {"sources":["https://anilist.co/anime/177191"],"title":"Go-toubun no Hanayome *","type":"SPECIAL","episodes":2,"status":"FINISHED","animeSeason":{"season":"FALL","year":2024},"picture":"https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx177191-ovNZsq8EbIPY.jpg","thumbnail":"https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx177191-ovNZsq8EbIPY.jpg","duration":{"value":1440,"unit":"SECONDS"},"scores":[{"hostname":"anilist.co","value":75.0,"range":{"minInclusive":1.0,"maxInclusive":100.0}}],"synonyms":["The Quintessential Quintuplets*","五等分の花嫁*"],"studios":["bibury animation studios"],"producers":["dax production","nichion","pony canyon"],"relatedAnime":[{"uri":"https://anilist.co/anime/131520"}],"tags":["comedy","drama","ensemble cast","female harem","heterosexual","language barrier","male protagonist","marriage","primarily female cast","romance","school","shounen","twins"]}
         """.trimIndent()
     }
 
@@ -377,18 +381,18 @@ internal object TestAnimeRawObjects {
                     "pony canyon",
                 ),
                 _relatedAnime = hashSetOf(
-                    URI("https://anidb.net/anime/16165"),
-                    URI("https://anilist.co/anime/131520"),
-                    URI("https://anime-planet.com/anime/the-quintessential-quintuplets-movie"),
-                    URI("https://animecountdown.com/1577789"),
-                    URI("https://anisearch.com/anime/16091"),
-                    URI("https://kitsu.app/anime/44229"),
-                    URI("https://livechart.me/anime/10488"),
-                    URI("https://livechart.me/anime/11921"),
-                    URI("https://livechart.me/anime/3448"),
-                    URI("https://livechart.me/anime/9428"),
-                    URI("https://myanimelist.net/anime/48548"),
-                    URI("https://simkl.com/anime/1577789"),
+                    RelatedAnime(URI("https://anidb.net/anime/16165")),
+                    RelatedAnime(URI("https://anilist.co/anime/131520")),
+                    RelatedAnime(URI("https://anime-planet.com/anime/the-quintessential-quintuplets-movie")),
+                    RelatedAnime(URI("https://animecountdown.com/1577789")),
+                    RelatedAnime(URI("https://anisearch.com/anime/16091")),
+                    RelatedAnime(URI("https://kitsu.app/anime/44229")),
+                    RelatedAnime(URI("https://livechart.me/anime/10488")),
+                    RelatedAnime(URI("https://livechart.me/anime/11921")),
+                    RelatedAnime(URI("https://livechart.me/anime/3448")),
+                    RelatedAnime(URI("https://livechart.me/anime/9428")),
+                    RelatedAnime(URI("https://myanimelist.net/anime/48548")),
+                    RelatedAnime(URI("https://simkl.com/anime/1577789")),
                 ),
                 _tags = hashSetOf(
                     "america",
@@ -576,18 +580,42 @@ internal object TestAnimeRawObjects {
                 "pony canyon"
               ],
               "relatedAnime": [
-                "https://anidb.net/anime/16165",
-                "https://anilist.co/anime/131520",
-                "https://anime-planet.com/anime/the-quintessential-quintuplets-movie",
-                "https://animecountdown.com/1577789",
-                "https://anisearch.com/anime/16091",
-                "https://kitsu.app/anime/44229",
-                "https://livechart.me/anime/10488",
-                "https://livechart.me/anime/11921",
-                "https://livechart.me/anime/3448",
-                "https://livechart.me/anime/9428",
-                "https://myanimelist.net/anime/48548",
-                "https://simkl.com/anime/1577789"
+                {
+                  "uri": "https://anidb.net/anime/16165"
+                },
+                {
+                  "uri": "https://anilist.co/anime/131520"
+                },
+                {
+                  "uri": "https://anime-planet.com/anime/the-quintessential-quintuplets-movie"
+                },
+                {
+                  "uri": "https://animecountdown.com/1577789"
+                },
+                {
+                  "uri": "https://anisearch.com/anime/16091"
+                },
+                {
+                  "uri": "https://kitsu.app/anime/44229"
+                },
+                {
+                  "uri": "https://livechart.me/anime/10488"
+                },
+                {
+                  "uri": "https://livechart.me/anime/11921"
+                },
+                {
+                  "uri": "https://livechart.me/anime/3448"
+                },
+                {
+                  "uri": "https://livechart.me/anime/9428"
+                },
+                {
+                  "uri": "https://myanimelist.net/anime/48548"
+                },
+                {
+                  "uri": "https://simkl.com/anime/1577789"
+                }
               ],
               "tags": [
                 "america",
@@ -618,7 +646,7 @@ internal object TestAnimeRawObjects {
         """.trimIndent()
 
         val serializedMinified = """
-            {"sources":["https://anidb.net/anime/18603","https://anilist.co/anime/177191","https://anime-planet.com/anime/the-quintessential-quintuplets-specials-2","https://anisearch.com/anime/19242","https://kitsu.app/anime/48807","https://livechart.me/anime/12646","https://myanimelist.net/anime/58755","https://simkl.com/anime/2448488"],"title":"5-toubun no Hanayome*","type":"SPECIAL","episodes":2,"status":"FINISHED","animeSeason":{"season":"FALL","year":2024},"picture":"https://cdn.myanimelist.net/images/anime/1915/145336.jpg","thumbnail":"https://cdn.myanimelist.net/images/anime/1915/145336t.jpg","duration":{"value":1440,"unit":"SECONDS"},"scores":[{"hostname":"anidb.net","value":6.63,"range":{"minInclusive":1,"maxInclusive":10}},{"hostname":"anilist.co","value":75,"range":{"minInclusive":1,"maxInclusive":100}},{"hostname":"anime-planet.com","value":3.845,"range":{"minInclusive":0.5,"maxInclusive":5.0}},{"hostname":"anisearch.com","value":3.9,"range":{"minInclusive":0.1,"maxInclusive":5}},{"hostname":"kitsu.app","value":76.95,"range":{"minInclusive":1,"maxInclusive":100}},{"hostname":"livechart.me","value":8.35,"range":{"minInclusive":1,"maxInclusive":10}},{"hostname":"myanimelist.net","value":8.62,"range":{"minInclusive":1,"maxInclusive":10}},{"hostname":"simkl.com","value":7.9,"range":{"minInclusive":1,"maxInclusive":10}}],"synonyms":["5-toubun no Hanayome *","Go-Toubun no Hanayome *","Go-Tōbun no Hanayome *","Go-toubun no Hanayome *","The Quintessential Quintuplets *","The Quintessential Quintuplets Movie*","The Quintessential Quintuplets Special 2","The Quintessential Quintuplets Specials 2","The Quintessential Quintuplets*","The Quintessential Quintuplets: Honeymoon Arc","五等分の花嫁*","五等分の花嫁＊","五等分的新娘＊"],"studios":["bibury animation studios"],"producers":["dax production","nichion","pony canyon"],"relatedAnime":["https://anidb.net/anime/16165","https://anilist.co/anime/131520","https://anime-planet.com/anime/the-quintessential-quintuplets-movie","https://animecountdown.com/1577789","https://anisearch.com/anime/16091","https://kitsu.app/anime/44229","https://livechart.me/anime/10488","https://livechart.me/anime/11921","https://livechart.me/anime/3448","https://livechart.me/anime/9428","https://myanimelist.net/anime/48548","https://simkl.com/anime/1577789"],"tags":["america","based on a manga","comedy","drama","ensemble cast","female harem","harem","heterosexual","japanese production","language barrier","male protagonist","marriage","new","predominantly female cast","present","primarily female cast","romance","school","sequel","shounen","siblings","time","twins"]}
+            {"sources":["https://anidb.net/anime/18603","https://anilist.co/anime/177191","https://anime-planet.com/anime/the-quintessential-quintuplets-specials-2","https://anisearch.com/anime/19242","https://kitsu.app/anime/48807","https://livechart.me/anime/12646","https://myanimelist.net/anime/58755","https://simkl.com/anime/2448488"],"title":"5-toubun no Hanayome*","type":"SPECIAL","episodes":2,"status":"FINISHED","animeSeason":{"season":"FALL","year":2024},"picture":"https://cdn.myanimelist.net/images/anime/1915/145336.jpg","thumbnail":"https://cdn.myanimelist.net/images/anime/1915/145336t.jpg","duration":{"value":1440,"unit":"SECONDS"},"scores":[{"hostname":"anidb.net","value":6.63,"range":{"minInclusive":1,"maxInclusive":10}},{"hostname":"anilist.co","value":75,"range":{"minInclusive":1,"maxInclusive":100}},{"hostname":"anime-planet.com","value":3.845,"range":{"minInclusive":0.5,"maxInclusive":5.0}},{"hostname":"anisearch.com","value":3.9,"range":{"minInclusive":0.1,"maxInclusive":5}},{"hostname":"kitsu.app","value":76.95,"range":{"minInclusive":1,"maxInclusive":100}},{"hostname":"livechart.me","value":8.35,"range":{"minInclusive":1,"maxInclusive":10}},{"hostname":"myanimelist.net","value":8.62,"range":{"minInclusive":1,"maxInclusive":10}},{"hostname":"simkl.com","value":7.9,"range":{"minInclusive":1,"maxInclusive":10}}],"synonyms":["5-toubun no Hanayome *","Go-Toubun no Hanayome *","Go-Tōbun no Hanayome *","Go-toubun no Hanayome *","The Quintessential Quintuplets *","The Quintessential Quintuplets Movie*","The Quintessential Quintuplets Special 2","The Quintessential Quintuplets Specials 2","The Quintessential Quintuplets*","The Quintessential Quintuplets: Honeymoon Arc","五等分の花嫁*","五等分の花嫁＊","五等分的新娘＊"],"studios":["bibury animation studios"],"producers":["dax production","nichion","pony canyon"],"relatedAnime":[{"uri":"https://anidb.net/anime/16165"},{"uri":"https://anilist.co/anime/131520"},{"uri":"https://anime-planet.com/anime/the-quintessential-quintuplets-movie"},{"uri":"https://animecountdown.com/1577789"},{"uri":"https://anisearch.com/anime/16091"},{"uri":"https://kitsu.app/anime/44229"},{"uri":"https://livechart.me/anime/10488"},{"uri":"https://livechart.me/anime/11921"},{"uri":"https://livechart.me/anime/3448"},{"uri":"https://livechart.me/anime/9428"},{"uri":"https://myanimelist.net/anime/48548"},{"uri":"https://simkl.com/anime/1577789"}],"tags":["america","based on a manga","comedy","drama","ensemble cast","female harem","harem","heterosexual","japanese production","language barrier","male protagonist","marriage","new","predominantly female cast","present","primarily female cast","romance","school","sequel","shounen","siblings","time","twins"]}
         """.trimIndent()
     }
 }
@@ -698,7 +726,7 @@ internal object TestAnimeObjects {
                     "vap",
                 ),
                 relatedAnime = hashSetOf(
-                    URI("https://myanimelist.net/anime/2994"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/2994")),
                 ),
                 tags = hashSetOf(
                     "psychological",
@@ -739,7 +767,9 @@ internal object TestAnimeObjects {
                 "vap"
               ],
               "relatedAnime": [
-                "https://myanimelist.net/anime/2994"
+                {
+                  "uri": "https://myanimelist.net/anime/2994"
+                }
               ],
               "tags": [
                 "psychological",
@@ -751,7 +781,7 @@ internal object TestAnimeObjects {
         """.trimIndent()
 
         val serializedMinified = """
-            {"sources":["https://myanimelist.net/anime/1535"],"title":"Death Note","type":"TV","episodes":37,"status":"FINISHED","animeSeason":{"season":"FALL"},"picture":"https://cdn.myanimelist.net/images/anime/1079/138100.jpg","thumbnail":"https://cdn.myanimelist.net/images/anime/1079/138100t.jpg","synonyms":["DN","デスノート"],"studios":["madhouse"],"producers":["D.N. Dream Partners","nippon television network","shueisha","vap"],"relatedAnime":["https://myanimelist.net/anime/2994"],"tags":["psychological","shounen","supernatural","suspense"]}
+            {"sources":["https://myanimelist.net/anime/1535"],"title":"Death Note","type":"TV","episodes":37,"status":"FINISHED","animeSeason":{"season":"FALL"},"picture":"https://cdn.myanimelist.net/images/anime/1079/138100.jpg","thumbnail":"https://cdn.myanimelist.net/images/anime/1079/138100t.jpg","synonyms":["DN","デスノート"],"studios":["madhouse"],"producers":["D.N. Dream Partners","nippon television network","shueisha","vap"],"relatedAnime":[{"uri":"https://myanimelist.net/anime/2994"}],"tags":["psychological","shounen","supernatural","suspense"]}
         """.trimIndent()
     }
 
@@ -797,7 +827,7 @@ internal object TestAnimeObjects {
                     "pony canyon",
                 ),
                 relatedAnime = hashSetOf(
-                    URI("https://myanimelist.net/anime/48548"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/48548")),
                 ),
                 tags = hashSetOf(
                     "comedy",
@@ -845,7 +875,9 @@ internal object TestAnimeObjects {
                 "pony canyon"
               ],
               "relatedAnime": [
-                "https://myanimelist.net/anime/48548"
+                {
+                  "uri": "https://myanimelist.net/anime/48548"
+                }
               ],
               "tags": [
                 "comedy",
@@ -858,7 +890,7 @@ internal object TestAnimeObjects {
         """.trimIndent()
 
         val serializedMinified = """
-            {"sources":["https://myanimelist.net/anime/58755"],"title":"5-toubun no Hanayome*","type":"SPECIAL","episodes":2,"status":"FINISHED","animeSeason":{"season":"FALL","year":2024},"picture":"https://cdn.myanimelist.net/images/anime/1915/145336.jpg","thumbnail":"https://cdn.myanimelist.net/images/anime/1915/145336t.jpg","duration":{"value":1440,"unit":"SECONDS"},"score":{"arithmeticGeometricMean":7.44,"arithmeticMean":7.44,"median":7.44},"synonyms":["The Quintessential Quintuplets*","五等分の花嫁*"],"studios":["bibury animation studios"],"producers":["dax production","nichion","pony canyon"],"relatedAnime":["https://myanimelist.net/anime/48548"],"tags":["comedy","harem","romance","school","shounen"]}
+            {"sources":["https://myanimelist.net/anime/58755"],"title":"5-toubun no Hanayome*","type":"SPECIAL","episodes":2,"status":"FINISHED","animeSeason":{"season":"FALL","year":2024},"picture":"https://cdn.myanimelist.net/images/anime/1915/145336.jpg","thumbnail":"https://cdn.myanimelist.net/images/anime/1915/145336t.jpg","duration":{"value":1440,"unit":"SECONDS"},"score":{"arithmeticGeometricMean":7.44,"arithmeticMean":7.44,"median":7.44},"synonyms":["The Quintessential Quintuplets*","五等分の花嫁*"],"studios":["bibury animation studios"],"producers":["dax production","nichion","pony canyon"],"relatedAnime":[{"uri":"https://myanimelist.net/anime/48548"}],"tags":["comedy","harem","romance","school","shounen"]}
         """.trimIndent()
     }
 
@@ -923,18 +955,18 @@ internal object TestAnimeObjects {
                     "tbs",
                 ),
                 relatedAnime = hashSetOf(
-                    URI("https://anidb.net/anime/16165"),
-                    URI("https://anilist.co/anime/131520"),
-                    URI("https://anime-planet.com/anime/the-quintessential-quintuplets-movie"),
-                    URI("https://animecountdown.com/1577789"),
-                    URI("https://anisearch.com/anime/16091"),
-                    URI("https://kitsu.app/anime/44229"),
-                    URI("https://livechart.me/anime/10488"),
-                    URI("https://livechart.me/anime/11921"),
-                    URI("https://livechart.me/anime/3448"),
-                    URI("https://livechart.me/anime/9428"),
-                    URI("https://myanimelist.net/anime/48548"),
-                    URI("https://simkl.com/anime/1577789"),
+                    RelatedAnime(URI("https://anidb.net/anime/16165")),
+                    RelatedAnime(URI("https://anilist.co/anime/131520")),
+                    RelatedAnime(URI("https://anime-planet.com/anime/the-quintessential-quintuplets-movie")),
+                    RelatedAnime(URI("https://animecountdown.com/1577789")),
+                    RelatedAnime(URI("https://anisearch.com/anime/16091")),
+                    RelatedAnime(URI("https://kitsu.app/anime/44229")),
+                    RelatedAnime(URI("https://livechart.me/anime/10488")),
+                    RelatedAnime(URI("https://livechart.me/anime/11921")),
+                    RelatedAnime(URI("https://livechart.me/anime/3448")),
+                    RelatedAnime(URI("https://livechart.me/anime/9428")),
+                    RelatedAnime(URI("https://myanimelist.net/anime/48548")),
+                    RelatedAnime(URI("https://simkl.com/anime/1577789")),
                 ),
                 tags = hashSetOf(
                     "america",
@@ -1020,18 +1052,42 @@ internal object TestAnimeObjects {
                 "tbs"
               ],
               "relatedAnime": [
-                "https://anidb.net/anime/16165",
-                "https://anilist.co/anime/131520",
-                "https://anime-planet.com/anime/the-quintessential-quintuplets-movie",
-                "https://animecountdown.com/1577789",
-                "https://anisearch.com/anime/16091",
-                "https://kitsu.app/anime/44229",
-                "https://livechart.me/anime/10488",
-                "https://livechart.me/anime/11921",
-                "https://livechart.me/anime/3448",
-                "https://livechart.me/anime/9428",
-                "https://myanimelist.net/anime/48548",
-                "https://simkl.com/anime/1577789"
+                {
+                  "uri": "https://anidb.net/anime/16165"
+                },
+                {
+                  "uri": "https://anilist.co/anime/131520"
+                },
+                {
+                  "uri": "https://anime-planet.com/anime/the-quintessential-quintuplets-movie"
+                },
+                {
+                  "uri": "https://animecountdown.com/1577789"
+                },
+                {
+                  "uri": "https://anisearch.com/anime/16091"
+                },
+                {
+                  "uri": "https://kitsu.app/anime/44229"
+                },
+                {
+                  "uri": "https://livechart.me/anime/10488"
+                },
+                {
+                  "uri": "https://livechart.me/anime/11921"
+                },
+                {
+                  "uri": "https://livechart.me/anime/3448"
+                },
+                {
+                  "uri": "https://livechart.me/anime/9428"
+                },
+                {
+                  "uri": "https://myanimelist.net/anime/48548"
+                },
+                {
+                  "uri": "https://simkl.com/anime/1577789"
+                }
               ],
               "tags": [
                 "america",
@@ -1062,7 +1118,7 @@ internal object TestAnimeObjects {
         """.trimIndent()
 
         val serializedMinified = """
-            {"sources":["https://anidb.net/anime/18603","https://anilist.co/anime/177191","https://anime-planet.com/anime/the-quintessential-quintuplets-specials-2","https://anisearch.com/anime/19242","https://kitsu.app/anime/48807","https://livechart.me/anime/12646","https://myanimelist.net/anime/58755","https://simkl.com/anime/2448488"],"title":"5-toubun no Hanayome*","type":"SPECIAL","episodes":2,"status":"FINISHED","animeSeason":{"season":"FALL","year":2024},"picture":"https://cdn.myanimelist.net/images/anime/1915/145336.jpg","thumbnail":"https://cdn.myanimelist.net/images/anime/1915/145336t.jpg","duration":{"value":1440,"unit":"SECONDS"},"score":{"arithmeticGeometricMean":7.616175305477198,"arithmeticMean":7.624601113172541,"median":7.7272727272727275},"synonyms":["5-toubun no Hanayome *","Go-Toubun no Hanayome *","Go-Tōbun no Hanayome *","Go-toubun no Hanayome *","The Quintessential Quintuplets *","The Quintessential Quintuplets Movie*","The Quintessential Quintuplets Special 2","The Quintessential Quintuplets Specials 2","The Quintessential Quintuplets*","The Quintessential Quintuplets: Honeymoon Arc","五等分の花嫁*","五等分の花嫁＊","五等分的新娘＊"],"studios":["bibury animation studios"],"producers":["dax production","nichion","pony canyon","tbs"],"relatedAnime":["https://anidb.net/anime/16165","https://anilist.co/anime/131520","https://anime-planet.com/anime/the-quintessential-quintuplets-movie","https://animecountdown.com/1577789","https://anisearch.com/anime/16091","https://kitsu.app/anime/44229","https://livechart.me/anime/10488","https://livechart.me/anime/11921","https://livechart.me/anime/3448","https://livechart.me/anime/9428","https://myanimelist.net/anime/48548","https://simkl.com/anime/1577789"],"tags":["america","based on a manga","comedy","drama","ensemble cast","female harem","harem","heterosexual","japanese production","language barrier","male protagonist","marriage","new","predominantly female cast","present","primarily female cast","romance","school","sequel","shounen","siblings","time","twins"]}
+            {"sources":["https://anidb.net/anime/18603","https://anilist.co/anime/177191","https://anime-planet.com/anime/the-quintessential-quintuplets-specials-2","https://anisearch.com/anime/19242","https://kitsu.app/anime/48807","https://livechart.me/anime/12646","https://myanimelist.net/anime/58755","https://simkl.com/anime/2448488"],"title":"5-toubun no Hanayome*","type":"SPECIAL","episodes":2,"status":"FINISHED","animeSeason":{"season":"FALL","year":2024},"picture":"https://cdn.myanimelist.net/images/anime/1915/145336.jpg","thumbnail":"https://cdn.myanimelist.net/images/anime/1915/145336t.jpg","duration":{"value":1440,"unit":"SECONDS"},"score":{"arithmeticGeometricMean":7.616175305477198,"arithmeticMean":7.624601113172541,"median":7.7272727272727275},"synonyms":["5-toubun no Hanayome *","Go-Toubun no Hanayome *","Go-Tōbun no Hanayome *","Go-toubun no Hanayome *","The Quintessential Quintuplets *","The Quintessential Quintuplets Movie*","The Quintessential Quintuplets Special 2","The Quintessential Quintuplets Specials 2","The Quintessential Quintuplets*","The Quintessential Quintuplets: Honeymoon Arc","五等分の花嫁*","五等分の花嫁＊","五等分的新娘＊"],"studios":["bibury animation studios"],"producers":["dax production","nichion","pony canyon","tbs"],"relatedAnime":[{"uri":"https://anidb.net/anime/16165"},{"uri":"https://anilist.co/anime/131520"},{"uri":"https://anime-planet.com/anime/the-quintessential-quintuplets-movie"},{"uri":"https://animecountdown.com/1577789"},{"uri":"https://anisearch.com/anime/16091"},{"uri":"https://kitsu.app/anime/44229"},{"uri":"https://livechart.me/anime/10488"},{"uri":"https://livechart.me/anime/11921"},{"uri":"https://livechart.me/anime/3448"},{"uri":"https://livechart.me/anime/9428"},{"uri":"https://myanimelist.net/anime/48548"},{"uri":"https://simkl.com/anime/1577789"}],"tags":["america","based on a manga","comedy","drama","ensemble cast","female harem","harem","heterosexual","japanese production","language barrier","male protagonist","marriage","new","predominantly female cast","present","primarily female cast","romance","school","sequel","shounen","siblings","time","twins"]}
         """.trimIndent()
     }
 }

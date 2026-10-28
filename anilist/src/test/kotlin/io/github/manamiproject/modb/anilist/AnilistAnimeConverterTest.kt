@@ -1,5 +1,6 @@
 package io.github.manamiproject.modb.anilist
 
+import io.github.manamiproject.modb.core.anime.RelatedAnime
 import io.github.manamiproject.modb.core.anime.AnimeSeason.Season.*
 import io.github.manamiproject.modb.core.anime.AnimeStatus.*
 import io.github.manamiproject.modb.core.anime.AnimeType.*
@@ -410,9 +411,9 @@ internal class AnilistAnimeConverterTest {
 
                 // then
                 assertThat(result.relatedAnime).containsExactlyInAnyOrder(
-                    URI("https://anilist.co/anime/107298"),
-                    URI("https://anilist.co/anime/116147"),
-                    URI("https://anilist.co/anime/97857"),
+                    RelatedAnime(URI("https://anilist.co/anime/107298"), "SIDE_STORY"),
+                    RelatedAnime(URI("https://anilist.co/anime/116147"), "SEQUEL"),
+                    RelatedAnime(URI("https://anilist.co/anime/97857"), "PREQUEL"),
                 )
             }
         }
@@ -434,7 +435,7 @@ internal class AnilistAnimeConverterTest {
 
                 // then
                 assertThat(result.relatedAnime).containsExactly(
-                    URI("https://anilist.co/anime/2337")
+                    RelatedAnime(URI("https://anilist.co/anime/2337"), "ALTERNATIVE")
                 )
             }
         }
@@ -456,18 +457,18 @@ internal class AnilistAnimeConverterTest {
 
                 // then
                 assertThat(result.relatedAnime).containsExactlyInAnyOrder(
-                    URI("https://anilist.co/anime/100148"),
-                    URI("https://anilist.co/anime/1081"),
-                    URI("https://anilist.co/anime/1301"),
-                    URI("https://anilist.co/anime/1302"),
-                    URI("https://anilist.co/anime/1491"),
-                    URI("https://anilist.co/anime/1645"),
-                    URI("https://anilist.co/anime/1676"),
-                    URI("https://anilist.co/anime/1706"),
-                    URI("https://anilist.co/anime/17269"),
-                    URI("https://anilist.co/anime/2202"),
-                    URI("https://anilist.co/anime/2203"),
-                    URI("https://anilist.co/anime/2470"),
+                    RelatedAnime(URI("https://anilist.co/anime/100148"), "ALTERNATIVE"),
+                    RelatedAnime(URI("https://anilist.co/anime/1081"), "SIDE_STORY"),
+                    RelatedAnime(URI("https://anilist.co/anime/1301"), "PREQUEL"),
+                    RelatedAnime(URI("https://anilist.co/anime/1302"), "CHARACTER"),
+                    RelatedAnime(URI("https://anilist.co/anime/1491"), "CHARACTER"),
+                    RelatedAnime(URI("https://anilist.co/anime/1645"), "SEQUEL"),
+                    RelatedAnime(URI("https://anilist.co/anime/1676"), "SIDE_STORY"),
+                    RelatedAnime(URI("https://anilist.co/anime/1706"), "ALTERNATIVE"),
+                    RelatedAnime(URI("https://anilist.co/anime/17269"), "ALTERNATIVE"),
+                    RelatedAnime(URI("https://anilist.co/anime/2202"), "ALTERNATIVE"),
+                    RelatedAnime(URI("https://anilist.co/anime/2203"), "ALTERNATIVE"),
+                    RelatedAnime(URI("https://anilist.co/anime/2470"), "SIDE_STORY"),
                 )
             }
         }

@@ -10,6 +10,7 @@ import io.github.manamiproject.modb.core.extensions.neitherNullNorBlank
 import io.github.manamiproject.modb.core.extensions.remove
 import io.github.manamiproject.modb.core.extractor.DataExtractor
 import io.github.manamiproject.modb.core.extractor.ExtractionResult
+import io.github.manamiproject.modb.core.extractor.extractLabelledLinks
 import io.github.manamiproject.modb.core.extractor.XmlDataExtractor
 import io.github.manamiproject.modb.core.anime.*
 import io.github.manamiproject.modb.core.anime.AnimeMedia.NO_PICTURE
@@ -57,7 +58,7 @@ public class SimklAnimeConverter(
                 "type" to "//strong[text()='Type:']/..//following-sibling::*/text()",
                 "duration" to "//meta[@property='og:duration']/@content",
                 "picture" to "//meta[@property='og:image']/@content",
-                "relatedAnime" to "//detail-related-item[@id='tvdetailrelations']//div[@class='tvdetailrelationsitems']//a/@href",
+                "relatedAnime" to "//detail-related-item[@id='tvdetailrelations']//div[@class='tvdetailrelationsitems']//a/html()",
                 "synonyms" to "//td[@itemprop='alternateName']/text()",
                 "score" to "//div[@itemprop='aggregateRating']//span[@class='SimklTVRatingAverage'][@itemprop='ratingValue']/text()",
                 "bestRating" to "//div[@itemprop='aggregateRating']//span[@itemprop='bestRating']/text()",
@@ -264,16 +265,19 @@ public class SimklAnimeConverter(
         return hashSetOf(metaDataProviderConfig.buildAnimeLink(animeId))
     }
 
-    private fun extractRelatedAnime(data: ExtractionResult): HashSet<URI> {
+    private suspend fun extractRelatedAnime(data: ExtractionResult): HashSet<RelatedAnime> {
         if (data.notFound("relatedAnime")) {
             return hashSetOf()
         }
 
-        val relatedAnimeIds = data.listNotNull<AnimeId>("relatedAnime") {
-            it.remove("/anime/").substringBefore('/')
-        }
-
-        return relatedAnimeIds.map { metaDataProviderConfig.buildAnimeLink(it) }.toHashSet()
+        // <a href="/anime/37429/..." class="tvdetailrelationsitem ..."> ... <div class="tvdetailrelationsitemimagetype">Alternative Setting</div>
+        return extractor.extractLabelledLinks(
+            snippets = data.listNotNull<String>("relatedAnime"),
+            labelSelector = "//div[@class='tvdetailrelationsitemimagetype']/text()",
+            linkSelector = "//a/@href",
+        ).flatMap { entry -> entry.links.map { it to entry.label } }
+            .map { (link, label) -> RelatedAnime.of(metaDataProviderConfig.buildAnimeLink(link.remove("/anime/").substringBefore('/')), label) }
+            .toHashSet()
     }
 
     private fun extractSynonyms(data: ExtractionResult): HashSet<String> {

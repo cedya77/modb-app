@@ -24,7 +24,7 @@ import io.github.manamiproject.modb.core.anime.Duration.Companion.UNKNOWN as UNK
  * @property synonyms Duplicate-free list of alternative titles. Synonyms are case-sensitive.
  * @property studios Lower case studio names. In general a duplicate free list, but might contain duplicates for different writings.
  * @property producers Lower case producers names. Companies only. In general a duplicate free list, but might contain duplicates for different writings.
- * @property relatedAnime Duplicate-free list of links to related anime.
+ * @property relatedAnime Duplicate-free list of links to related anime including the kind of relation as labelled by the metadata provider. One entry per link.
  * @property tags Duplicate-free list of tags. This contains both genres and tags from metadata providers. All tags are lower case.
  */
 public data class Anime(
@@ -41,7 +41,7 @@ public data class Anime(
     val synonyms: HashSet<Title> = HashSet(),
     val studios: HashSet<Studio> = HashSet(),
     val producers: HashSet<Producer> = HashSet(),
-    val relatedAnime: HashSet<URI> = HashSet(),
+    val relatedAnime: HashSet<RelatedAnime> = HashSet(),
     val tags: HashSet<Tag> = HashSet(),
 ) {
 

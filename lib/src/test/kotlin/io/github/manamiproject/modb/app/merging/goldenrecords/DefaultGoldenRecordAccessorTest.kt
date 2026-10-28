@@ -1,5 +1,6 @@
 package io.github.manamiproject.modb.app.merging.goldenrecords
 
+import io.github.manamiproject.modb.core.anime.RelatedAnime
 import io.github.manamiproject.modb.core.anime.AnimeRaw
 import io.github.manamiproject.modb.core.anime.AnimeType.*
 import io.github.manamiproject.modb.core.anime.Duration
@@ -86,8 +87,8 @@ internal class DefaultGoldenRecordAccessorTest {
                     "劇場版総集編【前編】メイドインアビス 旅立ちの夜明け",
                 ),
                 _relatedAnime = hashSetOf(
-                    URI("https://myanimelist.net/anime/34599"),
-                    URI("https://myanimelist.net/anime/37515"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/34599")),
+                    RelatedAnime(URI("https://myanimelist.net/anime/37515")),
                 )
             )
 
@@ -120,8 +121,8 @@ internal class DefaultGoldenRecordAccessorTest {
                     "劇場版総集編【前編】メイドインアビス 旅立ちの夜明け",
                 ),
                 _relatedAnime = hashSetOf(
-                    URI("https://myanimelist.net/anime/34599"),
-                    URI("https://myanimelist.net/anime/37515"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/34599")),
+                    RelatedAnime(URI("https://myanimelist.net/anime/37515")),
                 )
             )
 
@@ -247,9 +248,9 @@ internal class DefaultGoldenRecordAccessorTest {
                     "メイドインアビス",
                 ),
                 _relatedAnime = hashSetOf(
-                    URI("https://myanimelist.net/anime/36862"),
-                    URI("https://myanimelist.net/anime/37514"),
-                    URI("https://myanimelist.net/anime/37515"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/36862")),
+                    RelatedAnime(URI("https://myanimelist.net/anime/37514")),
+                    RelatedAnime(URI("https://myanimelist.net/anime/37515")),
                 ),
             )
 
@@ -267,8 +268,8 @@ internal class DefaultGoldenRecordAccessorTest {
                     "劇場版総集編【前編】メイドインアビス 旅立ちの夜明け",
                 ),
                 _relatedAnime = hashSetOf(
-                    URI("https://myanimelist.net/anime/34599"),
-                    URI("https://myanimelist.net/anime/37515"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/34599")),
+                    RelatedAnime(URI("https://myanimelist.net/anime/37515")),
                 ),
             )
 
@@ -289,7 +290,7 @@ internal class DefaultGoldenRecordAccessorTest {
                     "宇宙よりも遠い場所",
                 ),
                 _relatedAnime = hashSetOf(
-                    URI("https://myanimelist.net/anime/37123"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/37123")),
                 ),
             )
 
@@ -307,7 +308,7 @@ internal class DefaultGoldenRecordAccessorTest {
                     "宇宙よりも遠い場所 予告 WEB限定",
                 ),
                 _relatedAnime = hashSetOf(
-                    URI("https://myanimelist.net/anime/35839"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/35839")),
                 ),
             )
 
@@ -363,7 +364,7 @@ internal class DefaultGoldenRecordAccessorTest {
                     "宇宙よりも遠い場所",
                 ),
                 _relatedAnime = hashSetOf(
-                    URI("https://myanimelist.net/anime/37123"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/37123")),
                 ),
             )
 
@@ -599,8 +600,8 @@ internal class DefaultGoldenRecordAccessorTest {
                     "劇場版総集編【前編】メイドインアビス 旅立ちの夜明け",
                 ),
                 _relatedAnime = hashSetOf(
-                    URI("https://myanimelist.net/anime/34599"),
-                    URI("https://myanimelist.net/anime/37515"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/34599")),
+                    RelatedAnime(URI("https://myanimelist.net/anime/37515")),
                 )
             )
 
@@ -701,8 +702,8 @@ internal class DefaultGoldenRecordAccessorTest {
                     "劇場版総集編【前編】メイドインアビス 旅立ちの夜明け",
                 ),
                 _relatedAnime = hashSetOf(
-                    URI("https://myanimelist.net/anime/34599"),
-                    URI("https://myanimelist.net/anime/37515"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/34599")),
+                    RelatedAnime(URI("https://myanimelist.net/anime/37515")),
                 )
             )
 
@@ -746,8 +747,8 @@ internal class DefaultGoldenRecordAccessorTest {
                     "劇場版総集編【前編】メイドインアビス 旅立ちの夜明け"
                 ),
                 _relatedAnime = hashSetOf(
-                    URI("https://myanimelist.net/anime/34599"),
-                    URI("https://myanimelist.net/anime/37515"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/34599")),
+                    RelatedAnime(URI("https://myanimelist.net/anime/37515")),
                 ),
             )
 
@@ -766,8 +767,8 @@ internal class DefaultGoldenRecordAccessorTest {
                     "劇場版総集編【後編】メイドインアビス 放浪する黄昏",
                 ),
                 _relatedAnime = hashSetOf(
-                    URI("https://myanimelist.net/anime/34599"),
-                    URI("https://myanimelist.net/anime/37515"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/34599")),
+                    RelatedAnime(URI("https://myanimelist.net/anime/37515")),
                 )
             )
 
@@ -788,7 +789,7 @@ internal class DefaultGoldenRecordAccessorTest {
                     "宇宙よりも遠い場所",
                 ),
                 _relatedAnime = hashSetOf(
-                    URI("https://myanimelist.net/anime/37123"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/37123")),
                 ),
             )
 
@@ -806,7 +807,7 @@ internal class DefaultGoldenRecordAccessorTest {
                     "宇宙よりも遠い場所 予告 WEB限定",
                 ),
                 _relatedAnime = hashSetOf(
-                    URI("https://myanimelist.net/anime/35839"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/35839")),
                 )
             )
 
@@ -856,7 +857,7 @@ internal class DefaultGoldenRecordAccessorTest {
                     "宇宙よりも遠い場所",
                 ),
                 _relatedAnime = hashSetOf(
-                    URI("https://myanimelist.net/anime/37123"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/37123")),
                 ),
             )
 
@@ -958,7 +959,7 @@ internal class DefaultGoldenRecordAccessorTest {
                 ),
                 _title = "Death Note",
                 _relatedAnime = hashSetOf(
-                    URI("https://myanimelist.net/anime/2994"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/2994")),
                 ),
             )
 
@@ -971,8 +972,8 @@ internal class DefaultGoldenRecordAccessorTest {
                 ),
                 _title = "Death Note",
                 _relatedAnime = hashSetOf(
-                    URI("https://anidb.net/anime/8146"),
-                    URI("https://anidb.net/anime/8147"),
+                    RelatedAnime(URI("https://anidb.net/anime/8146")),
+                    RelatedAnime(URI("https://anidb.net/anime/8147")),
                 ),
             )
 
@@ -984,10 +985,10 @@ internal class DefaultGoldenRecordAccessorTest {
                 URI("https://anidb.net/anime/4563"),
                 URI("https://myanimelist.net/anime/1535"),
             )
-            assertThat(result.relatedAnime).containsExactly(
-                URI("https://anidb.net/anime/8146"),
-                URI("https://anidb.net/anime/8147"),
-                URI("https://myanimelist.net/anime/2994"),
+            assertThat(result.relatedAnime).containsExactlyInAnyOrder(
+                RelatedAnime(URI("https://anidb.net/anime/8146")),
+                RelatedAnime(URI("https://anidb.net/anime/8147")),
+                RelatedAnime(URI("https://myanimelist.net/anime/2994")),
             )
         }
 
@@ -1002,7 +1003,7 @@ internal class DefaultGoldenRecordAccessorTest {
                 ),
                 _title = "Death Note",
                 _relatedAnime = hashSetOf(
-                    URI("https://myanimelist.net/anime/2994"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/2994")),
                 ),
             )
 
@@ -1015,8 +1016,8 @@ internal class DefaultGoldenRecordAccessorTest {
                 ),
                 _title = "Death Note",
                 _relatedAnime = hashSetOf(
-                    URI("https://myanimelist.net/anime/1535"),
-                    URI("https://anidb.net/anime/8147"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/1535")),
+                    RelatedAnime(URI("https://anidb.net/anime/8147")),
                 ),
             )
 
@@ -1028,9 +1029,9 @@ internal class DefaultGoldenRecordAccessorTest {
                 URI("https://anidb.net/anime/4563"),
                 URI("https://myanimelist.net/anime/1535"),
             )
-            assertThat(result.relatedAnime).containsExactly(
-                URI("https://anidb.net/anime/8147"),
-                URI("https://myanimelist.net/anime/2994"),
+            assertThat(result.relatedAnime).containsExactlyInAnyOrder(
+                RelatedAnime(URI("https://anidb.net/anime/8147")),
+                RelatedAnime(URI("https://myanimelist.net/anime/2994")),
             )
         }
 

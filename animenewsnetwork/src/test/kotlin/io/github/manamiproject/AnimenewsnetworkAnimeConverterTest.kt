@@ -1,5 +1,6 @@
 package io.github.manamiproject
 
+import io.github.manamiproject.modb.core.anime.RelatedAnime
 import io.github.manamiproject.modb.core.anime.AnimeSeason.Season.*
 import io.github.manamiproject.modb.core.anime.AnimeStatus.*
 import io.github.manamiproject.modb.core.anime.AnimeType.*
@@ -1004,7 +1005,33 @@ internal class AnimenewsnetworkAnimeConverterTest {
 
                 // then
                 assertThat(result.relatedAnime).containsExactlyInAnyOrder(
-                    URI("https://animenewsnetwork.com/encyclopedia/anime.php?id=7809")
+                    RelatedAnime(URI("https://animenewsnetwork.com/encyclopedia/anime.php?id=7809"), "sequel of")
+                )
+            }
+        }
+
+        @Test
+        fun `relations in brackets separated by comma each keep their own label`() {
+            runTest {
+                // given
+                val testAnimenewsnetworkConfig = object : MetaDataProviderConfig by TestMetaDataProviderConfig {
+                    override fun hostname(): Hostname = AnimenewsnetworkConfig.hostname()
+                    override fun buildAnimeLink(id: AnimeId): URI = AnimenewsnetworkConfig.buildAnimeLink(id)
+                    override fun fileSuffix(): FileSuffix = AnimenewsnetworkConfig.fileSuffix()
+                }
+
+                val converter = AnimenewsnetworkAnimeConverter(testAnimenewsnetworkConfig)
+
+                // [ part of <a>[Gundam]</a>, compilation of <a>Mobile Suit Gundam Wing (TV)</a> ]
+                val testFile = loadTestResource<String>("AnimenewsnetworkAnimeConverterTest/duration/one-hour-per-episode.html")
+
+                // when
+                val result = converter.convert(testFile)
+
+                // then
+                assertThat(result.relatedAnime).containsExactlyInAnyOrder(
+                    RelatedAnime(URI("https://animenewsnetwork.com/encyclopedia/anime.php?id=4189"), "part of"),
+                    RelatedAnime(URI("https://animenewsnetwork.com/encyclopedia/anime.php?id=26"), "compilation of"),
                 )
             }
         }
@@ -1050,8 +1077,8 @@ internal class AnimenewsnetworkAnimeConverterTest {
 
                 // then
                 assertThat(result.relatedAnime).containsExactlyInAnyOrder(
-                    URI("https://animenewsnetwork.com/encyclopedia/anime.php?id=33628"),
-                    URI("https://animenewsnetwork.com/encyclopedia/anime.php?id=30277"),
+                    RelatedAnime(URI("https://animenewsnetwork.com/encyclopedia/anime.php?id=33628"), "sequel"),
+                    RelatedAnime(URI("https://animenewsnetwork.com/encyclopedia/anime.php?id=30277"), "spinoff"),
                 )
             }
         }
@@ -1075,9 +1102,9 @@ internal class AnimenewsnetworkAnimeConverterTest {
 
                 // then
                 assertThat(result.relatedAnime).containsExactlyInAnyOrder(
-                    URI("https://animenewsnetwork.com/encyclopedia/anime.php?id=2960"),
-                    URI("https://animenewsnetwork.com/encyclopedia/anime.php?id=14079"),
-                    URI("https://animenewsnetwork.com/encyclopedia/anime.php?id=12180"),
+                    RelatedAnime(URI("https://animenewsnetwork.com/encyclopedia/anime.php?id=2960"), "alternate retelling of"),
+                    RelatedAnime(URI("https://animenewsnetwork.com/encyclopedia/anime.php?id=14079"), "side story"),
+                    RelatedAnime(URI("https://animenewsnetwork.com/encyclopedia/anime.php?id=12180"), "side story"),
                 )
             }
         }
@@ -1101,14 +1128,14 @@ internal class AnimenewsnetworkAnimeConverterTest {
 
                 // then
                 assertThat(result.relatedAnime).containsExactlyInAnyOrder(
-                    URI("https://animenewsnetwork.com/encyclopedia/anime.php?id=20000"),
-                    URI("https://animenewsnetwork.com/encyclopedia/anime.php?id=28763"),
-                    URI("https://animenewsnetwork.com/encyclopedia/anime.php?id=23886"),
-                    URI("https://animenewsnetwork.com/encyclopedia/anime.php?id=24366"),
-                    URI("https://animenewsnetwork.com/encyclopedia/anime.php?id=27622"),
-                    URI("https://animenewsnetwork.com/encyclopedia/anime.php?id=26353"),
-                    URI("https://animenewsnetwork.com/encyclopedia/anime.php?id=26831"),
-                    URI("https://animenewsnetwork.com/encyclopedia/anime.php?id=31113"),
+                    RelatedAnime(URI("https://animenewsnetwork.com/encyclopedia/anime.php?id=20000"), "spinoff of"),
+                    RelatedAnime(URI("https://animenewsnetwork.com/encyclopedia/anime.php?id=28763")),
+                    RelatedAnime(URI("https://animenewsnetwork.com/encyclopedia/anime.php?id=23886")),
+                    RelatedAnime(URI("https://animenewsnetwork.com/encyclopedia/anime.php?id=24366"), "sequel"),
+                    RelatedAnime(URI("https://animenewsnetwork.com/encyclopedia/anime.php?id=27622")),
+                    RelatedAnime(URI("https://animenewsnetwork.com/encyclopedia/anime.php?id=26353"), "adaptation"),
+                    RelatedAnime(URI("https://animenewsnetwork.com/encyclopedia/anime.php?id=26831"), "side story"),
+                    RelatedAnime(URI("https://animenewsnetwork.com/encyclopedia/anime.php?id=31113"), "sequel"),
                 )
             }
         }

@@ -23,6 +23,7 @@ internal class AnimeRawAdapter: JsonAdapter<AnimeRaw>() {
     private val studioHashSetAdapter = HashSetAdapter(StudioAdapter())
     private val producerHashSetAdapter = HashSetAdapter(ProducerAdapter())
     private val uriHashSetAdapter = HashSetAdapter(UriAdapter())
+    private val relatedAnimeHashSetAdapter = HashSetAdapter(RelatedAnimeAdapter())
     private val tagHashSetAdapter = HashSetAdapter(TagAdapter())
 
     @FromJson
@@ -53,7 +54,7 @@ internal class AnimeRawAdapter: JsonAdapter<AnimeRaw>() {
         var studiosDeserialized = false
         var producers = HashSet<String>()
         var producersDeserialized = false
-        var relatedAnime = HashSet<URI>()
+        var relatedAnime = HashSet<RelatedAnime>()
         var relatedAnimeDeserialized = false
         var tags = HashSet<Tag>()
         var tagsDeserialized = false
@@ -111,7 +112,7 @@ internal class AnimeRawAdapter: JsonAdapter<AnimeRaw>() {
                     producersDeserialized = true
                 }
                 "relatedAnime" -> {
-                    relatedAnime = uriHashSetAdapter.fromJson(reader)
+                    relatedAnime = relatedAnimeHashSetAdapter.fromJson(reader)
                     relatedAnimeDeserialized = true
                 }
                 "tags" -> {
@@ -210,7 +211,7 @@ internal class AnimeRawAdapter: JsonAdapter<AnimeRaw>() {
         producerHashSetAdapter.toJson(writer, value.producers)
 
         writer.name("relatedAnime")
-        uriHashSetAdapter.toJson(writer, value.relatedAnime)
+        relatedAnimeHashSetAdapter.toJson(writer, value.relatedAnime)
 
         writer.name("tags")
         tagHashSetAdapter.toJson(writer, value.tags)

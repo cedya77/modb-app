@@ -1,5 +1,6 @@
 package io.github.manamiproject.modb.core.json
 
+import io.github.manamiproject.modb.core.anime.RelatedAnime
 import com.squareup.moshi.JsonDataException
 import io.github.manamiproject.modb.core.TestAnimeRawObjects
 import io.github.manamiproject.modb.test.exceptionExpected
@@ -1577,7 +1578,7 @@ internal class AnimeRawAdapterTest {
             // given
             val adapter = AnimeRawAdapter().indent("  ")
             val obj = TestAnimeRawObjects.AllPropertiesSet.obj.copy(
-                _relatedAnime = TestAnimeRawObjects.AllPropertiesSet.obj.relatedAnime.union(TestAnimeRawObjects.AllPropertiesSet.obj.sources).toHashSet(),
+                _relatedAnime = TestAnimeRawObjects.AllPropertiesSet.obj.relatedAnime.union(TestAnimeRawObjects.AllPropertiesSet.obj.sources.map { RelatedAnime(it) }).toHashSet(),
                 activateChecks = false,
             )
 

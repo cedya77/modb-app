@@ -14,6 +14,8 @@ import io.github.manamiproject.modb.core.extensions.EMPTY
 import io.github.manamiproject.modb.core.extensions.remove
 import io.github.manamiproject.modb.core.extractor.DataExtractor
 import io.github.manamiproject.modb.core.extractor.ExtractionResult
+import io.github.manamiproject.modb.core.extractor.WRAP_TABLE_ROW
+import io.github.manamiproject.modb.core.extractor.extractLabelledLinks
 import io.github.manamiproject.modb.core.extractor.XmlDataExtractor
 import io.github.manamiproject.modb.core.logging.LoggerDelegate
 import kotlinx.coroutines.withContext
@@ -45,8 +47,8 @@ public class MyanimelistAnimeConverter(
             "premiered" to "//td[text()='Premiered']/following-sibling::*/text()",
             "aired" to "//td[text()='Aired']/following-sibling::*/text()",
             "picture" to "//div[contains(@class, 'status-block')]/div[@itemprop='image']/@content",
-            "relatedAnime" to "//table[contains(@class, 'entries-table')]//a/@href",
-            "relatedAnimeDetails" to "//div[contains(@class, 'anime-detail-related-entries')]//a/@href",
+            "relatedAnime" to "//table[contains(@class, 'entries-table')]//tr/html()",
+            "relatedAnimeDetails" to "//div[contains(@class, 'anime-detail-related-entries')]/html()",
             "synonyms" to "//h2[text()='Information']/following-sibling::*//tr[0]/td[1]",
             "score" to "//span[@itemprop='ratingValue']/span/text()",
             "studios" to "//td[text()='Studios']/following-sibling::td/a/text()",
@@ -158,28 +160,38 @@ public class MyanimelistAnimeConverter(
         return hashSetOf(metaDataProviderConfig.buildAnimeLink(id))
     }
 
-    private fun extractRelatedAnime(data: ExtractionResult): HashSet<URI> {
+    private suspend fun extractRelatedAnime(data: ExtractionResult): HashSet<RelatedAnime> {
+        // tiles: <div class="... anime-detail-related-entries"> ... <a href="..."> ... <div class="text">Sequel</div>
         val relatedAnimeDetails = if (data.notFound("relatedAnimeDetails")) {
-            hashSetOf()
+            emptyList()
         } else {
-            data.listNotNull<String>("relatedAnimeDetails")
-                .filter { it.trim().startsWith(metaDataProviderConfig.buildAnimeLink(EMPTY).toString()) }
-                .mapNotNull { """\d+""".toRegex().find(it)?.value }
-                .map { metaDataProviderConfig.buildAnimeLink(it) }
-                .toHashSet()
+            extractor.extractLabelledLinks(
+                snippets = data.listNotNull<String>("relatedAnimeDetails"),
+                labelSelector = "//div[@class='text']/text()",
+                linkSelector = "//a/@href",
+            )
         }
 
+        // table: <tr><td class="... fn-grey5 ...">Side Story</td><td><ul class="entries"><li><a href="...">
         val relatedAnime = if (data.notFound("relatedAnime")) {
-            hashSetOf()
+            emptyList()
         } else {
-            data.listNotNull<String>("relatedAnime")
-                .filter { it.trim().startsWith(metaDataProviderConfig.buildAnimeLink(EMPTY).toString()) }
-                .mapNotNull { """\d+""".toRegex().find(it)?.value }
-                .map { metaDataProviderConfig.buildAnimeLink(it) }
-                .toHashSet()
+            extractor.extractLabelledLinks(
+                snippets = data.listNotNull<String>("relatedAnime"),
+                labelSelector = "//td[contains(@class, 'fn-grey5')]/text()",
+                linkSelector = "//ul[contains(@class, 'entries')]//a/@href",
+                wrap = WRAP_TABLE_ROW,
+            )
         }
 
-        return relatedAnime.union(relatedAnimeDetails).toHashSet()
+        return relatedAnime.union(relatedAnimeDetails)
+            .flatMap { entry -> entry.links.map { it to entry.label } }
+            .filter { (link, _) -> link.trim().startsWith(metaDataProviderConfig.buildAnimeLink(EMPTY).toString()) }
+            .mapNotNull { (link, label) ->
+                val id = """\d+""".toRegex().find(link)?.value ?: return@mapNotNull null
+                RelatedAnime.of(metaDataProviderConfig.buildAnimeLink(id), label)
+            }
+            .toHashSet()
     }
 
     private fun extractStatus(data: ExtractionResult): AnimeStatus {

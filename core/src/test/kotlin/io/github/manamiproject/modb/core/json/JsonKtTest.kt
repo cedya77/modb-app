@@ -339,7 +339,9 @@ internal class JsonKtTest {
                                 "vap"
                               ],
                               "relatedAnime": [
-                                "https://myanimelist.net/anime/2994"
+                                {
+                                  "uri": "https://myanimelist.net/anime/2994"
+                                }
                               ],
                               "tags": [
                                 "psychological",
@@ -410,7 +412,9 @@ internal class JsonKtTest {
                                 "vap"
                               ],
                               "relatedAnime": [
-                                "https://myanimelist.net/anime/2994"
+                                {
+                                  "uri": "https://myanimelist.net/anime/2994"
+                                }
                               ],
                               "tags": [
                                 "psychological",

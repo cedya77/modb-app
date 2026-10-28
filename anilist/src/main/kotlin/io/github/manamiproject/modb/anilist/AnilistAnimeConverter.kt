@@ -46,7 +46,7 @@ public class AnilistAnimeConverter(
             "id" to "$.data.Media.id",
             "status" to "$.data.Media.status",
             "tags" to "$.data.Media.tags.*.name",
-            "relatedAnime" to "$.data.Media.relations.edges.*.node",
+            "relatedAnime" to "$.data.Media.relations.edges",
             "score" to "$.data.Media.meanScore",
             "creators" to "$.data.Media.studios.edges",
         ))
@@ -126,11 +126,17 @@ public class AnilistAnimeConverter(
         return hashSetOf(metaDataProviderConfig.buildAnimeLink(data.string("id").trim()))
     }
 
-    private fun extractRelatedAnime(data: ExtractionResult): HashSet<URI> {
-        return data.listNotNull<LinkedHashMap<String, Any>>("relatedAnime")
-            .filter { it["type"] == "ANIME" }
-            .mapNotNull { it["id"] }
-            .map { metaDataProviderConfig.buildAnimeLink(it.toString().trim()) }
+    private fun extractRelatedAnime(data: ExtractionResult): HashSet<RelatedAnime> {
+        return data.listNotNull<Map<String, Any>>("relatedAnime")
+            .mapNotNull { edge ->
+                val node = edge["node"] as? Map<*, *> ?: return@mapNotNull null
+                if (node["type"] != "ANIME") return@mapNotNull null
+                val id = node["id"] ?: return@mapNotNull null
+                RelatedAnime.of(
+                    uri = metaDataProviderConfig.buildAnimeLink(id.toString().trim()),
+                    relation = edge["relationType"]?.toString(),
+                )
+            }
             .toHashSet()
     }
 

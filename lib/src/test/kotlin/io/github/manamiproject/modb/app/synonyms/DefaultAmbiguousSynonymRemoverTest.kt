@@ -1,5 +1,6 @@
 package io.github.manamiproject.modb.app.synonyms
 
+import io.github.manamiproject.modb.core.anime.RelatedAnime
 import io.github.manamiproject.modb.core.anime.AnimeRaw
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Nested
@@ -18,13 +19,13 @@ internal class DefaultAmbiguousSynonymRemoverTest {
                 _title = "Clevatess: Majuu no Ou to Akago to Shikabane no Yuusha",
                 _sources = hashSetOf(URI("http://example.org/anime/1")),
                 _synonyms = hashSetOf("Clevatess"),
-                _relatedAnime = hashSetOf(URI("http://example.org/anime/2")),
+                _relatedAnime = hashSetOf(RelatedAnime(URI("http://example.org/anime/2"))),
             )
             val season2 = AnimeRaw(
                 _title = "Clevatess II: Majuu no Ou to Itsuwari no Yuusha Denshou",
                 _sources = hashSetOf(URI("http://example.org/anime/2")),
                 _synonyms = hashSetOf("Clevatess", "Clevatess Season 2"),
-                _relatedAnime = hashSetOf(URI("http://example.org/anime/1")),
+                _relatedAnime = hashSetOf(RelatedAnime(URI("http://example.org/anime/1"))),
             )
 
             // when
@@ -42,7 +43,7 @@ internal class DefaultAmbiguousSynonymRemoverTest {
                 _title = "Jibaku Shounen Hanako-kun",
                 _sources = hashSetOf(URI("http://example.org/anime/1")),
                 _synonyms = hashSetOf("Toilet-bound Hanako-kun", "地縛少年花子くん"),
-                _relatedAnime = hashSetOf(URI("http://example.org/anime/2")),
+                _relatedAnime = hashSetOf(RelatedAnime(URI("http://example.org/anime/2"))),
             )
             val season2 = AnimeRaw(
                 _title = "Jibaku Shounen Hanako-kun 2",
@@ -53,7 +54,7 @@ internal class DefaultAmbiguousSynonymRemoverTest {
                     "地縛少年花子くん",
                     "地縛少年花子くん 第2期",
                 ),
-                _relatedAnime = hashSetOf(URI("http://example.org/anime/1")),
+                _relatedAnime = hashSetOf(RelatedAnime(URI("http://example.org/anime/1"))),
             )
 
             // when
@@ -73,12 +74,12 @@ internal class DefaultAmbiguousSynonymRemoverTest {
                 _title = "Monster: The Perfect Edition",
                 _sources = hashSetOf(URI("http://example.org/anime/1")),
                 _synonyms = hashSetOf("Monster", "Monster 2"),
-                _relatedAnime = hashSetOf(URI("http://example.org/anime/2")),
+                _relatedAnime = hashSetOf(RelatedAnime(URI("http://example.org/anime/2"))),
             )
             val unrelatedName = AnimeRaw(
                 _title = "Naoki Urasawa",
                 _sources = hashSetOf(URI("http://example.org/anime/2")),
-                _relatedAnime = hashSetOf(URI("http://example.org/anime/1")),
+                _relatedAnime = hashSetOf(RelatedAnime(URI("http://example.org/anime/1"))),
             )
 
             // when
@@ -95,13 +96,13 @@ internal class DefaultAmbiguousSynonymRemoverTest {
                 _title = "Kikou Kantai Dairugger XV",
                 _sources = hashSetOf(URI("http://example.org/anime/1")),
                 _synonyms = hashSetOf("Voltron"),
-                _relatedAnime = hashSetOf(URI("http://example.org/anime/2")),
+                _relatedAnime = hashSetOf(RelatedAnime(URI("http://example.org/anime/2"))),
             )
             val second = AnimeRaw(
                 _title = "Hyakujuu-Ou GoLion",
                 _sources = hashSetOf(URI("http://example.org/anime/2")),
                 _synonyms = hashSetOf("Voltron"),
-                _relatedAnime = hashSetOf(URI("http://example.org/anime/1")),
+                _relatedAnime = hashSetOf(RelatedAnime(URI("http://example.org/anime/1"))),
             )
 
             // when
@@ -119,13 +120,13 @@ internal class DefaultAmbiguousSynonymRemoverTest {
                 _title = "Hunter x Hunter",
                 _sources = hashSetOf(URI("http://example.org/anime/1")),
                 _synonyms = hashSetOf("Hunter x Hunter (1999)"),
-                _relatedAnime = hashSetOf(URI("http://example.org/anime/2")),
+                _relatedAnime = hashSetOf(RelatedAnime(URI("http://example.org/anime/2"))),
             )
             val remake = AnimeRaw(
                 _title = "Hunter x Hunter (2011)",
                 _sources = hashSetOf(URI("http://example.org/anime/2")),
                 _synonyms = hashSetOf("Hunter x Hunter"),
-                _relatedAnime = hashSetOf(URI("http://example.org/anime/1")),
+                _relatedAnime = hashSetOf(RelatedAnime(URI("http://example.org/anime/1"))),
             )
 
             // when
@@ -142,13 +143,13 @@ internal class DefaultAmbiguousSynonymRemoverTest {
                 _title = "Ashita no Joe",
                 _sources = hashSetOf(URI("http://example.org/anime/1")),
                 _synonyms = hashSetOf("Rocky Joe", "Rocky Joe 1"),
-                _relatedAnime = hashSetOf(URI("http://example.org/anime/2")),
+                _relatedAnime = hashSetOf(RelatedAnime(URI("http://example.org/anime/2"))),
             )
             val season2 = AnimeRaw(
                 _title = "Ashita no Joe 2",
                 _sources = hashSetOf(URI("http://example.org/anime/2")),
                 _synonyms = hashSetOf("Rocky Joe", "Rocky Joe 2"),
-                _relatedAnime = hashSetOf(URI("http://example.org/anime/1")),
+                _relatedAnime = hashSetOf(RelatedAnime(URI("http://example.org/anime/1"))),
             )
 
             // when
@@ -182,7 +183,7 @@ internal class DefaultAmbiguousSynonymRemoverTest {
                 _title = "Clevatess II",
                 _sources = hashSetOf(URI("http://example.org/anime/1")),
                 _synonyms = hashSetOf("Clevatess", "Clevatess Season 2"),
-                _relatedAnime = hashSetOf(URI("http://example.org/anime/unknown")),
+                _relatedAnime = hashSetOf(RelatedAnime(URI("http://example.org/anime/unknown"))),
             )
 
             // when
@@ -199,13 +200,13 @@ internal class DefaultAmbiguousSynonymRemoverTest {
                 _title = "Kyouryuu Shoujo Gauko",
                 _sources = hashSetOf(URI("http://example.org/anime/1")),
                 _synonyms = hashSetOf("\u6050\u7adc\u5c11\u5973\u30ac\u30a6\u5b50"),
-                _relatedAnime = hashSetOf(URI("http://example.org/anime/2")),
+                _relatedAnime = hashSetOf(RelatedAnime(URI("http://example.org/anime/2"))),
             )
             val season2 = AnimeRaw(
                 _title = "Kyouryuu Shoujo Gauko 2nd Season",
                 _sources = hashSetOf(URI("http://example.org/anime/2")),
                 _synonyms = hashSetOf("\u6050\u7adc\u5c11\u5973\u30ac\u30a6\u5b50", "\u6050\u7adc\u5c11\u5973\u30ac\u30a6\u5b50 \uff12"),
-                _relatedAnime = hashSetOf(URI("http://example.org/anime/1")),
+                _relatedAnime = hashSetOf(RelatedAnime(URI("http://example.org/anime/1"))),
             )
 
             // when
@@ -222,7 +223,7 @@ internal class DefaultAmbiguousSynonymRemoverTest {
                 _title = "Sengoku Youko",
                 _sources = hashSetOf(URI("http://example.org/anime/1")),
                 _synonyms = hashSetOf("\u6226\u56fd\u5996\u72d0 \u4e16\u76f4\u3057\u59c9\u5f1f\u7de8"),
-                _relatedAnime = hashSetOf(URI("http://example.org/anime/2")),
+                _relatedAnime = hashSetOf(RelatedAnime(URI("http://example.org/anime/2"))),
             )
             val recap = AnimeRaw(
                 _title = "Sengoku Youko: Yonaoshi Kyoudai-hen Recap",
@@ -231,7 +232,7 @@ internal class DefaultAmbiguousSynonymRemoverTest {
                     "\u6226\u56fd\u5996\u72d0\u3000\u4e16\u76f4\u3057\u59c9\u5f1f\u7de8",
                     "\u6226\u56fd\u5996\u72d0\u3000\u4e16\u76f4\u3057\u59c9\u5f1f\u7de8 \u7b2c2\u671f",
                 ),
-                _relatedAnime = hashSetOf(URI("http://example.org/anime/1")),
+                _relatedAnime = hashSetOf(RelatedAnime(URI("http://example.org/anime/1"))),
             )
 
             // when

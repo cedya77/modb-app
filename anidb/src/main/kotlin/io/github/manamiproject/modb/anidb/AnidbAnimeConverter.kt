@@ -9,6 +9,7 @@ import io.github.manamiproject.modb.core.extensions.neitherNullNorBlank
 import io.github.manamiproject.modb.core.extensions.remove
 import io.github.manamiproject.modb.core.extractor.DataExtractor
 import io.github.manamiproject.modb.core.extractor.ExtractionResult
+import io.github.manamiproject.modb.core.extractor.extractLabelledLinks
 import io.github.manamiproject.modb.core.extractor.XmlDataExtractor
 import io.github.manamiproject.modb.core.anime.*
 import io.github.manamiproject.modb.core.anime.AnimeMedia.NO_PICTURE
@@ -53,7 +54,7 @@ public class AnidbAnimeConverter(
             "season" to "//tr[contains(@class, 'season')]//td[contains(@class, 'value')]/text()",
             "startDate" to "//tr[contains(@class, 'year')]//td[contains(@class, 'value')]//span[contains(@itemprop, 'startDate')]/@content",
             "datePublished" to "//tr[contains(@class, 'year')]//td[contains(@class, 'value')]//span[contains(@itemprop, 'datePublished')]/@content",
-            "relatedAnime" to "//div[contains(@class, 'directly_related')]//a/@href",
+            "relatedAnime" to "//div[contains(@class, 'directly_related')]//div[contains(@class, 'stripe')]/html()",
             "alternateNames" to "//label[contains(@itemprop, 'alternateName')]/text()",
             "synonymsList" to "//div[contains(@class, 'titles')]//tr[contains(@class, 'syn')]/td/text()",
             "shortNames" to "//div[contains(@class, 'titles')]//tr[contains(@class, 'short')]/td/text()",
@@ -171,17 +172,20 @@ public class AnidbAnimeConverter(
         return hashSetOf(metaDataProviderConfig.buildAnimeLink(id))
     }
 
-    private fun extractRelatedAnime(data: ExtractionResult): HashSet<URI> {
+    private suspend fun extractRelatedAnime(data: ExtractionResult): HashSet<RelatedAnime> {
         if (data.notFound("relatedAnime")) {
             return hashSetOf()
         }
 
-        return data.listNotNull<String>("relatedAnime")
-            .asSequence()
-            .filterNot { it.contains("relation") }
-            .map { it.remove("/anime/") }
-            .distinct()
-            .map { metaDataProviderConfig.buildAnimeLink(it) }
+        // <div class="g_bubble stripe"> ... <a href="/anime/405"> ... <div class="type">Sequel</div>
+        // Entries in "indirectly related" don't have a type.
+        return extractor.extractLabelledLinks(
+            snippets = data.listNotNull<String>("relatedAnime"),
+            labelSelector = "//div[@class='type']/text()",
+            linkSelector = "//a/@href",
+        ).flatMap { entry -> entry.links.map { it to entry.label } }
+            .filterNot { (link, _) -> link.contains("relation") }
+            .map { (link, label) -> RelatedAnime.of(metaDataProviderConfig.buildAnimeLink(link.remove("/anime/")), label) }
             .toHashSet()
     }
 

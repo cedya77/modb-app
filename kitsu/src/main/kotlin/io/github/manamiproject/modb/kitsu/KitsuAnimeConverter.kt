@@ -104,7 +104,7 @@ public class KitsuAnimeConverter(
                data.listNotNull<LinkedHashMap<String, Title>>("titles").first().values.filterNotNull()).toHashSet()
     }
 
-    private fun extractRelatedAnime(data: ExtractionResult): HashSet<URI> {
+    private fun extractRelatedAnime(data: ExtractionResult): HashSet<RelatedAnime> {
         if (data.notFound("included")) {
             return hashSetOf()
         }
@@ -113,12 +113,12 @@ public class KitsuAnimeConverter(
 
         return included.filter { it["type"] == "mediaRelationships" }
             .map { it as Map<*,*> }
-            .map { it["relationships"] as Map<*,*> }
-            .map { it["destination"] as Map<*,*> }
-            .map { it["data"] as Map<*,*> }
-            .filter { it["type"] as String == "anime" }
-            .map { it["id"] as AnimeId }
-            .map { metaDataProviderConfig.buildAnimeLink(it) }
+            .mapNotNull { relationship ->
+                val destination = ((relationship["relationships"] as Map<*,*>)["destination"] as Map<*,*>)["data"] as Map<*,*>
+                if (destination["type"] as String != "anime") return@mapNotNull null
+                val role = (relationship["attributes"] as? Map<*,*>)?.get("role")?.toString()
+                RelatedAnime.of(metaDataProviderConfig.buildAnimeLink(destination["id"] as AnimeId), role)
+            }
             .toHashSet()
     }
 

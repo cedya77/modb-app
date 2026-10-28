@@ -9,6 +9,7 @@ import io.github.manamiproject.modb.core.extensions.neitherNullNorBlank
 import io.github.manamiproject.modb.core.extensions.remove
 import io.github.manamiproject.modb.core.extractor.DataExtractor
 import io.github.manamiproject.modb.core.extractor.ExtractionResult
+import io.github.manamiproject.modb.core.extractor.extractLabelledLinks
 import io.github.manamiproject.modb.core.extractor.JsonDataExtractor
 import io.github.manamiproject.modb.core.extractor.XmlDataExtractor
 import io.github.manamiproject.modb.core.anime.*
@@ -51,7 +52,7 @@ public class AnimePlanetAnimeConverter(
             "seasonYear" to "//section[@class='pure-g entryBar']//span[@class='iconYear']/following-sibling::*/text()",
             "source" to "//link[@rel='canonical']/@href",
             "alternativeTitle" to "//h2[@class='aka']/text()",
-            "relatedAnime" to "//div[@id='tabs--relations--anime']/div//a/@href",
+            "relatedAnime" to "//div[@id='tabs--relations--anime']/div//a/html()",
             "tags" to "//div[contains(@class, 'tags')]//a/text()",
             "studios" to "//a[contains(@href, '/studios/')]/text()",
         ))
@@ -266,15 +267,19 @@ public class AnimePlanetAnimeConverter(
         return tags
     }
 
-    private fun extractRelatedAnime(data: ExtractionResult): HashSet<URI> {
-        return if (data.notFound("relatedAnime")) {
-            hashSetOf()
-        } else {
-            data.listNotNull<String>("relatedAnime")
-                .map { it.remove("/anime/") }
-                .map { metaDataProviderConfig.buildAnimeLink(it) }
-                .toHashSet()
+    private suspend fun extractRelatedAnime(data: ExtractionResult): HashSet<RelatedAnime> {
+        if (data.notFound("relatedAnime")) {
+            return hashSetOf()
         }
+
+        // <a href="/anime/..." class="RelatedEntry ..."> ... <span class="RelatedEntry__subtitle ...">Side Story</span>
+        // The subtitle is optional.
+        return xmlExtractor.extractLabelledLinks(
+            snippets = data.listNotNull<String>("relatedAnime"),
+            labelSelector = "//span[contains(@class, 'RelatedEntry__subtitle')]/text()",
+            linkSelector = "//a/@href",
+        ).flatMap { entry -> entry.links.map { RelatedAnime.of(metaDataProviderConfig.buildAnimeLink(it.remove("/anime/")), entry.label) } }
+            .toHashSet()
     }
 
     private fun extractScore(jsonldData: ExtractionResult): MetaDataProviderScore {

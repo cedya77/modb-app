@@ -1,5 +1,6 @@
 package io.github.manamiproject.modb.anidb
 
+import io.github.manamiproject.modb.core.anime.RelatedAnime
 import io.github.manamiproject.modb.core.anime.AnimeSeason.Season.*
 import io.github.manamiproject.modb.core.anime.AnimeStatus.*
 import io.github.manamiproject.modb.core.anime.AnimeType.*
@@ -536,15 +537,15 @@ internal class AnidbAnimeConverterTest {
 
                 // then
                 assertThat(result.relatedAnime).containsExactlyInAnyOrder(
-                    URI("https://anidb.net/anime/405"),
-                    URI("https://anidb.net/anime/368"),
-                    URI("https://anidb.net/anime/2850"),
-                    URI("https://anidb.net/anime/4576"),
-                    URI("https://anidb.net/anime/2995"),
-                    URI("https://anidb.net/anime/6141"),
-                    URI("https://anidb.net/anime/367"),
-                    URI("https://anidb.net/anime/2996"),
-                    URI("https://anidb.net/anime/6393"),
+                    RelatedAnime(URI("https://anidb.net/anime/405"), "Sequel"),
+                    RelatedAnime(URI("https://anidb.net/anime/368"), "Side story"),
+                    RelatedAnime(URI("https://anidb.net/anime/2850")),
+                    RelatedAnime(URI("https://anidb.net/anime/4576"), "Prequel"),
+                    RelatedAnime(URI("https://anidb.net/anime/2995")),
+                    RelatedAnime(URI("https://anidb.net/anime/6141"), "Side story"),
+                    RelatedAnime(URI("https://anidb.net/anime/367"), "Side story"),
+                    RelatedAnime(URI("https://anidb.net/anime/2996")),
+                    RelatedAnime(URI("https://anidb.net/anime/6393"), "Side story"),
                 )
             }
         }

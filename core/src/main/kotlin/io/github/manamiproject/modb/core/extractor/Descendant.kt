@@ -21,9 +21,9 @@ internal class Descendant(private val initial: String) {
             .last()
     }
 
-    fun hasTerminatingChild(): Boolean = terminatingChild.neitherNullNorBlank() && (terminatingChild in setOf("text()", "node()") || terminatingChild.startsWith('@'))
+    fun hasTerminatingChild(): Boolean = terminatingChild.neitherNullNorBlank() && (terminatingChild in TERMINATING_FUNCTIONS || terminatingChild.startsWith('@'))
 
-    fun isTerminatingChild(): Boolean = selfPath.neitherNullNorBlank() && (selfPath in setOf("text()", "node()") || selfPath.startsWith('@'))
+    fun isTerminatingChild(): Boolean = selfPath.neitherNullNorBlank() && (selfPath in TERMINATING_FUNCTIONS || selfPath.startsWith('@'))
 
     private fun allFilters(value: String): List<String> {
         return ALL_FILTERS.findAll(value)
@@ -111,6 +111,7 @@ internal class Descendant(private val initial: String) {
     }
 
     private companion object {
+        private val TERMINATING_FUNCTIONS = setOf("text()", "node()", "html()")
         private val ALL_FILTERS = """\[(.*?)\]""".toRegex()
         private val FILTER_ATTRIBUTE_EQUALS_VALUE = """^\[@(?<attr>[\w-]+) *= *'(?<value>.*?)'\]$""".toRegex()
         private val FILTER_ATTRIBUTE_CONTAINS = """^\[contains\(@(?<attr>[\w-]+) *, *'(?<value>.*?)'\)\]$""".toRegex()

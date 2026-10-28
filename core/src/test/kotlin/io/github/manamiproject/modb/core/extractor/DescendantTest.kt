@@ -29,7 +29,7 @@ internal class DescendantTest {
         }
 
         @ParameterizedTest
-        @ValueSource(strings = ["@attr", "text()", "node()"])
+        @ValueSource(strings = ["@attr", "text()", "node()", "html()"])
         fun `only contains terminating child`(input: String) {
             // given
             val obj = Descendant(input)
@@ -47,7 +47,7 @@ internal class DescendantTest {
         }
 
         @ParameterizedTest
-        @ValueSource(strings = ["@attr", "text()", "node()"])
+        @ValueSource(strings = ["@attr", "text()", "node()", "html()"])
         fun `single descendant followed by terminating child`(input: String) {
             // given
             val obj = Descendant("//div/$input")
@@ -65,7 +65,7 @@ internal class DescendantTest {
         }
 
         @ParameterizedTest
-        @ValueSource(strings = ["@attr", "text()", "node()"])
+        @ValueSource(strings = ["@attr", "text()", "node()", "html()"])
         fun `contains terminating child after additional child and filter`(input: String) {
             // given
             val obj = Descendant("//div/span[@attr='test']/$input")
@@ -100,7 +100,7 @@ internal class DescendantTest {
         }
 
         @ParameterizedTest
-        @ValueSource(strings = ["@attr", "text()", "node()"])
+        @ValueSource(strings = ["@attr", "text()", "node()", "html()"])
         fun `empty if only contains terminating child`(input: String) {
             // given
             val obj = Descendant(input)

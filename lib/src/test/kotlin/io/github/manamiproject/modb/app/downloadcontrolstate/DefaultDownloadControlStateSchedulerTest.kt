@@ -1,5 +1,6 @@
 package io.github.manamiproject.modb.app.downloadcontrolstate
 
+import io.github.manamiproject.modb.core.anime.RelatedAnime
 import io.github.manamiproject.modb.anilist.AnilistConfig
 import io.github.manamiproject.modb.app.TestAppConfig
 import io.github.manamiproject.modb.app.TestDownloadControlStateAccessor
@@ -57,7 +58,7 @@ internal class DefaultDownloadControlStateSchedulerTest {
                             "フルーツバスケット",
                         ),
                         _relatedAnime = hashSetOf(
-                            URI("https://kitsu.app/anime/41995"),
+                            RelatedAnime(URI("https://kitsu.app/anime/41995")),
                         ),
                     ),
                 )
@@ -120,7 +121,7 @@ internal class DefaultDownloadControlStateSchedulerTest {
                             "フルーツバスケット",
                         ),
                         _relatedAnime = hashSetOf(
-                            URI("https://kitsu.app/anime/41995"),
+                            RelatedAnime(URI("https://kitsu.app/anime/41995")),
                         ),
                     ),
                 )
@@ -187,7 +188,7 @@ internal class DefaultDownloadControlStateSchedulerTest {
                             "新世紀エヴァンゲリオン劇場版 THE END OF EVANGELION",
                         ),
                         _relatedAnime = hashSetOf(
-                            URI("https://anilist.co/anime/30"),
+                            RelatedAnime(URI("https://anilist.co/anime/30")),
                         ),
                         _tags = hashSetOf(
                             "action",
@@ -258,7 +259,7 @@ internal class DefaultDownloadControlStateSchedulerTest {
                             "新世紀エヴァンゲリオン劇場版 THE END OF EVANGELION",
                         ),
                         _relatedAnime = hashSetOf(
-                            URI("https://anilist.co/anime/30"),
+                            RelatedAnime(URI("https://anilist.co/anime/30")),
                         ),
                         _tags = hashSetOf(
                             "action",

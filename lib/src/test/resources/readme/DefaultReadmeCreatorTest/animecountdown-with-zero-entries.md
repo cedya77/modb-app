@@ -76,8 +76,15 @@ Here is a description of the types in the JSON files.
 | `synonyms`     | `String[]`                                        | no       | Alternative titles and spellings under which the anime is also known. Duplicate free (case-sensitive). Doesn't contain the `title` |
 | `studios`      | `String[]`                                        | no       | Lower case studio names. In general a duplicate free list, but might contain duplicates for different writings.                    |
 | `producers`    | `String[]`                                        | no       | Lower case producers names. Companies only. In general a duplicate free list, but might contain duplicates for different writings. |
-| `relatedAnime` | `URL[]`                                           | no       | URLs to the metadata providers for anime that are somehow related to this anime.                                                   |
+| `relatedAnime` | [RelatedAnime[]](#relatedanime)                   | no       | Anime on the metadata providers which are related to this anime, including the kind of relation if the provider names it.         |
 | `tags`         | `String[]`                                        | no       | A non-curated list of tags and genres which describe the anime. All entries are lower case.                                        |
+
+### RelatedAnime
+
+| Field      | Type     | Nullable | Description                                                                                                                                       |
+|------------|----------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------|
+| `uri`      | `URL`    | no       | URL to the related anime on the metadata provider.                                                                                                |
+| `relation` | `String` | yes      | Kind of relation exactly as the metadata provider labels it, e.g. `Sequel` (myanimelist), `SEQUEL` (anilist), `sequel` (kitsu). Not unified. Missing if the provider doesn't name it. |
 
 ### AnimeSeason
 
@@ -208,21 +215,56 @@ Here are some examples showing what the files look like.
         "vap"
       ],
       "relatedAnime": [
-        "https://anidb.net/anime/8146",
-        "https://anidb.net/anime/8147",
-        "https://anilist.co/anime/20931",
-        "https://anilist.co/anime/2994",
-        "https://anime-planet.com/anime/death-note-rewrite-1-visions-of-a-god",
-        "https://anime-planet.com/anime/death-note-rewrite-2-ls-successors",
-        "https://animecountdown.com/36687",
-        "https://animecountdown.com/40690",
-        "https://anisearch.com/anime/4441",
-        "https://anisearch.com/anime/5194",
-        "https://kitsu.app/anime/2707",
-        "https://livechart.me/anime/3808",
-        "https://myanimelist.net/anime/2994",
-        "https://simkl.com/anime/36687",
-        "https://simkl.com/anime/40690"
+        {
+          "uri": "https://anidb.net/anime/8146",
+          "relation": "Summary"
+        },
+        {
+          "uri": "https://anidb.net/anime/8147",
+          "relation": "Summary"
+        },
+        {
+          "uri": "https://anilist.co/anime/20931"
+        },
+        {
+          "uri": "https://anilist.co/anime/2994",
+          "relation": "SUMMARY"
+        },
+        {
+          "uri": "https://anime-planet.com/anime/death-note-rewrite-1-visions-of-a-god"
+        },
+        {
+          "uri": "https://anime-planet.com/anime/death-note-rewrite-2-ls-successors"
+        },
+        {
+          "uri": "https://animecountdown.com/36687"
+        },
+        {
+          "uri": "https://animecountdown.com/40690"
+        },
+        {
+          "uri": "https://anisearch.com/anime/4441"
+        },
+        {
+          "uri": "https://anisearch.com/anime/5194"
+        },
+        {
+          "uri": "https://kitsu.app/anime/2707",
+          "relation": "summary"
+        },
+        {
+          "uri": "https://livechart.me/anime/3808"
+        },
+        {
+          "uri": "https://myanimelist.net/anime/2994",
+          "relation": "Summary"
+        },
+        {
+          "uri": "https://simkl.com/anime/36687"
+        },
+        {
+          "uri": "https://simkl.com/anime/40690"
+        }
       ],
       "tags": [
         "achronological order",

@@ -1,5 +1,6 @@
 package io.github.manamiproject.modb.anisearch
 
+import io.github.manamiproject.modb.core.anime.RelatedAnime
 import io.github.manamiproject.modb.core.anime.AnimeMedia.NO_PICTURE
 import io.github.manamiproject.modb.core.anime.AnimeMedia.NO_PICTURE_THUMBNAIL
 import io.github.manamiproject.modb.core.anime.AnimeSeason.Season.*
@@ -1816,7 +1817,7 @@ internal class AnisearchAnimeConverterTest {
 
                 // then
                 assertThat(result.relatedAnime).containsExactly(
-                    URI("https://anisearch.com/anime/17530")
+                    RelatedAnime(URI("https://anisearch.com/anime/17530"))
                 )
             }
         }
@@ -1844,9 +1845,9 @@ internal class AnisearchAnimeConverterTest {
                 val result = converter.convert(main)
 
                 // then
-                assertThat(result.relatedAnime).containsExactly(
-                    URI("https://anisearch.com/anime/2088"),
-                    URI("https://anisearch.com/anime/2753"),
+                assertThat(result.relatedAnime).containsExactlyInAnyOrder(
+                    RelatedAnime(URI("https://anisearch.com/anime/2088"), "Remake"),
+                    RelatedAnime(URI("https://anisearch.com/anime/2753"), "Sequel"),
                 )
             }
         }

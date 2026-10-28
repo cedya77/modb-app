@@ -260,13 +260,14 @@ public class LivechartAnimeConverter(
             .toHashSet()
     }
 
-    private fun extractRelatedAnime(data: ExtractionResult): HashSet<URI> {
+    private fun extractRelatedAnime(data: ExtractionResult): HashSet<RelatedAnime> {
         return if (data.notFound("relatedAnime")) {
             hashSetOf()
         } else {
+            // livechart only shows the franchise without naming the kind of relation
             data.listNotNull<String>("relatedAnime")
                 .map { it.remove("/anime/") }
-                .map { metaDataProviderConfig.buildAnimeLink(it) }
+                .map { RelatedAnime(metaDataProviderConfig.buildAnimeLink(it)) }
                 .toHashSet()
         }
     }

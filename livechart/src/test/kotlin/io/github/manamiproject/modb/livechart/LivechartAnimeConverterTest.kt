@@ -1,5 +1,6 @@
 package io.github.manamiproject.modb.livechart
 
+import io.github.manamiproject.modb.core.anime.RelatedAnime
 import io.github.manamiproject.modb.core.anime.AnimeSeason.Season.*
 import io.github.manamiproject.modb.core.anime.AnimeStatus.*
 import io.github.manamiproject.modb.core.anime.AnimeType.*
@@ -1208,7 +1209,7 @@ internal class LivechartAnimeConverterTest {
 
                 // then
                 assertThat(result.relatedAnime).containsExactly(
-                    URI("https://livechart.me/anime/3808"),
+                    RelatedAnime(URI("https://livechart.me/anime/3808")),
                 )
             }
         }
@@ -1234,9 +1235,9 @@ internal class LivechartAnimeConverterTest {
 
                 // then
                 assertThat(result.relatedAnime).containsExactlyInAnyOrder(
-                    URI("https://livechart.me/anime/3367"),
-                    URI("https://livechart.me/anime/3369"),
-                    URI("https://livechart.me/anime/3368"),
+                    RelatedAnime(URI("https://livechart.me/anime/3367")),
+                    RelatedAnime(URI("https://livechart.me/anime/3369")),
+                    RelatedAnime(URI("https://livechart.me/anime/3368")),
                 )
             }
         }
@@ -1262,21 +1263,21 @@ internal class LivechartAnimeConverterTest {
 
                 // then
                 assertThat(result.relatedAnime).containsExactlyInAnyOrder(
-                    URI("https://livechart.me/anime/3662"),
-                    URI("https://livechart.me/anime/6221"),
-                    URI("https://livechart.me/anime/3767"),
-                    URI("https://livechart.me/anime/7353"),
-                    URI("https://livechart.me/anime/3782"),
-                    URI("https://livechart.me/anime/7133"),
-                    URI("https://livechart.me/anime/4823"),
-                    URI("https://livechart.me/anime/7289"),
-                    URI("https://livechart.me/anime/6604"),
-                    URI("https://livechart.me/anime/5530"),
-                    URI("https://livechart.me/anime/3984"),
-                    URI("https://livechart.me/anime/5793"),
-                    URI("https://livechart.me/anime/7156"),
-                    URI("https://livechart.me/anime/4054"),
-                    URI("https://livechart.me/anime/6022"),
+                    RelatedAnime(URI("https://livechart.me/anime/3662")),
+                    RelatedAnime(URI("https://livechart.me/anime/6221")),
+                    RelatedAnime(URI("https://livechart.me/anime/3767")),
+                    RelatedAnime(URI("https://livechart.me/anime/7353")),
+                    RelatedAnime(URI("https://livechart.me/anime/3782")),
+                    RelatedAnime(URI("https://livechart.me/anime/7133")),
+                    RelatedAnime(URI("https://livechart.me/anime/4823")),
+                    RelatedAnime(URI("https://livechart.me/anime/7289")),
+                    RelatedAnime(URI("https://livechart.me/anime/6604")),
+                    RelatedAnime(URI("https://livechart.me/anime/5530")),
+                    RelatedAnime(URI("https://livechart.me/anime/3984")),
+                    RelatedAnime(URI("https://livechart.me/anime/5793")),
+                    RelatedAnime(URI("https://livechart.me/anime/7156")),
+                    RelatedAnime(URI("https://livechart.me/anime/4054")),
+                    RelatedAnime(URI("https://livechart.me/anime/6022")),
                 )
             }
         }

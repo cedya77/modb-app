@@ -1,5 +1,6 @@
 package io.github.manamiproject.modb.anidb
 
+import io.github.manamiproject.modb.core.anime.RelatedAnime
 import io.github.manamiproject.modb.core.anime.AnimeSeason.Season.SPRING
 import io.github.manamiproject.modb.core.anime.AnimeStatus.FINISHED
 import io.github.manamiproject.modb.core.anime.AnimeType.TV
@@ -43,7 +44,7 @@ internal class AnidbApiAnimeConverterTest {
                 assertThat(result.sources).containsExactly(URI("https://anidb.net/anime/23"))
                 assertThat(result.picture).isEqualTo(URI("https://cdn.anidb.net/images/main/221595.jpg"))
                 assertThat(result.thumbnail).isEqualTo(URI("https://cdn.anidb.net/images/main/221595.jpg-thumb.jpg"))
-                assertThat(result.relatedAnime).containsExactly(URI("https://anidb.net/anime/219"))
+                assertThat(result.relatedAnime).containsExactly(RelatedAnime(URI("https://anidb.net/anime/219"), "Side Story"))
                 assertThat(result.synonyms).contains("Kaubojus Bibopas")
                 assertThat(result.tags).contains("bounty hunter", "detective")
             }

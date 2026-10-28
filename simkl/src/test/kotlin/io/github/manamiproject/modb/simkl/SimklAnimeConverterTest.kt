@@ -866,9 +866,9 @@ internal class SimklAnimeConverterTest {
 
                 // then
                 assertThat(result.relatedAnime).containsExactlyInAnyOrder(
-                    URI("https://simkl.com/anime/37429"),
-                    URI("https://simkl.com/anime/38317"),
-                    URI("https://simkl.com/anime/39885"),
+                    RelatedAnime(URI("https://simkl.com/anime/37429"), "Alternative Setting"),
+                    RelatedAnime(URI("https://simkl.com/anime/38317"), "Side story"),
+                    RelatedAnime(URI("https://simkl.com/anime/39885")),
                 )
             }
         }

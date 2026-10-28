@@ -56,7 +56,7 @@ public class AnimenewsnetworkAnimeConverter(
             "synonyms" to "//div[@id='infotype-2']//div",
             "genres" to "//div[@id='infotype-30']//a/text()",
             "themes" to "//div[@id='infotype-31']//a/text()",
-            "relatedAnime" to "//div[@id='infotype-related']//a/@href",
+            "relatedAnime" to "//div[@id='infotype-related']/html()",
             "duration" to "//div[@id='infotype-4']//span/text()",
             "year_list_all" to "//div[@id='infotype-7']//div//text()",
         ))
@@ -275,17 +275,27 @@ public class AnimenewsnetworkAnimeConverter(
         return genres.union(themes).toHashSet()
     }
 
-    private fun extractRelatedAnime(data: ExtractionResult): HashSet<URI> {
-        val entries = if (data.notFound("relatedAnime")) {
-            hashSetOf()
-        } else {
-            data.listNotNull<String>("relatedAnime")
+    /**
+     * The relation is plain text next to the link:
+     * + `[ sequel of <a href="/encyclopedia/anime.php?id=7809">Clannad (TV)</a> ]` (header) → `sequel of`
+     * + `<a href="/encyclopedia/anime.php?id=33628">Frieren (TV 2)</a> (sequel)<br>` (list) → `sequel`
+     */
+    private fun extractRelatedAnime(data: ExtractionResult): HashSet<RelatedAnime> {
+        if (data.notFound("relatedAnime")) {
+            return hashSetOf()
         }
 
-        return entries.filter { it.contains("anime.php") }
-            .map { it.substringAfterLast('=') }
-            .map { metaDataProviderConfig.buildAnimeLink(it) }
-            .toHashSet()
+        return data.listNotNull<String>("relatedAnime").flatMap { html ->
+            relatedAnimeLinkRegex.findAll(html).map { match ->
+                val textBefore = html.substring(0, match.range.first).substringAfterLast('>')
+                val label = if (textBefore.contains('[') || textBefore.trimStart().startsWith(',')) {
+                    textBefore.substringAfterLast('[').trimStart().removePrefix(",")
+                } else {
+                    relationInBracketsRegex.find(match.groups["after"]?.value ?: EMPTY)?.groups?.get("label")?.value
+                }
+                RelatedAnime.of(metaDataProviderConfig.buildAnimeLink(match.groups["id"]!!.value), label)
+            }.toList()
+        }.toHashSet()
     }
 
     private fun extractDuration(data: ExtractionResult): Duration {
@@ -440,6 +450,8 @@ public class AnimenewsnetworkAnimeConverter(
             season = UNDEFINED,
         )
 
+        private val relatedAnimeLinkRegex = """<a [^>]*href="[^"]*anime\.php\?id=(?<id>\d+)"[^>]*>[^<]*</a>(?<after>[^<]*)""".toRegex()
+        private val relationInBracketsRegex = """^\s*\((?<label>[^)]*)\)""".toRegex()
         private val yearMonthRegex = """.*?(?<year>\d{4})(-(?<month>\d{2}))?.*?""".toRegex()
         private val yearMonthDayRegex = """.*?(?<year>\d{4})(-(?<month>\d{2}))?(-(?<day>\d{2}))?.*""".toRegex()
         private val new_language_lock_identifiers = hashSetOf(' ', ')')

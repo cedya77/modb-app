@@ -1,5 +1,6 @@
 package io.github.manamiproject.modb.app.relatedanime
 
+import io.github.manamiproject.modb.core.anime.RelatedAnime
 import io.github.manamiproject.modb.core.anime.AnimeRaw
 import io.github.manamiproject.modb.test.tempDirectory
 import org.assertj.core.api.Assertions.assertThat
@@ -23,10 +24,10 @@ internal class DefaultUnknownRelatedAnimeRemoverTest {
                         URI("http://config2.example.org/anime/first-entry"),
                     ),
                     _relatedAnime = hashSetOf(
-                        URI("http://config1.example.org/anime/2"),
-                        URI("http://config1.example.org/anime/25"),
-                        URI("http://config2.example.org/anime/second-entry"),
-                        URI("http://config2.example.org/anime/non-existent-entry"),
+                        RelatedAnime(URI("http://config1.example.org/anime/2")),
+                        RelatedAnime(URI("http://config1.example.org/anime/25")),
+                        RelatedAnime(URI("http://config2.example.org/anime/second-entry")),
+                        RelatedAnime(URI("http://config2.example.org/anime/non-existent-entry")),
                     )
                 ),
                 AnimeRaw(
@@ -36,9 +37,9 @@ internal class DefaultUnknownRelatedAnimeRemoverTest {
                         URI("http://config2.example.org/anime/second-entry"),
                     ),
                     _relatedAnime = hashSetOf(
-                        URI("http://config1.example.org/anime/1"),
-                        URI("http://config1.example.org/anime/25"),
-                        URI("http://config2.example.org/anime/first-entry"),
+                        RelatedAnime(URI("http://config1.example.org/anime/1")),
+                        RelatedAnime(URI("http://config1.example.org/anime/25")),
+                        RelatedAnime(URI("http://config2.example.org/anime/first-entry")),
                     ),
                 ),
                 AnimeRaw(
@@ -47,7 +48,7 @@ internal class DefaultUnknownRelatedAnimeRemoverTest {
                         URI("http://config2.example.org/anime/third-entry"),
                     ),
                     _relatedAnime = hashSetOf(
-                        URI("http://config2.example.org/anime/non-existent-entry"),
+                        RelatedAnime(URI("http://config2.example.org/anime/non-existent-entry")),
                     ),
                 ),
             )
@@ -59,12 +60,12 @@ internal class DefaultUnknownRelatedAnimeRemoverTest {
 
             // then
             assertThat(result.find { it.title == "1" }!!.relatedAnime).containsExactlyInAnyOrder(
-                URI("http://config1.example.org/anime/2"),
-                URI("http://config2.example.org/anime/second-entry"),
+                RelatedAnime(URI("http://config1.example.org/anime/2")),
+                RelatedAnime(URI("http://config2.example.org/anime/second-entry")),
             )
             assertThat(result.find { it.title == "2" }!!.relatedAnime).containsExactlyInAnyOrder(
-                URI("http://config1.example.org/anime/1"),
-                URI("http://config2.example.org/anime/first-entry"),
+                RelatedAnime(URI("http://config1.example.org/anime/1")),
+                RelatedAnime(URI("http://config2.example.org/anime/first-entry")),
             )
             assertThat(result.find { it.title == "3" }!!.relatedAnime).isEmpty()
         }

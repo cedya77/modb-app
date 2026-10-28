@@ -1,5 +1,6 @@
 package io.github.manamiproject.modb.kitsu
 
+import io.github.manamiproject.modb.core.anime.RelatedAnime
 import io.github.manamiproject.modb.core.anime.AnimeSeason.Season.*
 import io.github.manamiproject.modb.core.anime.AnimeStatus.*
 import io.github.manamiproject.modb.core.anime.AnimeType.*
@@ -441,12 +442,12 @@ internal class KitsuAnimeConverterTest {
 
                 // then
                 assertThat(result.relatedAnime).containsExactlyInAnyOrder(
-                    URI("https://kitsu.app/anime/10761"),
-                    URI("https://kitsu.app/anime/12549"),
-                    URI("https://kitsu.app/anime/13562"),
-                    URI("https://kitsu.app/anime/7742"),
-                    URI("https://kitsu.app/anime/7913"),
-                    URI("https://kitsu.app/anime/8273"),
+                    RelatedAnime(URI("https://kitsu.app/anime/10761"), "prequel"),
+                    RelatedAnime(URI("https://kitsu.app/anime/12549"), "other"),
+                    RelatedAnime(URI("https://kitsu.app/anime/13562"), "other"),
+                    RelatedAnime(URI("https://kitsu.app/anime/7742"), "other"),
+                    RelatedAnime(URI("https://kitsu.app/anime/7913"), "side_story"),
+                    RelatedAnime(URI("https://kitsu.app/anime/8273"), "sequel"),
                 )
             }
         }
@@ -471,7 +472,7 @@ internal class KitsuAnimeConverterTest {
                 val result = converter.convert(testFileContent)
 
                 // then
-                assertThat(result.relatedAnime).containsExactly(URI("https://kitsu.app/anime/47280"))
+                assertThat(result.relatedAnime).containsExactly(RelatedAnime(URI("https://kitsu.app/anime/47280"), "other"))
             }
         }
 
@@ -496,15 +497,15 @@ internal class KitsuAnimeConverterTest {
 
                 // then
                 assertThat(result.relatedAnime).containsExactlyInAnyOrder(
-                    URI("https://kitsu.app/anime/13850"),
-                    URI("https://kitsu.app/anime/1759"),
-                    URI("https://kitsu.app/anime/1921"),
-                    URI("https://kitsu.app/anime/2634"),
-                    URI("https://kitsu.app/anime/3700"),
-                    URI("https://kitsu.app/anime/42535"),
-                    URI("https://kitsu.app/anime/5518"),
-                    URI("https://kitsu.app/anime/6791"),
-                    URI("https://kitsu.app/anime/7627"),
+                    RelatedAnime(URI("https://kitsu.app/anime/13850"), "alternative_version"),
+                    RelatedAnime(URI("https://kitsu.app/anime/1759"), "side_story"),
+                    RelatedAnime(URI("https://kitsu.app/anime/1921"), "summary"),
+                    RelatedAnime(URI("https://kitsu.app/anime/2634"), "sequel"),
+                    RelatedAnime(URI("https://kitsu.app/anime/3700"), "summary"),
+                    RelatedAnime(URI("https://kitsu.app/anime/42535"), "side_story"),
+                    RelatedAnime(URI("https://kitsu.app/anime/5518"), "other"),
+                    RelatedAnime(URI("https://kitsu.app/anime/6791"), "spinoff"),
+                    RelatedAnime(URI("https://kitsu.app/anime/7627"), "spinoff"),
                 )
             }
         }

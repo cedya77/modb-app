@@ -41,6 +41,7 @@ internal object JsoupXPathDataExtractor : DataExtractor {
             split.last().startsWith("@") -> Triple(entry.key, allExceptLast, split.last().trimStart('@'))
             split.last().endsWith("text()") -> Triple(entry.key, allExceptLast, split.last())
             split.last().endsWith("node()") -> Triple(entry.key, allExceptLast, split.last())
+            split.last().endsWith("html()") -> Triple(entry.key, allExceptLast, split.last())
             else -> Triple(entry.key, entry.value, EMPTY)
         }
     }
@@ -56,6 +57,7 @@ internal object JsoupXPathDataExtractor : DataExtractor {
             jsoupElements.isEmpty() -> NotFound
             entry.third == "text()" -> jsoupElements.eachText() ?: NotFound
             entry.third == "node()" -> jsoupElements.dataNodes().map { it.wholeData.trim() }
+            entry.third == "html()" -> jsoupElements.map { it.outerHtml() }
             entry.third.eitherNullOrBlank() -> jsoupElements.textNodes().map { it.text().trim() }.filter { it.neitherNullNorBlank() }
             else -> jsoupElements.eachAttr(entry.third) ?: NotFound
         }

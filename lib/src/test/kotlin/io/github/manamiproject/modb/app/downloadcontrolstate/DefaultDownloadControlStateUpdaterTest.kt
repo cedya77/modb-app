@@ -496,7 +496,7 @@ internal class DefaultDownloadControlStateUpdaterTest {
                         "新世紀エヴァンゲリオン劇場版 THE END OF EVANGELION",
                     ),
                     _relatedAnime = hashSetOf(
-                        URI("https://anilist.co/anime/30"),
+                        RelatedAnime(URI("https://anilist.co/anime/30")),
                     ),
                     _tags = hashSetOf(
                         "action",
@@ -573,7 +573,7 @@ internal class DefaultDownloadControlStateUpdaterTest {
                         "新世紀エヴァンゲリオン劇場版 THE END OF EVANGELION",
                     ),
                     _relatedAnime = hashSetOf(
-                        URI("https://anilist.co/anime/30"),
+                        RelatedAnime(URI("https://anilist.co/anime/30")),
                     ),
                     _tags = hashSetOf(
                         "action",
@@ -668,7 +668,7 @@ internal class DefaultDownloadControlStateUpdaterTest {
                         "新世紀エヴァンゲリオン劇場版 THE END OF EVANGELION",
                     ),
                     _relatedAnime = hashSetOf(
-                        URI("https://anilist.co/anime/30"),
+                        RelatedAnime(URI("https://anilist.co/anime/30")),
                     ),
                     _tags = hashSetOf(
                         "action",

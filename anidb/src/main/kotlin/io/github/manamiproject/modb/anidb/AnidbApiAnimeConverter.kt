@@ -17,6 +17,7 @@ import io.github.manamiproject.modb.core.extensions.EMPTY
 import io.github.manamiproject.modb.core.extensions.neitherNullNorBlank
 import io.github.manamiproject.modb.core.extractor.DataExtractor
 import io.github.manamiproject.modb.core.extractor.ExtractionResult
+import io.github.manamiproject.modb.core.extractor.extractLabelledLinks
 import io.github.manamiproject.modb.core.extractor.XmlDataExtractor
 import kotlinx.coroutines.withContext
 import java.net.URI
@@ -50,7 +51,7 @@ public class AnidbApiAnimeConverter(
             "mainTitle" to "//anime/titles/title[@type='main']/text()",
             "otherTitles" to "//anime/titles/title[@type!='main']/text()",
             "tags" to "//anime/tags/tag/name/text()",
-            "relatedAnime" to "//anime/relatedanime/anime/@id",
+            "relatedAnime" to "//anime/relatedanime/anime/html()",
             "episodeLengths" to "//anime/episodes/episode/length/text()",
             "score" to "//anime/ratings/permanent/text()",
         ))
@@ -169,13 +170,17 @@ public class AnidbApiAnimeConverter(
             .toHashSet()
     }
 
-    private fun extractRelatedAnime(data: ExtractionResult): HashSet<URI> {
+    private suspend fun extractRelatedAnime(data: ExtractionResult): HashSet<RelatedAnime> {
         if (data.notFound("relatedAnime")) {
             return hashSetOf()
         }
 
-        return data.listNotNull<String>("relatedAnime")
-            .map { metaDataProviderConfig.buildAnimeLink(it.trim()) }
+        // <anime id="219" type="Side Story">Cowboy Bebop: Tengoku no Tobira</anime>
+        return extractor.extractLabelledLinks(
+            snippets = data.listNotNull<String>("relatedAnime"),
+            labelSelector = "//anime/@type",
+            linkSelector = "//anime/@id",
+        ).flatMap { entry -> entry.links.map { RelatedAnime.of(metaDataProviderConfig.buildAnimeLink(it.trim()), entry.label) } }
             .toHashSet()
     }
 

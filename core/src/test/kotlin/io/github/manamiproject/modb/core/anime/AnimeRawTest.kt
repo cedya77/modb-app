@@ -1,5 +1,6 @@
 package io.github.manamiproject.modb.core.anime
 
+import io.github.manamiproject.modb.core.anime.RelatedAnime
 import io.github.manamiproject.modb.core.TestAnimeRawObjects
 import io.github.manamiproject.modb.core.anime.AnimeSeason.Companion.UNKNOWN_YEAR
 import io.github.manamiproject.modb.core.anime.AnimeSeason.Season.*
@@ -5953,7 +5954,7 @@ internal class AnimeRawTest {
                         source,
                     ),
                     _relatedAnime = hashSetOf(
-                        source,
+                        RelatedAnime(source),
                     ),
                 )
 
@@ -5976,7 +5977,7 @@ internal class AnimeRawTest {
                         source,
                     ),
                     _relatedAnime = hashSetOf(
-                        source,
+                        RelatedAnime(source),
                     ),
                     activateChecks = false,
                 )
@@ -5986,7 +5987,7 @@ internal class AnimeRawTest {
                     source,
                 )
                 assertThat(result.relatedAnime).containsExactly(
-                    source,
+                    RelatedAnime(source),
                 )
             }
         }
@@ -6042,7 +6043,7 @@ internal class AnimeRawTest {
                 val anime = AnimeRaw(
                     _title =  "Death Note",
                     _relatedAnime = hashSetOf(
-                        source,
+                        RelatedAnime(source),
                     ),
                 )
 
@@ -6108,7 +6109,7 @@ internal class AnimeRawTest {
                 val anime = AnimeRaw(
                     _title =  "Death Note",
                     _relatedAnime = hashSetOf(
-                        source,
+                        RelatedAnime(source),
                     ),
                 )
 
@@ -6178,8 +6179,8 @@ internal class AnimeRawTest {
                 val anime = AnimeRaw(
                     _title = "test",
                     _relatedAnime = hashSetOf(
-                        URI("https://example.org/anime/1535"),
-                        URI("https://myanimelist.net/anime/1535"),
+                        RelatedAnime(URI("https://example.org/anime/1535")),
+                        RelatedAnime(URI("https://myanimelist.net/anime/1535")),
                     ),
                 )
 
@@ -6199,13 +6200,13 @@ internal class AnimeRawTest {
                 val result = AnimeRaw(
                     _title =  "Death Note",
                     _relatedAnime = hashSetOf(
-                        relatedAnime,
+                        RelatedAnime(relatedAnime),
                     ),
                 )
 
                 // then
                 assertThat(result.relatedAnime).containsExactly(
-                    relatedAnime,
+                    RelatedAnime(relatedAnime),
                 )
             }
 
@@ -6218,14 +6219,14 @@ internal class AnimeRawTest {
                 val result = AnimeRaw(
                     _title =  "Death Note",
                     _relatedAnime = hashSetOf(
-                        relatedAnime,
-                        relatedAnime,
+                        RelatedAnime(relatedAnime),
+                        RelatedAnime(relatedAnime),
                     ),
                 )
 
                 // then
                 assertThat(result.relatedAnime).containsExactly(
-                    relatedAnime,
+                    RelatedAnime(relatedAnime),
                 )
             }
 
@@ -6241,7 +6242,7 @@ internal class AnimeRawTest {
                         link,
                     ),
                     _relatedAnime = hashSetOf(
-                        link,
+                        RelatedAnime(link),
                     ),
                 )
 
@@ -6258,8 +6259,8 @@ internal class AnimeRawTest {
                         URI("https://myanimelist.net/anime/6351"),
                     ),
                     _relatedAnime = hashSetOf(
-                        URI("https://myanimelist.net/anime/2167"),
-                        URI("https://myanimelist.net/anime/6351"),
+                        RelatedAnime(URI("https://myanimelist.net/anime/2167")),
+                        RelatedAnime(URI("https://myanimelist.net/anime/6351")),
                     ),
                     activateChecks = false,
                 )
@@ -6287,7 +6288,7 @@ internal class AnimeRawTest {
 
                 // then
                 assertThat(anime.relatedAnime).containsExactly(
-                    relatedAnime,
+                    RelatedAnime(relatedAnime),
                 )
             }
 
@@ -6298,7 +6299,7 @@ internal class AnimeRawTest {
                 val anime = AnimeRaw(
                     _title =  "Death Note",
                     _relatedAnime = hashSetOf(
-                        relatedAnime,
+                        RelatedAnime(relatedAnime),
                     ),
                 )
 
@@ -6309,7 +6310,7 @@ internal class AnimeRawTest {
 
                 // then
                 assertThat(anime.relatedAnime).containsExactly(
-                    relatedAnime,
+                    RelatedAnime(relatedAnime),
                 )
             }
 
@@ -6352,7 +6353,7 @@ internal class AnimeRawTest {
 
                 // then
                 assertThat(anime.relatedAnime).containsExactly(
-                    relatedAnime,
+                    RelatedAnime(relatedAnime),
                 )
             }
 
@@ -6363,7 +6364,7 @@ internal class AnimeRawTest {
                 val anime = AnimeRaw(
                     _title =  "Death Note",
                     _relatedAnime = hashSetOf(
-                        relatedAnime,
+                        RelatedAnime(relatedAnime),
                     ),
                 )
 
@@ -6374,7 +6375,7 @@ internal class AnimeRawTest {
 
                 // then
                 assertThat(anime.relatedAnime).containsExactly(
-                    relatedAnime,
+                    RelatedAnime(relatedAnime),
                 )
             }
 
@@ -6398,6 +6399,122 @@ internal class AnimeRawTest {
         }
 
         @Nested
+        inner class AddRelatedAnimeWithRelationTests {
+
+            @Test
+            fun `add related anime including the kind of relation`() {
+                // given
+                val relatedAnime = RelatedAnime(URI("https://myanimelist.net/anime/2994"), "Summary")
+                val anime = AnimeRaw(
+                    _title =  "Death Note",
+                )
+
+                // when
+                anime.addRelatedAnime(relatedAnime)
+
+                // then
+                assertThat(anime.relatedAnime).containsExactly(
+                    RelatedAnime(URI("https://myanimelist.net/anime/2994"), "Summary"),
+                )
+            }
+
+            @Test
+            fun `an entry having a relation replaces an entry for the same link without relation`() {
+                // given
+                val anime = AnimeRaw(
+                    _title =  "Death Note",
+                    _relatedAnime = hashSetOf(
+                        RelatedAnime(URI("https://myanimelist.net/anime/2994")),
+                    ),
+                )
+
+                // when
+                anime.addRelatedAnime(RelatedAnime(URI("https://myanimelist.net/anime/2994"), "Summary"))
+
+                // then
+                assertThat(anime.relatedAnime).containsExactly(
+                    RelatedAnime(URI("https://myanimelist.net/anime/2994"), "Summary"),
+                )
+            }
+
+            @Test
+            fun `an entry without relation doesn't replace an entry for the same link having a relation`() {
+                // given
+                val anime = AnimeRaw(
+                    _title =  "Death Note",
+                    _relatedAnime = hashSetOf(
+                        RelatedAnime(URI("https://myanimelist.net/anime/2994"), "Summary"),
+                    ),
+                )
+
+                // when
+                anime.addRelatedAnime(URI("https://myanimelist.net/anime/2994"))
+
+                // then
+                assertThat(anime.relatedAnime).containsExactly(
+                    RelatedAnime(URI("https://myanimelist.net/anime/2994"), "Summary"),
+                )
+            }
+
+            @Test
+            fun `keeps only one entry per link`() {
+                // when
+                val anime = AnimeRaw(
+                    _title =  "Death Note",
+                    _relatedAnime = hashSetOf(
+                        RelatedAnime(URI("https://myanimelist.net/anime/2994"), "Summary"),
+                        RelatedAnime(URI("https://myanimelist.net/anime/2994"), "Other"),
+                    ),
+                )
+
+                // then
+                assertThat(anime.relatedAnime).hasSize(1)
+            }
+
+            @Test
+            fun `cannot add a related anime having a relation if the link is already part of the sources`() {
+                // given
+                val link = URI("https://myanimelist.net/anime/1535")
+                val anime = AnimeRaw(
+                    _title =  "Death Note",
+                    _sources = hashSetOf(
+                        link,
+                    ),
+                )
+
+                // when
+                anime.addRelatedAnime(RelatedAnime(link, "Sequel"))
+
+                // then
+                assertThat(anime.relatedAnime).isEmpty()
+            }
+
+            @Test
+            fun `merging keeps the kind of relation`() {
+                // given
+                val anime = AnimeRaw(
+                    _title =  "Death Note",
+                    _sources = hashSetOf(URI("https://myanimelist.net/anime/1535")),
+                    _relatedAnime = hashSetOf(RelatedAnime(URI("https://myanimelist.net/anime/2994"), "Summary")),
+                )
+                val other = AnimeRaw(
+                    _title =  "Death Note",
+                    _sources = hashSetOf(URI("https://anilist.co/anime/1535")),
+                    _relatedAnime = hashSetOf(RelatedAnime(URI("https://anilist.co/anime/2994"), "SUMMARY")),
+                )
+
+                // when
+                val result = anime.mergeWith(other)
+
+                // then
+                assertThat(result.relatedAnime).containsExactlyInAnyOrder(
+                    RelatedAnime(URI("https://myanimelist.net/anime/2994"), "Summary"),
+                    RelatedAnime(URI("https://anilist.co/anime/2994"), "SUMMARY"),
+                )
+            }
+        }
+
+        @Nested
         inner class RemoveRelationIfTests {
 
             @Test
@@ -6407,7 +6524,7 @@ internal class AnimeRawTest {
                 val anime = AnimeRaw(
                     _title =  "Death Note",
                     _relatedAnime = hashSetOf(
-                        relatedAnime,
+                        RelatedAnime(relatedAnime),
                     ),
                 )
 
@@ -6425,7 +6542,7 @@ internal class AnimeRawTest {
                 val anime = AnimeRaw(
                     _title =  "Death Note",
                     _relatedAnime = hashSetOf(
-                        relatedAnime,
+                        RelatedAnime(relatedAnime),
                     ),
                 )
 
@@ -6434,7 +6551,7 @@ internal class AnimeRawTest {
 
                 // then
                 assertThat(anime.relatedAnime).containsExactly(
-                    relatedAnime,
+                    RelatedAnime(relatedAnime),
                 )
             }
         }
@@ -6984,14 +7101,14 @@ internal class AnimeRawTest {
             val a = AnimeRaw(
                 _title =  title,
                 _relatedAnime = hashSetOf(
-                    URI("https://myanimelist.net/anime/2994"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/2994")),
                 ),
             )
 
             val b = AnimeRaw(
                 _title =  title,
                 _relatedAnime = hashSetOf(
-                    URI("https://myanimelist.net/anime/2994"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/2994")),
                 ),
             )
 
@@ -7010,15 +7127,15 @@ internal class AnimeRawTest {
             val a = AnimeRaw(
                 _title =  title,
                 _relatedAnime = hashSetOf(
-                    URI("https://myanimelist.net/anime/2994"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/2994")),
                 ),
             )
 
             val b = AnimeRaw(
                 _title =  title,
                 _relatedAnime = hashSetOf(
-                    URI("https://myanimelist.net/anime/2994"),
-                    URI("http://anilist.co/anime/2994"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/2994")),
+                    RelatedAnime(URI("http://anilist.co/anime/2994")),
                 ),
             )
 
@@ -7512,7 +7629,7 @@ internal class AnimeRawTest {
                     URI("https://myanimelist.net/anime/1535"),
                 ),
                 _relatedAnime = hashSetOf(
-                    URI("https://myanimelist.net/anime/2994"),
+                    RelatedAnime(URI("https://myanimelist.net/anime/2994")),
                 ),
             )
 
@@ -7522,8 +7639,8 @@ internal class AnimeRawTest {
                     URI("https://anidb.net/anime/4563"),
                 ),
                 _relatedAnime = hashSetOf(
-                    URI("https://anidb.net/anime/8146"),
-                    URI("https://anidb.net/anime/8147"),
+                    RelatedAnime(URI("https://anidb.net/anime/8146")),
+                    RelatedAnime(URI("https://anidb.net/anime/8147")),
                 ),
             )
 
@@ -7536,9 +7653,9 @@ internal class AnimeRawTest {
                 URI("https://myanimelist.net/anime/1535"),
             )
             assertThat(result.relatedAnime).containsExactlyInAnyOrder(
-                URI("https://anidb.net/anime/8146"),
-                URI("https://anidb.net/anime/8147"),
-                URI("https://myanimelist.net/anime/2994"),
+                RelatedAnime(URI("https://anidb.net/anime/8146")),
+                RelatedAnime(URI("https://anidb.net/anime/8147")),
+                RelatedAnime(URI("https://myanimelist.net/anime/2994")),
             )
         }
 
@@ -8904,8 +9021,8 @@ internal class AnimeRawTest {
                         URI("https://myanimelist.net/anime/6351"),
                     ),
                     _relatedAnime = hashSetOf(
-                        URI("https://myanimelist.net/anime/2167"),
-                        URI("https://myanimelist.net/anime/6351"),
+                        RelatedAnime(URI("https://myanimelist.net/anime/2167")),
+                        RelatedAnime(URI("https://myanimelist.net/anime/6351")),
                     ),
                     activateChecks = false,
                 )
@@ -8933,7 +9050,9 @@ internal class AnimeRawTest {
                       "studios": [],
                       "producers": [],
                       "relatedAnime": [
-                        "https://myanimelist.net/anime/2167"
+                        {
+                          "uri": "https://myanimelist.net/anime/2167"
+                        }
                       ],
                       "tags": []
                     }
@@ -9066,7 +9185,7 @@ internal class AnimeRawTest {
                         source,
                     ),
                     _relatedAnime = hashSetOf(
-                        source,
+                        RelatedAnime(source),
                     ),
                     activateChecks = false,
                 )

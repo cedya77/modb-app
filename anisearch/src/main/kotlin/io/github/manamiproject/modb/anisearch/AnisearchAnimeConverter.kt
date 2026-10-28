@@ -14,6 +14,8 @@ import io.github.manamiproject.modb.core.coroutines.ModbDispatchers.LIMITED_CPU
 import io.github.manamiproject.modb.core.extensions.*
 import io.github.manamiproject.modb.core.extractor.DataExtractor
 import io.github.manamiproject.modb.core.extractor.ExtractionResult
+import io.github.manamiproject.modb.core.extractor.WRAP_TABLE_ROW
+import io.github.manamiproject.modb.core.extractor.extractLabelledLinks
 import io.github.manamiproject.modb.core.extractor.JsonDataExtractor
 import io.github.manamiproject.modb.core.extractor.XmlDataExtractor
 import kotlinx.coroutines.withContext
@@ -247,23 +249,28 @@ public class AnisearchAnimeConverter(
         return synonyms.map { it.trimStart(',').trimEnd(',') }.toHashSet()
     }
 
-    private suspend fun extractRelatedAnime(data: ExtractionResult): HashSet<URI> = withContext(LIMITED_CPU) {
+    private suspend fun extractRelatedAnime(data: ExtractionResult): HashSet<RelatedAnime> = withContext(LIMITED_CPU) {
         val id = data.string("source")
         val relationsFile = relationsDir.resolve("$id.${metaDataProviderConfig.fileSuffix()}")
 
         check(relationsFile.regularFileExists()) { "Relations file is missing for [$id]." }
 
         val relatedAnimeData = xmlExtractor.extract(relationsFile.readFile(), mapOf(
-            "relatedAnime" to "//section[@id='relations_anime']//table//tbody//a/@href",
+            "relatedAnime" to "//section[@id='relations_anime']//table//tbody//tr/html()",
         ))
 
         if (relatedAnimeData.notFound("relatedAnime")) {
             hashSetOf()
         } else {
-            relatedAnimeData.listNotNull<String>("relatedAnime")
-                .map { it.remove("anime/") }
-                .map { it.substring(0, it.indexOf(',')) }
-                .map { metaDataProviderConfig.buildAnimeLink(it) }
+            // <tr><th><a href="anime/2753,ghost-in-the-shell-2-innocence">...</a><br><span ...>Sequel</span></th>...</tr>
+            xmlExtractor.extractLabelledLinks(
+                snippets = relatedAnimeData.listNotNull<String>("relatedAnime"),
+                labelSelector = "//th//span/text()",
+                linkSelector = "//a/@href",
+                wrap = WRAP_TABLE_ROW,
+            ).flatMap { entry -> entry.links.map { it to entry.label } }
+                .map { (link, label) -> link.remove("anime/") to label?.takeUnless { it.trim() == "?" } } // "?" = relation unknown
+                .map { (link, label) -> RelatedAnime.of(metaDataProviderConfig.buildAnimeLink(link.substring(0, link.indexOf(','))), label) }
                 .toHashSet()
         }
     }

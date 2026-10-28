@@ -33,7 +33,7 @@ class DefaultAmbiguousSynonymRemover: AmbiguousSynonymRemover {
         var removed = 0
 
         allEntries.forEachIndexed { index, anime ->
-            val relatedEntries = anime.relatedAnime.mapNotNull { indexBySource[it] }
+            val relatedEntries = anime.relatedAnime.mapNotNull { indexBySource[it.uri] }
                 .filterNot { it == index }
                 .distinct()
 

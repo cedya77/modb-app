@@ -35,8 +35,8 @@ import io.github.manamiproject.modb.core.anime.Duration.Companion.UNKNOWN as UNK
  * @property studios List of studio names. May contain duplicates for slightly different writings. All studio names are lower case.
  * @param _producers List of names of producers as provided by the metadata providers.
  * @property producers List of names of producers. May contain duplicates for slightly different writings. All producer names are lower case.
- * @param _relatedAnime Duplicate-free list of links to related anime.
- * @property relatedAnime Duplicate-free list of links to related anime.
+ * @param _relatedAnime Duplicate-free list of links to related anime including the kind of relation. One entry per link.
+ * @property relatedAnime Duplicate-free list of links to related anime including the kind of relation. One entry per link.
  * @param _tags Duplicate-free list of tags. This contains both genres and tags from metadata providers. All tags transformed to lower case.
  * @property tags Duplicate-free list of tags. This contains both genres and tags from metadata providers. All tags are lower case.
  * @property metaDataProviderScores Contains a score for each metadata provider. The property will not be serialized as-is. It's serialized using backing field [scores].
@@ -56,7 +56,7 @@ public data class AnimeRaw(
     private val _synonyms: HashSet<Title> = HashSet(),
     private val _studios: HashSet<Studio> = HashSet(),
     private val _producers: HashSet<Producer> = HashSet(),
-    private val _relatedAnime: HashSet<URI> = HashSet(),
+    private val _relatedAnime: HashSet<RelatedAnime> = HashSet(),
     private val _tags: HashSet<Tag> = HashSet(),
     @Transient private val metaDataProviderScores: HashMap<Hostname, MetaDataProviderScoreValue> = hashMapOf(),
     @Transient val activateChecks: Boolean = true,
@@ -98,10 +98,10 @@ public data class AnimeRaw(
         get() = _producers.toHashSet()
 
     /**
-     * Duplicate-free list of links to related anime.
-     * @since 16.6.0
+     * Duplicate-free list of links to related anime including the kind of relation. One entry per link.
+     * @since 20.0.0
      */
-    val relatedAnime: HashSet<URI>
+    val relatedAnime: HashSet<RelatedAnime>
         get() = _relatedAnime.toHashSet()
 
     /**
@@ -313,36 +313,66 @@ public data class AnimeRaw(
 
     /**
      * Add additional related anime to the existing list. This will **not** override [relatedAnime].
-     * Duplicates are being ignored.
-     * @since 11.0.0
-     * @param relatedAnime List of related anime.
+     * Links which are part of [sources] are ignored. There is only one entry per link: an entry having a
+     * [RelatedAnime.relation] replaces an existing entry without one, otherwise the existing entry is kept.
+     * @since 20.0.0
+     * @param relatedAnime Related anime including the kind of relation.
      * @return Same instance.
      */
-    public fun addRelatedAnime(vararg relatedAnime: URI): AnimeRaw = addRelatedAnime(relatedAnime.toHashSet())
+    public fun addRelatedAnime(vararg relatedAnime: RelatedAnime): AnimeRaw = addRelatedAnime(relatedAnime.toList())
 
     /**
      * Add additional related anime to the existing list. This will **not** override [relatedAnime].
-     * Duplicates are being ignored.
-     * @since 11.0.0
-     * @param relatedAnime List of related anime.
+     * Links which are part of [sources] are ignored. There is only one entry per link: an entry having a
+     * [RelatedAnime.relation] replaces an existing entry without one, otherwise the existing entry is kept.
+     * @since 20.0.0
+     * @param relatedAnime List of related anime including the kind of relation.
      * @return Same instance.
      */
-    public fun addRelatedAnime(relatedAnime: Collection<URI>): AnimeRaw {
+    public fun addRelatedAnime(relatedAnime: Collection<RelatedAnime>): AnimeRaw {
         relatedAnime.asSequence()
-            .filter { !_sources.contains(it) }
-            .forEach { _relatedAnime.add(it) }
+            .filter { !_sources.contains(it.uri) }
+            .forEach { new ->
+                val existing = _relatedAnime.firstOrNull { it.uri == new.uri }
+                when {
+                    existing == null -> _relatedAnime.add(new)
+                    existing.relation == null && new.relation != null -> {
+                        _relatedAnime.remove(existing)
+                        _relatedAnime.add(new)
+                    }
+                }
+            }
 
         return this
     }
 
     /**
-     * Removes an [URI] from [relatedAnime] if the given condition matches.
+     * Add additional related anime for which the kind of relation is unknown.
+     * This will **not** override [relatedAnime]. See [addRelatedAnime].
      * @since 11.0.0
-     * @param condition If an entry in [relatedAnime] matches this condition, then the [URI] will be removed from [relatedAnime].
+     * @param relatedAnime Links to related anime.
+     * @return Same instance.
+     */
+    public fun addRelatedAnime(vararg relatedAnime: URI): AnimeRaw = addRelatedAnime(relatedAnime.map { RelatedAnime(it) })
+
+    /**
+     * Add additional related anime for which the kind of relation is unknown.
+     * This will **not** override [relatedAnime]. See [addRelatedAnime].
+     * @since 11.0.0
+     * @param relatedAnime Links to related anime.
+     * @return Same instance.
+     */
+    @JvmName("addRelatedAnimeUris")
+    public fun addRelatedAnime(relatedAnime: Collection<URI>): AnimeRaw = addRelatedAnime(relatedAnime.map { RelatedAnime(it) })
+
+    /**
+     * Removes an entry from [relatedAnime] if the given condition matches its link.
+     * @since 11.0.0
+     * @param condition If the link of an entry in [relatedAnime] matches this condition, then the entry will be removed from [relatedAnime].
      * @return Same instance.
      */
     public fun removeRelatedAnimeIf(condition: (URI) -> Boolean): AnimeRaw {
-        _relatedAnime.removeIf { condition.invoke(it) }
+        _relatedAnime.removeIf { condition.invoke(it.uri) }
         return this
     }
 
@@ -515,7 +545,7 @@ public data class AnimeRaw(
         _producers.clear()
         addProducers(uncheckedProducers)
 
-        val uncheckedRelatedAnime: Collection<URI> = _relatedAnime.toSet()
+        val uncheckedRelatedAnime: Collection<RelatedAnime> = _relatedAnime.toSet()
         _relatedAnime.clear()
         addRelatedAnime(uncheckedRelatedAnime)
 

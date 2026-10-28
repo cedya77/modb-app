@@ -1,5 +1,6 @@
 package io.github.manamiproject.modb.app.merging
 
+import io.github.manamiproject.modb.core.anime.RelatedAnime
 import io.github.manamiproject.modb.app.TestAppConfig
 import io.github.manamiproject.modb.app.TestMergeLockAccessor
 import io.github.manamiproject.modb.app.config.AppConfig
@@ -51,8 +52,8 @@ internal class DefaultMergingServiceTest {
                         "イレブンアイズ",
                     ),
                     _relatedAnime = hashSetOf(
-                        URI("https://anilist.co/anime/110465"),
-                        URI("https://anilist.co/anime/7739"),
+                        RelatedAnime(URI("https://anilist.co/anime/110465")),
+                        RelatedAnime(URI("https://anilist.co/anime/7739")),
                     ),
                 )
 
@@ -102,8 +103,8 @@ internal class DefaultMergingServiceTest {
                         "11eyes イレブンアイズ",
                     ),
                     _relatedAnime = hashSetOf(
-                        URI("https://myanimelist.net/anime/20557"),
-                        URI("https://myanimelist.net/anime/7739"),
+                        RelatedAnime(URI("https://myanimelist.net/anime/20557")),
+                        RelatedAnime(URI("https://myanimelist.net/anime/7739")),
                     ),
                 )
 
@@ -167,9 +168,9 @@ internal class DefaultMergingServiceTest {
                         "星界之纹章",
                     ),
                     _relatedAnime = hashSetOf(
-                        URI("https://anidb.net/anime/1623"),
-                        URI("https://anidb.net/anime/4"),
-                        URI("https://anidb.net/anime/6"),
+                        RelatedAnime(URI("https://anidb.net/anime/1623")),
+                        RelatedAnime(URI("https://anidb.net/anime/4")),
+                        RelatedAnime(URI("https://anidb.net/anime/6")),
                     ),
                 )
 
@@ -190,9 +191,9 @@ internal class DefaultMergingServiceTest {
                         "カウボーイビバップ",
                     ),
                     _relatedAnime = hashSetOf(
-                        URI("https://myanimelist.net/anime/17205"),
-                        URI("https://myanimelist.net/anime/4037"),
-                        URI("https://myanimelist.net/anime/5"),
+                        RelatedAnime(URI("https://myanimelist.net/anime/17205")),
+                        RelatedAnime(URI("https://myanimelist.net/anime/4037")),
+                        RelatedAnime(URI("https://myanimelist.net/anime/5")),
                     ),
                 )
 
@@ -239,8 +240,8 @@ internal class DefaultMergingServiceTest {
                         "イレブンアイズ",
                     ),
                     _relatedAnime = hashSetOf(
-                        URI("https://anilist.co/anime/110465"),
-                        URI("https://anilist.co/anime/7739"),
+                        RelatedAnime(URI("https://anilist.co/anime/110465")),
+                        RelatedAnime(URI("https://anilist.co/anime/7739")),
                     ),
                 )
 
@@ -262,10 +263,10 @@ internal class DefaultMergingServiceTest {
                         "劇場版“文学少女”",
                     ),
                     _relatedAnime = hashSetOf(
-                        URI("https://kitsu.app/anime/5078"),
-                        URI("https://kitsu.app/anime/5352"),
-                        URI("https://myanimelist.net/anime/7669"),
-                        URI("https://myanimelist.net/anime/8481"),
+                        RelatedAnime(URI("https://kitsu.app/anime/5078")),
+                        RelatedAnime(URI("https://kitsu.app/anime/5352")),
+                        RelatedAnime(URI("https://myanimelist.net/anime/7669")),
+                        RelatedAnime(URI("https://myanimelist.net/anime/8481")),
                     ),
                 )
 
@@ -423,9 +424,9 @@ internal class DefaultMergingServiceTest {
                         "カウボーイビバップ",
                     ),
                     _relatedAnime = hashSetOf(
-                        URI("https://myanimelist.net/anime/17205"),
-                        URI("https://myanimelist.net/anime/4037"),
-                        URI("https://myanimelist.net/anime/5"),
+                        RelatedAnime(URI("https://myanimelist.net/anime/17205")),
+                        RelatedAnime(URI("https://myanimelist.net/anime/4037")),
+                        RelatedAnime(URI("https://myanimelist.net/anime/5")),
                     ),
                 )
 
