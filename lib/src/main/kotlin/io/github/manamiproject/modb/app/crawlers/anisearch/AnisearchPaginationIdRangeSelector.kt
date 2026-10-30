@@ -1,5 +1,6 @@
 package io.github.manamiproject.modb.app.crawlers.anisearch
 
+import io.github.manamiproject.modb.app.extensions.siteName
 import io.github.manamiproject.modb.app.convfiles.AlreadyDownloadedIdsFinder
 import io.github.manamiproject.modb.app.convfiles.DefaultAlreadyDownloadedIdsFinder
 import io.github.manamiproject.modb.app.crawlers.PaginationIdRangeSelector
@@ -58,7 +59,7 @@ class AnisearchPaginationIdRangeSelector(
     }
 
     override suspend fun idDownloadList(page: Int): List<AnimeId> {
-        log.info { "Retrieving IDs for [${metaDataProviderConfig.hostname()}] from page [$page]" }
+        log.info { "Retrieving IDs for [${metaDataProviderConfig.siteName()}] from page [$page]" }
 
         if (entriesNotScheduledForCurrentWeek.isEmpty()) {
             entriesNotScheduledForCurrentWeek.addAll(downloadControlStateScheduler.findEntriesNotScheduledForCurrentWeek(metaDataProviderConfig))

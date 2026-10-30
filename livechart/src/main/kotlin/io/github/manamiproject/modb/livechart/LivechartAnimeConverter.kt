@@ -54,6 +54,18 @@ public class LivechartAnimeConverter(
             "sourceDiv" to "//div[@data-anime-details-id]/@data-anime-details-id",
             "sourceMeta" to "//meta[@property='og:url']/@content",
             "studios" to "//a[contains(@href, 'studios')]/text()",
+            // Layout since the redesign of october 2026: the value sits in the element following its label. The keys
+            // above stay as fallback for pages in the earlier layout.
+            "typeValue" to "//div[text()='Format']/following-sibling::div[1]/text()",
+            "statusValue" to "//div[text()='Status']/following-sibling::*[1]/text()",
+            "durationValue" to "//div[text()='Run time']/following-sibling::div[1]/text()",
+            "seasonValue" to "//div[text()='Season']/following-sibling::a[1]/text()",
+            "yearValue" to "//div[text()='Premiere']/following-sibling::*[1]/text()",
+            "episodesDetails" to "//div[@data-anime-details-target='viewingProgression']/@data-viewing-progression-anime-id",
+            "episodesTotal" to "//div[@data-anime-details-target='viewingProgression']/@data-viewing-progression-total-count-value",
+            "episodesNext" to "//div[a[contains(@href,'/schedules/')]]//strong[starts-with(text(),'EP')]/text()",
+            "relatedAnimeCards" to "//article[@data-related-anime-target='anime']//a/@href",
+            "tagChips" to "//div[text()='Tags']/following-sibling::div[1]//a/text()",
         ))
 
         val jsonld = data.listNotNull<String>("jsonld").first()
@@ -104,8 +116,14 @@ public class LivechartAnimeConverter(
         var episodes = jsonData.intOrDefault("numberOfEpisodes")
         var isTableValueUnknown = false
 
-        // regular value in data table
-        if (episodes == 0) {
+        // number of episodes of the details card, layout since october 2026
+        if (episodes == 0 && !data.notFound("episodesDetails")) {
+            episodes = data.firstText("episodesTotal").toIntOrNull() ?: 0
+            isTableValueUnknown = episodes == 0
+        }
+
+        // regular value in data table, earlier layout
+        if (episodes == 0 && data.notFound("episodesDetails")) {
             val episodesValue = data.stringOrDefault("episodesDiv", "?")
                 .trim()
                 .split('/')
@@ -120,7 +138,7 @@ public class LivechartAnimeConverter(
 
         // current episode from table if the anime is ongoing
         if (episodes == 0) {
-            episodes = data.stringOrDefault("episodesCountdown")
+            episodes = data.firstText("episodesNext", "episodesCountdown")
                 .remove("EP")
                 .trim()
                 .toIntOrNull()
@@ -138,7 +156,7 @@ public class LivechartAnimeConverter(
     }
 
     private fun extractType(data: ExtractionResult): AnimeType {
-        val value = data.string("type")
+        val value = data.firstText("typeValue", "type")
 
         return when(value.trim().lowercase()) {
             "movie" -> MOVIE
@@ -176,7 +194,7 @@ public class LivechartAnimeConverter(
     }
 
     private fun extractStatus(data: ExtractionResult): AnimeStatus {
-        val statusString = data.stringOrDefault("status")
+        val statusString = data.firstText("statusValue", "status")
 
         return when (statusString.trim().lowercase()){
             "not yet released" -> UPCOMING
@@ -187,7 +205,7 @@ public class LivechartAnimeConverter(
     }
 
     private fun extractDuration(data: ExtractionResult): Duration {
-        val durationString = data.stringOrDefault("duration").trim()
+        val durationString = data.firstText("durationValue", "duration").trim()
 
         val seconds = """(\d+ ?[aA-zZ]+)+""".toRegex()
             .findAll(durationString)
@@ -211,10 +229,11 @@ public class LivechartAnimeConverter(
     }
 
     private fun extractAnimeSeason(data: ExtractionResult): AnimeSeason {
-        val splitSeasonString = if (data.notFound("season")) {
+        val seasonText = data.firstText("seasonValue", "season")
+        val splitSeasonString = if (seasonText.isBlank()) {
             listOf(EMPTY)
         } else {
-            data.listNotNull<String>("season").first().remove("Season ").split(' ')
+            seasonText.remove("Season ").split(' ')
         }
 
         val seasonString = splitSeasonString.first().trim().lowercase()
@@ -229,7 +248,7 @@ public class LivechartAnimeConverter(
         val year = if (splitSeasonString.size == 2) {
             YEAR_REGEX.find(splitSeasonString[1])?.value?.trim()?.ifBlank { "0" }?.toIntOrNull() ?: 0
         } else {
-            YEAR_REGEX.find(data.stringOrDefault("year"))?.value?.trim()?.toIntOrNull() ?: 0
+            YEAR_REGEX.find(data.firstText("yearValue", "year"))?.value?.trim()?.toIntOrNull() ?: 0
         }
 
         return AnimeSeason(
@@ -261,14 +280,12 @@ public class LivechartAnimeConverter(
     }
 
     private fun extractRelatedAnime(data: ExtractionResult): HashSet<URI> {
-        return if (data.notFound("relatedAnime")) {
-            hashSetOf()
-        } else {
-            data.listNotNull<String>("relatedAnime")
-                .map { it.remove("/anime/") }
-                .map { metaDataProviderConfig.buildAnimeLink(it) }
-                .toHashSet()
-        }
+        val key = listOf("relatedAnimeCards", "relatedAnime").firstOrNull { !data.notFound(it) } ?: return hashSetOf()
+
+        return data.listNotNull<String>(key)
+            .mapNotNull { ANIME_LINK.find(it.trim())?.groupValues?.get(1) }
+            .map { metaDataProviderConfig.buildAnimeLink(it) }
+            .toHashSet()
     }
 
     private fun extractTags(jsonData: ExtractionResult, data: ExtractionResult): HashSet<Tag> {
@@ -280,9 +297,10 @@ public class LivechartAnimeConverter(
                 .toHashSet()
         }
 
-        if (!data.notFound("tags")) {
-            data.listNotNull<Tag>("tags")
+        listOf("tagChips", "tags").firstOrNull { !data.notFound(it) }?.let { key ->
+            data.listNotNull<Tag>(key)
                 .map { it.trim().lowercase() }
+                .filter { it.isNotBlank() }
                 .forEach { tags.add(it) }
         }
 
@@ -315,7 +333,7 @@ public class LivechartAnimeConverter(
         if (!data.notFound("studios")) {
             data.listNotNull<Studio>("studios")
                 .map { it.normalize().lowercase() }
-                .filterNot { it == "studios" }
+                .filterNot { it == "studios" || it.isBlank() }
                 .forEach { studios.add(it) }
         }
 
@@ -326,6 +344,16 @@ public class LivechartAnimeConverter(
         private const val LARGE_PICTURE_INDICATOR = "large.jpg"
         private const val SMALL_PICTURE_INDICATOR = "small.jpg"
         private val YEAR_REGEX = """\d{4}""".toRegex()
+        private val ANIME_LINK = """^(?:https?://(?:www\.)?livechart\.me)?/anime/(\d+)/?$""".toRegex()
+
+        /**
+         * Text of the first key which has been found and isn't blank. A key can hold one value or a list of values.
+         */
+        private fun ExtractionResult.firstText(vararg keys: String): String = keys.asSequence()
+            .filterNot { notFound(it) }
+            .map { listNotNull<String>(it) { value -> value }.joinToString(" ").trim() }
+            .firstOrNull { it.isNotBlank() }
+            ?: EMPTY
 
         /**
          * Singleton of [LivechartAnimeConverter]

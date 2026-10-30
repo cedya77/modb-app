@@ -106,6 +106,7 @@ internal class LinuxNetworkControllerTest {
                     appConfig = testAppConfig,
                     kotlinCommandExecutor = testCommandExecutor,
                 )
+                linuxNetworkController.sudoPasswordValue = "password"
 
                 // when
                 val result = linuxNetworkController.restartAsync().await()
@@ -119,6 +120,70 @@ internal class LinuxNetworkControllerTest {
                     listOf("ifconfig", "en1"),
                     listOf("ifconfig", "en1"),
                     listOf("sudo", "ifconfig", "en1", "up"),
+                    listOf("ifconfig", "en1"),
+                    listOf("ifconfig", "en1"),
+                    listOf("ifconfig", "en1"),
+                    listOf("ifconfig", "en1"),
+                )
+            }
+        }
+
+        @Test
+        fun `restarts the network controller without sudo if no sudo password is set`() {
+            runTest {
+                // given
+                var clock = Clock.fixed(Instant.parse("2021-01-31T16:02:42.00Z"), UTC)
+
+                val testAppConfig = object: Config by TestAppConfig {
+                    override fun isTestContext(): Boolean = true
+                    override fun clock(): Clock = clock
+                }
+
+                val invocations = mutableListOf<List<String>>()
+                var numberOfChecks = 0
+                val testCommandExecutor = object : CommandExecutor {
+                    override var config: CommandLineConfig = CommandLineConfig()
+                    override fun executeCmd(command: List<String>): String {
+                        invocations.add(command)
+                        clock = Clock.fixed(clock.instant().plus(1, ChronoUnit.MINUTES), UTC)
+
+                        return when {
+                            command.containsExactlyInTheSameOrder(listOf("ifconfig")) -> loadTestResource<String>("network/LinuxNetworkControllerTest/all_devices.txt")
+                            command.containsExactlyInTheSameOrder(listOf("ifconfig", "en1")) -> {
+                                numberOfChecks++
+
+                                when {
+                                    numberOfChecks < 3 -> loadTestResource<String>("network/LinuxNetworkControllerTest/device_up.txt")
+                                    numberOfChecks == 3 -> loadTestResource<String>("network/LinuxNetworkControllerTest/device_down.txt")
+                                    numberOfChecks in 4..6 -> loadTestResource<String>("network/LinuxNetworkControllerTest/device_down.txt")
+                                    numberOfChecks == 7 -> loadTestResource<String>("network/LinuxNetworkControllerTest/device_up.txt")
+                                    else -> shouldNotBeInvoked()
+                                }
+                            }
+                            command.any { it.contains("up") } -> loadTestResource<String>("network/LinuxNetworkControllerTest/device_down.txt")
+                            command.any { it.contains("down") } -> loadTestResource<String>("network/LinuxNetworkControllerTest/device_up.txt")
+                            else -> shouldNotBeInvoked()
+                        }
+                    }
+                }
+
+                val linuxNetworkController = LinuxNetworkController(
+                    appConfig = testAppConfig,
+                    kotlinCommandExecutor = testCommandExecutor,
+                )
+
+                // when
+                val result = linuxNetworkController.restartAsync().await()
+
+                // then
+                assertThat(result).isTrue()
+                assertThat(invocations).containsExactly(
+                    listOf("ifconfig"),
+                    listOf("ifconfig", "en1", "down"),
+                    listOf("ifconfig", "en1"),
+                    listOf("ifconfig", "en1"),
+                    listOf("ifconfig", "en1"),
+                    listOf("ifconfig", "en1", "up"),
                     listOf("ifconfig", "en1"),
                     listOf("ifconfig", "en1"),
                     listOf("ifconfig", "en1"),

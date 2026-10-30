@@ -1,0 +1,25 @@
+[modb.app]
+downloadsDirectory = ""
+outputDirectory = ""
+downloadControlStateDirectory = ""
+disabledCrawlers = ["anidb.net"]
+
+[modb.app.challenge]
+solverUrl = "http://localhost:8191/v1"
+
+[modb.app.crawler]
+# Requested again per run: dead entries of AniList, Kitsu, MAL (highest IDs first), pending entries of AniDB (longest unchecked first).
+deadEntriesToRecheck = 0
+
+[modb.core.httpclient]
+# Retries after server errors, 429 and timeouts, for all sites.
+maxRetries = 5
+
+[modb.anidb]
+# api | website
+source = "api"
+# Client registered for the AniDB HTTP API.
+client = ""
+clientver = ""
+# Retries while AniDB answers "banned", before the AniDB crawler stops.
+banRetries = 5

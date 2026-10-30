@@ -45,6 +45,7 @@ class SimpleConversionWatchService @KoverIgnore constructor(
 
     override suspend fun prepare() = withContext(LIMITED_FS) {
         deleteLocks()
+        cleanUpEmptyConvertedFiles()
         fileConverter.convertUnconvertedFiles()
         workingDir.register(watchService, ENTRY_CREATE)
         isPrepared = true
@@ -80,6 +81,14 @@ class SimpleConversionWatchService @KoverIgnore constructor(
 
     override suspend fun stop() = withContext(LIMITED_FS) {
         watchService.close()
+    }
+
+    private suspend fun cleanUpEmptyConvertedFiles() {
+        val deleted = workingDir.deleteEmptyConvertedFiles()
+
+        if (deleted > 0) {
+            log.warn { "Deleted [$deleted] empty [*.$CONVERTED_FILE_SUFFIX] files in [$workingDir]. They are converted again." }
+        }
     }
 
     private suspend fun deleteLocks() {

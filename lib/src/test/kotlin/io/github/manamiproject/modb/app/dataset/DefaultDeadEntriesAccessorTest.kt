@@ -847,6 +847,108 @@ internal class DefaultDeadEntriesAccessorTest {
     }
 
     @Nested
+    inner class ReplaceDeadEntriesTests {
+
+        @Test
+        fun `replaces the list, writes the file and removes the dcs entries of new dead entries only`() {
+            tempDirectory {
+                // given
+                val testAppConfig = object: Config by TestAppConfig {
+                    override fun outputDirectory(): Directory = tempDir
+                    override fun metaDataProviderConfigurations(): Set<MetaDataProviderConfig> = setOf(AnidbConfig)
+                }
+
+                val removedFromDcs = mutableListOf<AnimeId>()
+                val testDownloadControlStateAccessor = object: DownloadControlStateAccessor by TestDownloadControlStateAccessor {
+                    override suspend fun removeDeadEntry(metaDataProviderConfig: MetaDataProviderConfig, animeId: AnimeId) {
+                        removedFromDcs.add(animeId)
+                    }
+                }
+
+                val testDeserializer = object: Deserializer<RegularFile, DeadEntries> by TestDeserializer() {
+                    override suspend fun deserialize(source: RegularFile): DeadEntries = DeadEntries(
+                        `$schema` = URI("https://raw.githubusercontent.com/manami-project/anime-offline-database/refs/heads/master/dead-entries/dead-entries.schema.json"),
+                        lastUpdate = "2024-08-01",
+                        deadEntries = listOf("111", "222"),
+                    )
+                }
+
+                val deadEntriesAccessor = DefaultDeadEntriesAccessor(
+                    appConfig = testAppConfig,
+                    jsonDeserializer = testDeserializer,
+                    downloadControlStateAccessor = testDownloadControlStateAccessor,
+                )
+
+                // when
+                deadEntriesAccessor.replaceDeadEntries(setOf("222", "333", "444"), AnidbConfig)
+
+                // then
+                assertThat(deadEntriesAccessor.fetchDeadEntries(AnidbConfig)).containsExactlyInAnyOrder("222", "333", "444")
+                assertThat(removedFromDcs).containsExactlyInAnyOrder("333", "444")
+                val result = FromRegularFileDeserializer(
+                    deserializer = DeadEntriesFromInputStreamDeserializer.instance).deserialize(
+                        deadEntriesAccessor.deadEntriesFile(AnidbConfig, JSON_MINIFIED),
+                    ).deadEntries
+                assertThat(result).containsExactlyInAnyOrder("222", "333", "444")
+            }
+        }
+
+        @Test
+        fun `doesn't write the file if nothing changed`() {
+            tempDirectory {
+                // given
+                val testAppConfig = object: Config by TestAppConfig {
+                    override fun outputDirectory(): Directory = tempDir
+                    override fun metaDataProviderConfigurations(): Set<MetaDataProviderConfig> = setOf(AnidbConfig)
+                }
+
+                val testDeserializer = object: Deserializer<RegularFile, DeadEntries> by TestDeserializer() {
+                    override suspend fun deserialize(source: RegularFile): DeadEntries = DeadEntries(
+                        `$schema` = URI("https://raw.githubusercontent.com/manami-project/anime-offline-database/refs/heads/master/dead-entries/dead-entries.schema.json"),
+                        lastUpdate = "2024-08-01",
+                        deadEntries = listOf("111"),
+                    )
+                }
+
+                val deadEntriesAccessor = DefaultDeadEntriesAccessor(
+                    appConfig = testAppConfig,
+                    jsonDeserializer = testDeserializer,
+                    downloadControlStateAccessor = TestDownloadControlStateAccessor,
+                )
+
+                // when
+                deadEntriesAccessor.replaceDeadEntries(setOf("111"), AnidbConfig)
+
+                // then
+                assertThat(deadEntriesAccessor.deadEntriesFile(AnidbConfig, JSON_MINIFIED)).doesNotExist()
+                assertThat(deadEntriesAccessor.fetchDeadEntries(AnidbConfig)).containsExactly("111")
+            }
+        }
+
+        @Test
+        fun `does nothing for a metadata provider without dead entry files`() {
+            tempDirectory {
+                // given
+                val testAppConfig = object: Config by TestAppConfig {
+                    override fun outputDirectory(): Directory = tempDir
+                    override fun metaDataProviderConfigurations(): Set<MetaDataProviderConfig> = setOf(AnisearchConfig)
+                }
+
+                val deadEntriesAccessor = DefaultDeadEntriesAccessor(
+                    appConfig = testAppConfig,
+                    downloadControlStateAccessor = TestDownloadControlStateAccessor,
+                )
+
+                // when
+                deadEntriesAccessor.replaceDeadEntries(setOf("111"), AnisearchConfig)
+
+                // then
+                assertThat(tempDir.resolve("dead-entries")).doesNotExist()
+            }
+        }
+    }
+
+    @Nested
     inner class DetermineDeadEntriesTests {
 
         @Test

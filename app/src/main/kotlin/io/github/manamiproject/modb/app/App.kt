@@ -1,5 +1,8 @@
 package io.github.manamiproject.modb.app
 
+import io.github.manamiproject.modb.anidb.AnidbBannedException
+import io.github.manamiproject.modb.anidb.CrawlerDetectedException
+import io.github.manamiproject.modb.anidb.AnidbConfig
 import io.github.manamiproject.modb.anisearch.AnisearchConfig
 import io.github.manamiproject.modb.anisearch.AnisearchRelationsConfig
 import io.github.manamiproject.modb.app.convfiles.DefaultRawFileConversionService
@@ -21,6 +24,7 @@ import io.github.manamiproject.modb.app.downloadcontrolstate.DefaultDownloadCont
 import io.github.manamiproject.modb.app.extensions.alertDeletedAnimeByTitle
 import io.github.manamiproject.modb.app.fluentapi.*
 import io.github.manamiproject.modb.app.network.LinuxNetworkController
+import io.github.manamiproject.modb.app.network.NetworkControllers
 import io.github.manamiproject.modb.app.postprocessors.*
 import io.github.manamiproject.modb.core.coroutines.CoroutineManager.runCoroutine
 import io.github.manamiproject.modb.core.coroutines.ModbDispatchers.LIMITED_NETWORK
@@ -33,16 +37,38 @@ import javax.swing.JPasswordField
 import javax.swing.SwingUtilities
 import kotlin.system.exitProcess
 
+// Lazy, because the first logger sets up logback, which reads the configuration. That has to wait
+// until ensureConfigFileExists() had the chance to create it.
 @KoverIgnore
-private val log = org.slf4j.LoggerFactory.getLogger("App")
+private val log by lazy { org.slf4j.LoggerFactory.getLogger("App") }
 
-fun main() = runCoroutine {
-    LinuxNetworkController.instance.sudoPasswordValue = passwordPrompt()
+fun main() {
+    ensureConfigFileExists()
+    crawlAndCreateDataset()
+}
+
+private fun crawlAndCreateDataset() = runCoroutine {
+    val disabled = DefaultConfigRegistry.instance.list<String>("modb.app.disabledCrawlers")?.toSet() ?: emptySet()
+
+    // Only the crawlers of these sites change the outgoing address by restarting the network device.
+    // Both aniSearch crawlers use the hostname of anisearch.com, but can be disabled independently.
+    val sitesChangingAddress = buildSet {
+        if (AnidbConfig.hostname() !in disabled) {
+            add(AnidbConfig.hostname())
+        }
+        if (AnisearchConfig.hostname() !in disabled || ANISEARCH_RELATIONS_CRAWLER !in disabled) {
+            add(AnisearchConfig.hostname())
+        }
+    }
+
+    when {
+        isRoot() -> log.info("Running as root. No sudo password needed.")
+        !NetworkControllers.usesNetworkDevice(sitesChangingAddress) -> log.info("Network device won't be restarted. No sudo password needed.")
+        else -> LinuxNetworkController.instance.sudoPasswordValue = verifiedSudoPassword()
+    }
 
     val rawFileConversionService = DefaultRawFileConversionService.instance
     rawFileConversionService.start()
-
-    val disabled = DefaultConfigRegistry.instance.list<String>("modb.app.disabledCrawlers")?.toSet() ?: emptySet()
 
     val crawlers = mutableListOf<Job>()
 
@@ -52,7 +78,7 @@ fun main() = runCoroutine {
         crawl("anime-planet.com", disabled, crawlers) { AnimePlanetCrawler.instance.start() }
         crawl("animenewsnetwork.com", disabled, crawlers) { AnimenewsnetworkCrawler.instance.start() }
         crawl("anisearch.com", disabled, crawlers) { AnisearchCrawler(metaDataProviderConfig = AnisearchConfig).start() }
-        crawl("anisearch.com-relations", disabled, crawlers) { AnisearchCrawler(metaDataProviderConfig = AnisearchRelationsConfig).start() }
+        crawl(ANISEARCH_RELATIONS_CRAWLER, disabled, crawlers) { AnisearchCrawler(metaDataProviderConfig = AnisearchRelationsConfig).start() }
         crawl("kitsu.app", disabled, crawlers) { KitsuCrawler.instance.start() }
         crawl("livechart.me", disabled, crawlers) { LivechartCrawler.instance.start() }
         crawl("myanimelist.net", disabled, crawlers) { MyanimelistCrawler.instance.start() }
@@ -90,6 +116,48 @@ fun main() = runCoroutine {
         ReleaseInfoFileCreatorPostProcessor.instance
     ).forEach { it.process() }
 }
+
+@KoverIgnore
+private fun isRoot(): Boolean = try {
+    val process = ProcessBuilder("id", "-u").redirectErrorStream(true).start()
+    val userId = process.inputStream.bufferedReader().readText().trim()
+    process.waitFor() == 0 && userId == "0"
+} catch (_: Exception) {
+    false
+}
+
+@KoverIgnore
+private fun verifiedSudoPassword(): String {
+    repeat(MAX_SUDO_ATTEMPTS) { attempt ->
+        val password = passwordPrompt()
+
+        if (isValidSudoPassword(password)) {
+            return password
+        }
+
+        log.warn("Incorrect sudo password [${attempt + 1}/$MAX_SUDO_ATTEMPTS].")
+    }
+
+    log.error("No valid sudo password after [$MAX_SUDO_ATTEMPTS] attempts. Exiting.")
+    exitProcess(1)
+}
+
+/**
+ * `-k` ignores cached credentials so that the password is really checked, `-S` reads it from stdin
+ * and `-v` only validates without running a command.
+ */
+@KoverIgnore
+private fun isValidSudoPassword(password: String): Boolean = try {
+    val process = ProcessBuilder("sudo", "-k", "-S", "-p", "", "-v").redirectErrorStream(true).start()
+    process.outputStream.bufferedWriter().use { it.write(password); it.newLine() }
+    process.inputStream.bufferedReader().readText()
+    process.waitFor() == 0
+} catch (_: Exception) {
+    false
+}
+
+private const val MAX_SUDO_ATTEMPTS = 3
+private const val ANISEARCH_RELATIONS_CRAWLER = "anisearch.com-relations"
 
 @KoverIgnore
 private fun passwordPrompt(): String {
@@ -143,8 +211,17 @@ private fun CoroutineScope.crawl(hostname: String, disabled: Set<String>, jobs: 
     jobs.add(launch {
         try {
             block.invoke()
+        } catch (_: AnidbBannedException) {
+            // Expected while a ban lasts, so a stack trace adds nothing.
+            log.error("Crawler for [$hostname] stopped, because AniDB still answers with [banned] after all retries. Wait until the ban has been lifted or add [$hostname] to [modb.app.disabledCrawlers].")
+        } catch (_: CrawlerDetectedException) {
+            // AniDB refusing the connection is an answer, not a fault in the code, so a stack trace adds nothing.
+            log.error("Crawler for [$hostname] stopped, because AniDB refuses the connection (AntiLeech or 403). Try again later or add [$hostname] to [modb.app.disabledCrawlers].")
         } catch (e: Throwable) {
-            log.error("Crawler for [$hostname] stopped: ${e.message}", e)
+            // The message says what happened. The stack trace is only of use when debugging, so it is logged at trace
+            // level, which the regular log levels (down to debug) leave out.
+            log.error("Crawler for [$hostname] stopped: ${e.message ?: e::class.simpleName}")
+            log.trace("Stack trace of the stopped crawler for [$hostname]", e)
         }
     })
 }

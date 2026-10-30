@@ -139,8 +139,24 @@ class DefaultDownloadControlStateAccessor(
         val currentDownloadControlStateEntry = dcsEntry(metaDataProviderConfig, animeId)
 
         if (currentDownloadControlStateEntry.lastDownloaded == WeekOfYear.currentWeek()) {
-            log.debug { "Not updating DCS file for [${animeId}] of [${metaDataProviderConfig.hostname()}], because it has been updated already." }
-            return false
+            // A second run in the same week must not count as another week of the schedule. But if the
+            // raw files have been converted again in the meantime (e.g. by a fixed converter), the data
+            // of this week has changed and is kept, otherwise the dataset is built from the old version.
+            if (currentDownloadControlStateEntry.anime == downloadControlStateEntry.anime) {
+                log.debug { "Not updating DCS file for [${animeId}] of [${metaDataProviderConfig.hostname()}], because it has been updated already." }
+                return false
+            }
+
+            log.debug { "Refreshing the data of DCS entry [$animeId] of [${metaDataProviderConfig.hostname()}], which has been updated this week already, without changing its schedule." }
+
+            val refreshed = currentDownloadControlStateEntry.copy(_anime = downloadControlStateEntry.anime)
+            Json.toJson(refreshed).writeToFile(downloadControlStateFile)
+            safelyStore(metaDataProviderConfig) {
+                it.toMutableMap().apply {
+                    put(animeId, refreshed)
+                }
+            }
+            return true
         }
 
         log.info { "Updating DCS entry for [$animeId] of [${metaDataProviderConfig.hostname()}]." }

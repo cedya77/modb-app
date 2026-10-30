@@ -78,6 +78,44 @@ internal class LivechartPaginationIdRangeSelectorTest {
         }
 
         @Test
+        fun `correctly extracts page content of the layout of october 2026`() {
+            runTest {
+                // given
+                val testMetaDataProviderConfig = object: MetaDataProviderConfig by LivechartPaginationIdRangeSelectorConfig {
+                    override fun isTestContext(): Boolean = true
+                }
+
+                val testHttpClient = object: HttpClient by TestHttpClient {
+                    override suspend fun get(url: URL, headers: Map<String, Collection<String>>): HttpResponse = HttpResponse(
+                        code = 200,
+                        body = loadTestResource<ByteArray>("crawler/livechart/LivechartPaginationIdRangeSelectorTest/fall-2026-redesign.html")
+                    )
+                }
+
+                val testDownloadControlStateScheduler = object: DownloadControlStateScheduler by TestDownloadControlStateScheduler {
+                    override suspend fun findEntriesNotScheduledForCurrentWeek(metaDataProviderConfig: MetaDataProviderConfig): Set<AnimeId> = emptySet()
+                }
+
+                val testAlreadyDownloadedIdsFinder = object: AlreadyDownloadedIdsFinder by TestAlreadyDownloadedIdsFinder {
+                    override suspend fun alreadyDownloadedIds(metaDataProviderConfig: MetaDataProviderConfig): Set<AnimeId> = emptySet()
+                }
+
+                val livechartPaginationIdRangeSelector = LivechartPaginationIdRangeSelector(
+                    metaDataProviderConfig = testMetaDataProviderConfig,
+                    httpClient = testHttpClient,
+                    downloadControlStateScheduler = testDownloadControlStateScheduler,
+                    alreadyDownloadedIdsFinder = testAlreadyDownloadedIdsFinder,
+                )
+
+                // when
+                val result = livechartPaginationIdRangeSelector.idDownloadList("fall-2026")
+
+                // then
+                assertThat(result).containsExactlyInAnyOrder("13226", "13232", "11748")
+            }
+        }
+
+        @Test
         fun `removes anime not scheduled for the current week`() {
             runTest {
                 // given

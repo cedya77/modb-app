@@ -84,6 +84,13 @@ class AnimePlanetCrawler(
         val lastPage = lastPageDetector.detectHighestId()
         val entriesNotScheduledForCurrentWeek = downloadControlStateScheduler.findEntriesNotScheduledForCurrentWeek(metaDataProviderConfig)
 
+        val alreadyDownloaded = alreadyDownloadedIdsFinder.alreadyDownloadedIds(metaDataProviderConfig).size
+        log.info {
+            "[${metaDataProviderConfig.hostname()}] Skipping [$alreadyDownloaded] already downloaded " +
+            "and [${entriesNotScheduledForCurrentWeek.size}] not scheduled for this week. " +
+            "Continuing from page [$firstPage] of [$lastPage]."
+        }
+
         wait()
 
         for (currentPage in firstPage..lastPage) {

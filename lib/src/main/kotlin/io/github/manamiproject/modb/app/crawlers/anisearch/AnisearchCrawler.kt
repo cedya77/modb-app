@@ -1,5 +1,6 @@
 package io.github.manamiproject.modb.app.crawlers.anisearch
 
+import io.github.manamiproject.modb.app.extensions.siteName
 import io.github.manamiproject.modb.anisearch.AnisearchConfig
 import io.github.manamiproject.modb.anisearch.AnisearchDownloader
 import io.github.manamiproject.modb.app.config.AppConfig
@@ -70,7 +71,7 @@ class AnisearchCrawler(
         metaDataProviderConfig = metaDataProviderConfig,
         httpClient = httpClient,
     ),
-        hostname = metaDataProviderConfig.hostname(),
+        hostname = metaDataProviderConfig.siteName(),
     ),
     private val networkController: NetworkController = NetworkControllers.forDeployment(hostname = metaDataProviderConfig.hostname()),
 ): Crawler {
@@ -83,30 +84,37 @@ class AnisearchCrawler(
     }
 
     override suspend fun start() {
-        log.info { "Starting crawler for [${metaDataProviderConfig.hostname()}]." }
+        log.info { "Starting crawler for [${metaDataProviderConfig.siteName()}]." }
 
         downloadEntriesScheduledForCurrentWeek()
         wait()
         downloadEntriesUsingPagination()
 
-        log.info { "Finished crawling data for [${metaDataProviderConfig.hostname()}]." }
+        log.info { "Finished crawling data for [${metaDataProviderConfig.siteName()}]." }
     }
 
     private suspend fun downloadEntriesScheduledForCurrentWeek() {
-        log.info { "Downloading [${metaDataProviderConfig.hostname()}] entries scheduled for the current week." }
+        log.info { "Downloading [${metaDataProviderConfig.siteName()}] entries scheduled for the current week." }
 
         val ids = downloadControlStateScheduler.findEntriesScheduledForCurrentWeek(metaDataProviderConfig) - alreadyDownloadedIdsFinder.alreadyDownloadedIds(metaDataProviderConfig)
         startDownload(ids.toList().createShuffledList())
 
-        log.info { "Finished downloading [${metaDataProviderConfig.hostname()}] entries scheduled for the current week." }
+        log.info { "Finished downloading [${metaDataProviderConfig.siteName()}] entries scheduled for the current week." }
     }
 
     private suspend fun downloadEntriesUsingPagination() {
-        log.info { "Downloading [${metaDataProviderConfig.hostname()}] entries using pagination." }
+        log.info { "Downloading [${metaDataProviderConfig.siteName()}] entries using pagination." }
 
         val firstPage = lastPageMemorizer.retrieveLastPage()
         val lastPage = lastPageDetector.detectHighestId()
         val entriesNotScheduledForCurrentWeek = downloadControlStateScheduler.findEntriesNotScheduledForCurrentWeek(metaDataProviderConfig)
+
+        val alreadyDownloaded = alreadyDownloadedIdsFinder.alreadyDownloadedIds(metaDataProviderConfig).size
+        log.info {
+            "[${metaDataProviderConfig.siteName()}] Skipping [$alreadyDownloaded] already downloaded " +
+            "and [${entriesNotScheduledForCurrentWeek.size}] not scheduled for this week. " +
+            "Continuing from page [$firstPage] of [$lastPage]."
+        }
 
         wait()
 
@@ -117,7 +125,7 @@ class AnisearchCrawler(
             lastPageMemorizer.memorizeLastPage(currentPage)
         }
 
-        log.info { "Finished downloading [${metaDataProviderConfig.hostname()}] entries using pagination." }
+        log.info { "Finished downloading [${metaDataProviderConfig.siteName()}] entries using pagination." }
     }
 
     private suspend fun startDownload(idDownloadList: List<String>) = repeat(idDownloadList.size) { index ->

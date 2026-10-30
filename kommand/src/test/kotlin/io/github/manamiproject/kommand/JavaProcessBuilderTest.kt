@@ -5,6 +5,7 @@ import io.github.manamiproject.kommand.exceptions.IncorrectPasswordAttemptExcept
 import io.github.manamiproject.kommand.exceptions.UnexpectedUsageOfSudo
 import io.github.manamiproject.kommand.exceptions.UnsupportedOperatingSystemException
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Assumptions.assumeTrue
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -186,6 +187,8 @@ internal class JavaProcessBuilderTest {
 
         @Test
         fun `throws exception if command with sudo is given an incorrect password`() {
+            assumeTrue(sudoRequiresPassword(), "sudo doesn't ask for a password on this system, so an incorrect password cannot be detected.")
+
             // given
             val javaProcessBuilder = JavaProcessBuilder {
                 useSudo = true
@@ -218,5 +221,18 @@ internal class JavaProcessBuilderTest {
             assertThat(result).isExactlyInstanceOf(JavaProcessBuilder::class.java)
             assertThat(result===previous).isTrue()
         }
+    }
+}
+
+private fun sudoRequiresPassword(): Boolean {
+    return try {
+        // -n fails instead of asking if a password is required. Without -k, so that credentials cached by an earlier
+        // sudo in the same terminal count as well: the command under test would use them and never check the password.
+        ProcessBuilder("sudo", "-n", "true")
+            .redirectErrorStream(true)
+            .start()
+            .waitFor() != 0
+    } catch (e: java.io.IOException) {
+        false
     }
 }

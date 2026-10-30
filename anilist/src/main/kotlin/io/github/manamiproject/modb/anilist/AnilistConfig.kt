@@ -11,7 +11,8 @@ import java.net.URI
  */
 public object AnilistConfig : MetaDataProviderConfig {
 
-    override fun buildDataDownloadLink(id: String): URI = URI("https://${hostname()}/graphql")
+    // Official public GraphQL API. The anime itself is still linked on the website (hostname).
+    override fun buildDataDownloadLink(id: String): URI = URI("https://graphql.anilist.co")
 
     override fun hostname(): Hostname = "anilist.co"
 

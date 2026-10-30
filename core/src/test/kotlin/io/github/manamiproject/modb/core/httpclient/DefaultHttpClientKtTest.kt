@@ -4,6 +4,8 @@ import com.github.tomakehurst.wiremock.WireMockServer
 import com.github.tomakehurst.wiremock.client.WireMock.*
 import com.github.tomakehurst.wiremock.matching.EqualToJsonPattern
 import com.github.tomakehurst.wiremock.stubbing.Scenario.STARTED
+import io.github.manamiproject.modb.core.TestConfigRegistry
+import io.github.manamiproject.modb.core.config.ConfigRegistry
 import io.github.manamiproject.modb.core.extensions.EMPTY
 import io.github.manamiproject.modb.core.httpclient.HttpProtocol.HTTP_1_1
 import io.github.manamiproject.modb.test.*
@@ -369,6 +371,42 @@ internal class DefaultHttpClientKtTest : MockServerTestCase<WireMockServer> by W
                 // then
                 assertThat(result).hasMessage("Execution failed despite [5] retry attempts. Last invocation of [GET http://localhost:$port/anime/1535] returned http status code [429]")
                 assertThat(result.cause).hasNoCause()
+            }
+        }
+
+        @Test
+        fun `status code - number of retries can be set via maxRetries`() {
+            runTest {
+                // given
+                val path = "anime/1535"
+
+                serverInstance.stubFor(
+                    get(urlPathEqualTo("/$path")).willReturn(
+                        aResponse()
+                            .withHeader("Content-Type", "text/plain")
+                            .withStatus(429)
+                            .withBody(EMPTY)
+                    )
+                )
+
+                val testConfigRegistry = object: ConfigRegistry by TestConfigRegistry {
+                    override fun int(key: String): Int? = if (key == "modb.core.httpclient.maxRetries") 2 else null
+                }
+
+                val url = URI("http://localhost:$port/$path").toURL()
+                val client = DefaultHttpClient(
+                    isTestContext = true,
+                    configRegistry = testConfigRegistry,
+                )
+
+                // when
+                val result = exceptionExpected<FailedAfterRetryException> {
+                    client.get(url)
+                }
+
+                // then
+                assertThat(result).hasMessage("Execution failed despite [2] retry attempts. Last invocation of [GET http://localhost:$port/anime/1535] returned http status code [429]")
+                serverInstance.verify(3, getRequestedFor(urlPathEqualTo("/$path")))
             }
         }
 

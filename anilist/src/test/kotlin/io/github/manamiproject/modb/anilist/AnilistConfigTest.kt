@@ -45,7 +45,7 @@ internal class AnilistConfigTest {
         val result = AnilistConfig.buildDataDownloadLink(id)
 
         // then
-        assertThat(result).isEqualTo(URI("https://anilist.co/graphql"))
+        assertThat(result).isEqualTo(URI("https://graphql.anilist.co"))
     }
 
     @Test

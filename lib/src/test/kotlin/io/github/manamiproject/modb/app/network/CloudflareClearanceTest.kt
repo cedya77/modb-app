@@ -11,6 +11,8 @@ import io.github.manamiproject.modb.test.tempDirectory
 import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Nested
+import org.junit.jupiter.api.assertThrows
+import java.net.ConnectException
 import java.net.URI
 import java.net.URL
 import java.nio.file.Path
@@ -45,6 +47,33 @@ internal class CloudflareClearanceTest {
                 // then
                 assertThat(bodies.single()).contains(""""disableMedia":true""")
                 assertThat(bodies.single()).contains(""""proxy":{"url":"$route"}""")
+            }
+        }
+
+        @Test
+        fun `names the challenge solver if it cannot be reached`() {
+            runBlocking {
+                // given
+                val clearance = CloudflareClearance(
+                    configRegistry = registry(file = null),
+                    httpClient = object: HttpClient {
+                        override suspend fun get(url: URL, headers: Map<String, Collection<String>>): HttpResponse = shouldNotBeInvoked()
+                        override suspend fun post(url: URL, requestBody: RequestBody, headers: Map<String, Collection<String>>): HttpResponse {
+                            throw ConnectException("Failed to connect to localhost/127.0.0.1:8191")
+                        }
+                        override fun addRetryCases(vararg retryCases: RetryCase): HttpClient = this
+                    },
+                    hostname = "anidb.net",
+                )
+
+                // when
+                val result = assertThrows<ConnectException> {
+                    runBlocking { clearance.refresh(URI("https://anidb.net/anime/23").toURL()) }
+                }
+
+                // then
+                assertThat(result).hasMessage("Failed to connect to the challenge solver [localhost/127.0.0.1:8191]")
+                assertThat(result.cause).isInstanceOf(ConnectException::class.java)
             }
         }
 

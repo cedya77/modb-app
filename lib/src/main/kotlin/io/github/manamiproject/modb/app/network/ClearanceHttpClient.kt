@@ -67,6 +67,7 @@ class ClearanceHttpClient(
                 renewedOnThisRoute = true
 
                 if (clearance.refresh(url, route)) {
+                    response.close()
                     continue
                 }
 
@@ -80,6 +81,8 @@ class ClearanceHttpClient(
                 return response
             }
 
+            // A refusal which isn't returned must be closed, otherwise its connection is never released.
+            response.close()
             changeConnection()
             renewedOnThisRoute = false
         }

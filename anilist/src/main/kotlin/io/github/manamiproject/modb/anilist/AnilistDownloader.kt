@@ -6,6 +6,7 @@ import io.github.manamiproject.modb.core.downloader.Downloader
 import io.github.manamiproject.modb.core.extensions.EMPTY
 import io.github.manamiproject.modb.core.extensions.neitherNullNorBlank
 import io.github.manamiproject.modb.core.httpclient.APPLICATION_JSON
+import io.github.manamiproject.modb.core.httpclient.DefaultHttpClient
 import io.github.manamiproject.modb.core.httpclient.HttpClient
 import io.github.manamiproject.modb.core.httpclient.RequestBody
 import io.github.manamiproject.modb.core.loadResource
@@ -20,7 +21,7 @@ import kotlinx.coroutines.runBlocking
  */
 public class AnilistDownloader(
     private val metaDataProviderConfig: MetaDataProviderConfig = AnilistConfig,
-    private val httpClient: HttpClient = AnilistHttpClient(),
+    private val httpClient: HttpClient = DefaultHttpClient(isTestContext = metaDataProviderConfig.isTestContext()),
 ) : Downloader {
 
     private val requestBody: String by lazy { runBlocking { loadResource("anime_download_request.graphql") } }
@@ -35,7 +36,6 @@ public class AnilistDownloader(
 
         val requestHeaders = AnilistHeaderCreator.createAnilistHeaders(
             requestBody = requestBody,
-            referer = metaDataProviderConfig.buildAnimeLink(id).toURL(),
         )
 
         val response = httpClient.post(

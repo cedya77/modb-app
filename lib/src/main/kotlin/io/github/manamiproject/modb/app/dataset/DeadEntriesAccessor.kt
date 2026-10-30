@@ -39,6 +39,20 @@ interface DeadEntriesAccessor {
     suspend fun removeDeadEntry(animeId: AnimeId, metaDataProviderConfig: MetaDataProviderConfig)
 
     /**
+     * Replaces the whole dead entries list of a metadata provider.
+     * For metadata providers which publish a complete list of their anime. Ids which are new to the list are
+     * handled like [addDeadEntry], ids which are no longer part of it like [removeDeadEntry].
+     * @since 1.0.0
+     * @param animeIds Complete list of dead entries.
+     * @param metaDataProviderConfig Configuration for a specific metadata provider.
+     */
+    suspend fun replaceDeadEntries(animeIds: Set<AnimeId>, metaDataProviderConfig: MetaDataProviderConfig) {
+        val current = fetchDeadEntries(metaDataProviderConfig)
+        (current - animeIds).forEach { removeDeadEntry(it, metaDataProviderConfig) }
+        (animeIds - current).forEach { addDeadEntry(it, metaDataProviderConfig) }
+    }
+
+    /**
      * Find dead entries in a list of [URI].
      * @since 1.0.0
      * @param sources List of URIs to check for dead entries.

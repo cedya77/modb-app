@@ -32,12 +32,12 @@ class SuspendableHttpClient(
 ): HttpClient {
 
     override suspend fun get(url: URL, headers: Map<String, Collection<String>>): HttpResponse {
-        suspendIfNecessary()
+        suspendIfNecessary(url)
         return httpClient.get(url, headers)
     }
 
     override suspend fun post(url: URL, requestBody: RequestBody, headers: Map<String, Collection<String>>): HttpResponse {
-        suspendIfNecessary()
+        suspendIfNecessary(url)
         return httpClient.post(url, requestBody, headers)
     }
 
@@ -46,9 +46,9 @@ class SuspendableHttpClient(
         return this
     }
 
-    private suspend fun suspendIfNecessary() = withContext(Default) {
+    private suspend fun suspendIfNecessary(url: URL) = withContext(Default) {
         while(!networkController.isNetworkActive() && isActive) {
-            log.info { "Waiting for network to be active again." }
+            log.info { "Waiting for network to be active again before requesting [${url.host}]." }
             wait()
         }
     }

@@ -1,5 +1,6 @@
 package io.github.manamiproject.modb.app.crawlers.livechart
 
+import io.github.manamiproject.modb.core.httpclient.CloudflareChallengeRetryCase
 import io.github.manamiproject.modb.app.crawlers.HighestIdDetector
 import io.github.manamiproject.modb.app.extensions.checkedBody
 import io.github.manamiproject.modb.app.network.SuspendableHttpClient
@@ -24,31 +25,38 @@ import kotlin.time.toDuration
  */
 class LivechartNewestYearDetector(
     private val metaDataProviderConfig: MetaDataProviderConfig = LivechartNewestYearDetectorConfig,
-    private val httpClient: HttpClient = SuspendableHttpClient(),
+    private val httpClient: HttpClient = SuspendableHttpClient().addRetryCases(CloudflareChallengeRetryCase),
     private val extractor: DataExtractor = XmlDataExtractor,
 ): HighestIdDetector {
 
     override suspend fun detectHighestId(): Int {
-        log.info { "Fetching highest id for [${metaDataProviderConfig.hostname()}]." }
+        log.info { "Detecting newest year for [${metaDataProviderConfig.hostname()}]." }
 
         wait()
 
+        val url = metaDataProviderConfig.buildDataDownloadLink().toURL()
         val response = httpClient.get(
-            url = metaDataProviderConfig.buildDataDownloadLink().toURL(),
+            url = url,
             headers = mapOf("host" to listOf("www.${metaDataProviderConfig.hostname()}")),
         ).checkedBody(this::class)
 
+        // The season links are read instead of the headings, because they survive a change of the layout.
         val data = extractor.extract(response, mapOf(
-            "headers" to "//ul[@class='grouped-list']/li//h5",
+            "links" to "//a/@href",
+            "title" to "//title/text()",
         ))
 
-        if (data.notFound("headers")) {
-            throw IllegalStateException("Unable to extract headers.")
+        val years = when {
+            data.notFound("links") -> emptyList()
+            else -> data.listNotNull<String>("links").mapNotNull { SEASON_LINK.find(it.trim())?.groupValues?.get(1)?.toInt() }
         }
 
-        val headers = data.listNotNull<String>("headers")
+        if (years.isEmpty()) {
+            val title = data.stringOrDefault("title").trim().ifEmpty { "none" }
+            throw IllegalStateException("No list of years found on [$url], page title [$title]. Most likely a block or maintenance page, or the layout has changed.")
+        }
 
-        return headers[1].trim().toInt()
+        return years.max()
     }
 
     @KoverIgnore
@@ -60,6 +68,11 @@ class LivechartNewestYearDetector(
 
     companion object {
         private val log by LoggerDelegate()
+
+        /**
+         * A season page, such as `/winter-2027` or `/winter-2026/tv`, either relative or as full link.
+         */
+        private val SEASON_LINK = Regex("""^(?:https?://(?:www\.)?livechart\.me)?/(?:winter|spring|summer|fall)-(\d{4})(?:/.*)?$""")
 
         /**
          * Singleton of [LivechartNewestYearDetector]

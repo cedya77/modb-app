@@ -8,6 +8,15 @@ import java.io.IOException
 private const val SUDO = "sudo"
 
 /**
+ * How sudo reports a wrong password. Classic sudo says "incorrect password attempt", sudo-rs (the default since
+ * Ubuntu 25.10) says "Authentication failed".
+ */
+private val INCORRECT_PASSWORD_MESSAGES = setOf(
+    "incorrect password attempt",
+    "authentication failed",
+)
+
+/**
  * If you want to execute a command as `sudo` you can pass `command` in [JavaProcessBuilder.executeCmd] either with or
  * without sudo as first element. It's only important that [CommandLineConfig.useSudo] is set to `true`. If you don't
  * provide `sudo` yourself in `command` then it will be added automatically.
@@ -55,7 +64,7 @@ public class JavaProcessBuilder(
             output.addAll(process.inputStream.bufferedReader().readLines())
         }
 
-        if (config.useSudo && output.any { it.lowercase().contains("incorrect password attempt") }) {
+        if (config.useSudo && output.any { line -> INCORRECT_PASSWORD_MESSAGES.any { line.lowercase().contains(it) } }) {
             throw IncorrectPasswordAttemptException
         }
 
@@ -98,7 +107,8 @@ public class JavaProcessBuilder(
             }
 
             when {
-                e.cause?.message == "error=2, No such file or directory" -> throw CommandNotFoundException(commandName)
+                // The wording depends on the JDK, e.g. "error=2, No such file or directory" or "Exec failed, error: 2 (No such file or directory)"
+                e.cause?.message?.contains("No such file or directory") == true -> throw CommandNotFoundException(commandName)
                 e.cause?.message?.contains("permission denied", false) == true -> throw PermissionDeniedException(commandName)
                 else -> throw e
             }

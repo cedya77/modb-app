@@ -51,6 +51,8 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach 
 
 tasks.withType<Test> {
     useJUnitPlatform()
+    // zstd-jni loads a native library, which JDK 24+ only allows silently with this flag.
+    jvmArgs("--enable-native-access=ALL-UNNAMED")
     reports.html.required.set(false)
     reports.junitXml.required.set(true)
     maxParallelForks = rootProject.extra["maxParallelForks"] as Int

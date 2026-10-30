@@ -134,6 +134,35 @@ internal class ClearanceHttpClientTest {
         }
 
         @Test
+        fun `closes every refusal it doesn't return`() {
+            runBlocking {
+                // given
+                val responses = mutableListOf<HttpResponse>()
+                val codes = mutableListOf(403, 403, 200)
+                val client = ClearanceHttpClient(
+                    clearance = clearanceWith(solved),
+                    httpClient = object: HttpClient {
+                        override suspend fun get(url: URL, headers: Map<String, Collection<String>>): HttpResponse {
+                            return HttpResponse(codes.removeFirst(), "body").also { responses.add(it) }
+                        }
+                        override suspend fun post(url: URL, requestBody: RequestBody, headers: Map<String, Collection<String>>): HttpResponse = shouldNotBeInvoked()
+                        override fun addRetryCases(vararg retryCases: RetryCase): HttpClient = this
+                    },
+                )
+
+                // when
+                val result = client.get(URI("https://anidb.net/anime/23").toURL())
+
+                // then
+                assertThat(result.code).isEqualTo(200)
+                assertThat(responses).hasSize(3)
+                assertThat(responses[0].isBodyInputStreamExhausted()).isTrue()
+                assertThat(responses[1].isBodyInputStreamExhausted()).isTrue()
+                assertThat(result.isBodyInputStreamExhausted()).isFalse()
+            }
+        }
+
+        @Test
         fun `renews the clearance once when the site refuses it`() {
             runBlocking {
                 // given

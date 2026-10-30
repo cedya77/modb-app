@@ -2,7 +2,6 @@ package io.github.manamiproject.modb.app.crawlers.anilist
 
 import io.github.manamiproject.modb.anilist.AnilistConfig
 import io.github.manamiproject.modb.anilist.AnilistDownloader
-import io.github.manamiproject.modb.anilist.AnilistHttpClient
 import io.github.manamiproject.modb.app.config.AppConfig
 import io.github.manamiproject.modb.app.config.Config
 import io.github.manamiproject.modb.app.crawlers.Crawler
@@ -45,10 +44,8 @@ class AnilistCrawler(
     ),
     private val downloader: Downloader = FaultTolerantDownloader(
         downloader = AnilistDownloader(
-        httpClient = SuspendableHttpClient(
-            httpClient = AnilistHttpClient.instance,
+            httpClient = SuspendableHttpClient(),
         ),
-    ),
         hostname = metaDataProviderConfig.hostname(),
     ),
 ): Crawler {
@@ -88,14 +85,14 @@ class AnilistCrawler(
     @KoverIgnore
     private suspend fun waitAfterDeadEntry() {
         excludeFromTestContext(metaDataProviderConfig) {
-            delay(random(1000, 1500).toDuration(MILLISECONDS))
+            delay(random(670, 1500).toDuration(MILLISECONDS))
         }
     }
 
     @KoverIgnore
     private suspend fun wait() {
         excludeFromTestContext(metaDataProviderConfig) {
-            delay(random(1000, 1500).toDuration(MILLISECONDS))
+            delay(random(670, 1500).toDuration(MILLISECONDS))
         }
     }
 

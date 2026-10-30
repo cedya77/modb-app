@@ -1,5 +1,8 @@
 package io.github.manamiproject.modb.core.httpclient
 
+import io.github.manamiproject.modb.core.config.ConfigRegistry
+import io.github.manamiproject.modb.core.config.DefaultConfigRegistry
+import io.github.manamiproject.modb.core.config.IntPropertyDelegate
 import io.github.manamiproject.modb.core.coroutines.ModbDispatchers.LIMITED_NETWORK
 import io.github.manamiproject.modb.core.coverage.KoverIgnore
 import io.github.manamiproject.modb.core.extensions.EMPTY
@@ -12,6 +15,7 @@ import io.github.manamiproject.modb.core.logging.LoggerDelegate
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.withContext
+import kotlin.time.Duration
 import okhttp3.*
 import okhttp3.Protocol.HTTP_1_1 as OKHTTP_HTTP_1_1
 import okhttp3.Protocol.HTTP_2 as OKHTTP_HTTP_2
@@ -52,6 +56,7 @@ import java.util.concurrent.TimeUnit.*
  * @property okhttpClient Instance of the OKHTTP client on which this client is based.
  * @property isTestContext Whether this runs in the unit test context or not.
  * @property headerCreator Creates default headers based on the selected browser type.
+ * @param configRegistry Source of `modb.core.httpclient.maxRetries`, the number of retries before a request fails. **Default:** `5`
  */
 public class DefaultHttpClient(
     proxy: Proxy = NO_PROXY,
@@ -70,9 +75,17 @@ public class DefaultHttpClient(
     private val isTestContext: Boolean = false,
     private val headerCreator: HeaderCreator = DefaultHeaderCreator.instance,
     useDefaultRetryCases: Boolean = true,
+    configRegistry: ConfigRegistry = DefaultConfigRegistry.instance,
 ) : HttpClient {
 
-    private val retryBehavior: RetryBehavior = RetryBehavior()
+    private val maxRetries: Int by IntPropertyDelegate(
+        configRegistry = configRegistry,
+        namespace = CONFIG_NAMESPACE,
+        default = DEFAULT_MAX_RETRIES,
+        validator = { it >= 0 },
+    )
+
+    private val retryBehavior: RetryBehavior = RetryBehavior(maxAttempts = maxRetries)
 
     init {
         if (useDefaultRetryCases) retryBehavior.addCases(
@@ -158,6 +171,8 @@ public class DefaultHttpClient(
         var attempt = 0
         var retryCase: RetryCase = NoRetry
         var responseOrException: Any = HttpResponse(100, EMPTY)
+        var retryAfter: Duration? = null
+        var reason = EMPTY
 
         do {
             if (retryCase !is NoRetry) {
@@ -165,7 +180,7 @@ public class DefaultHttpClient(
 
                 if ((responseOrException is HttpResponse) && (responseOrException.code == 103)) {
                     responseOrException.close()
-                    log.warn { "Received HTTP status code 103. Deactivating HTTP/2." }
+                    log.warn { "Received HTTP status code 103 from [${request.url.host}]. Deactivating HTTP/2." }
                     protocols.remove(HTTP_2)
                 }
 
@@ -185,7 +200,7 @@ public class DefaultHttpClient(
                     okhttpClient = currentClient.newBuilder().build()
                 }
 
-                wait(request, retryCase, attempt)
+                wait(request, retryCase, attempt, retryAfter, reason)
             }
 
             responseOrException = safelyExecute {
@@ -201,7 +216,11 @@ public class DefaultHttpClient(
                 true -> {
                     log.debug { "[${request.method} ${request.url}] Requires retry." }
 
+                    retryAfter = null
+                    reason = reasonOf(responseOrException)
+
                     if (responseOrException is HttpResponse) {
+                        retryAfter = parseRetryAfter(responseOrException.headers)
                         responseOrException.close()
                     }
 
@@ -228,11 +247,28 @@ public class DefaultHttpClient(
         }
     }
 
+    private fun reasonOf(responseOrException: Any): String = when (responseOrException) {
+        // The body is only looked at if a retry case has read it already. Reading it here would download pages
+        // which are going to be discarded anyway.
+        is HttpResponse -> when {
+            responseOrException.isBodyInputStreamExhausted() && runCatching { responseOrException.isCloudflareChallenge() }.getOrDefault(false) -> {
+                "HTTP ${responseOrException.code}, Cloudflare challenge"
+            }
+            else -> "HTTP ${responseOrException.code}"
+        }
+        is Throwable -> listOfNotNull(responseOrException::class.simpleName, responseOrException.message).joinToString(": ")
+        else -> responseOrException.javaClass.simpleName
+    }
+
     @KoverIgnore
-    private suspend fun wait(request: Request, retryCase: RetryCase, attempt: Int) {
+    private suspend fun wait(request: Request, retryCase: RetryCase, attempt: Int, retryAfter: Duration?, reason: String) {
         if (!isTestContext) {
-            log.trace { "Initiating waiting time for retry of [${request.method} ${request.url}]." }
-            delay(retryCase.waitDuration(attempt))
+            val duration = retryAfter ?: retryCase.waitDuration(attempt)
+            val askedByServer = if (retryAfter != null) ", as the server asked" else EMPTY
+
+            // A wait can last minutes, so it is logged at info level: without it a waiting crawler looks like a hung one.
+            log.info { "Retrying [${request.method} ${request.url}] in [${duration.inWholeSeconds}s] (attempt $attempt/${retryBehavior.maxAttempts}) after [$reason]$askedByServer." }
+            delay(duration)
         }
     }
 
@@ -289,6 +325,18 @@ public class DefaultHttpClient(
          * @since 15.0.0
          */
         public const val DEFAULT_READ_TIMEOUT_IN_SECONDS: Long = 60L
+
+        /**
+         * Number of retries before a request fails, unless `modb.core.httpclient.maxRetries` sets another one.
+         * @since 15.0.0
+         */
+        public const val DEFAULT_MAX_RETRIES: Int = 5
+
+        /**
+         * Prefix of the properties read by this class.
+         * @since 15.0.0
+         */
+        public const val CONFIG_NAMESPACE: String = "modb.core.httpclient"
 
         /**
          * Singleton of [DefaultHttpClient]

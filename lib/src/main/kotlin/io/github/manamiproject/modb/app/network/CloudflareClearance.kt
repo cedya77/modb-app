@@ -11,6 +11,7 @@ import io.github.manamiproject.modb.core.json.Json
 import io.github.manamiproject.modb.core.logging.LoggerDelegate
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
+import java.net.ConnectException
 import java.net.URI
 import java.net.URL
 import java.nio.file.Files
@@ -125,7 +126,14 @@ class CloudflareClearance(
             body = """{"cmd":"request.get","url":"$url","maxTimeout":$SOLVER_TIMEOUT,"disableMedia":true$proxy}""",
         )
 
-        val response = httpClient.post(URI(solverUrl).toURL(), body).bodyAsString()
+        val response = try {
+            httpClient.post(URI(solverUrl).toURL(), body).bodyAsString()
+        } catch (e: ConnectException) {
+            // OkHttp's message only names an address, which reads as if the site itself were unreachable.
+            // It stays a ConnectException, so the callers' handling doesn't change.
+            val address = e.message?.substringAfter("Failed to connect to ", missingDelimiterValue = "")?.ifBlank { null } ?: solverUrl
+            throw ConnectException("Failed to connect to the challenge solver [$address]").apply { initCause(e) }
+        }
         val parsed = Json.parseJson<SolverResponse>(response)
 
         if (parsed?.status != "ok" || parsed.solution == null) {

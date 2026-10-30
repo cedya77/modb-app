@@ -2,16 +2,13 @@ package io.github.manamiproject.modb.anilist
 
 import io.github.manamiproject.modb.core.httpclient.RequestBody
 import org.assertj.core.api.Assertions.assertThat
-import java.net.URI
 import kotlin.test.Test
 
 internal class AnilistHeaderCreatorTest {
 
     @Test
-    fun `default referer`() {
+    fun `creates the headers for the official API`() {
         // given
-        AnilistDefaultTokenRepository.token = AnilistToken("cookie-value", "csrf-token-value")
-
         val requestBody = RequestBody(
             mediaType = "used media type",
             body = "payload",
@@ -23,23 +20,13 @@ internal class AnilistHeaderCreatorTest {
         )
 
         // then
-        assertThat(result["authority"]).isEqualTo(listOf("https://anilist.co"))
-        assertThat(result["method"]).isEqualTo(listOf("POST"))
-        assertThat(result["path"]).isEqualTo(listOf("/graphql"))
-        assertThat(result["scheme"]).isEqualTo(listOf("https"))
-        assertThat(result["accept"]).isEqualTo(listOf("*/*"))
-        assertThat(result["accept-language"]).isEqualTo(listOf("en-US;q=0.9", "en;q=0.8"))
-        assertThat(result["content-length"]).isEqualTo(listOf("7"))
+        assertThat(result).containsOnlyKeys("accept", "content-type")
+        assertThat(result["accept"]).isEqualTo(listOf("application/json"))
         assertThat(result["content-type"]).isEqualTo(listOf("used media type"))
-        assertThat(result["cookie"]).isEqualTo(listOf("cookie-value"))
-        assertThat(result["origin"]).isEqualTo(listOf("https://anilist.co"))
-        assertThat(result["schema"]).isEqualTo(listOf("default"))
-        assertThat(result["x-csrf-token"]).isEqualTo(listOf("csrf-token-value"))
-        assertThat(result["referer"]).isEqualTo(listOf("https://anilist.co"))
     }
 
     @Test
-    fun `override referer`() {
+    fun `doesn't send session cookie or csrf token`() {
         // given
         val requestBody = RequestBody(
             mediaType = "used media type",
@@ -49,10 +36,9 @@ internal class AnilistHeaderCreatorTest {
         // when
         val result = AnilistHeaderCreator.createAnilistHeaders(
             requestBody = requestBody,
-            referer = URI("https://anilist.co/anime/1535").toURL(),
         )
 
         // then
-        assertThat(result["referer"]).isEqualTo(listOf("https://anilist.co/anime/1535"))
+        assertThat(result).doesNotContainKeys("cookie", "x-csrf-token")
     }
 }

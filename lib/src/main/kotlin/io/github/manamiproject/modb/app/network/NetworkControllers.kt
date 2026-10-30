@@ -21,6 +21,7 @@ object NetworkControllers {
 
     private val rotatingControllers = mutableMapOf<ConfigRegistry, RotatingProxyNetworkController>()
     private val routedControllers = mutableMapOf<Pair<ConfigRegistry, String>, RotatingProxyNetworkController>()
+    private val loggedDecisions = mutableSetOf<Pair<String, String>>()
 
     /**
      * Returns the one rotating controller belonging to a configuration.
@@ -100,14 +101,37 @@ object NetworkControllers {
         return when {
             rotating.hasProxies() -> rotating
             canRestartNetworkDevice() -> {
-                log.info { "Using the network device to change the outgoing address." }
+                logOncePerSite(hostname, "Using the network device to change the outgoing address.")
                 LinuxNetworkController.instance
             }
             else -> {
-                log.info { "No proxy pool configured and no network device to restart, so the outgoing address cannot be changed on demand." }
+                logOncePerSite(hostname, "No proxy pool configured and no network device to restart, so the outgoing address cannot be changed on demand.")
                 FixedNetworkController
             }
         }
+    }
+
+    // Several classes of the same crawler ask for a controller, which would repeat the same message for each of them.
+    private fun logOncePerSite(hostname: String?, message: String) {
+        val site = hostname ?: "all sites"
+        val isNew = synchronized(loggedDecisions) { loggedDecisions.add(site to message) }
+
+        if (isNew) {
+            log.info { "[$site] $message" }
+        }
+    }
+
+    /**
+     * Tells in advance whether [forDeployment] will hand out [LinuxNetworkController] for any of the given sites,
+     * which is the only case in which a sudo password is needed.
+     * @since 20.0.0
+     * @param hostnames Sites whose crawlers change the outgoing address on demand.
+     * @param configRegistry Source of the proxy pool definition.
+     * @return `true` if at least one of the sites has no proxies and the network device can be restarted.
+     */
+    fun usesNetworkDevice(hostnames: Collection<String>, configRegistry: ConfigRegistry = DefaultConfigRegistry.instance): Boolean {
+        val withoutProxies = hostnames.filterNot { forHost(it, configRegistry).hasProxies() }
+        return withoutProxies.isNotEmpty() && canRestartNetworkDevice()
     }
 
     // The original design changes address by restarting the device, which only works where ifconfig

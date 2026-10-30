@@ -134,10 +134,26 @@ class DefaultDownloadControlStateUpdater(
             .map { workDir ->
                 workDir.listRegularFiles("*.$CONVERTED_FILE_SUFFIX").map { file ->
                     async {
-                        Json.parseJson<AnimeRaw>(file.readFile())!! to file.fileName()
+                        val anime = try {
+                            Json.parseJson<AnimeRaw>(file.readFile())
+                        } catch (e: Exception) {
+                            log.debug { "Unable to parse [$file]: ${e.message}" }
+                            null
+                        }
+
+                        when (anime) {
+                            null -> {
+                                // Most likely written only partially, because the app was stopped during the
+                                // conversion. Without the file the raw file counts as unconverted again.
+                                file.deleteIfExists()
+                                log.warn { "Skipping [${file.fileName()}] of [${workDir.fileName()}], because it is empty or broken. It has been deleted and will be converted again on the next start." }
+                                null
+                            }
+                            else -> anime to file.fileName()
+                        }
                     }
                 }
-            }.flatten().awaitAll()
+            }.flatten().awaitAll().filterNotNull()
 
         return@withContext jobsResults
     }

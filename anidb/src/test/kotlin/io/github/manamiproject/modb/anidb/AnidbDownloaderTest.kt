@@ -3,6 +3,7 @@ package io.github.manamiproject.modb.anidb
 import com.github.tomakehurst.wiremock.WireMockServer
 import com.github.tomakehurst.wiremock.client.WireMock.*
 import io.github.manamiproject.modb.anidb.AnidbDownloader.Companion.ANIDB_PENDING_FILE_INDICATOR
+import io.github.manamiproject.modb.anidb.AnidbDownloader.Companion.ANIDB_RESTRICTED_INDICATOR
 import io.github.manamiproject.modb.core.config.AnimeId
 import io.github.manamiproject.modb.core.config.FileSuffix
 import io.github.manamiproject.modb.core.config.Hostname
@@ -156,7 +157,7 @@ internal class AnidbDownloaderTest : MockServerTestCase<WireMockServer> by WireM
         }
 
         @Test
-        fun `invoke onDeadEntry if the response body indicates a hentai`() {
+        fun `returns the restricted indicator for an 18+ entry without invoking onDeadEntry`() {
             runTest {
                 // given
                 val id = "11376"
@@ -188,8 +189,8 @@ internal class AnidbDownloaderTest : MockServerTestCase<WireMockServer> by WireM
                 }
 
                 // then
-                assertThat(result).isEmpty()
-                assertThat(deadEntry).isEqualTo(id)
+                assertThat(result).isEqualTo(ANIDB_RESTRICTED_INDICATOR)
+                assertThat(deadEntry).isEmpty()
             }
         }
 

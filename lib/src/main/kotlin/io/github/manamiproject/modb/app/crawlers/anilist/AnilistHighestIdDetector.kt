@@ -2,7 +2,6 @@ package io.github.manamiproject.modb.app.crawlers.anilist
 
 import io.github.manamiproject.modb.anilist.AnilistConfig
 import io.github.manamiproject.modb.anilist.AnilistHeaderCreator
-import io.github.manamiproject.modb.anilist.AnilistHttpClient
 import io.github.manamiproject.modb.app.crawlers.HighestIdDetector
 import io.github.manamiproject.modb.app.extensions.checkedBody
 import io.github.manamiproject.modb.app.network.SuspendableHttpClient
@@ -22,7 +21,7 @@ import io.github.manamiproject.modb.core.logging.LoggerDelegate
  */
 class AnilistHighestIdDetector(
     private val metaDataProviderConfig: MetaDataProviderConfig = AnilistConfig,
-    private val httpClient: HttpClient = SuspendableHttpClient(httpClient = AnilistHttpClient.instance),
+    private val httpClient: HttpClient = SuspendableHttpClient(),
 ): HighestIdDetector {
 
     override suspend fun detectHighestId(): Int {
@@ -39,7 +38,6 @@ class AnilistHighestIdDetector(
             url = requestUrl.toURL(),
             headers = AnilistHeaderCreator.createAnilistHeaders(
                 requestBody = requestBody,
-                referer = requestUrl.toURL(),
             ),
             requestBody = requestBody,
         ).checkedBody(this::class)

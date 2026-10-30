@@ -114,7 +114,7 @@ internal object JsoupCssSelectorDataExtractor : DataExtractor {
             terminatingChild == "text()" -> jsoupElements.eachText()
             terminatingChild == "node()" -> jsoupElements.dataNodes().map { it.wholeData.trim() }
             terminatingChild.eitherNullOrBlank() -> jsoupElements.textNodes().map { it.text().trim() }.filter { it.neitherNullNorBlank() }
-            terminatingChild.startsWith('@') -> jsoupElements.eachAttr(terminatingChild.trimStart('@')) ?: NotFound
+            terminatingChild.startsWith('@') -> jsoupElements.eachAttr(terminatingChild.trimStart('@'))
             else -> throw IllegalStateException("unmapped case")
         }
     }

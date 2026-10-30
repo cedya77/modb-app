@@ -28,6 +28,7 @@ import io.github.manamiproject.modb.core.logging.LoggerDelegate
  * @property downloadControlStateAccessor Access to DCS files.
  * @property downloadControlStateScheduler Allows to check which anime are scheduled for re-download and which are not.
  * @property alreadyDownloadedIdsFinder Fetches all IDs which have already been downloaded.
+ * @property recheckDeadEntries Whether `deadEntriesToRecheck` applies. A crawler which rechecks something else instead turns it off.
  */
 class IntegerBasedIdRangeSelector(
     private val metaDataProviderConfig: MetaDataProviderConfig,
@@ -36,6 +37,7 @@ class IntegerBasedIdRangeSelector(
     private val downloadControlStateAccessor: DownloadControlStateAccessor = DefaultDownloadControlStateAccessor.instance,
     private val downloadControlStateScheduler: DownloadControlStateScheduler = DefaultDownloadControlStateScheduler.instance,
     private val alreadyDownloadedIdsFinder: AlreadyDownloadedIdsFinder = DefaultAlreadyDownloadedIdsFinder.instance,
+    private val recheckDeadEntries: Boolean = true,
     configRegistry: ConfigRegistry = DefaultConfigRegistry.instance,
 ): IdRangeSelector<Int> {
 
@@ -67,22 +69,34 @@ class IntegerBasedIdRangeSelector(
         // out of the dataset for good. The highest ids are the ones this happens to, because they
         // are the ones a provider is still filling in, so a slice of them is looked at again.
         val deadEntries = deadEntriesAccessor.fetchDeadEntries(metaDataProviderConfig).map { it.toInt() }.toSet()
-        val recheck = deadEntries.sortedDescending().take(deadEntriesToRecheck).toSet()
+        val recheck = if (recheckDeadEntries) deadEntries.sortedDescending().take(deadEntriesToRecheck).toSet() else emptySet()
 
         if (recheck.isNotEmpty()) {
             log.info { "Rechecking [${recheck.size}] of [${deadEntries.size}] dead entries for [${metaDataProviderConfig.hostname()}]." }
         }
 
+        val beforeDeadEntries = possibleIds.size
         possibleIds.removeAll(deadEntries - recheck)
+        val excludedDeadEntries = beforeDeadEntries - possibleIds.size
         log.debug { "Having [${possibleIds.size}] for [${metaDataProviderConfig.hostname()}] after excluding dead entries." }
 
         log.debug { "Having [${possibleIds.size}] for [${metaDataProviderConfig.hostname()}] before excluding entries which are not scheduled for the current week." }
+        val beforeNotScheduled = possibleIds.size
         possibleIds.removeAll(downloadControlStateScheduler.findEntriesNotScheduledForCurrentWeek(metaDataProviderConfig).map { it.toInt() }.toSet())
+        val excludedNotScheduled = beforeNotScheduled - possibleIds.size
         log.debug { "Having [${possibleIds.size}] for [${metaDataProviderConfig.hostname()}] after excluding entries which are not scheduled for the current week." }
 
         log.debug { "Having [${possibleIds.size}] for [${metaDataProviderConfig.hostname()}] before excluding already downloaded entries." }
+        val beforeAlreadyDownloaded = possibleIds.size
         possibleIds.removeAll(alreadyDownloadedIdsFinder.alreadyDownloadedIds(metaDataProviderConfig).map { it.toInt() }.toSet())
+        val excludedAlreadyDownloaded = beforeAlreadyDownloaded - possibleIds.size
         log.debug { "Having [${possibleIds.size}] for [${metaDataProviderConfig.hostname()}] after excluding already downloaded entries." }
+
+        log.info {
+            "[${metaDataProviderConfig.hostname()}] highest ID is [$highestId]. " +
+            "Skipping [$excludedDeadEntries] dead entries, [$excludedNotScheduled] entries not scheduled for this week " +
+            "and [$excludedAlreadyDownloaded] already downloaded. [${possibleIds.size}] of [$highestId] IDs left to download."
+        }
 
         return possibleIds.toList().createShuffledList()
     }

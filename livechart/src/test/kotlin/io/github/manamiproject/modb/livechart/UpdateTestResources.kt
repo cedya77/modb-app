@@ -42,6 +42,10 @@ private val files = mapOf(
     "LivechartAnimeConverterTest/episodes/number_of_episodes_unknown_but_currently_running.html" to "319",
     "LivechartAnimeConverterTest/episodes/unknown.html" to "11873",
 
+    "LivechartAnimeConverterTest/layout_2026_10/11343.html" to "11343",
+    "LivechartAnimeConverterTest/layout_2026_10/11428.html" to "11428",
+    "LivechartAnimeConverterTest/layout_2026_10/12345.html" to "12345",
+
     "LivechartAnimeConverterTest/picture_and_thumbnail/neither_picture_nor_thumbnail.html" to "2301",
     "LivechartAnimeConverterTest/picture_and_thumbnail/picture_and_thumbnail_available.html" to "3437",
 

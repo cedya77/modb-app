@@ -50,6 +50,8 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach 
 
 tasks.withType<Test> {
     useJUnitPlatform()
+    // zstd-jni loads a native library, which JDK 24+ only allows silently with this flag.
+    jvmArgs("--enable-native-access=ALL-UNNAMED")
     reports.html.required.set(false)
     reports.junitXml.required.set(true)
     maxParallelForks = rootProject.extra["maxParallelForks"] as Int
@@ -63,12 +65,19 @@ application {
 }
 
 tasks {
+    // Bundled so that the app can offer to create a config.toml from it on the first start.
+    named<ProcessResources>("processResources") {
+        from(rootProject.file("config.example.toml"))
+    }
+
     named<ShadowJar>("shadowJar") {
         archiveBaseName.set("modb-app")
         archiveClassifier.set("")
         archiveVersion.set("")
         manifest {
             attributes["Main-Class"] = mainClassPath
+            // zstd-jni loads a native library, which JDK 24+ only allows silently with this attribute.
+            attributes["Enable-Native-Access"] = "ALL-UNNAMED"
         }
         exclude(".gitemptydir")
     }

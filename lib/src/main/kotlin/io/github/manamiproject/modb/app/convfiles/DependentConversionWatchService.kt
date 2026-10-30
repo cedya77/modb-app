@@ -69,6 +69,7 @@ class DependentConversionWatchService(
             validFileSuffixes.addAll(metaDataConfigs.map { it.value.fileSuffix() })
         }
         workingDirs.values.forEach { deleteLocks(it) }
+        workingDirs.values.forEach { cleanUpEmptyConvertedFiles(it) }
         dependentFileConverter.convertUnconvertedFiles()
         isPrepared = true
     }
@@ -89,6 +90,14 @@ class DependentConversionWatchService(
     override suspend fun stop() = withContext(LIMITED_FS) {
         watchServices.values.forEach { it.close() }
         jobs.forEach { it.cancelAndJoin() }
+    }
+
+    private suspend fun cleanUpEmptyConvertedFiles(workingDir: Directory) {
+        val deleted = workingDir.deleteEmptyConvertedFiles()
+
+        if (deleted > 0) {
+            log.warn { "Deleted [$deleted] empty [*.$CONVERTED_FILE_SUFFIX] files in [$workingDir]. They are converted again." }
+        }
     }
 
     private suspend fun deleteLocks(workingDir: Directory) {

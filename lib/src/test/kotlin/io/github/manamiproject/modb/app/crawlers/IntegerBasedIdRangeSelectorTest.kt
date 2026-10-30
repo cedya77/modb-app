@@ -6,6 +6,7 @@ import io.github.manamiproject.modb.app.dataset.DeadEntriesAccessor
 import io.github.manamiproject.modb.app.downloadcontrolstate.DownloadControlStateAccessor
 import io.github.manamiproject.modb.app.downloadcontrolstate.DownloadControlStateScheduler
 import io.github.manamiproject.modb.core.config.AnimeId
+import io.github.manamiproject.modb.core.config.ConfigRegistry
 import io.github.manamiproject.modb.core.config.Hostname
 import io.github.manamiproject.modb.core.config.MetaDataProviderConfig
 import io.github.manamiproject.modb.test.exceptionExpected
@@ -243,6 +244,107 @@ internal class IntegerBasedIdRangeSelectorTest {
                     7,
                     8,
                 )
+            }
+        }
+
+        @Test
+        fun `rechecks the highest dead entries as configured by deadEntriesToRecheck`() {
+            runTest {
+                // given
+                val testMetaDataProviderConfig = object: MetaDataProviderConfig by TestMetaDataProviderConfig {
+                    override fun hostname(): Hostname = "example.org"
+                }
+
+                val testHighestIdDetector = object: HighestIdDetector {
+                    override suspend fun detectHighestId(): Int = 8
+                }
+
+                val testDeadEntriesAccessor = object: DeadEntriesAccessor by TestDeadEntriesAccessor {
+                    override suspend fun fetchDeadEntries(metaDataProviderConfig: MetaDataProviderConfig): Set<AnimeId> = setOf("3", "5")
+                }
+
+                val testDownloadControlStateAccessor = object: DownloadControlStateAccessor by TestDownloadControlStateAccessor {
+                    override suspend fun highestIdAlreadyInDataset(metaDataProviderConfig: MetaDataProviderConfig): Int = 5
+                }
+
+                val testDownloadControlStateScheduler = object: DownloadControlStateScheduler by TestDownloadControlStateScheduler {
+                    override suspend fun findEntriesNotScheduledForCurrentWeek(metaDataProviderConfig: MetaDataProviderConfig): Set<AnimeId> = emptySet()
+                }
+
+                val testDefaultAlreadyDownloadedIdsFinder = object: AlreadyDownloadedIdsFinder by TestAlreadyDownloadedIdsFinder {
+                    override suspend fun alreadyDownloadedIds(metaDataProviderConfig: MetaDataProviderConfig): Set<AnimeId> = emptySet()
+                }
+
+                val testConfigRegistry = object: ConfigRegistry by TestConfigRegistry {
+                    override fun int(key: String): Int? = if (key == "modb.app.crawler.deadEntriesToRecheck") 1 else null
+                }
+
+                val idRangeSelector = IntegerBasedIdRangeSelector(
+                    metaDataProviderConfig = testMetaDataProviderConfig,
+                    highestIdDetector = testHighestIdDetector,
+                    deadEntriesAccessor = testDeadEntriesAccessor,
+                    downloadControlStateAccessor = testDownloadControlStateAccessor,
+                    downloadControlStateScheduler = testDownloadControlStateScheduler,
+                    alreadyDownloadedIdsFinder = testDefaultAlreadyDownloadedIdsFinder,
+                    configRegistry = testConfigRegistry,
+                )
+
+                // when
+                val result = idRangeSelector.idDownloadList()
+
+                // then
+                assertThat(result).containsExactlyInAnyOrder(1, 2, 4, 5, 6, 7, 8)
+            }
+        }
+
+        @Test
+        fun `doesn't recheck dead entries if the crawler turned it off`() {
+            runTest {
+                // given
+                val testMetaDataProviderConfig = object: MetaDataProviderConfig by TestMetaDataProviderConfig {
+                    override fun hostname(): Hostname = "example.org"
+                }
+
+                val testHighestIdDetector = object: HighestIdDetector {
+                    override suspend fun detectHighestId(): Int = 8
+                }
+
+                val testDeadEntriesAccessor = object: DeadEntriesAccessor by TestDeadEntriesAccessor {
+                    override suspend fun fetchDeadEntries(metaDataProviderConfig: MetaDataProviderConfig): Set<AnimeId> = setOf("3", "5")
+                }
+
+                val testDownloadControlStateAccessor = object: DownloadControlStateAccessor by TestDownloadControlStateAccessor {
+                    override suspend fun highestIdAlreadyInDataset(metaDataProviderConfig: MetaDataProviderConfig): Int = 5
+                }
+
+                val testDownloadControlStateScheduler = object: DownloadControlStateScheduler by TestDownloadControlStateScheduler {
+                    override suspend fun findEntriesNotScheduledForCurrentWeek(metaDataProviderConfig: MetaDataProviderConfig): Set<AnimeId> = emptySet()
+                }
+
+                val testDefaultAlreadyDownloadedIdsFinder = object: AlreadyDownloadedIdsFinder by TestAlreadyDownloadedIdsFinder {
+                    override suspend fun alreadyDownloadedIds(metaDataProviderConfig: MetaDataProviderConfig): Set<AnimeId> = emptySet()
+                }
+
+                val testConfigRegistry = object: ConfigRegistry by TestConfigRegistry {
+                    override fun int(key: String): Int? = if (key == "modb.app.crawler.deadEntriesToRecheck") 1 else null
+                }
+
+                val idRangeSelector = IntegerBasedIdRangeSelector(
+                    metaDataProviderConfig = testMetaDataProviderConfig,
+                    highestIdDetector = testHighestIdDetector,
+                    deadEntriesAccessor = testDeadEntriesAccessor,
+                    downloadControlStateAccessor = testDownloadControlStateAccessor,
+                    downloadControlStateScheduler = testDownloadControlStateScheduler,
+                    alreadyDownloadedIdsFinder = testDefaultAlreadyDownloadedIdsFinder,
+                    recheckDeadEntries = false,
+                    configRegistry = testConfigRegistry,
+                )
+
+                // when
+                val result = idRangeSelector.idDownloadList()
+
+                // then
+                assertThat(result).containsExactlyInAnyOrder(1, 2, 4, 6, 7, 8)
             }
         }
 

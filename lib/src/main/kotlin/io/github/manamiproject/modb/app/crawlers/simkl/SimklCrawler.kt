@@ -87,6 +87,12 @@ class SimklCrawler(
         }
         val maxYear = LocalDate.now(appConfig.clock()).year + 2
 
+        val alreadyDownloaded = alreadyDownloadedIdsFinder.alreadyDownloadedIds(metaDataProviderConfig).size
+        log.info {
+            "[${metaDataProviderConfig.hostname()}] Skipping [$alreadyDownloaded] already downloaded " +
+            "and [${entriesNotScheduledForCurrentWeek.size}] not scheduled for this week. Continuing from year [$startYear] up to [$maxYear]."
+        }
+
         for (currentYear in startYear..maxYear) {
             for (currentOffset in 0..Int.MAX_VALUE step 20) {
                 log.debug { "Checking year [$currentYear] with offset [$currentOffset] for [${metaDataProviderConfig.hostname()}]." }

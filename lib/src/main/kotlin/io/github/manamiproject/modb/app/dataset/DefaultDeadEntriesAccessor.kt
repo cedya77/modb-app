@@ -121,6 +121,42 @@ class DefaultDeadEntriesAccessor(
         }
     }
 
+    override suspend fun replaceDeadEntries(animeIds: Set<AnimeId>, metaDataProviderConfig: MetaDataProviderConfig) {
+        if (!appConfig.deadEntriesSupported(metaDataProviderConfig)) {
+            return
+        }
+
+        if (!isInitialized) {
+            init()
+        }
+
+        val added = writeAccess.withLock {
+            val deadEntriesOfProvider = when (metaDataProviderConfig.hostname()) {
+                AnidbConfig.hostname() -> deadEntries.anidb
+                AnilistConfig.hostname() -> deadEntries.anilist
+                AnimenewsnetworkConfig.hostname() -> deadEntries.animenewsnetwork
+                KitsuConfig.hostname() -> deadEntries.kitsu
+                MyanimelistConfig.hostname() -> deadEntries.myanimelist
+                else -> throw IllegalStateException("Metadata provider [${metaDataProviderConfig.hostname()}] is not supported.")
+            }
+
+            val added = animeIds - deadEntriesOfProvider
+            val removed = deadEntriesOfProvider - animeIds
+
+            log.info { "[${metaDataProviderConfig.hostname()}] has [${animeIds.size}] dead entries. Adding [${added.size}] and removing [${removed.size}]." }
+
+            if (added.isNotEmpty() || removed.isNotEmpty()) {
+                deadEntriesOfProvider.clear()
+                deadEntriesOfProvider.addAll(animeIds)
+                jsonSerializer.serialize(deadEntriesOfProvider, minify = true).writeToFile(deadEntriesFile(metaDataProviderConfig, JSON_MINIFIED))
+            }
+
+            added
+        }
+
+        added.forEach { downloadControlStateAccessor.removeDeadEntry(metaDataProviderConfig, it) }
+    }
+
     override suspend fun determineDeadEntries(sources: Collection<URI>): Set<URI> {
         if (!isInitialized) {
             init()

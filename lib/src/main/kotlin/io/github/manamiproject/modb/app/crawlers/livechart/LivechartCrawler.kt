@@ -1,5 +1,6 @@
 package io.github.manamiproject.modb.app.crawlers.livechart
 
+import io.github.manamiproject.modb.core.httpclient.CloudflareChallengeRetryCase
 import io.github.manamiproject.modb.app.config.AppConfig
 import io.github.manamiproject.modb.app.config.Config
 import io.github.manamiproject.modb.app.convfiles.AlreadyDownloadedIdsFinder
@@ -27,6 +28,8 @@ import io.github.manamiproject.modb.core.random
 import io.github.manamiproject.modb.livechart.LivechartConfig
 import io.github.manamiproject.modb.livechart.LivechartDownloader
 import kotlinx.coroutines.delay
+import java.time.Clock
+import java.time.LocalDate
 import kotlin.time.DurationUnit.MILLISECONDS
 import kotlin.time.toDuration
 
@@ -53,10 +56,11 @@ class LivechartCrawler(
     private val deadEntriesAccessor: DeadEntriesAccessor = DefaultDeadEntriesAccessor.instance,
     private val lastPageMemorizer: LastPageMemorizer<String> = StringBasedLastPageMemorizer(metaDataProviderConfig = metaDataProviderConfig),
     private val newestYearDetector: HighestIdDetector = LivechartNewestYearDetector.instance,
+    private val clock: () -> Clock = { appConfig.clock() },
     private val paginationIdRangeSelector: PaginationIdRangeSelector<String> = LivechartPaginationIdRangeSelector.instance,
     private val alreadyDownloadedIdsFinder: AlreadyDownloadedIdsFinder = DefaultAlreadyDownloadedIdsFinder.instance,
     private val downloader: Downloader = FaultTolerantDownloader(
-        downloader = LivechartDownloader(httpClient = SuspendableHttpClient()),
+        downloader = LivechartDownloader(httpClient = SuspendableHttpClient().addRetryCases(CloudflareChallengeRetryCase)),
         hostname = metaDataProviderConfig.hostname(),
     ),
 ): Crawler {
@@ -92,13 +96,38 @@ class LivechartCrawler(
             pages = pages.dropWhile { it != lastPage }.drop(1)
         }
 
+        val alreadyDownloaded = alreadyDownloadedIdsFinder.alreadyDownloadedIds(metaDataProviderConfig).size
+        log.info {
+            "[${metaDataProviderConfig.hostname()}] Skipping [$alreadyDownloaded] already downloaded " +
+            "and [${entriesNotScheduledForCurrentWeek.size}] not scheduled for this week. " +
+            "Continuing from page [${pages.firstOrNull() ?: "-"}] with [${pages.size}] pages left."
+        }
+
         wait()
+
+        val handledInThisRun = hashSetOf<String>()
 
         pages.forEach { page ->
             val currentList = paginationIdRangeSelector.idDownloadList(page) - entriesNotScheduledForCurrentWeek - alreadyDownloadedIdsFinder.alreadyDownloadedIds(metaDataProviderConfig)
             wait()
             startDownload(currentList)
+            handledInThisRun.addAll(currentList)
             lastPageMemorizer.memorizeLastPage(page)
+        }
+
+        // New anime appear in the current and the upcoming seasons, so these are looked at on every run, even once
+        // every page has been crawled this week. They aren't memorized, so they don't move where the crawl resumes.
+        val recheck = recheckPages(newestYear) - pages.toSet()
+
+        if (recheck.isNotEmpty()) {
+            log.info { "[${metaDataProviderConfig.hostname()}] Rechecking [${recheck.size}] pages for new anime: $recheck" }
+        }
+
+        recheck.forEach { page ->
+            val currentList = paginationIdRangeSelector.idDownloadList(page) - entriesNotScheduledForCurrentWeek - alreadyDownloadedIdsFinder.alreadyDownloadedIds(metaDataProviderConfig) - handledInThisRun
+            wait()
+            startDownload(currentList)
+            handledInThisRun.addAll(currentList)
         }
 
         log.info { "Finished downloading [${metaDataProviderConfig.hostname()}] entries using pagination." }
@@ -114,6 +143,19 @@ class LivechartCrawler(
             .toMutableList()
             .apply { add("tba") }
             .sorted()
+    }
+
+    /**
+     * Pages from the current season up to the last season of the newest year, followed by `tba`.
+     */
+    private fun recheckPages(newestYear: Year): List<String> {
+        val today = LocalDate.now(clock())
+        val currentSeason = (today.monthValue - 1) / 3
+
+        return (today.year..newestYear).flatMap { year ->
+            SEASONS_IN_ORDER.filterIndexed { index, _ -> year > today.year || index >= currentSeason }
+                .map { season -> "$season-$year" }
+        } + "tba"
     }
 
     private suspend fun startDownload(idDownloadList: List<String>) = repeat(idDownloadList.size) { index ->
@@ -142,6 +184,11 @@ class LivechartCrawler(
 
     companion object {
         private val log by LoggerDelegate()
+
+        /**
+         * Seasons in the order of the year: January to March is winter, October to December is fall.
+         */
+        private val SEASONS_IN_ORDER = listOf("winter", "spring", "summer", "fall")
 
         /**
          * Singleton of [LivechartCrawler]

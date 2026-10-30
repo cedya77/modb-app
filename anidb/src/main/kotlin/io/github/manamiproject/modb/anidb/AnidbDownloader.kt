@@ -14,6 +14,7 @@ import kotlinx.coroutines.withContext
 /**
  * Downloads anime data from anidb.net
  * In case the anime addition is pending, the [download] function will return a static [String] (see [ANIDB_PENDING_FILE_INDICATOR]).
+ * In case the anime is 18+ restricted, it returns [ANIDB_RESTRICTED_INDICATOR] instead.
  * The caller must handle this behavior.
  * @since 1.0.0
  * @property metaDataProviderConfig Configuration for downloading data.
@@ -39,7 +40,12 @@ public class AnidbDownloader(
         check(response.isOk() || response.code == 404) { "Unexpected response code [anidbId=$id], [responseCode=${response.code}]" }
 
         return@withContext when {
-            responseChecker.isHentai() || responseChecker.isRemovedFromAnidb() -> {
+            // 18+ pages show no data without an account: skipped, neither dead nor pending
+            responseChecker.isHentai() -> {
+                log.info { "Skipping [anidbId=$id], because it is 18+ restricted." }
+                ANIDB_RESTRICTED_INDICATOR
+            }
+            responseChecker.isRemovedFromAnidb() -> {
                 log.info { "Adding [anidbId=$id] to dead-entries list" }
                 onDeadEntry.invoke(id)
                 EMPTY
@@ -59,9 +65,15 @@ public class AnidbDownloader(
         public val instance: AnidbDownloader by lazy { AnidbDownloader() }
 
         /**
-         * Indicator for pending files which have been downloaded, but cannot be converted.
+         * Returned for an entry whose addition is still pending. There is nothing to convert.
          * @since 7.0.0
          */
         public const val ANIDB_PENDING_FILE_INDICATOR: String = ">pending<"
+
+        /**
+         * Returned for an entry which is 18+ restricted. The page shows no data without an account.
+         * @since 7.0.0
+         */
+        public const val ANIDB_RESTRICTED_INDICATOR: String = ">restricted<"
     }
 }

@@ -1,5 +1,6 @@
 package io.github.manamiproject.modb.app.downloadcontrolstate
 
+import io.github.manamiproject.modb.app.extensions.siteName
 import io.github.manamiproject.modb.app.config.AppConfig
 import io.github.manamiproject.modb.app.config.Config
 import io.github.manamiproject.modb.core.config.AnimeId
@@ -22,7 +23,7 @@ class DefaultDownloadControlStateScheduler(
 ): DownloadControlStateScheduler {
 
     override suspend fun findEntriesNotScheduledForCurrentWeek(metaDataProviderConfig: MetaDataProviderConfig): Set<AnimeId> {
-        log.info { "Finding all anime which are not scheduled to download this week." }
+        log.info { "Finding all anime which are not scheduled to download this week for [${metaDataProviderConfig.siteName()}]." }
 
         return downloadControlStateAccessor.allDcsEntries(metaDataProviderConfig)
             .filter { isAfterCurrentWeek(it.nextDownload) }
@@ -31,7 +32,7 @@ class DefaultDownloadControlStateScheduler(
     }
 
     override suspend fun findEntriesScheduledForCurrentWeek(metaDataProviderConfig: MetaDataProviderConfig): Set<AnimeId> {
-        log.info { "Finding all anime which are scheduled to download this week." }
+        log.info { "Finding all anime which are scheduled to download this week for [${metaDataProviderConfig.siteName()}]." }
 
         return downloadControlStateAccessor.allDcsEntries(metaDataProviderConfig)
             .filter { isCurrentWeekOrOlder(it.nextDownload) }

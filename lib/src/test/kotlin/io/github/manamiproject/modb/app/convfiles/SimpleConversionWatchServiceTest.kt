@@ -24,6 +24,9 @@ import org.junit.jupiter.api.Nested
 import java.nio.file.Path
 import kotlin.io.path.createDirectory
 import kotlin.io.path.createFile
+import kotlin.io.path.fileSize
+import kotlin.io.path.readText
+import kotlin.io.path.writeText
 import kotlin.io.path.deleteIfExists
 import kotlin.io.path.listDirectoryEntries
 import kotlin.test.Test
@@ -75,6 +78,50 @@ internal class SimpleConversionWatchServiceTest {
                     "1535.${testConfig.fileSuffix()}",
                     "dir.$LOCK_FILE_SUFFIX",
                 )
+            }
+        }
+
+        @Test
+        fun `deletes empty conv files when starting the watch service and converts their raw files again`() {
+            tempDirectory {
+                // given
+                val anime = AnimeRaw("Death Note")
+
+                val testAppConfig = object: Config by TestAppConfig {
+                    override fun workingDir(metaDataProviderConfig: MetaDataProviderConfig): Directory = tempDir
+                }
+
+                val testConfig = object: MetaDataProviderConfig by TestMetaDataProviderConfig {
+                    override fun hostname(): Hostname = "example.org"
+                    override fun fileSuffix(): FileSuffix = "html"
+                }
+
+                val convertedPaths = mutableListOf<Path>()
+                val testConverter = object: PathAnimeConverter by TestPathAnimeConverter {
+                    override suspend fun convert(path: Path): List<AnimeRaw> {
+                        convertedPaths.add(path)
+                        return listOf(anime)
+                    }
+                }
+
+                tempDir.resolve("1535.${testConfig.fileSuffix()}").createFile()
+                val emptyConvFile = tempDir.resolve("1535.$CONVERTED_FILE_SUFFIX").createFile()
+                tempDir.resolve("4000.${testConfig.fileSuffix()}").createFile()
+                tempDir.resolve("4000.$CONVERTED_FILE_SUFFIX").writeText("{}")
+
+                val simpleConversionWatchService = SimpleConversionWatchService(
+                    appConfig = testAppConfig,
+                    converter = testConverter,
+                    metaDataProviderConfig = testConfig,
+                )
+
+                // when
+                simpleConversionWatchService.prepare()
+
+                // then
+                assertThat(convertedPaths.map { it.fileName() }).containsExactly("1535.${testConfig.fileSuffix()}")
+                assertThat(emptyConvFile.fileSize()).isGreaterThan(0L)
+                assertThat(tempDir.resolve("4000.$CONVERTED_FILE_SUFFIX").readText()).isEqualTo("{}")
             }
         }
 

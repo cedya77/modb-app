@@ -124,7 +124,8 @@ class LinuxNetworkController(
 
         ifconfig(device, option) {
             commandExecutor = kotlinCommandExecutor.apply {
-                config.useSudo = true
+                // No password means the app runs as root and doesn't need sudo.
+                config.useSudo = sudoPasswordValue.isNotBlank()
                 config.sudoPassword = sudoPasswordValue
             }
         }

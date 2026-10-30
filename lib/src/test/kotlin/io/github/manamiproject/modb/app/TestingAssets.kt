@@ -159,8 +159,24 @@ internal object TestDeadEntriesAccessor: DeadEntriesAccessor {
     override fun deadEntriesFile(metaDataProviderConfig: MetaDataProviderConfig, type: DatasetFileType): RegularFile = shouldNotBeInvoked()
     override suspend fun addDeadEntry(animeId: AnimeId, metaDataProviderConfig: MetaDataProviderConfig) = shouldNotBeInvoked()
     override suspend fun removeDeadEntry(animeId: AnimeId, metaDataProviderConfig: MetaDataProviderConfig) { }
+    override suspend fun replaceDeadEntries(animeIds: Set<AnimeId>, metaDataProviderConfig: MetaDataProviderConfig) = shouldNotBeInvoked()
     override suspend fun determineDeadEntries(sources: Collection<URI>): Set<URI> = shouldNotBeInvoked()
     override suspend fun fetchDeadEntries(metaDataProviderConfig: MetaDataProviderConfig): Set<AnimeId> = shouldNotBeInvoked()
+}
+
+internal object TestAnidbPendingEntries: io.github.manamiproject.modb.app.crawlers.anidb.AnidbPendingEntries {
+    override suspend fun removeAllNotIn(idsInTitleDump: Set<Int>) { }
+    override suspend fun all(): Set<Int> = emptySet()
+    override suspend fun selectForRecheck(numberOfEntries: Int): Set<Int> = emptySet()
+    override suspend fun add(id: Int) { }
+    override suspend fun remove(id: Int) { }
+}
+
+internal object TestAnidbRestrictedEntries: io.github.manamiproject.modb.app.crawlers.anidb.AnidbRestrictedEntries {
+    override suspend fun removeAllNotIn(idsInTitleDump: Set<Int>) { }
+    override suspend fun all(): Set<Int> = emptySet()
+    override suspend fun add(id: Int) { }
+    override suspend fun remove(id: Int) { }
 }
 
 internal object TestReviewedIsolatedEntriesAccessor: ReviewedIsolatedEntriesAccessor {

@@ -38,17 +38,19 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach 
 
 tasks.withType<Test> {
     useJUnitPlatform()
+    // zstd-jni loads a native library, which JDK 24+ only allows silently with this flag.
+    jvmArgs("--enable-native-access=ALL-UNNAMED")
     reports.html.required.set(false)
     reports.junitXml.required.set(true)
     maxParallelForks = Runtime.getRuntime().availableProcessors()
 }
 
-val sourcesJar by tasks.registering(Jar::class) {
+val sourcesJar = tasks.register<Jar>("sourcesJar") {
     archiveClassifier.set("sources")
     from(sourceSets.main.get().allSource)
 }
 
-val javaDoc by tasks.registering(Jar::class) {
+val javaDoc = tasks.register<Jar>("javaDoc") {
     archiveClassifier.set("javadoc")
     from(sourceSets.main.get().allSource)
 }

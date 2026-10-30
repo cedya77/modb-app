@@ -150,7 +150,7 @@ internal class IfconfigKtTest {
             // given
             val receivedCommand = mutableListOf<String>()
             val testCommandExecutor = object : CommandExecutor {
-                override var config: CommandLineConfig = CommandLineConfig()
+                override var config: CommandLineConfig = CommandLineConfig(useSudo = true)
                 override fun executeCmd(command: List<String>): String {
                     receivedCommand.addAll(command)
                     return loadTestResource<String>("network/IfconfigKtTest/device_up.txt")
@@ -176,7 +176,7 @@ internal class IfconfigKtTest {
             // given
             val receivedCommand = mutableListOf<String>()
             val testCommandExecutor = object : CommandExecutor {
-                override var config: CommandLineConfig = CommandLineConfig()
+                override var config: CommandLineConfig = CommandLineConfig(useSudo = true)
                 override fun executeCmd(command: List<String>): String {
                     receivedCommand.addAll(command)
                     return loadTestResource<String>("network/IfconfigKtTest/device_down.txt")
@@ -191,6 +191,56 @@ internal class IfconfigKtTest {
             // then
             assertThat(receivedCommand).containsExactly(
                 "sudo",
+                "ifconfig",
+                "en1",
+                "down",
+            )
+        }
+
+        @Test
+        fun `up a specific device without sudo if sudo is disabled`() {
+            // given
+            val receivedCommand = mutableListOf<String>()
+            val testCommandExecutor = object : CommandExecutor {
+                override var config: CommandLineConfig = CommandLineConfig(useSudo = false)
+                override fun executeCmd(command: List<String>): String {
+                    receivedCommand.addAll(command)
+                    return loadTestResource<String>("network/IfconfigKtTest/device_up.txt")
+                }
+            }
+
+            // when
+            ifconfig("en1", "up") {
+                commandExecutor = testCommandExecutor
+            }
+
+            // then
+            assertThat(receivedCommand).containsExactly(
+                "ifconfig",
+                "en1",
+                "up",
+            )
+        }
+
+        @Test
+        fun `down a specific device without sudo if sudo is disabled`() {
+            // given
+            val receivedCommand = mutableListOf<String>()
+            val testCommandExecutor = object : CommandExecutor {
+                override var config: CommandLineConfig = CommandLineConfig(useSudo = false)
+                override fun executeCmd(command: List<String>): String {
+                    receivedCommand.addAll(command)
+                    return loadTestResource<String>("network/IfconfigKtTest/device_down.txt")
+                }
+            }
+
+            // when
+            ifconfig("en1", "down") {
+                commandExecutor = testCommandExecutor
+            }
+
+            // then
+            assertThat(receivedCommand).containsExactly(
                 "ifconfig",
                 "en1",
                 "down",

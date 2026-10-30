@@ -1163,6 +1163,49 @@ internal class DefaultDownloadControlStateAccessorTest {
         }
 
         @Test
+        fun `refreshes the data of an entry updated this week already, but keeps its schedule`() {
+            tempDirectory {
+                // given
+                val testAppConfig = object: Config by TestAppConfig {
+                    override fun metaDataProviderConfigurations(): Set<MetaDataProviderConfig> = setOf(AnilistConfig)
+                    override fun downloadControlStateDirectory(): Directory = tempDir
+                }
+
+                val firstUpdate = DownloadControlStateEntry(
+                    _weeksWihoutChange = 3,
+                    _lastDownloaded = WeekOfYear.currentWeek(),
+                    _nextDownload = WeekOfYear.currentWeek().plusWeeks(3),
+                    _anime = TestAnimeRawObjects.DefaultAnime.obj,
+                )
+
+                val secondUpdate = DownloadControlStateEntry(
+                    _weeksWihoutChange = 4,
+                    _lastDownloaded = WeekOfYear.currentWeek(),
+                    _nextDownload = WeekOfYear.currentWeek().plusWeeks(4),
+                    _anime = TestAnimeRawObjects.AllPropertiesSet.obj,
+                )
+
+                tempDir.resolve(AnilistConfig.hostname()).createDirectory()
+
+                val defaultDownloadControlStateAccessor = DefaultDownloadControlStateAccessor(
+                    appConfig = testAppConfig,
+                    mergeLockAccess = TestMergeLockAccessor,
+                )
+                defaultDownloadControlStateAccessor.createOrUpdate(AnilistConfig, "177191", firstUpdate)
+
+                // when
+                val result = defaultDownloadControlStateAccessor.createOrUpdate(AnilistConfig, "177191", secondUpdate)
+
+                // then
+                assertThat(result).isTrue()
+                val stored = defaultDownloadControlStateAccessor.dcsEntry(AnilistConfig, "177191")
+                assertThat(stored.anime).isEqualTo(TestAnimeRawObjects.AllPropertiesSet.obj)
+                assertThat(stored.weeksWihoutChange).isEqualTo(3)
+                assertThat(stored.nextDownload).isEqualTo(WeekOfYear.currentWeek().plusWeeks(3))
+            }
+        }
+
+        @Test
         fun `triggers initialization if necessary`() {
             tempDirectory {
                 // given

@@ -1385,6 +1385,86 @@ internal class LivechartAnimeConverterTest {
         }
     }
 
+    private fun converter() = LivechartAnimeConverter(
+        metaDataProviderConfig = object : MetaDataProviderConfig by TestMetaDataProviderConfig {
+            override fun hostname(): Hostname = LivechartConfig.hostname()
+            override fun buildAnimeLink(id: AnimeId): URI = LivechartConfig.buildAnimeLink(id)
+            override fun fileSuffix(): FileSuffix = LivechartConfig.fileSuffix()
+        },
+    )
+
+    @Nested
+    inner class LayoutOfOctober2026Tests {
+
+        @Test
+        fun `finished anime`() {
+            runTest {
+                // given
+                val testFile = loadTestResource<String>("LivechartAnimeConverterTest/layout_2026_10/12345.html")
+
+                // when
+                val result = converter().convert(testFile)
+
+                // then
+                assertThat(result.type).isEqualTo(TV)
+                assertThat(result.status).isEqualTo(FINISHED)
+                assertThat(result.episodes).isEqualTo(12)
+                assertThat(result.duration).isEqualTo(Duration(24, MINUTES))
+                assertThat(result.animeSeason.season).isEqualTo(SUMMER)
+                assertThat(result.animeSeason.year).isEqualTo(2026)
+                assertThat(result.tags).contains("action", "adventure", "fantasy")
+                assertThat(result.studios).contains("maho film")
+                assertThat(result.studios).doesNotContain("")
+                assertThat(result.relatedAnime).isEmpty()
+            }
+        }
+
+        @Test
+        fun `airing sequel`() {
+            runTest {
+                // given
+                val testFile = loadTestResource<String>("LivechartAnimeConverterTest/layout_2026_10/11343.html")
+
+                // when
+                val result = converter().convert(testFile)
+
+                // then
+                assertThat(result.type).isEqualTo(TV)
+                assertThat(result.status).isEqualTo(ONGOING)
+                assertThat(result.episodes).isEqualTo(13)
+                assertThat(result.animeSeason.season).isEqualTo(FALL)
+                assertThat(result.animeSeason.year).isEqualTo(2026)
+                assertThat(result.relatedAnime).containsExactly(
+                    URI("https://livechart.me/anime/10355"),
+                )
+            }
+        }
+
+        @Test
+        fun `airing anime without a known number of episodes takes the episode before the next one`() {
+            runTest {
+                // given
+                val testFile = loadTestResource<String>("LivechartAnimeConverterTest/layout_2026_10/11428.html")
+
+                // when
+                val result = converter().convert(testFile)
+
+                // then
+                assertThat(result.status).isEqualTo(ONGOING)
+                assertThat(result.episodes).isEqualTo(1751)
+                assertThat(result.animeSeason.season).isEqualTo(FALL)
+                assertThat(result.animeSeason.year).isEqualTo(1988)
+                assertThat(result.relatedAnime).containsExactlyInAnyOrder(
+                    URI("https://livechart.me/anime/11443"),
+                    URI("https://livechart.me/anime/11430"),
+                    URI("https://livechart.me/anime/11397"),
+                    URI("https://livechart.me/anime/7249"),
+                    URI("https://livechart.me/anime/11405"),
+                )
+            }
+        }
+    }
+
     @Nested
     inner class CompanionObjectTests {
 

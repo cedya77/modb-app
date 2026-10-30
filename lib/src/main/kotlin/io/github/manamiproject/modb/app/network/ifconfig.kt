@@ -59,7 +59,8 @@ internal fun ifconfig(device: Device, vararg options: String, config: IfconfigCo
     val currentConfig = IfconfigConfig().apply(config)
     val commandBuilder = mutableListOf<String>()
 
-    if (options.contains("up") || options.contains("down")) {
+    // Only with sudo enabled. Running as root, the executor rejects a command starting with sudo.
+    if ((options.contains("up") || options.contains("down")) && currentConfig.commandExecutor.config.useSudo) {
         commandBuilder.add("sudo")
     }
     commandBuilder.add("ifconfig")

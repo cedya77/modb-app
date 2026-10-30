@@ -1,5 +1,6 @@
 package io.github.manamiproject.modb.app.crawlers.livechart
 
+import io.github.manamiproject.modb.core.httpclient.CloudflareChallengeRetryCase
 import io.github.manamiproject.modb.app.convfiles.AlreadyDownloadedIdsFinder
 import io.github.manamiproject.modb.app.convfiles.DefaultAlreadyDownloadedIdsFinder
 import io.github.manamiproject.modb.app.crawlers.PaginationIdRangeSelector
@@ -35,7 +36,7 @@ import kotlin.time.toDuration
  */
 class LivechartPaginationIdRangeSelector(
     private val metaDataProviderConfig: MetaDataProviderConfig = LivechartPaginationIdRangeSelectorConfig,
-    private val httpClient: HttpClient = SuspendableHttpClient(),
+    private val httpClient: HttpClient = SuspendableHttpClient().addRetryCases(CloudflareChallengeRetryCase),
     private val extractor: DataExtractor = XmlDataExtractor,
     private val downloadControlStateScheduler: DownloadControlStateScheduler = DefaultDownloadControlStateScheduler.instance,
     private val alreadyDownloadedIdsFinder: AlreadyDownloadedIdsFinder = DefaultAlreadyDownloadedIdsFinder.instance,
@@ -57,12 +58,13 @@ class LivechartPaginationIdRangeSelector(
             headers = mapOf("host" to listOf("www.${metaDataProviderConfig.hostname()}")),
         ).use { response ->
             if (response.code == 404) {
-                log.warn { "404 on LivechartPaginationIdRangeSelector" }
+                log.warn { "[${metaDataProviderConfig.hostname()}] page [$page] doesn't exist (404). Treating it as empty." }
                 return emptyList()
             }
 
             val data = extractor.extract(response.checkedBody(this::class), mapOf(
-                "animeIdList" to "//article[@class='anime']/@data-anime-id",
+                // Any card carrying an id: the class of the card changed with the redesign of october 2026.
+                "animeIdList" to "//article[@data-anime-id]/@data-anime-id",
                 "emptyMessage" to "//section[@data-anime-card-list-target='emptyMessage']/text()",
             ))
 
